@@ -325,18 +325,68 @@ footer{
 </footer>
 
 <script>
-// 🏀 NBA — Resultados automáticos
-async function cargarNBA(){
+// ⚽ MUNDIAL 2026 — RESULTADOS
+async function cargarResultados() {
   try {
-    const res = await fetch("https://www.balldontlie.io/api/v1/games?seasons[]=2023");
+    const res = await fetch("https://wcup2026.org/api/data.php?action=today");
     const json = await res.json();
-    const lista = document.getElementById("contenedor-nba");
-    lista.innerHTML = "<h3>Resultados recientes</h3>";
-    json.data.slice(0,4).forEach(p => {
-      lista.innerHTML += `<p>${p.home_team.full_name} ${p.home_team_score} - ${p.away_team_score} ${p.away_team.full_name}</p>`;
-    });
-  } catch(e){ console.error("NBA:", e); }
+    const tabla = document.getElementById("tabla-resultados");
+    tabla.innerHTML = `<tr><th>Partido</th><th>Resultado</th></tr>`;
+    if (json.matches?.length) {
+      json.matches.forEach(p => {
+        tabla.innerHTML += `<tr><td>${p.home_team} vs ${p.away_team}</td><td>${p.score || p.status}</td></tr>`;
+      });
+    } else tabla.innerHTML += `<tr><td colspan="2">Sin partidos hoy</td></tr>`;
+  } catch (e) { console.error("Resultados:", e); }
 }
+
+// 📊 POSICIONES POR GRUPO
+async function cargarPosiciones() {
+  try {
+    const res = await fetch("https://wcup2026.org/api/data.php?action=standings");
+    const json = await res.json();
+    const cont = document.getElementById("contenedor-posiciones");
+    cont.innerHTML = "";
+    for (const grupo in json.groups) {
+      cont.innerHTML += `<div class="card"><h3>Grupo ${grupo}</h3>
+      <table><tr><th>Selección</th><th>Pts</th><th>PJ</th><th>PG</th><th>PE</th><th>PP</th></tr>`;
+      json.groups[grupo].forEach(sel => {
+        cont.innerHTML += `<tr><td>${sel.team}</td><td>${sel.points}</td><td>${sel.played}</td><td>${sel.won}</td><td>${sel.drawn}</td><td>${sel.lost}</td></tr>`;
+      });
+      cont.innerHTML += `</table></div>`;
+    }
+  } catch (e) { console.error("Posiciones:", e); }
+}
+
+// 📅 PRÓXIMOS PARTIDOS
+async function cargarProximos() {
+  try {
+    const res = await fetch("https://wcup2026.org/api/data.php?action=fixtures");
+    const json = await res.json();
+    const lista = document.getElementById("lista-proximos");
+    lista.innerHTML = "";
+    if (json.matches?.length) {
+      json.matches.slice(0,4).forEach(p => {
+        const f = new Date(p.date).toLocaleString("es-ES",{day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"});
+        lista.innerHTML += `<li>${p.home_team} vs ${p.away_team} — ${f}</li>`;
+      });
+    } else lista.innerHTML = `<li>Sin próximos partidos</li>`;
+  } catch (e) { console.error("Próximos:", e); }
+}
+
+// 📰 NOTICIAS DE FÚTBOL
+async function cargarNoticias() {
+  try {
+    const res = await fetch("https://api.rss2json.com/v1/api.json?rss_url=https://www.tycsports.com.ar/rss/futbol/mundial-2026.xml");
+    const json = await res.json();
+    const cont = document.getElementById("contenedor-noticias");
+    cont.innerHTML = "";
+    json.items.slice(0,3).forEach(n => {
+      cont.innerHTML += `<div class="card"><h3>${n.title}</h3><p>${n.description.substring(0,120)}…</p><small>${n.pubDate}</small></div>`;
+    });
+  } catch (e) { console.error("Noticias:", e); }
+}
+
 
 
 const formForo=document.getElementById('formForo');
