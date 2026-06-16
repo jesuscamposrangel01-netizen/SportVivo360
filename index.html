@@ -194,11 +194,10 @@ footer{
         </ul>
     </div>
 </section>
-
-<<section id="posiciones">          <!-- 🔴 FALTA ESTA LÍNEA -->
-     <h2>📊 Posiciones por Grupo</h2>  <!-- 🔴 FALTA ESTA LÍNEA -->
-     <div id="contenedor-posiciones"></div>
- </section>                          <!-- 🔴 FALTA ESTA LÍNEA -->
+<section id="posiciones">
+  <h2>📊 Posiciones por Grupo</h2>
+  <div id="contenedor-posiciones"></div>
+</section>
 
 <section id="sedes">
     <h2>🏟️ Sedes y Estadios</h2>
@@ -321,9 +320,8 @@ footer{
 <script> 
     async function cargarEnVivo() {
   try {
-    const res = await fetch("https://api.football-data.org/v4/competitions/WC/matches?status=LIVE", {
-      headers: { "X-Auth-Token": "b48a0c4b3c444a78a8a2b48a0c4b3c44" }
-    });
+    const res = await fetch("https://wcup2026-api.vercel.app/api/matches?status=live");
+
     const json = await res.json();
     const elem = document.getElementById("partido-en-vivo");
     if (json.matches?.length) {
@@ -345,9 +343,8 @@ footer{
 // ⚽ MUNDIAL 2026 — RESULTADOS
 async function cargarResultados() {
   try {
-    const res = await fetch("https://api.football-data.org/v4/competitions/WC/matches?status=FINISHED,LIVE", {
-      headers: { "X-Auth-Token": "b48a0c4b3c444a78a8a2b48a0c4b3c44" }
-    });
+    const res = await fetch("https://wcup2026-api.vercel.app/api/matches?status=finished");
+
     const json = await res.json();
     const tabla = document.getElementById("tabla-resultados");
     tabla.innerHTML = `<tr><th>Partido</th><th>Resultado</th></tr>`;
@@ -379,9 +376,7 @@ async function cargarResultados() {
 // 📊 POSICIONES POR GRUPO
 async function cargarPosiciones() {
   try {
-    const res = await fetch("https://api.football-data.org/v4/competitions/WC/standings", {
-      headers: { "X-Auth-Token": "b48a0c4b3c444a78a8a2b48a0c4b3c44" }
-    });
+    const res = await fetch("https://wcup2026-api.vercel.app/api/standings");
     const json = await res.json();
     const cont = document.getElementById("contenedor-posiciones");
     cont.innerHTML = "";
@@ -411,9 +406,7 @@ async function cargarPosiciones() {
 // 📅 PRÓXIMOS PARTIDOS
 async function cargarProximos() {
   try {
-    const res = await fetch("https://api.football-data.org/v4/competitions/WC/matches?status=SCHEDULED", {
-      headers: { "X-Auth-Token": "b48a0c4b3c444a78a8a2b48a0c4b3c44" }
-    });
+    const res = await fetch("https://wcup2026-api.vercel.app/api/matches?status=scheduled");
     const json = await res.json();
     const lista = document.getElementById("lista-proximos");
     lista.innerHTML = "";
