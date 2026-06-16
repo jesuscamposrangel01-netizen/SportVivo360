@@ -432,10 +432,10 @@ async function cargarProximos() {
     
 // 📰 NOTICIAS DE FÚTBOL
 async function cargarNoticias() {
+  const cont = document.getElementById("contenedor-noticias");
   try {
     const res = await fetch("https://api.rss2json.com/v1/api.json?rss_url=https://www.marca.com/futbol/rss.xml");
     const json = await res.json();
-    const cont = document.getElementById("contenedor-noticias");
     cont.innerHTML = "";
 
     if (json.items?.length) {
