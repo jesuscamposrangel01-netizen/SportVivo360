@@ -433,7 +433,7 @@ async function cargarProximos() {
 // 📰 NOTICIAS DE FÚTBOL
 async function cargarNoticias() {
   try {
-    const res = await fetch("https://api.rss2json.com/v1/api.json?rss_url=https://as.com/futbol/rss.xml");
+    const res = await fetch("https://api.rss2json.com/v1/api.json?rss_url=https://www.marca.com/futbol/rss.xml");
     const json = await res.json();
     const cont = document.getElementById("contenedor-noticias");
     cont.innerHTML = "";
@@ -443,7 +443,7 @@ async function cargarNoticias() {
         cont.innerHTML += `
           <div class="card">
             <h3>${n.title}</h3>
-            <p>${n.description.substring(0,130)}…</p>
+            <p>${n.description ? n.description.substring(0,130)+"…" : "Sin resumen"}</p>
             <small>📰 ${n.pubDate}</small>
           </div>`;
       });
@@ -455,6 +455,7 @@ async function cargarNoticias() {
     cont.innerHTML = `<div class="card"><p>No se pudieron cargar las noticias</p></div>`;
   }
 }
+
 
     
 document.addEventListener('DOMContentLoaded',()=>{
