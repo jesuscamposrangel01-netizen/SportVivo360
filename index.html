@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SPORTMAX 360</title>
+<style>
+body{margin:0;font-family:Arial,sans-serif;background:#0d1117;color:white;}
+header{background:#111827;padding:20px;text-align:center;border-bottom:3px solid gold;}
+header h1{color:gold;margin:0;}
+nav{background:#1f2937;padding:15px;text-align:center;position:sticky;top:0;z-index:10;}
+nav a{color:white;text-decoration:none;margin:12px;font-weight:bold;}
+section{padding:20px;max-width:1200px;margin:0 auto;}
+.card{background:#161b22;padding:15px;margin-bottom:15px;border-radius:10px;}
+h2{color:gold;}
+table{width:100%;border-collapse:collapse;margin:10px 0;}
+table th,table td{border:1px solid #333;padding:10px;text-align:center;}
+table th{background:#1f2937;}
+ul{padding-left:20px;}
+form input,form textarea,form button{width:100%;box-sizing:border-box;padding:10px;margin:8px 0;border:1px solid #333;border-radius:6px;background:#0d1117;color:white;font-size:15px;}
+form button{background:gold;color:#000;font-weight:bold;cursor:pointer;border:none;}
+.comentario{border-left:3px solid gold;padding:10px 15px;margin:10px 0;background:#1f2937;border-radius:0 6px 6px 0;}
+small{color:#aaa;}
+.estado-vivo{color:#2ecc71;font-weight:bold;animation:parpadeo 1.2s infinite;}
+@keyframes parpadeo{50%{opacity:0.6;}}
+.galeria{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px;margin-top:10px;}
+.galeria img{width:100%;height:90px;object-fit:cover;border-radius:6px;border:1px solid #333;}
+footer{background:#111827;text-align:center;padding:20px;margin-top:30px;}
+</style>
+</head>
+<body>
+
+<header>
+    <h1>SPORTMAX 360</h1>
+    <p>Mundial 2026 • Fútbol • NBA • MLB • Noticias</p>
+</header>
+
+<nav>
+    <a href="#mundial">Mundial</a>
+    <a href="#posiciones">Posiciones</a>
+    <a href="#sedes">Sedes</a>
+    <a href="#noticias">Noticias</a>
+    <a href="#galeria">Galería</a>
+    <a href="#videos">Videos</a>
+    <a href="#nba">NBA</a>
+    <a href="#mlb">MLB</a>
+    <a href="#foro">Foro</a>
+    <a href="#contacto">Contacto</a>
+</nav>
+
+<section id="mundial">
+    <h2>🏆 Mundial 2026 • México, EE.UU., Canadá</h2>
+
+    <div class="card">
+        <h3>🔴 En vivo</h3>
+        <p class="estado-vivo">Estados Unidos 2 - 1 Paraguay • 65'</p>
+    </div>
+
+    <div class="card">
+        <h3>Últimos Resultados</h3>
+        <table id="tabla-resultados">
+            <tr><th>Partido</th><th>Resultado</th></tr>
+            <tr><td>México vs Sudáfrica</td><td>2 - 0</td></tr>
+            <tr><td>Corea del Sur vs Chequia</td><td>2 - 1</td></tr>
+            <tr><td>Brasil vs Marruecos</td><td>1 - 1</td></tr>
+            <tr><td>Alemania vs Curazao</td><td>7 - 1</td></tr>
+        </table>
+    </div>
+
+    <div class="card">
+        <h3>Próximos Partidos</h3>
+        <ul id="lista-proximos">
+            <li>Francia vs Senegal — 17/06 14:00</li>
+            <li>Argentina vs Argelia — 17/06 18:00</li>
+            <li>Portugal vs RD Congo — 18/06 13:00</li>
+            <li>Brasil vs Haití — 18/06 19:00</li>
+        </ul>
+    </div>
+</section>
+
+<section id="posiciones">
+    <h2>📊 Posiciones por Grupo</h2>
+    <div class="card">
+        <h3>Grupo A</h3>
+        <table>
+            <tr><th>Selección</th><th>Pts</th><th>PJ</th><th>PG</th><th>PE</th><th>PP</th></tr>
+            <tr><td>México</td><td>3</td><td>1</td><td>1</td><td>0</td><td>0</td></tr>
+            <tr><td>Estados Unidos</td><td>3</td><td>1</td><td>1</td><td>0</td><td>0</td></tr>
+            <tr><td>Paraguay</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td></tr>
+            <tr><td>Sudáfrica</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td></tr>
+        </table>
+    </div>
+</section>
+
+<section id="sedes">
+    <h2>🏟️ Sedes y Estadios</h2>
+    <div class="card">
+        <ul>
+            <li>Estadio Azteca — Ciudad de México</li>
+            <li>MetLife Stadium — Nueva York/NJ</li>
+            <li>BC Place — Vancouver</li>
+            <li>AT&T Stadium — Dallas</li>
+            <li>Estadio BBVA — Monterrey</li>
+        </ul>
+    </div>
+</section>
+
+<section id="galeria">
+    <h2>📸 Galería</h2>
+    <div class="card galeria">
+        <img src="https://images.unsplash.com/photo-1522778119026-d647f0596c20?auto=format&fit=crop&w=300&q=70" alt="Estadio">
+        <img src="https://images.unsplash.com/photo-1542281286-9e0a16bb7367afe?auto=format&fit=crop&w=300&q=70" alt="Público">
+        <img src="https://images.unsplash.com/photo-1517466787929-bc90951d0974?auto=format&fit=crop&w=300&q=70" alt="Acción">
+        <img src="https://images.unsplash.com/photo-1504472482416-4404d405237c?auto=format&fit=crop&w=300&q=70" alt="Gol">
+    </div>
+</section>
+
+<section id="noticias">
+    <h2>📰 Noticias</h2>
+    <div id="contenedor-noticias">
+        <div class="card">
+            <h3>Sedes del Mundial confirmadas oficialmente</h3>
+            <p>Los estadios de México, Estados Unidos y Canadá ya están listos para recibir el torneo en 2026.</p>
+            <small>Mundial • 15 jun 2026</small>
+        </div>
+        <div class="card">
+            <h3>Selecciones avanzan en el ranking FIBA</h3>
+            <p>El baloncesto continental mejora su posición de cara a los próximos juegos internacionales.</p>
+            <small>Básquet • 14 jun 2026</small>
+        </div>
+        <div class="card">
+            <h3>Torneos de verano prometen cambios</h3>
+            <p>La jerarquía mundial ATP y WTA se renueva con nuevas promesas que buscan el liderato.</p>
+            <small>Tenis • 13 jun 2026</small>
+        </div>
+    </div>
+</section>
+
+<section id="videos">
+    <h2>🎥 Videos Destacados</h2>
+    <div class="card">
+        <ul id="lista-videos">
+            <li>Resumen México 2-0 Sudáfrica</li>
+            <li>Resumen Alemania 7-1 Curazao</li>
+            <li>Resumen Brasil 1-1 Marruecos</li>
+            <li>Mejores goles del Mundial 2026</li>
+        </ul>
+    </div>
+</section>
+
+<section id="nba">
+    <h2>🏀 NBA</h2>
+    <div class="card" id="contenedor-nba">
+        <h3>Resultados recientes</h3>
+        <p>Lakers 102 - 95 Warriors</p>
+        <p>Celtics 115 - 108 Heat</p>
+        <small>Más datos desde API</small>
+    </div>
+</section>
+
+<section id="mlb">
+    <h2>⚾ MLB</h2>
+    <div class="card" id="contenedor-mlb">
+        <h3>Últimos encuentros</h3>
+        <p>Yankees 4 - 2 Red Sox</p>
+        <p>Dodgers 6 - 3 Giants</p>
+        <small>Más datos desde API</small>
+    </div>
+</section>
+
+<section id="foro">
+    <h2>💬 Foro de Discusión</h2>
+    <div class="card">
+        <h3>Publicar un tema</h3>
+        <form id="formForo">
+            <input type="text" id="nombreUsuario" placeholder="Tu nombre" required>
+            <input type="text" id="tituloTema" placeholder="Título del tema" required>
+            <textarea id="textoComentario" rows="4" placeholder="Escribe tu opinión..." required></textarea>
+            <button type="submit">Publicar</button>
+        </form>
+    </div>
+    <div class="card">
+        <h3>Últimos comentarios</h3>
+        <div id="listaForo">
+            <div class="comentario"><strong>¿Quién será campeón 2026?</strong><p>¿Argentina repite o Brasil recupera la corona?</p><small>— UsuarioDeportes92 • Hace 2 h</small></div>
+        </div>
+    </div>
+</section>
+
+<section id="contacto">
+    <h2>📩 Contacto</h2>
+    <div class="card">
+        <h3>Envíanos un mensaje</h3>
+        <form id="formContacto">
+            <input type="text" placeholder="Nombre completo" required>
+            <input type="email" placeholder="Correo electrónico" required>
+            <input type="text" placeholder="Asunto" required>
+            <textarea rows="5" placeholder="Tu mensaje..." required></textarea>
+            <button type="submit">Enviar mensaje</button>
+        </form>
+    </div>
+    <div class="card">
+        <h3>Información</h3>
+        <p>📍 Lima, Perú</p>
+        <p>📧 contacto@sportmax360.com</p>
+        <p>📱 +51 999 999 999</p>
+    </div>
+</section>
+
+<footer>
+    <p>© 2026 SPORTMAX 360 - Todos los derechos reservados</p>
+</footer>
+
+<script>
+async function cargarResultados(){/* const res=await fetch("TU_URL_API/resultados"); */}
+async function cargarNoticias(){/* const res=await fetch("TU_URL_API/noticias"); */}
+async function cargarProximos(){/* const res=await fetch("TU_URL_API/proximos"); */}
+
+const formForo=document.getElementById('formForo');
+const listaForo=document.getElementById('listaForo');
+formForo.addEventListener('submit',e=>{
+    e.preventDefault();
+    const nom=document.getElementById('nombreUsuario').value;
+    const tit=document.getElementById('tituloTema').value;
+    const txt=document.getElementById('textoComentario').value;
+    const nuevo=document.createElement('div');
+    nuevo.className='comentario';
+    nuevo.innerHTML=`<strong>${tit}</strong><p>${txt}</p><small>— ${nom} • Ahora mismo</small>`;
+    listaForo.prepend(nuevo);
+    formForo.reset();
+});
+
+document.addEventListener('DOMContentLoaded',()=>{
+    cargarResultados();cargarNoticias();cargarProximos();
+});
+</script>
+
+</body>
+</html>
