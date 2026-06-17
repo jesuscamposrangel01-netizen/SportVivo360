@@ -173,54 +173,51 @@ footer{
 <section id="mundial">
     <h2>🏆 Mundial 2026 • México, EE.UU., Canadá</h2>
 
-<div class="card">
-    <h3>🔴 En vivo</h3>
-    <p id="partido-en-vivo">Sin partidos en curso</p>
-</div>
-
+    <div class="card">
+        <h3>🔴 En vivo</h3>
+        <p id="partido-en-vivo">Cargando…</p>
+    </div>
 
     <div class="card">
-        <h3>Últimos Resultados</h3>
+        <h3>📋 Últimos Resultados</h3>
         <table id="tabla-resultados">
             <tr><th>Partido</th><th>Resultado</th></tr>
-            
         </table>
     </div>
 
     <div class="card">
-        <h3>Próximos Partidos</h3>
-        <ul id="lista-proximos">
-            
-        </ul>
+        <h3>📅 Próximos Partidos</h3>
+        <ul id="lista-proximos"></ul>
     </div>
-</section>
-<section id="posiciones">
-  <h2>📊 Posiciones por Grupo</h2>
-  <div id="contenedor-posiciones"></div>
-</section>
 
-<section id="sedes">
-    <h2>🏟️ Sedes y Estadios</h2>
+    <div id="contenedor-posiciones"></div>
+
     <div class="card">
-        <ul>
-            <li>Estadio Azteca — Ciudad de México</li>
-            <li>MetLife Stadium — Nueva York/NJ</li>
-            <li>BC Place — Vancouver</li>
-            <li>AT&T Stadium — Dallas</li>
-            <li>Estadio BBVA — Monterrey</li>
-        </ul>
+        <h3>📰 Noticias</h3>
+        <div id="contenedor-noticias"></div>
     </div>
 </section>
 
-<section id="galeria">
-    <h2>📸 Galería</h2>
-    <div class="card galeria">
-        <img src="https://images.unsplash.com/photo-1522778119026-d647f0596c20?auto=format&fit=crop&w=300&q=70" alt="Estadio">
-        <img src="https://images.unsplash.com/photo-1542281286-9e0a16bb7367afe?auto=format&fit=crop&w=300&q=70" alt="Público">
-        <img src="https://images.unsplash.com/photo-1517466787929-bc90951d0974?auto=format&fit=crop&w=300&q=70" alt="Acción">
-        <img src="https://images.unsplash.com/photo-1504472482416-4404d405237c?auto=format&fit=crop&w=300&q=70" alt="Gol">
+<section id="nba"></section>
+
+<section id="mlb">
+    <h2>⚾ MLB — Temporada 2026</h2>
+
+    <div class="card">
+        <h3>📅 Próximos / Hoy</h3>
+        <ul id="lista-mlb"></ul>
     </div>
+
+    <div class="card">
+        <h3>📋 Últimos Resultados</h3>
+        <table id="tabla-mlb-resultados">
+            <tr><th>Visitante</th><th>Local</th><th>Resultado</th></tr>
+        </table>
+    </div>
+
+    <div id="contenedor-mlb-posiciones"></div>
 </section>
+
 
 <section id="noticias">
     <h2>📰 Noticias</h2>
@@ -451,12 +448,15 @@ async function cargarNoticias() {
 }
 
 // 🟢 EN VIVO — pon esto arriba donde está la función
+// ⚽ FÚTBOL — En vivo
 async function cargarEnVivo() {
   try {
-    const res = await fetch("https://worldcupfixtureapi.com/api/matches");
+    const res = await fetch("https://api.football-data.org/v4/matches?status=LIVE", {
+      headers: { "X-Auth-Token": "d0134d9dafae4349b1748ddfc02fab16", "Accept": "application/json" }
+    });
     const json = await res.json();
     const elem = document.getElementById("partido-en-vivo");
-    const enVivo = json.matches?.find(p => p.status === "in_play" || p.status === "live");
+    const enVivo = json.matches?.[0];
     if (enVivo) {
       const local = enVivo.homeTeam?.name || "Desconocido";
       const vis = enVivo.awayTeam?.name || "Desconocido";
@@ -469,16 +469,131 @@ async function cargarEnVivo() {
     }
   } catch (e) {
     console.error("En vivo:", e);
-    document.getElementById("partido-en-vivo").textContent = "Sin partidos en curso";
+    document.getElementById("partido-en-vivo").textContent = "Error al cargar";
   }
 }
 
-// 🚀 INICIO
+// ⚽ Resultados
+async function cargarResultados() {
+  try {
+    const res = await fetch("https://api.football-data.org/v4/matches?status=FINISHED", {
+      headers: { "X-Auth-Token": "d0134d9dafae4349b1748ddfc02fab16", "Accept": "application/json" }
+    });
+    const json = await res.json();
+    const tbl = document.getElementById("tabla-resultados");
+    tbl.innerHTML = `<tr><th>Partido</th><th>Resultado</th></tr>`;
+    json.matches?.slice(0,3).forEach(p => {
+      tbl.innerHTML += `<tr><td>${p.homeTeam.name} vs ${p.awayTeam.name}</td><td>${p.score.fullTime.home ?? "-"}‑${p.score.fullTime.away ?? "-"}</td></tr>`;
+    });
+  } catch (e) { console.error("Resultados:", e); }
+}
+
+// ⚽ Próximos
+async function cargarProximos() {
+  try {
+    const res = await fetch("https://api.football-data.org/v4/matches?status=SCHEDULED", {
+      headers: { "X-Auth-Token": "d0134d9dafae4349b1748ddfc02fab16", "Accept": "application/json" }
+    });
+    const json = await res.json();
+    const ul = document.getElementById("lista-proximos");
+    ul.innerHTML = "";
+    json.matches?.slice(0,4).forEach(p => {
+      const fecha = new Date(p.utcDate).toLocaleString("es‑ES", {timeZone:"America/Lima", day:"2-digit", month:"2-digit", hour:"2-digit", minute:"2-digit"});
+      ul.innerHTML += `<li>${p.homeTeam.name} vs ${p.awayTeam.name} — ${fecha}</li>`;
+    });
+  } catch (e) { console.error("Próximos:", e); }
+}
+
+// ⚽ Posiciones
+async function cargarPosiciones() {
+  try {
+    const res = await fetch("https://api.football-data.org/v4/competitions/WC/standings", {
+      headers: { "X-Auth-Token": "d0134d9dafae4349b1748ddfc02fab16", "Accept": "application/json" }
+    });
+    const json = await res.json();
+    const c = document.getElementById("contenedor-posiciones");
+    c.innerHTML = "";
+    json.standings?.forEach(grupo => {
+      c.innerHTML += `<div class="card"><h3>${grupo.group}</h3>
+      <table><tr><th>#</th><th>Equipo</th><th>Pts</th><th>PJ</th><th>PG</th><th>PE</th><th>PP</th></tr>`;
+      grupo.table?.forEach(f => {
+        c.innerHTML += `<tr><td>${f.position}</td><td>${f.team.name}</td><td>${f.points}</td><td>${f.playedGames}</td><td>${f.won}</td><td>${f.draw}</td><td>${f.lost}</td></tr>`;
+      });
+      c.innerHTML += `</table></div>`;
+    });
+  } catch (e) { console.error("Posiciones:", e); }
+}
+
+// 📰 Noticias
+async function cargarNoticias() {
+  try {
+    const res = await fetch("https://api.rss2json.com/v1/api.json?rss_url=https://www.marca.com/futbol/rss.xml");
+    const json = await res.json();
+    const c = document.getElementById("contenedor-noticias");
+    c.innerHTML = "";
+    json.items?.slice(0,3).forEach(n => {
+      c.innerHTML += `<div class="card"><h4>${n.title}</h4><p>${n.description?.substring(0,120)}…</p></div>`;
+    });
+  } catch (e) { console.error("Noticias:", e); }
+}
+
+// ⚾ MLB — Hoy / Próximos
+async function cargarMLBProximos() {
+  try {
+    const hoy = new Date().toISOString().split("T")[0];
+    const res = await fetch(`https://statsapi.mlb.com/api/v1/schedule?sportId=1&date=${hoy}&language=es`);
+    const json = await res.json();
+    const ul = document.getElementById("lista-mlb");
+    ul.innerHTML = "";
+    json.dates?.[0]?.games?.slice(0,6).forEach(g => {
+      const hora = new Date(g.gameDate).toLocaleString("es‑ES", {timeZone:"America/Lima", hour:"2-digit", minute:"2-digit"});
+      const vivo = g.status?.abstractGameState === "Live" ? "🔴" : "⏰";
+      ul.innerHTML += `<li>${vivo} ${g.teams.away.team.name} @ ${g.teams.home.team.name} — ${hora}</li>`;
+    });
+  } catch (e) { console.error("MLB‑próximos:", e); }
+}
+
+// ⚾ MLB — Resultados
+async function cargarMLBResultados() {
+  try {
+    const ayer = new Date(Date.now()‑86400000).toISOString().split("T")[0];
+    const res = await fetch(`https://statsapi.mlb.com/api/v1/schedule?sportId=1&date=${ayer}&language=es`);
+    const json = await res.json();
+    const tbl = document.getElementById("tabla-mlb-resultados");
+    tbl.innerHTML = `<tr><th>Visitante</th><th>Local</th><th>Resultado</th></tr>`;
+    json.dates?.[0]?.games?.filter(x=>x.status?.abstractGameState==="Final")?.slice(0,4).forEach(g=>{
+      tbl.innerHTML += `<tr><td>${g.teams.away.team.name}</td><td>${g.teams.home.team.name}</td><td>${g.teams.away.score??"-"}‑${g.teams.home.score??"-"}</td></tr>`;
+    });
+  } catch (e) { console.error("MLB‑resultados:", e); }
+}
+
+// ⚾ MLB — Posiciones
+async function cargarMLBPosiciones() {
+  try {
+    const res = await fetch("https://statsapi.mlb.com/api/v1/standings?leagueId=103,104&season=2026&language=es");
+    const json = await res.json();
+    const c = document.getElementById("contenedor-mlb-posiciones");
+    c.innerHTML = `<h3>📊 MLB 2026</h3>`;
+    json.records?.forEach(liga=>{
+      c.innerHTML += `<div class="card"><h4>${liga.league.name}</h4>
+      <table><tr><th>#</th><th>Equipo</th><th>G</th><th>P</th><th>%</th><th>Dif</th></tr>`;
+      liga.teamRecords?.slice(0,8).forEach(r=>{
+        c.innerHTML += `<tr><td>${r.divisionRank}</td><td>${r.team.name}</td><td>${r.wins}</td><td>${r.losses}</td><td>${r.winningPercentage}</td><td>${r.divisionGamesBack??"-"}</td></tr>`;
+      });
+      c.innerHTML += `</table></div>`;
+    });
+  } catch (e) { console.error("MLB‑posiciones:", e); }
+}
+
+// 🚀 INICIO COMPLETO
 document.addEventListener('DOMContentLoaded', async () => {
   cargarEnVivo();
   cargarResultados();
-  cargarPosiciones();
   cargarProximos();
+  cargarPosiciones();
   cargarNoticias();
+  cargarMLBProximos();
+  cargarMLBResultados();
+  cargarMLBPosiciones();
 });
 </script>
