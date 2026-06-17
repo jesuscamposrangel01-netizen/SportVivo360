@@ -420,6 +420,47 @@ async function cargarProximos() {
         });
         lista.innerHTML += `<li>${local} vs ${visitante} — ${fecha}</li>`;
       });
+// ⚽ RESULTADOS — línea aprox 344
+async function cargarResultados() {
+  try {
+    const res = await fetch("https://wcup2026-api.vercel.app/api/matches?status=finished");
+    const json = await res.json();
+    const tabla = document.getElementById("tabla-resultados");
+    tabla.innerHTML = `<tr><th>Partido</th><th>Resultado</th></tr>`;
+
+    if (json.matches?.length) {
+      json.matches.slice(0,3).forEach(p => {
+        const local = p.homeTeam?.name || "Desconocido";
+        const visitante = p.awayTeam?.name || "Desconocido";
+        const golesLocal = p.score?.fullTime?.home ?? "-";
+        const golesVisitante = p.score?.fullTime?.away ?? "-";
+        tabla.innerHTML += `<tr><td>${local} vs ${visitante}</td><td>${golesLocal} - ${golesVisitante}</td></tr>`;
+      });
+    } else {
+      tabla.innerHTML += `<tr><td colspan="2">Sin partidos finalizados</td></tr>`;
+    }
+  } catch (e) {
+    console.error("Resultados:", e);
+  }
+}
+
+// 📅 PRÓXIMOS
+async function cargarProximos() {
+  try {
+    const res = await fetch("https://wcup2026-api.vercel.app/api/matches?status=scheduled");
+    const json = await res.json();
+    const lista = document.getElementById("lista-proximos");
+    lista.innerHTML = "";
+
+    if (json.matches?.length) {
+      json.matches.slice(0,4).forEach(p => {
+        const local = p.homeTeam?.name || "Desconocido";
+        const visitante = p.awayTeam?.name || "Desconocido";
+        const fecha = new Date(p.utcDate).toLocaleString("es-ES", {
+          day:"2-digit", month:"2-digit", hour:"2-digit", minute:"2-digit"
+        });
+        lista.innerHTML += `<li>${local} vs ${visitante} — ${fecha}</li>`;
+      });
     } else {
       lista.innerHTML = `<li>Sin próximos partidos programados</li>`;
     }
@@ -428,9 +469,34 @@ async function cargarProximos() {
   }
 }
 
+// 📊 POSICIONES
+async function cargarPosiciones() {
+  try {
+    const res = await fetch("https://wcup2026-api.vercel.app/api/standings");
+    const json = await res.json();
+    const cont = document.getElementById("contenedor-posiciones");
+    cont.innerHTML = "";
 
-    
-// 📰 NOTICIAS DE FÚTBOL
+    if (json.standings?.length) {
+      json.standings.forEach(grupo => {
+        cont.innerHTML += `<div class="card"><h3>${grupo.group}</h3>
+        <table><tr><th>#</th><th>Selección</th><th>Pts</th><th>PJ</th><th>PG</th><th>PE</th><th>PP</th></tr>`;
+        grupo.table.forEach(fila => {
+          const equipo = fila.team?.name || "Desconocido";
+          cont.innerHTML += `<tr><td>${fila.position}</td><td>${equipo}</td><td>${fila.points}</td><td>${fila.playedGames}</td><td>${fila.won}</td><td>${fila.draw}</td><td>${fila.lost}</td></tr>`;
+        });
+        cont.innerHTML += `</table></div>`;
+      });
+    } else {
+      cont.innerHTML = `<p>No hay posiciones disponibles</p>`;
+    }
+  } catch (e) {
+    console.error("Posiciones:", e);
+    cont.innerHTML = `<p>No se pudieron cargar las posiciones</p>`;
+  }
+}
+
+// 📰 NOTICIAS
 async function cargarNoticias() {
   const cont = document.getElementById("contenedor-noticias");
   try {
@@ -456,20 +522,13 @@ async function cargarNoticias() {
   }
 }
 
-
-    
-document.addEventListener('DOMContentLoaded',()=>{
-    cargarEnVivo();
-    cargarResultados();
-    cargarPosiciones();
-    cargarProximos();
-    cargarNoticias();
+// 🚀 INICIO
+document.addEventListener('DOMContentLoaded', async () => {
+  cargarEnVivo();
+  cargarResultados();
+  cargarPosiciones();
+  cargarProximos();
+  cargarNoticias();
 });
-
-
 </script>
 
-</body>
-         Agregué API de fútbol completa                                                               </html>
-                                                                        
-Arreglé undefined y finalicé todas las funciones
