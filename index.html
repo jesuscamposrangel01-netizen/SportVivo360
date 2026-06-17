@@ -341,229 +341,116 @@ footer{
 }
     
 // ⚽ MUNDIAL 2026 — RESULTADOS
-    <script>
-
-// ⚽ PARTIDOS FINALIZADOS
+    // ⚽ RESULTADOS — línea aprox 344
 async function cargarResultados() {
   try {
-    const res = await fetch("https://wcup2026-api.vercel.app/api/matches?status=finished");
+    const res = await fetch("https://worldcupfixtureapi.com/api/matches");
     const json = await res.json();
-
     const tabla = document.getElementById("tabla-resultados");
+    tabla.innerHTML = `<tr><th>Partido</th><th>Resultado</th></tr>`;
 
-    if (!tabla) return;
-
-    tabla.innerHTML = `
-      <tr>
-        <th>Partido</th>
-        <th>Resultado</th>
-      </tr>
-    `;
-
-    if (json.matches?.length) {
-      json.matches.slice(0, 5).forEach(p => {
+    const terminados = json.matches?.filter(p => p.status === "finished");
+    if (terminados?.length) {
+      terminados.slice(0,3).forEach(p => {
         const local = p.homeTeam?.name || "Desconocido";
         const visitante = p.awayTeam?.name || "Desconocido";
-
         const golesLocal = p.score?.fullTime?.home ?? "-";
         const golesVisitante = p.score?.fullTime?.away ?? "-";
-
-        tabla.innerHTML += `
-          <tr>
-            <td>${local} vs ${visitante}</td>
-            <td>${golesLocal} - ${golesVisitante}</td>
-          </tr>
-        `;
+        tabla.innerHTML += `<tr><td>${local} vs ${visitante}</td><td>${golesLocal} - ${golesVisitante}</td></tr>`;
       });
     } else {
-      tabla.innerHTML += `
-        <tr>
-          <td colspan="2">No hay resultados disponibles</td>
-        </tr>
-      `;
+      tabla.innerHTML += `<tr><td colspan="2">Sin partidos finalizados</td></tr>`;
     }
-
-  } catch (error) {
-    console.error("Error resultados:", error);
+  } catch (e) {
+    console.error("Resultados:", e);
   }
 }
 
-// 📅 PRÓXIMOS PARTIDOS
+// 📅 PRÓXIMOS
 async function cargarProximos() {
   try {
-    const res = await fetch("https://wcup2026-api.vercel.app/api/matches?status=scheduled");
+    const res = await fetch("https://worldcupfixtureapi.com/api/matches");
     const json = await res.json();
-
     const lista = document.getElementById("lista-proximos");
-
-    if (!lista) return;
-
     lista.innerHTML = "";
 
-    if (json.matches?.length) {
-      json.matches.slice(0, 6).forEach(p => {
+    const proximos = json.matches?.filter(p => p.status === "scheduled");
+    if (proximos?.length) {
+      proximos.slice(0,4).forEach(p => {
         const local = p.homeTeam?.name || "Desconocido";
         const visitante = p.awayTeam?.name || "Desconocido";
-
-        const fecha = new Date(p.utcDate).toLocaleString("es-ES", {
-          day: "2-digit",
-          month: "2-digit",
-          year: "numeric",
-          hour: "2-digit",
-          minute: "2-digit"
+        const fecha = new Date(p.kickoff.utc).toLocaleString("es-ES", {
+          day:"2-digit", month:"2-digit", hour:"2-digit", minute:"2-digit"
         });
-
-        lista.innerHTML += `
-          <li>${local} vs ${visitante} - ${fecha}</li>
-        `;
+        lista.innerHTML += `<li>${local} vs ${visitante} — ${fecha}</li>`;
       });
     } else {
-      lista.innerHTML = `
-        <li>No hay próximos partidos.</li>
-      `;
+      lista.innerHTML = `<li>Sin próximos partidos programados</li>`;
     }
-
-  } catch (error) {
-    console.error("Error próximos:", error);
+  } catch (e) {
+    console.error("Próximos:", e);
   }
 }
 
-// 📊 TABLA DE POSICIONES
+// 📊 POSICIONES — se mantiene la fuente anterior
 async function cargarPosiciones() {
-
-  const cont = document.getElementById("contenedor-posiciones");
-
-  if (!cont) return;
-
   try {
-
     const res = await fetch("https://wcup2026-api.vercel.app/api/standings");
     const json = await res.json();
-
+    const cont = document.getElementById("contenedor-posiciones");
     cont.innerHTML = "";
 
     if (json.standings?.length) {
-
       json.standings.forEach(grupo => {
-
-        let html = `
-          <div class="card">
-            <h3>${grupo.group}</h3>
-
-            <table>
-              <tr>
-                <th>#</th>
-                <th>Selección</th>
-                <th>Pts</th>
-                <th>PJ</th>
-                <th>PG</th>
-                <th>PE</th>
-                <th>PP</th>
-              </tr>
-        `;
-
+        cont.innerHTML += `<div class="card"><h3>${grupo.group}</h3>
+        <table><tr><th>#</th><th>Selección</th><th>Pts</th><th>PJ</th><th>PG</th><th>PE</th><th>PP</th></tr>`;
         grupo.table.forEach(fila => {
-
-          html += `
-            <tr>
-              <td>${fila.position}</td>
-              <td>${fila.team?.name || "Desconocido"}</td>
-              <td>${fila.points}</td>
-              <td>${fila.playedGames}</td>
-              <td>${fila.won}</td>
-              <td>${fila.draw}</td>
-              <td>${fila.lost}</td>
-            </tr>
-          `;
+          const equipo = fila.team?.name || "Desconocido";
+          cont.innerHTML += `<tr><td>${fila.position}</td><td>${equipo}</td><td>${fila.points}</td><td>${fila.playedGames}</td><td>${fila.won}</td><td>${fila.draw}</td><td>${fila.lost}</td></tr>`;
         });
-
-        html += `
-            </table>
-          </div>
-        `;
-
-        cont.innerHTML += html;
+        cont.innerHTML += `</table></div>`;
       });
-
     } else {
-      cont.innerHTML = `
-        <p>No hay posiciones disponibles.</p>
-      `;
+      cont.innerHTML = `<p>No hay posiciones disponibles</p>`;
     }
-
-  } catch (error) {
-    console.error("Error posiciones:", error);
-
-    cont.innerHTML = `
-      <p>No se pudieron cargar las posiciones.</p>
-    `;
+  } catch (e) {
+    console.error("Posiciones:", e);
+    cont.innerHTML = `<p>No se pudieron cargar las posiciones</p>`;
   }
 }
 
 // 📰 NOTICIAS
 async function cargarNoticias() {
-
   const cont = document.getElementById("contenedor-noticias");
-
-  if (!cont) return;
-
   try {
-
-    const res = await fetch(
-      "https://api.rss2json.com/v1/api.json?rss_url=https://www.marca.com/futbol/rss.xml"
-    );
-
+    const res = await fetch("https://api.rss2json.com/v1/api.json?rss_url=https://www.marca.com/futbol/rss.xml");
     const json = await res.json();
-
     cont.innerHTML = "";
 
     if (json.items?.length) {
-
-      json.items.slice(0, 6).forEach(noticia => {
-
+      json.items.slice(0,4).forEach(n => {
         cont.innerHTML += `
           <div class="card">
-            <h3>${noticia.title}</h3>
-
-            <p>
-              ${
-                noticia.description
-                  ? noticia.description.replace(/<[^>]*>/g, "").substring(0, 140) + "..."
-                  : "Sin descripción"
-              }
-            </p>
-
-            <small>${noticia.pubDate}</small>
-          </div>
-        `;
+            <h3>${n.title}</h3>
+            <p>${n.description ? n.description.substring(0,130)+"…" : "Sin resumen"}</p>
+            <small>📰 ${n.pubDate}</small>
+          </div>`;
       });
-
     } else {
-
-      cont.innerHTML = `
-        <div class="card">
-          <p>No hay noticias disponibles.</p>
-        </div>
-      `;
+      cont.innerHTML = `<div class="card"><p>No hay noticias nuevas</p></div>`;
     }
-
-  } catch (error) {
-
-    console.error("Error noticias:", error);
-
-    cont.innerHTML = `
-      <div class="card">
-        <p>No se pudieron cargar las noticias.</p>
-      </div>
-    `;
+  } catch (e) {
+    console.error("Noticias:", e);
+    cont.innerHTML = `<div class="card"><p>No se pudieron cargar las noticias</p></div>`;
   }
 }
 
 // 🚀 INICIO
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener('DOMContentLoaded', async () => {
+  cargarEnVivo();
   cargarResultados();
+  cargarPosiciones();
   cargarProximos();
   cargarNoticias();
 });
-
 </script>
