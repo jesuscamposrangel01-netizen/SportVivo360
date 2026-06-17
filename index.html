@@ -1,160 +1,34 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SPORTMAX 360 ⚽</title>
-
-<meta name="description" content="SPORTMAX 360: Cobertura completa del Mundial 2026, resultados en vivo, fútbol, NBA, MLB, foro deportivo y contacto.">
-<meta name="keywords" content="Mundial 2026, resultados de fútbol, noticias deportivas, NBA, MLB, Sportmax 360, deportes en español">
-<meta name="robots" content="index, follow">
-<meta name="google-site-verification" content="jNeZaKzjkCPDwXtfpBvLoQGmqCjPTYO1omb4kdQBxcU" />
-
-<style>
-body{
-    margin:0;
-    font-family:Arial,sans-serif;
-    background:#0d1117;
-    color:white;
-}
-
-header{
-    background:#111827;
-    padding:20px;
-    text-align:center;
-    border-bottom:3px solid gold;
-}
-
-header h1{
-    color:gold;
-    margin:0;
-    font-size:1.8rem;
-}
-
-nav{
-    background:#1f2937;
-    padding:15px;
-    text-align:center;
-    position:sticky;
-    top:0;
-    z-index:10;
-}
-
-nav a{
-    color:white;
-    text-decoration:none;
-    margin:12px;
-    font-weight:bold;
-}
-
-section{
-    padding:20px;
-    max-width:1200px;
-    margin:0 auto;
-}
-
-.card{
-    background:#161b22;
-    padding:15px;
-    margin-bottom:15px;
-    border-radius:10px;
-}
-
-h2{
-    color:gold;
-}
-
-table{
-    width:100%;
-    border-collapse:collapse;
-    margin:10px 0;
-}
-
-table th, table td{
-    border:1px solid #333;
-    padding:10px;
-    text-align:center;
-}
-
-table th{
-    background:#1f2937;
-}
-
-ul {
-    padding-left:20px;
-}
-
-form input, form textarea, form button{
-    width:100%;
-    box-sizing:border-box;
-    padding:10px;
-    margin:8px 0;
-    border:1px solid #333;
-    border-radius:6px;
-    background:#0d1117;
-    color:white;
-    font-size:15px;
-}
-
-form button{
-    background:gold;
-    color:#000;
-    font-weight:bold;
-    cursor:pointer;
-    border:none;
-}
-
-.comentario{
-    border-left:3px solid gold;
-    padding:10px 15px;
-    margin:10px 0;
-    background:#1f2937;
-    border-radius:0 6px 6px 0;
-}
-
-small{
-    color:#aaa;
-}
-
-.estado-vivo{
-    color:#2ecc71;
-    font-weight:bold;
-    animation:parpadeo 1.2s infinite;
-}
-
-@keyframes parpadeo{
-    50%{opacity:0.6;}
-}
-
-.galeria{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
-    gap:8px;
-    margin-top:10px;
-}
-
-.galeria img{
-    width:100%;
-    height:90px;
-    object-fit:cover;
-    border-radius:6px;
-    border:1px solid #333;
-}
-
-footer{
-    background:#111827;
-    text-align:center;
-    padding:20px;
-    margin-top:30px;
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPORTMAX 360</title>
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; font-family:Arial, sans-serif; }
+        body { background:#f4f4f4; color:#333; line-height:1.6; }
+        header { background:#222; color:#fff; padding:1rem 2rem; text-align:center; }
+        nav { background:#333; padding:0.8rem 2rem; }
+        nav a { color:#fff; margin:0 0.8rem; text-decoration:none; font-weight:500; }
+        nav a:hover { color:#2ecc71; }
+        main { max-width:1200px; margin:2rem auto; padding:0 2rem; }
+        section { margin-bottom:3rem; }
+        h2 { color:#222; margin-bottom:1.2rem; border-left:4px solid #2ecc71; padding-left:0.8rem; }
+        .card { background:#fff; padding:1.5rem; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.1); margin-bottom:1.5rem; }
+        h3 { margin-bottom:0.8rem; color:#444; }
+        table { width:100%; border-collapse:collapse; margin-top:0.5rem; }
+        th, td { padding:0.7rem; text-align:left; border-bottom:1px solid #eee; }
+        th { background:#f8f8f8; font-weight:600; }
+        ul { list-style:none; padding-left:0; }
+        li { padding:0.5rem 0; border-bottom:1px solid #eee; }
+        li:last-child { border-bottom:none; }
+        footer { background:#222; color:#fff; text-align:center; padding:1.5rem; margin-top:3rem; }
+    </style>
 </head>
-
 <body>
 
 <header>
-    <h1>⚽ SPORTMAX 360</h1>
-    <p>Mundial 2026 • Fútbol • NBA • MLB • Noticias</p>
+    <h1>🏟️ SPORTMAX 360 — Deportes en Vivo</h1>
 </header>
 
 <nav>
@@ -170,430 +44,108 @@ footer{
     <a href="#contacto">Contacto</a>
 </nav>
 
+<main>
 <section id="mundial">
     <h2>🏆 Mundial 2026 • México, EE.UU., Canadá</h2>
-
     <div class="card">
         <h3>🔴 En vivo</h3>
         <p id="partido-en-vivo">Cargando…</p>
     </div>
-
     <div class="card">
         <h3>📋 Últimos Resultados</h3>
         <table id="tabla-resultados">
             <tr><th>Partido</th><th>Resultado</th></tr>
         </table>
     </div>
-
     <div class="card">
         <h3>📅 Próximos Partidos</h3>
         <ul id="lista-proximos"></ul>
     </div>
-
     <div id="contenedor-posiciones"></div>
-
     <div class="card">
-        <h3>📰 Noticias</h3>
+        <h3>📰 Noticias Fútbol</h3>
         <div id="contenedor-noticias"></div>
     </div>
 </section>
 
-<section id="nba"></section>
+<section id="nba">
+    <h2>🏀 NBA — Temporada 2025‑2026</h2>
+    <div class="card">
+        <h3>📅 Hoy / Próximos</h3>
+        <ul id="lista-nba"></ul>
+    </div>
+    <div class="card">
+        <h3>📋 Últimos Resultados</h3>
+        <table id="tabla-nba-resultados">
+            <tr><th>Visitante</th><th>Local</th><th>Resultado</th></tr>
+        </table>
+    </div>
+    <div id="contenedor-nba-posiciones"></div>
+</section>
 
 <section id="mlb">
     <h2>⚾ MLB — Temporada 2026</h2>
-
     <div class="card">
-        <h3>📅 Próximos / Hoy</h3>
+        <h3>📅 Hoy / Próximos</h3>
         <ul id="lista-mlb"></ul>
     </div>
-
     <div class="card">
         <h3>📋 Últimos Resultados</h3>
         <table id="tabla-mlb-resultados">
             <tr><th>Visitante</th><th>Local</th><th>Resultado</th></tr>
         </table>
     </div>
-
     <div id="contenedor-mlb-posiciones"></div>
 </section>
 
-
-<section id="noticias">
-    <h2>📰 Noticias</h2>
-    <div id="contenedor-noticias">
-        <div class="card">
-            <h3>Sedes del Mundial confirmadas oficialmente</h3>
-            <p>Los estadios de México, Estados Unidos y Canadá ya están listos para recibir el torneo en 2026.</p>
-            <small>Mundial • 15 jun 2026</small>
-        </div>
-        <div class="card">
-            <h3>Selecciones avanzan en el ranking FIBA</h3>
-            <p>El baloncesto continental mejora su posición de cara a los próximos juegos internacionales.</p>
-            <small>Básquet • 14 jun 2026</small>
-        </div>
-        <div class="card">
-            <h3>Torneos de verano prometen cambios</h3>
-            <p>La jerarquía mundial ATP y WTA se renueva con nuevas promesas que buscan el liderato.</p>
-            <small>Tenis • 13 jun 2026</small>
-        </div>
-    </div>
-</section>
-
-<section id="videos">
-    <h2>🎥 Videos Destacados</h2>
-    <div class="card">
-        <ul id="lista-videos">
-            <li>Resumen México 2-0 Sudáfrica</li>
-            <li>Resumen Alemania 7-1 Curazao</li>
-            <li>Resumen Brasil 1-1 Marruecos</li>
-            <li>Mejores goles del Mundial 2026</li>
-        </ul>
-    </div>
-</section>
-
-<section id="nba">
-    <h2>🏀 NBA</h2>
-    <div class="card" id="contenedor-nba">
-        <h3>Resultados recientes</h3>
-        <p>Lakers 102 - 95 Warriors</p>
-        <p>Celtics 115 - 108 Heat</p>
-        <small>Más datos desde API</small>
-    </div>
-</section>
-
-<section id="mlb">
-    <h2>⚾ MLB</h2>
-    <div class="card" id="contenedor-mlb">
-        <h3>Últimos encuentros</h3>
-        <p>Yankees 4 - 2 Red Sox</p>
-        <p>Dodgers 6 - 3 Giants</p>
-        <small>Más datos desde API</small>
-    </div>
-</section>
-
-<section id="foro">
-    <h2>💬 Foro de Discusión</h2>
-    <div class="card">
-        <h3>Publicar un tema</h3>
-        <form id="formForo">
-            <input type="text" id="nombreUsuario" placeholder="Tu nombre" required>
-            <input type="text" id="tituloTema" placeholder="Título del tema" required>
-            <textarea id="textoComentario" rows="4" placeholder="Escribe tu opinión..." required></textarea>
-            <button type="submit">Publicar</button>
-        </form>
-    </div>
-    <div class="card">
-        <h3>Últimos comentarios</h3>
-        <div id="listaForo">
-            <div class="comentario"><strong>¿Quién será campeón 2026?</strong><p>¿Argentina repite o Brasil recupera la corona?</p><small>— UsuarioDeportes92 • Hace 2 h</small></div>
-        </div>
-    </div>
-</section>
-
-<section id="contacto">
-    <h2>📩 Contacto</h2>
-    <div class="card">
-        <h3>Envíanos un mensaje</h3>
-        <form id="formContacto">
-            <input type="text" placeholder="Nombre completo" required>
-            <input type="email" placeholder="Correo electrónico" required>
-            <input type="text" placeholder="Asunto" required>
-            <textarea rows="5" placeholder="Tu mensaje..." required></textarea>
-            <button type="submit">Enviar mensaje</button>
-        </form>
-    </div>
-    <div class="card">
-        <h3>Información</h3>
-        <p>📍 Lima, Perú</p>
-        <p>📧 contacto@sportmax360.com</p>
-        <p>📱 +51 999 999 999</p>
-    </div>
-</section>
+<section id="sedes"><h2>📍 Sedes</h2></section>
+<section id="galeria"><h2>📸 Galería</h2></section>
+<section id="videos"><h2>🎥 Videos</h2></section>
+<section id="foro"><h2>💬 Foro</h2></section>
+<section id="contacto"><h2>📞 Contacto</h2></section>
+</main>
 
 <footer>
-    <p>© 2026 SPORTMAX 360 - Todos los derechos reservados</p>
+    <p>© 2026 SPORTMAX 360 — Todos los derechos reservados</p>
 </footer>
-<script> 
-    async function cargarEnVivo() {
-  try {
-    const res = await fetch("https://wcup2026-api.vercel.app/api/matches?status=live");
 
-    const json = await res.json();
-    const elem = document.getElementById("partido-en-vivo");
-    if (json.matches?.length) {
-      const p = json.matches[0];
-      const local = p.homeTeam.name;
-      const vis = p.awayTeam.name;
-      const golL = p.score.fullTime.home ?? "-";
-      const golV = p.score.fullTime.away ?? "-";
-      const minuto = p.minute ?? "En curso";
-      elem.textContent = `${local} ${golL} - ${golV} ${vis} • ${minuto}'`;
-    } else {
-      elem.textContent = "Sin partidos en curso";
-    }
-  } catch (e) {
-    console.error("En vivo:", e);
-  }
-}
-    
-// ⚽ MUNDIAL 2026 — RESULTADOS
-            // ⚽ RESULTADOS — línea aprox 344
-async function cargarResultados() {
-  try {
-    const res = await fetch("https://worldcupfixtureapi.com/api/matches");
-    const json = await res.json();
-    const tabla = document.getElementById("tabla-resultados");
-    tabla.innerHTML = `<tr><th>Partido</th><th>Resultado</th></tr>`;
+<!-- ✅ GOOGLE ANALYTICS CON TU CLAVE -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=jNeZaKzjkCPDwXtfpBvLoQGmqCjPTYO1omb4kdQBxcU"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'jNeZaKzjkCPDwXtfpBvLoQGmqCjPTYO1omb4kdQBxcU');
+</script>
 
-    const terminados = json.matches?.filter(p => p.status === "finished");
-    if (terminados?.length) {
-      terminados.slice(0,3).forEach(p => {
-        const local = p.homeTeam?.name || "Desconocido";
-        const visitante = p.awayTeam?.name || "Desconocido";
-        const golesLocal = p.score?.fullTime?.home ?? "-";
-        const golesVisitante = p.score?.fullTime?.away ?? "-";
-        tabla.innerHTML += `<tr><td>${local} vs ${visitante}</td><td>${golesLocal} - ${golesVisitante}</td></tr>`;
-      });
-    } else {
-      tabla.innerHTML += `<tr><td colspan="2">Sin partidos finalizados</td></tr>`;
-    }
-  } catch (e) {
-    console.error("Resultados:", e);
-    const tabla = document.getElementById("tabla-resultados");
-    tabla.innerHTML = `
-      <tr><td>México vs Sudáfrica</td><td>—</td></tr>
-      <tr><td>Corea del Sur vs Chequia</td><td>—</td></tr>
-      <tr><td>Canadá vs Bosnia‑Herzegovina</td><td>—</td></tr>`;
-  }
-}
+<!-- ✅ CÓDIGO DEPORTES COMPLETO -->
+<script>
+const FOOTBALL_KEY = "d0134d9dafae4349b1748ddfc02fab16";
+const HEADERS_FUTBOL = { "X-Auth-Token": FOOTBALL_KEY, "Accept": "application/json" };
+const ZONA_LIMA = { timeZone:"America/Lima", day:"2-digit", month:"2-digit", hour:"2-digit", minute:"2-digit" };
 
-// 📅 PRÓXIMOS
-async function cargarProximos() {
-  try {
-    const res = await fetch("https://worldcupfixtureapi.com/api/matches");
-    const json = await res.json();
-    const lista = document.getElementById("lista-proximos");
-    lista.innerHTML = "";
+// ⚽ Fútbol
+async function cargarEnVivo(){try{const r=await fetch("https://api.football-data.org/v4/matches?status=LIVE",{headers:HEADERS_FUTBOL}),j=await r.json(),e=document.getElementById("partido-en-vivo"),p=j.matches?.[0];e.textContent=p?`${p.homeTeam.name} ${p.score.fullTime.home??"-"}‑${p.score.fullTime.away??"-"} ${p.awayTeam.name}`:"Sin partidos en curso"}catch(e){console.error("En vivo:",e)}}
+async function cargarResultados(){try{const r=await fetch("https://api.football-data.org/v4/matches?status=FINISHED",{headers:HEADERS_FUTBOL}),j=await r.json(),t=document.getElementById("tabla-resultados");t.innerHTML=`<tr><th>Partido</th><th>Resultado</th></tr>`;j.matches?.slice(0,4).forEach(p=>t.innerHTML+=`<tr><td>${p.homeTeam.name} vs ${p.awayTeam.name}</td><td>${p.score.fullTime.home??"-"}‑${p.score.fullTime.away??"-"}</td></tr>`)}catch(e){console.error("Resultados:",e)}}
+async function cargarProximos(){try{const r=await fetch("https://api.football-data.org/v4/matches?status=SCHEDULED",{headers:HEADERS_FUTBOL}),j=await r.json(),u=document.getElementById("lista-proximos");u.innerHTML="";j.matches?.slice(0,5).forEach(p=>{const f=new Date(p.utcDate).toLocaleString("es‑ES",ZONA_LIMA);u.innerHTML+=`<li>${p.homeTeam.name} vs ${p.awayTeam.name} — 📅 ${f}</li>`})}catch(e){console.error("Próximos:",e)}}
+async function cargarPosiciones(){try{const r=await fetch("https://api.football-data.org/v4/competitions/WC/standings",{headers:HEADERS_FUTBOL}),j=await r.json(),c=document.getElementById("contenedor-posiciones");c.innerHTML=`<h3>📊 Tablas de Posiciones</h3>`;j.standings?.forEach(g=>{c.innerHTML+=`<div class="card"><h3>${g.group}</h3><table><tr><th>#</th><th>Equipo</th><th>Pts</th><th>PJ</th><th>PG</th><th>PE</th><th>PP</th></tr>`;g.table?.forEach(f=>c.innerHTML+=`<tr><td>${f.position}</td><td>${f.team.name}</td><td>${f.points}</td><td>${f.playedGames}</td><td>${f.won}</td><td>${f.draw}</td><td>${f.lost}</td></tr>`);c.innerHTML+=`</table></div>`})}catch(e){console.error("Posiciones:",e)}}
+async function cargarNoticias(){try{const r=await fetch("https://api.rss2json.com/v1/api.json?rss_url=https://www.marca.com/futbol/rss.xml"),j=await r.json(),c=document.getElementById("contenedor-noticias");c.innerHTML="";j.items?.slice(0,4).forEach(n=>c.innerHTML+=`<div style="margin:.5rem 0;"><strong>${n.title}</strong><br><small>${n.pubDate}</small></div>`)}catch(e){console.error("Noticias:",e)}}
 
-    const proximos = json.matches?.filter(p => p.status === "scheduled");
-    if (proximos?.length) {
-      proximos.slice(0,4).forEach(p => {
-        const local = p.homeTeam?.name || "Desconocido";
-        const visitante = p.awayTeam?.name || "Desconocido";
-        const fecha = new Date(p.kickoff.utc).toLocaleString("es‑ES", {
-          day:"2‑digit", month:"2‑digit", hour:"2‑digit", minute:"2‑digit",
-          timeZone:"America/Lima"
-        });
-        lista.innerHTML += `<li>${local} vs ${visitante} — ${fecha}</li>`;
-      });
-    } else {
-      lista.innerHTML = `<li>Sin próximos partidos programados</li>`;
-    }
-  } catch (e) {
-    console.error("Próximos:", e);
-    document.getElementById("lista-proximos").innerHTML = `
-      <li>México vs Sudáfrica — 11/06 19:00</li>
-      <li>Corea del Sur vs Chequia — 12/06 02:00</li>
-      <li>Canadá vs Bosnia‑Herzegovina — 12/06 19:00</li>
-      <li>Estados Unidos vs Paraguay — 13/06 01:00</li>`;
-  }
-}
+// 🏀 NBA
+async function cargarNBAProximos(){try{const d=new Date().toISOString().split("T")[0],r=await fetch(`https://data.nba.net/10s/prod/v1/${d}/scoreboard.json`),j=await r.json(),u=document.getElementById("lista-nba");u.innerHTML="";j.games?.slice(0,5).forEach(g=>{const h=new Date(g.startTimeUTC).toLocaleString("es‑ES",ZONA_LIMA),v=g.gameStatus===2?"🔴":"⏰";u.innerHTML+=`<li>${v} ${g.vTeam.name} @ ${g.hTeam.name} — ${h}</li>`})}catch(e){console.error("NBA‑próximos:",e)}}
+async function cargarNBAResultados(){try{const d=new Date(Date.now()-86400000).toISOString().split("T")[0],r=await fetch(`https://data.nba.net/10s/prod/v1/${d}/scoreboard.json`),j=await r.json(),t=document.getElementById("tabla-nba-resultados");t.innerHTML=`<tr><th>Visitante</th><th>Local</th><th>Resultado</th></tr>`;j.games?.filter(x=>x.gameStatus===3).slice(0,4).forEach(g=>t.innerHTML+=`<tr><td>${g.vTeam.city} ${g.vTeam.name}</td><td>${g.hTeam.city} ${g.hTeam.name}</td><td>${g.vTeam.score}‑${g.hTeam.score}</td></tr>`)}catch(e){console.error("NBA‑resultados:",e)}}
+async function cargarNBAPosiciones(){try{const [E,W]=await Promise.all([fetch("https://data.nba.net/10s/prod/v1/current/standings_east.json").then(x=>x.json()),fetch("https://data.nba.net/10s/prod/v1/current/standings_west.json").then(x=>x.json())]),c=document.getElementById("contenedor-nba-posiciones");c.innerHTML=`<h3>📊 Clasificaciones NBA</h3>`;[["Este",E.league.standard],["Oeste",W.league.standard]].forEach(([n,a])=>{c.innerHTML+=`<div class="card"><h4>Conferencia ${n}</h4><table><tr><th>#</th><th>Equipo</th><th>G</th><th>P</th><th>%</th></tr>`;a.slice(0,8).forEach((eq,i)=>c.innerHTML+=`<tr><td>${i+1}</td><td>${eq.teamCity} ${eq.teamName}</td><td>${eq.win}</td><td>${eq.loss}</td><td>${eq.pct}</td></tr>`);c.innerHTML+=`</table></div>`})}catch(e){console.error("NBA‑posiciones:",e)}}
 
-// 📊 POSICIONES — esta API no trae posiciones → usamos datos fijos
-async function cargarPosiciones() {
-  const cont = document.getElementById("contenedor-posiciones");
-  try {
-    throw new Error("API no trae posiciones");
-  } catch (e) {
-    cont.innerHTML = `
-    <div class="card"><h3>Grupo A</h3>
-    <table><tr><th>#</th><th>Selección</th><th>Pts</th><th>PJ</th><th>PG</th><th>PE</th><th>PP</th></tr>
-    <tr><td>1</td><td>México</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
-    <tr><td>2</td><td>Sudáfrica</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
-    <tr><td>3</td><td>Corea del Sur</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
-    <tr><td>4</td><td>Chequia</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr></table></div>
-    <div class="card"><h3>Grupo B</h3>
-    <table><tr><th>#</th><th>Selección</th><th>Pts</th><th>PJ</th><th>PG</th><th>PE</th><th>PP</th></tr>
-    <tr><td>1</td><td>Canadá</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
-    <tr><td>2</td><td>Bosnia‑Herzegovina</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
-    <tr><td>3</td><td>Catar</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
-    <tr><td>4</td><td>Suiza</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr></table></div>`;
-  }
-}
+// ⚾ MLB
+async function cargarMLBProximos(){try{const d=new Date().toISOString().split("T")[0],r=await fetch(`https://statsapi.mlb.com/api/v1/schedule?sportId=1&date=${d}&language=es`),j=await r.json(),u=document.getElementById("lista-mlb");u.innerHTML="";j.dates?.[0]?.games?.slice(0,6).forEach(g=>{const h=new Date(g.gameDate).toLocaleString("es‑ES",ZONA_LIMA),v=g.status?.abstractGameState==="Live"?"🔴":"⏰";u.innerHTML+=`<li>${v} ${g.teams.away.team.name} @ ${g.teams.home.team.name} — ${h}</li>`})}catch(e){console.error("MLB‑próximos:",e)}}
+async function cargarMLBResultados(){try{const d=new Date(Date.now()-86400000).toISOString().split("T")[0],r=await fetch(`https://statsapi.mlb.com/api/v1/schedule?sportId=1&date=${d}&language=es`),j=await r.json(),t=document.getElementById("tabla-mlb-resultados");t.innerHTML=`<tr><th>Visitante</th><th>Local</th><th>Resultado</th></tr>`;j.dates?.[0]?.games?.filter(x=>x.status?.abstractGameState==="Final")?.slice(0,4).forEach(g=>t.innerHTML+=`<tr><td>${g.teams.away.team.name}</td><td>${g.teams.home.team.name}</td><td>${g.teams.away.score??"-"}‑${g.teams.home.score??"-"}</td></tr>`)}catch(e){console.error("MLB‑resultados:",e)}}
+async function cargarMLBPosiciones(){try{const r=await fetch("https://statsapi.mlb.com/api/v1/standings?leagueId=103,104&season=2026&language=es"),j=await r.json(),c=document.getElementById("contenedor-mlb-posiciones");c.innerHTML=`<h3>📊 MLB 2026</h3>`;j.records?.forEach(l=>{c.innerHTML+=`<div class="card"><h4>${l.league.name}</h4><table><tr><th>#</th><th>Equipo</th><th>G</th><th>P</th><th>%</th><th>Dif</th></tr>`;l.teamRecords?.slice(0,8).forEach(r=>c.innerHTML+=`<tr><td>${r.divisionRank}</td><td>${r.team.name}</td><td>${r.wins}</td><td>${r.losses}</td><td>${r.winningPercentage}</td><td>${r.divisionGamesBack??"-"}</td></tr>`);c.innerHTML+=`</table></div>`})}catch(e){console.error("MLB‑posiciones:",e)}}
 
-// 📰 NOTICIAS
-async function cargarNoticias() {
-  const cont = document.getElementById("contenedor-noticias");
-  try {
-    const res = await fetch("https://api.rss2json.com/v1/api.json?rss_url=https://www.marca.com/futbol/rss.xml");
-    const json = await res.json();
-    cont.innerHTML = "";
-    if (json.items?.length) {
-      json.items.slice(0,4).forEach(n => {
-        cont.innerHTML += `
-          <div class="card">
-            <h3>${n.title}</h3>
-            <p>${n.description ? n.description.substring(0,130)+"…" : "Sin resumen"}</p>
-            <small>📰 ${n.pubDate}</small>
-          </div>`;
-      });
-    } else {
-      cont.innerHTML = `<div class="card"><p>No hay noticias nuevas</p></div>`;
-    }
-  } catch (e) {
-    console.error("Noticias:", e);
-    cont.innerHTML = `<div class="card"><p>No se pudieron cargar las noticias</p></div>`;
-  }
-}
-
-// 🟢 EN VIVO — pon esto arriba donde está la función
-// ⚽ FÚTBOL — En vivo
-async function cargarEnVivo() {
-  try {
-    const res = await fetch("https://api.football-data.org/v4/matches?status=LIVE", {
-      headers: { "X-Auth-Token": "d0134d9dafae4349b1748ddfc02fab16", "Accept": "application/json" }
-    });
-    const json = await res.json();
-    const elem = document.getElementById("partido-en-vivo");
-    const enVivo = json.matches?.[0];
-    if (enVivo) {
-      const local = enVivo.homeTeam?.name || "Desconocido";
-      const vis = enVivo.awayTeam?.name || "Desconocido";
-      const golL = enVivo.score?.fullTime?.home ?? "-";
-      const golV = enVivo.score?.fullTime?.away ?? "-";
-      const minuto = enVivo.minute ?? "En curso";
-      elem.textContent = `${local} ${golL} - ${golV} ${vis} • ${minuto}'`;
-    } else {
-      elem.textContent = "Sin partidos en curso";
-    }
-  } catch (e) {
-    console.error("En vivo:", e);
-    document.getElementById("partido-en-vivo").textContent = "Error al cargar";
-  }
-}
-
-// ⚽ Resultados
-async function cargarResultados() {
-  try {
-    const res = await fetch("https://api.football-data.org/v4/matches?status=FINISHED", {
-      headers: { "X-Auth-Token": "d0134d9dafae4349b1748ddfc02fab16", "Accept": "application/json" }
-    });
-    const json = await res.json();
-    const tbl = document.getElementById("tabla-resultados");
-    tbl.innerHTML = `<tr><th>Partido</th><th>Resultado</th></tr>`;
-    json.matches?.slice(0,3).forEach(p => {
-      tbl.innerHTML += `<tr><td>${p.homeTeam.name} vs ${p.awayTeam.name}</td><td>${p.score.fullTime.home ?? "-"}‑${p.score.fullTime.away ?? "-"}</td></tr>`;
-    });
-  } catch (e) { console.error("Resultados:", e); }
-}
-
-// ⚽ Próximos
-async function cargarProximos() {
-  try {
-    const res = await fetch("https://api.football-data.org/v4/matches?status=SCHEDULED", {
-      headers: { "X-Auth-Token": "d0134d9dafae4349b1748ddfc02fab16", "Accept": "application/json" }
-    });
-    const json = await res.json();
-    const ul = document.getElementById("lista-proximos");
-    ul.innerHTML = "";
-    json.matches?.slice(0,4).forEach(p => {
-      const fecha = new Date(p.utcDate).toLocaleString("es‑ES", {timeZone:"America/Lima", day:"2-digit", month:"2-digit", hour:"2-digit", minute:"2-digit"});
-      ul.innerHTML += `<li>${p.homeTeam.name} vs ${p.awayTeam.name} — ${fecha}</li>`;
-    });
-  } catch (e) { console.error("Próximos:", e); }
-}
-
-// ⚽ Posiciones
-async function cargarPosiciones() {
-  try {
-    const res = await fetch("https://api.football-data.org/v4/competitions/WC/standings", {
-      headers: { "X-Auth-Token": "d0134d9dafae4349b1748ddfc02fab16", "Accept": "application/json" }
-    });
-    const json = await res.json();
-    const c = document.getElementById("contenedor-posiciones");
-    c.innerHTML = "";
-    json.standings?.forEach(grupo => {
-      c.innerHTML += `<div class="card"><h3>${grupo.group}</h3>
-      <table><tr><th>#</th><th>Equipo</th><th>Pts</th><th>PJ</th><th>PG</th><th>PE</th><th>PP</th></tr>`;
-      grupo.table?.forEach(f => {
-        c.innerHTML += `<tr><td>${f.position}</td><td>${f.team.name}</td><td>${f.points}</td><td>${f.playedGames}</td><td>${f.won}</td><td>${f.draw}</td><td>${f.lost}</td></tr>`;
-      });
-      c.innerHTML += `</table></div>`;
-    });
-  } catch (e) { console.error("Posiciones:", e); }
-}
-
-// 📰 Noticias
-async function cargarNoticias() {
-  try {
-    const res = await fetch("https://api.rss2json.com/v1/api.json?rss_url=https://www.marca.com/futbol/rss.xml");
-    const json = await res.json();
-    const c = document.getElementById("contenedor-noticias");
-    c.innerHTML = "";
-    json.items?.slice(0,3).forEach(n => {
-      c.innerHTML += `<div class="card"><h4>${n.title}</h4><p>${n.description?.substring(0,120)}…</p></div>`;
-    });
-  } catch (e) { console.error("Noticias:", e); }
-}
-
-// ⚾ MLB — Hoy / Próximos
-async function cargarMLBProximos() {
-  try {
-    const hoy = new Date().toISOString().split("T")[0];
-    const res = await fetch(`https://statsapi.mlb.com/api/v1/schedule?sportId=1&date=${hoy}&language=es`);
-    const json = await res.json();
-    const ul = document.getElementById("lista-mlb");
-    ul.innerHTML = "";
-    json.dates?.[0]?.games?.slice(0,6).forEach(g => {
-      const hora = new Date(g.gameDate).toLocaleString("es‑ES", {timeZone:"America/Lima", hour:"2-digit", minute:"2-digit"});
-      const vivo = g.status?.abstractGameState === "Live" ? "🔴" : "⏰";
-      ul.innerHTML += `<li>${vivo} ${g.teams.away.team.name} @ ${g.teams.home.team.name} — ${hora}</li>`;
-    });
-  } catch (e) { console.error("MLB‑próximos:", e); }
-}
-
-// ⚾ MLB — Resultados
-async function cargarMLBResultados() {
-  try {
-    const ayer = new Date(Date.now()‑86400000).toISOString().split("T")[0];
-    const res = await fetch(`https://statsapi.mlb.com/api/v1/schedule?sportId=1&date=${ayer}&language=es`);
-    const json = await res.json();
-    const tbl = document.getElementById("tabla-mlb-resultados");
-    tbl.innerHTML = `<tr><th>Visitante</th><th>Local</th><th>Resultado</th></tr>`;
-    json.dates?.[0]?.games?.filter(x=>x.status?.abstractGameState==="Final")?.slice(0,4).forEach(g=>{
-      tbl.innerHTML += `<tr><td>${g.teams.away.team.name}</td><td>${g.teams.home.team.name}</td><td>${g.teams.away.score??"-"}‑${g.teams.home.score??"-"}</td></tr>`;
-    });
-  } catch (e) { console.error("MLB‑resultados:", e); }
-}
-
-// ⚾ MLB — Posiciones
-async function cargarMLBPosiciones() {
-  try {
-    const res = await fetch("https://statsapi.mlb.com/api/v1/standings?leagueId=103,104&season=2026&language=es");
-    const json = await res.json();
-    const c = document.getElementById("contenedor-mlb-posiciones");
-    c.innerHTML = `<h3>📊 MLB 2026</h3>`;
-    json.records?.forEach(liga=>{
-      c.innerHTML += `<div class="card"><h4>${liga.league.name}</h4>
-      <table><tr><th>#</th><th>Equipo</th><th>G</th><th>P</th><th>%</th><th>Dif</th></tr>`;
-      liga.teamRecords?.slice(0,8).forEach(r=>{
-        c.innerHTML += `<tr><td>${r.divisionRank}</td><td>${r.team.name}</td><td>${r.wins}</td><td>${r.losses}</td><td>${r.winningPercentage}</td><td>${r.divisionGamesBack??"-"}</td></tr>`;
-      });
-      c.innerHTML += `</table></div>`;
-    });
-  } catch (e) { console.error("MLB‑posiciones:", e); }
-}
-
-// 🚀 INICIO COMPLETO
-document.addEventListener('DOMContentLoaded', async () => {
-  cargarEnVivo();
-  cargarResultados();
-  cargarProximos();
-  cargarPosiciones();
-  cargarNoticias();
-  cargarMLBProximos();
-  cargarMLBResultados();
-  cargarMLBPosiciones();
+document.addEventListener("DOMContentLoaded",async()=>{
+  cargarEnVivo();cargarResultados();cargarProximos();cargarPosiciones();cargarNoticias();
+  cargarNBAProximos();cargarNBAResultados();cargarNBAPosiciones();
+  cargarMLBProximos();cargarMLBResultados();cargarMLBPosiciones();
 });
 </script>
+</body>
+</html>
