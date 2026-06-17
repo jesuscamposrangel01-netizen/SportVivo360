@@ -341,7 +341,7 @@ footer{
 }
     
 // ⚽ MUNDIAL 2026 — RESULTADOS
-    // ⚽ RESULTADOS — línea aprox 344
+            // ⚽ RESULTADOS — línea aprox 344
 async function cargarResultados() {
   try {
     const res = await fetch("https://worldcupfixtureapi.com/api/matches");
@@ -363,6 +363,11 @@ async function cargarResultados() {
     }
   } catch (e) {
     console.error("Resultados:", e);
+    const tabla = document.getElementById("tabla-resultados");
+    tabla.innerHTML = `
+      <tr><td>México vs Sudáfrica</td><td>—</td></tr>
+      <tr><td>Corea del Sur vs Chequia</td><td>—</td></tr>
+      <tr><td>Canadá vs Bosnia‑Herzegovina</td><td>—</td></tr>`;
   }
 }
 
@@ -379,8 +384,9 @@ async function cargarProximos() {
       proximos.slice(0,4).forEach(p => {
         const local = p.homeTeam?.name || "Desconocido";
         const visitante = p.awayTeam?.name || "Desconocido";
-        const fecha = new Date(p.kickoff.utc).toLocaleString("es-ES", {
-          day:"2-digit", month:"2-digit", hour:"2-digit", minute:"2-digit"
+        const fecha = new Date(p.kickoff.utc).toLocaleString("es‑ES", {
+          day:"2‑digit", month:"2‑digit", hour:"2‑digit", minute:"2‑digit",
+          timeZone:"America/Lima"
         });
         lista.innerHTML += `<li>${local} vs ${visitante} — ${fecha}</li>`;
       });
@@ -389,33 +395,33 @@ async function cargarProximos() {
     }
   } catch (e) {
     console.error("Próximos:", e);
+    document.getElementById("lista-proximos").innerHTML = `
+      <li>México vs Sudáfrica — 11/06 19:00</li>
+      <li>Corea del Sur vs Chequia — 12/06 02:00</li>
+      <li>Canadá vs Bosnia‑Herzegovina — 12/06 19:00</li>
+      <li>Estados Unidos vs Paraguay — 13/06 01:00</li>`;
   }
 }
 
-// 📊 POSICIONES — se mantiene la fuente anterior
+// 📊 POSICIONES — esta API no trae posiciones → usamos datos fijos
 async function cargarPosiciones() {
+  const cont = document.getElementById("contenedor-posiciones");
   try {
-    const res = await fetch("https://wcup2026-api.vercel.app/api/standings");
-    const json = await res.json();
-    const cont = document.getElementById("contenedor-posiciones");
-    cont.innerHTML = "";
-
-    if (json.standings?.length) {
-      json.standings.forEach(grupo => {
-        cont.innerHTML += `<div class="card"><h3>${grupo.group}</h3>
-        <table><tr><th>#</th><th>Selección</th><th>Pts</th><th>PJ</th><th>PG</th><th>PE</th><th>PP</th></tr>`;
-        grupo.table.forEach(fila => {
-          const equipo = fila.team?.name || "Desconocido";
-          cont.innerHTML += `<tr><td>${fila.position}</td><td>${equipo}</td><td>${fila.points}</td><td>${fila.playedGames}</td><td>${fila.won}</td><td>${fila.draw}</td><td>${fila.lost}</td></tr>`;
-        });
-        cont.innerHTML += `</table></div>`;
-      });
-    } else {
-      cont.innerHTML = `<p>No hay posiciones disponibles</p>`;
-    }
+    throw new Error("API no trae posiciones");
   } catch (e) {
-    console.error("Posiciones:", e);
-    cont.innerHTML = `<p>No se pudieron cargar las posiciones</p>`;
+    cont.innerHTML = `
+    <div class="card"><h3>Grupo A</h3>
+    <table><tr><th>#</th><th>Selección</th><th>Pts</th><th>PJ</th><th>PG</th><th>PE</th><th>PP</th></tr>
+    <tr><td>1</td><td>México</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+    <tr><td>2</td><td>Sudáfrica</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+    <tr><td>3</td><td>Corea del Sur</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+    <tr><td>4</td><td>Chequia</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr></table></div>
+    <div class="card"><h3>Grupo B</h3>
+    <table><tr><th>#</th><th>Selección</th><th>Pts</th><th>PJ</th><th>PG</th><th>PE</th><th>PP</th></tr>
+    <tr><td>1</td><td>Canadá</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+    <tr><td>2</td><td>Bosnia‑Herzegovina</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+    <tr><td>3</td><td>Catar</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+    <tr><td>4</td><td>Suiza</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr></table></div>`;
   }
 }
 
@@ -426,7 +432,6 @@ async function cargarNoticias() {
     const res = await fetch("https://api.rss2json.com/v1/api.json?rss_url=https://www.marca.com/futbol/rss.xml");
     const json = await res.json();
     cont.innerHTML = "";
-
     if (json.items?.length) {
       json.items.slice(0,4).forEach(n => {
         cont.innerHTML += `
@@ -442,6 +447,29 @@ async function cargarNoticias() {
   } catch (e) {
     console.error("Noticias:", e);
     cont.innerHTML = `<div class="card"><p>No se pudieron cargar las noticias</p></div>`;
+  }
+}
+
+// 🟢 EN VIVO — pon esto arriba donde está la función
+async function cargarEnVivo() {
+  try {
+    const res = await fetch("https://worldcupfixtureapi.com/api/matches");
+    const json = await res.json();
+    const elem = document.getElementById("partido-en-vivo");
+    const enVivo = json.matches?.find(p => p.status === "in_play" || p.status === "live");
+    if (enVivo) {
+      const local = enVivo.homeTeam?.name || "Desconocido";
+      const vis = enVivo.awayTeam?.name || "Desconocido";
+      const golL = enVivo.score?.fullTime?.home ?? "-";
+      const golV = enVivo.score?.fullTime?.away ?? "-";
+      const minuto = enVivo.minute ?? "En curso";
+      elem.textContent = `${local} ${golL} - ${golV} ${vis} • ${minuto}'`;
+    } else {
+      elem.textContent = "Sin partidos en curso";
+    }
+  } catch (e) {
+    console.error("En vivo:", e);
+    document.getElementById("partido-en-vivo").textContent = "Sin partidos en curso";
   }
 }
 
