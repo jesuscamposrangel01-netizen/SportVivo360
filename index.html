@@ -363,10 +363,17 @@
 
     <script>
         // ================================================================
-        // 1. CONFIGURACIÓN RAPIDAPI (TU CLAVE VERIFICADA)
+        // 1. CONFIGURACIÓN DE APIS
         // ================================================================
+        // 🔑 Clave de football-data.org (Mundial 2026 y ligas)
+        const FOOTBALL_API_KEY = 'd0134d9dafae4349b1748ddfc02fab16';
+        const FOOTBALL_HEADERS = {
+            'X-Auth-Token': FOOTBALL_API_KEY,
+            'Accept': 'application/json'
+        };
+
+        // 🔑 Clave de RapidAPI (NBA, videos, etc.)
         const RAPIDAPI_KEY = 'f019ce89dfmhsh54169a00fd80f9b1c5aadjsn50be5f785083';
-        const RAPIDAPI_HOST_FOOTBALL = 'api-football-v1.p.rapidapi.com';
         const RAPIDAPI_HOST_NBA = 'api-nba-v1.p.rapidapi.com';
 
         // ================================================================
@@ -522,7 +529,83 @@
         // 4. FUNCIONES PARA CONSUMIR APIS
         // ================================================================
 
-        // 🎥 VIDEOS DE FÚTBOL — API de RapidAPI
+        // ⚽ FÚTBOL — football-data.org (NUEVA API, MÁS ESTABLE)
+        async function cargarFutbolDataOrg() {
+            try {
+                // Partidos en vivo
+                const resLive = await fetch('https://api.football-data.org/v4/matches?status=LIVE', {
+                    headers: FOOTBALL_HEADERS
+                });
+                if (!resLive.ok) throw new Error('HTTP ' + resLive.status);
+                const dataLive = await resLive.json();
+                if (dataLive.matches?.length > 0) {
+                    const vivo = dataLive.matches[0];
+                    mostrarEnVivo(`🔥 ${vivo.homeTeam.name} ${vivo.score.fullTime.home ?? '-'}‑${vivo.score.fullTime.away ?? '-'} ${vivo.awayTeam.name}`);
+                }
+
+                // Resultados (últimos 4 finalizados)
+                const resFin = await fetch('https://api.football-data.org/v4/matches?status=FINISHED', {
+                    headers: FOOTBALL_HEADERS
+                });
+                if (resFin.ok) {
+                    const dataFin = await resFin.json();
+                    const finalizados = dataFin.matches?.slice(0, 4) || [];
+                    if (finalizados.length) {
+                        const resultados = finalizados.map(m => ({
+                            local: m.homeTeam.name,
+                            visitante: m.awayTeam.name,
+                            resultado: `${m.score.fullTime.home ?? '-'}‑${m.score.fullTime.away ?? '-'}`
+                        }));
+                        mostrarResultados(resultados);
+                    }
+                }
+
+                // Próximos (hasta 5)
+                const resProx = await fetch('https://api.football-data.org/v4/matches?status=SCHEDULED', {
+                    headers: FOOTBALL_HEADERS
+                });
+                if (resProx.ok) {
+                    const dataProx = await resProx.json();
+                    const proximos = dataProx.matches?.slice(0, 5) || [];
+                    if (proximos.length) {
+                        const proxData = proximos.map(m => ({
+                            local: m.homeTeam.name,
+                            visitante: m.awayTeam.name,
+                            fecha: new Date(m.utcDate).toLocaleString('es-ES', ZONA_LIMA)
+                        }));
+                        mostrarProximos(proxData);
+                    }
+                }
+
+                // Clasificaciones (Mundial 2026)
+                const resStand = await fetch('https://api.football-data.org/v4/competitions/WC/standings', {
+                    headers: FOOTBALL_HEADERS
+                });
+                if (resStand.ok) {
+                    const dataStand = await resStand.json();
+                    if (dataStand.standings?.length) {
+                        const posiciones = dataStand.standings.map(s => ({
+                            grupo: s.group,
+                            equipos: s.table?.map(t => ({
+                                pos: t.position,
+                                nombre: t.team.name,
+                                pts: t.points,
+                                pj: t.playedGames,
+                                pg: t.won,
+                                pe: t.draw,
+                                pp: t.lost
+                            })) || []
+                        }));
+                        mostrarPosiciones(posiciones);
+                    }
+                }
+
+            } catch (e) {
+                console.log('ℹ️ football-data.org no disponible, usando MOCK');
+            }
+        }
+
+        // 🎥 VIDEOS DE FÚTBOL — RapidAPI
         async function cargarVideosFutbol() {
             try {
                 const res = await fetch('https://free-football-soccer-videos.p.rapidapi.com/', {
@@ -573,70 +656,15 @@
             }
         }
 
-        // ⚽ FÚTBOL — RapidAPI (API-Football) — SUSCRIPCIÓN VERIFICADA
-        async function cargarFutbolRapid() {
-            try {
-                const hoy = new Date().toISOString().split('T')[0];
-                const resLive = await fetch('https://api-football-v1.p.rapidapi.com/v3/fixtures?live=all', {
-                    headers: { 'X-RapidAPI-Key': RAPIDAPI_KEY, 'X-RapidAPI-Host': RAPIDAPI_HOST_FOOTBALL }
-                });
-                if (!resLive.ok) throw new Error('HTTP ' + resLive.status);
-                const dataLive = await resLive.json();
-                if (Array.isArray(dataLive?.response) && dataLive.response.length > 0) {
-                    const v = dataLive.response[0];
-                    mostrarEnVivo(`🔥 ${v.teams.home.name} ${v.goals.home}‑${v.goals.away} ${v.teams.away.name}`);
-                }
-
-                const resFin = await fetch(`https://api-football-v1.p.rapidapi.com/v3/fixtures?date=${hoy}&status=FT`, {
-                    headers: { 'X-RapidAPI-Key': RAPIDAPI_KEY, 'X-RapidAPI-Host': RAPIDAPI_HOST_FOOTBALL }
-                });
-                if (resFin.ok) {
-                    const dataFin = await resFin.json();
-                    const finalizados = dataFin.response?.slice(0, 4) || [];
-                    if (finalizados.length) {
-                        const resultados = finalizados.map(f => ({ local: f.teams.home.name, visitante: f.teams.away.name, resultado: `${f.goals.home}‑${f.goals.away}` }));
-                        mostrarResultados(resultados);
-                    }
-                }
-
-                const resProx = await fetch(`https://api-football-v1.p.rapidapi.com/v3/fixtures?date=${hoy}&status=NS`, {
-                    headers: { 'X-RapidAPI-Key': RAPIDAPI_KEY, 'X-RapidAPI-Host': RAPIDAPI_HOST_FOOTBALL }
-                });
-                if (resProx.ok) {
-                    const dataProx = await resProx.json();
-                    const proximos = dataProx.response?.slice(0, 5) || [];
-                    if (proximos.length) {
-                        const proxData = proximos.map(f => ({ local: f.teams.home.name, visitante: f.teams.away.name, fecha: new Date(f.fixture.date).toLocaleString('es-ES', ZONA_LIMA) }));
-                        mostrarProximos(proxData);
-                    }
-                }
-
-                const resStand = await fetch('https://api-football-v1.p.rapidapi.com/v3/standings?league=1&season=2026', {
-                    headers: { 'X-RapidAPI-Key': RAPIDAPI_KEY, 'X-RapidAPI-Host': RAPIDAPI_HOST_FOOTBALL }
-                });
-                if (resStand.ok) {
-                    const dataStand = await resStand.json();
-                    if (dataStand.response?.length) {
-                        const liga = dataStand.response[0];
-                        const equipos = liga.league.standings[0]?.slice(0, 5) || [];
-                        const posiciones = [{
-                            grupo: liga.league.name,
-                            equipos: equipos.map((eq, i) => ({ pos: i+1, nombre: eq.team.name, pts: eq.points, pj: eq.all.played, pg: eq.all.win, pe: eq.all.draw, pp: eq.all.lose }))
-                        }];
-                        mostrarPosiciones(posiciones);
-                    }
-                }
-            } catch (e) {
-                console.log('ℹ️ RapidAPI Fútbol no disponible, usando MOCK');
-            }
-        }
-
-        // 🏀 NBA — RapidAPI (API-NBA) — PENDIENTE DE SUSCRIPCIÓN
+        // 🏀 NBA — RapidAPI (PENDIENTE DE SUSCRIPCIÓN)
         async function cargarNBARapid() {
             try {
                 const hoy = new Date().toISOString().split('T')[0];
                 const res = await fetch(`https://api-nba-v1.p.rapidapi.com/games?date=${hoy}`, {
-                    headers: { 'X-RapidAPI-Key': RAPIDAPI_KEY, 'X-RapidAPI-Host': RAPIDAPI_HOST_NBA }
+                    headers: {
+                        'X-RapidAPI-Key': RAPIDAPI_KEY,
+                        'X-RapidAPI-Host': RAPIDAPI_HOST_NBA
+                    }
                 });
                 if (!res.ok) throw new Error('HTTP ' + res.status);
                 const data = await res.json();
@@ -654,7 +682,10 @@
                     }
                 }
                 const resStand = await fetch('https://api-nba-v1.p.rapidapi.com/standings?league=standard&season=2025', {
-                    headers: { 'X-RapidAPI-Key': RAPIDAPI_KEY, 'X-RapidAPI-Host': RAPIDAPI_HOST_NBA }
+                    headers: {
+                        'X-RapidAPI-Key': RAPIDAPI_KEY,
+                        'X-RapidAPI-Host': RAPIDAPI_HOST_NBA
+                    }
                 });
                 if (resStand.ok) {
                     const dataStand = await resStand.json();
@@ -740,14 +771,14 @@
             mostrarMLBResultados(MOCK.mlb.resultados);
             mostrarMLBPosiciones(MOCK.mlb.posiciones);
             mostrarNoticias(MOCK.noticias);
-            cargarVideosFutbol(); // Videos MOCK
+            cargarVideosFutbol();
             actualizarHora();
 
             // Intentar APIs en segundo plano
             setTimeout(() => {
-                cargarFutbolRapid();   // ✅ Suscripción verificada
-                cargarNBARapid();      // ⚠️ Necesita suscripción
-                cargarMLBGratis();     // ✅ Gratis sin clave
+                cargarFutbolDataOrg();  // ✅ NUEVA API (football-data.org)
+                cargarNBARapid();       // ⚠️ Necesita suscripción en RapidAPI
+                cargarMLBGratis();      // ✅ Gratis sin clave
                 cargarNoticiasGratis(); // ✅ Gratis
                 cargarVideosFutbol();   // ⚠️ Puede requerir suscripción
             }, 500);
