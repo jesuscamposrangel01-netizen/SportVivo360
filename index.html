@@ -3,81 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sportmax360 | Deportes en vivo</title>
+    <title>Sportmax360 | MLB Béisbol</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
-        body { background-color: #f5f7fa; color: #333; line-height: 1.6; }
-        header { background: #165DFF; color: #fff; padding: 2rem; text-align: center; }
-        header h1 { font-size: 2rem; margin-bottom: 0.3rem; }
-        nav { background: #fff; padding: 1rem; border-bottom: 1px solid #ddd; position: sticky; top:0; z-index:10; }
-        nav a { margin: 0 0.8rem; color: #333; text-decoration: none; font-weight: bold; }
-        nav a:hover { color: #165DFF; }
-        main { max-width: 1100px; margin: 2rem auto; padding: 0 1rem; }
-        h2 { color: #222; margin: 2.2rem 0 1rem; border-left: 4px solid #165DFF; padding-left: 0.8rem; }
-        .grid-equipos, .grid-partidos { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1.2rem; }
-        .grid-partidos { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
-        .card { background: #fff; padding: 1.2rem; border-radius: 8px; box-shadow: 0 3px 8px rgba(0,0,0,0.08); }
-        .tabla-posiciones { width: 100%; border-collapse: collapse; background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 3px 8px rgba(0,0,0,0.08); }
-        .tabla-posiciones th, .tabla-posiciones td { padding: 0.8rem; text-align: center; border-bottom: 1px solid #eee; }
-        .tabla-posiciones th { background: #165DFF; color: #fff; }
-        footer { background: #1f2937; color: #ccc; text-align: center; padding: 2rem; margin-top: 3rem; }
-        .aviso { color: #e63946; font-weight: 500; }
+        * { margin:0; padding:0; box-sizing:border-box; font-family:Arial,sans-serif; }
+        body { background:#f5f7fa; color:#333; line-height:1.6; }
+        header { background:#00468B; color:#fff; padding:2rem; text-align:center; }
+        header h1 { font-size:2rem; margin-bottom:.3rem; }
+        nav { background:#fff; padding:1rem; border-bottom:1px solid #ddd; position:sticky; top:0; z-index:10; }
+        nav a { margin:0 .8rem; color:#333; text-decoration:none; font-weight:bold; }
+        nav a:hover,.activo { color:#00468B; }
+        main { max-width:1100px; margin:2rem auto; padding:0 1rem; }
+        h2 { color:#222; margin:2rem 0 1rem; border-left:4px solid #00468B; padding-left:.8rem; }
+        h3 { color:#444; margin:1.5rem 0 .6rem; }
+        .grid-equipos { display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:1.2rem; }
+        .grid-partidos { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:1.2rem; }
+        .card { background:#fff; padding:1.2rem; border-radius:8px; box-shadow:0 3px 8px rgba(0,0,0,.08); text-align:center; }
+        .card img { height:65px; margin:0 auto .6rem; }
+        footer { background:#1f2937; color:#ccc; text-align:center; padding:2rem; margin-top:3rem; }
+        .aviso { color:#e63946; font-weight:500; }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>⚽ Sportmax360</h1>
-    <p>Resultados, estadísticas y torneos en vivo</p>
+    <h1>⚾ Sportmax360 — MLB</h1>
+    <p>Liga Mayor de Béisbol — Datos en vivo</p>
 </header>
 
 <nav>
-    <a href="#inicio">Inicio</a>
+    <a href="#inicio" class="activo">Inicio</a>
     <a href="#equipos">Equipos</a>
-    <a href="#posiciones">Tabla</a>
-    <a href="#partidos">Partidos</a>
+    <a href="#resultados">Resultados</a>
     <a href="#contacto">Contacto</a>
 </nav>
 
 <main>
     <section id="inicio">
-        <h2>Bienvenido a Sportmax360</h2>
-        <p>Plataforma deportiva con datos reales de fútbol y más competiciones.</p>
+        <h2>Bienvenido a la sección MLB</h2>
+        <p>Usamos <strong>The‑SportsDB</strong>: API pública, sin claves ni límites estrictos.</p>
     </section>
 
     <section id="equipos">
-        <h2>📋 Equipos del torneo</h2>
+        <h2>🏟️ Equipos de la MLB</h2>
         <div id="lista-equipos" class="grid-equipos">
             <p>Cargando equipos…</p>
         </div>
     </section>
 
-    <section id="posiciones">
-        <h2>🏆 Tabla de posiciones</h2>
-        <div style="overflow-x:auto;">
-            <table id="tabla-posiciones" class="tabla-posiciones">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Equipo</th>
-                        <th>PJ</th>
-                        <th>PG</th>
-                        <th>PE</th>
-                        <th>PP</th>
-                        <th>Pts</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td colspan="7" class="aviso">Cargando clasificación…</td></tr>
-                </tbody>
-            </table>
-        </div>
-    </section>
-
-    <section id="partidos">
-        <h2>📅 Partidos y resultados</h2>
+    <section id="resultados">
+        <h2>📅 Últimos encuentros</h2>
         <div id="lista-partidos" class="grid-partidos">
-            <p>Cargando encuentros…</p>
+            <p>Cargando resultados…</p>
         </div>
     </section>
 
@@ -88,98 +64,76 @@
 </main>
 
 <footer>
-    <p>© 2026 Sportmax360 — Datos vía AllSportsAPI2 / RapidAPI</p>
+    <p>© 2026 Sportmax360 — Datos: The‑SportsDB</p>
 </footer>
 
 <script>
-const RAPIDAPI_KEY = "f019ce89dfmsh54169a00fd80f9bp1c5aadjsn50be5f785083";
-const RAPIDAPI_HOST = "allsportsapi2.p.rapidapi.com";
-const URL_ESTAD = "https://allsportsapi2.p.rapidapi.com/api/tournament/17/season/76986/statistics/info";
-const URL_TABLE = "https://allsportsapi2.p.rapidapi.com/api/tournament/17/season/76986/standings";
-const URL_PART = "https://allsportsapi2.p.rapidapi.com/api/tournament/17/season/76986/matches";
+// ⚾ MLB — API PÚBLICA
+const API_KEY = "3"; // clave pública de prueba
+const URL_EQUIPOS = `https://www.thesportsdb.com/api/v1/json/${API_KEY}/lookup_all_teams.php?id=4424`;
+const URL_PARTIDOS = `https://www.thesportsdb.com/api/v1/json/${API_KEY}/eventspastleague.php?id=4424`;
 
-async function cargarEquipos() {
+// Cargar equipos MLB
+async function cargarEquiposMLB() {
     const cont = document.getElementById("lista-equipos");
     try {
-        const res = await fetch(URL_ESTAD, {
-            headers: { "x-rapidapi-host": RAPIDAPI_HOST, "x-rapidapi-key": RAPIDAPI_KEY },
-            signal: AbortSignal.timeout(10000)
-        });
+        const res = await fetch(URL_EQUIPOS);
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const datos = await res.json();
         const equipos = datos.teams || [];
-        cont.innerHTML = equipos.map(eq => `
-            <div class="card">
-                <h4>${eq.name}</h4>
-                <p>Abr: ${eq.shortName || eq.nameCode || "-"}</p>
-                <p>ID: ${eq.id}</p>
-                <div style="width:32px;height:32px;border-radius:50%;background:${eq.teamColors?.primary||'#ccc'};margin-top:.5rem"></div>
-            </div>
-        `).join("");
-    } catch (e) { cont.innerHTML = `<p class='aviso'>Error equipos: ${e.message}</p>`; }
-}
 
-async function cargarTablaPosiciones() {
-    const cuerpo = document.querySelector("#tabla-posiciones tbody");
-    try {
-        const res = await fetch(URL_TABLE, {
-            headers: { "x-rapidapi-host": RAPIDAPI_HOST, "x-rapidapi-key": RAPIDAPI_KEY },
-            signal: AbortSignal.timeout(10000)
-        });
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const datos = await res.json();
-        const filas = datos.standings || datos.table || [];
-        cuerpo.innerHTML = filas.map(f => `
-            <tr>
-                <td>${f.position || f.rank || "-"}</td>
-                <td>${f.team?.name || f.teamName || "—"}</td>
-                <td>${f.playedMatches || f.pj || 0}</td>
-                <td>${f.wins || f.pg || 0}</td>
-                <td>${f.draws || f.pe || 0}</td>
-                <td>${f.losses || f.pp || 0}</td>
-                <td><strong>${f.points || f.pts || 0}</strong></td>
-            </tr>
-        `).join("");
-    } catch (e) { cuerpo.innerHTML = `<tr><td colspan='7' class='aviso'>Tabla: ${e.message}</td></tr>`; }
-}
-
-async function cargarPartidos() {
-    const cont = document.getElementById("lista-partidos");
-    try {
-        const res = await fetch(URL_PART, {
-            headers: { "x-rapidapi-host": RAPIDAPI_HOST, "x-rapidapi-key": RAPIDAPI_KEY },
-            signal: AbortSignal.timeout(12000)
-        });
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const datos = await res.json();
-        console.log("📌 Respuesta partidos:", datos);
-        const partidos = datos.matches || datos.events || datos.data || datos.results || [];
-
-        if (!partidos.length) {
-            cont.innerHTML = "<p class='aviso'>La API respondió pero no trae partidos</p>";
+        if (!equipos.length) {
+            cont.innerHTML = "<p class='aviso'>Sin equipos disponibles</p>";
             return;
         }
-        cont.innerHTML = partidos.map(p => `
-            <div class="card" style="text-align:center">
-                <p style="font-weight:bold">${p.homeTeam?.name || p.home?.name || p.local || "Local"}</p>
-                <p style="font-size:1.2rem;color:#165DFF;font-weight:bold;margin:.3rem 0">
-                    ${p.homeScore?.display ?? p.home?.score ?? p.score?.home ?? "-"}
-                    :
-                    ${p.awayScore?.display ?? p.away?.score ?? p.score?.away ?? "-"}
-                </p>
-                <p style="font-weight:bold">${p.awayTeam?.name || p.away?.name || p.visitante || "Visitante"}</p>
-                <p style="font-size:.9rem;color:#666;margin-top:.6rem">${p.startDate || p.date || p.fecha || "Fecha sin definir"}</p>
+
+        cont.innerHTML = equipos.map(eq => `
+            <div class="card">
+                <img src="${eq.strTeamBadge}" alt="${eq.strTeam}" loading="lazy">
+                <h4 style="margin:.4rem 0;">${eq.strTeam}</h4>
+                <p style="font-size:.85rem; color:#666;">${eq.strStadium || "Estadio no especificado"}</p>
             </div>
         `).join("");
     } catch (err) {
-        console.error("❌ Partidos:", err);
-        cont.innerHTML = `<p class='aviso'>Partidos: ${err.message}</p>`;
+        console.error("❌ Equipos MLB:", err);
+        cont.innerHTML = `<p class='aviso'>Error: ${err.message}</p>`;
     }
 }
 
-cargarEquipos();
-cargarTablaPosiciones();
-cargarPartidos();
+// Cargar resultados MLB
+async function cargarPartidosMLB() {
+    const cont = document.getElementById("lista-partidos");
+    try {
+        const res = await fetch(URL_PARTIDOS);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const datos = await res.json();
+        const partidos = datos.events || [];
+
+        if (!partidos.length) {
+            cont.innerHTML = "<p class='aviso'>Sin partidos disponibles</p>";
+            return;
+        }
+
+        // Mostrar últimos 8 partidos
+        cont.innerHTML = partidos.slice(0,8).map(p => `
+            <div class="card">
+                <p style="font-weight:bold;">${p.strHomeTeam}</p>
+                <p style="font-size:1.2rem; color:#00468B; font-weight:bold; margin:.4rem 0;">
+                    ${p.intHomeScore ?? "-"} : ${p.intAwayScore ?? "-"}
+                </p>
+                <p style="font-weight:bold;">${p.strAwayTeam}</p>
+                <p style="font-size:.9rem; color:#666; margin-top:.6rem;">📅 ${p.dateEvent} | ⏰ ${p.strTime || "Sin hora"}</p>
+            </div>
+        `).join("");
+    } catch (err) {
+        console.error("❌ Partidos MLB:", err);
+        cont.innerHTML = `<p class='aviso'>Error: ${err.message}</p>`;
+    }
+}
+
+// Ejecutar
+cargarEquiposMLB();
+cargarPartidosMLB();
 </script>
 </body>
 </html>
