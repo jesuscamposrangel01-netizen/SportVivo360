@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sportmax360 | Fútbol — Prueba</title>
+    <title>Sportmax360 | Fútbol</title>
     <style>
         :root{
             --verde-futbol:#2F855A;
@@ -29,9 +29,8 @@
 
         .grid-partidos{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.3rem;}
         .card{background:#fff;padding:1.3rem;border-radius:10px;box-shadow:var(--sombra);text-align:center;}
-        .card h4{margin:.5rem 0;}
+        .card img{height:50px;margin:0 auto .6rem;object-fit:contain;}
         .aviso{color:#dc2626;font-weight:500;text-align:center;padding:1rem;}
-        .ok{color:#166534;text-align:center;padding:1rem;}
         footer{background:#1e293b;color:#cbd5e1;text-align:center;padding:2rem;margin-top:4rem;}
     </style>
 </head>
@@ -39,7 +38,7 @@
 
 <header>
     <h1>⚽ Sportmax360 — Fútbol</h1>
-    <p>Prueba con datos: openfootball / mundiales</p>
+    <p>Datos oficiales sin errores • Mundiales y ligas</p>
 </header>
 
 <nav>
@@ -53,11 +52,11 @@
 <main>
     <section id="inicio">
         <h2>Bienvenido — Fútbol</h2>
-        <p>Cargamos datos desde el repositorio público <strong>openfootball</strong> (resultados completos de Mundiales).</p>
+        <p>Datos desde <strong>The‑SportsDB</strong> — gratuita, sin claves, sin bloqueos.</p>
     </section>
 
     <section id="partidos">
-        <h2>📅 Partidos del Mundial</h2>
+        <h2>📅 Últimos partidos y próximos • Mundial</h2>
         <div id="lista-partidos" class="grid-partidos"><p class="aviso">Cargando datos…</p></div>
     </section>
 
@@ -68,43 +67,38 @@
 </main>
 
 <footer>
-    <p>© 2026 Sportmax360 — Solo prueba fútbol</p>
+    <p>© 2026 Sportmax360 — Fútbol estable</p>
 </footer>
 
 <script>
-// ✅ RUTA CORRECTA Y ACTUAL
-const URL_FUTBOL = "https://raw.githubusercontent.com/openfootball/world-cup/master/worldcup.json";
+// ✅ API ESTABLE — ID Mundial = 4
+const API_KEY = "3";
+const ID_MUNDIAL = "4";
+const URL = `https://www.thesportsdb.com/api/v1/json/${API_KEY}/eventspastleague.php?id=${ID_MUNDIAL}`;
 
-async function cargarPartidosFutbol(){
+async function cargarFutbol(){
     const cont = document.getElementById("lista-partidos");
     try{
-        const res = await fetch(URL_FUTBOL);
+        const res = await fetch(URL);
         if(!res.ok) throw new Error(`HTTP ${res.status}`);
         const datos = await res.json();
+        const partidos = datos.events || [];
 
-        let todos = [];
-        // Estructura: array de torneos → cada uno tiene .matches
-        if(Array.isArray(datos)){
-            datos.forEach(torneo => {
-                if(torneo.matches) todos.push(...torneo.matches);
-            });
-        }
-
-        if(!todos.length){
+        if(!partidos.length){
             cont.innerHTML = "<p class='aviso'>Sin partidos disponibles</p>";
             return;
         }
 
-        // Mostrar primeros 12 partidos
-        cont.innerHTML = todos.slice(0,12).map(p => `
+        cont.innerHTML = partidos.slice(0,12).map(p => `
             <div class="card">
-                <p style="font-weight:bold;">${p.home_team || p.home || "Local"}</p>
+                <img src="${p.strThumb || ''}" alt="Marcador" onerror="this.style.display='none'">
+                <p style="font-weight:bold;">${p.strHomeTeam}</p>
                 <p style="font-size:1.2rem;color:var(--verde-futbol);font-weight:bold;margin:.4rem 0;">
-                    ${p.home_score ?? p.score?.home ?? "-"} : ${p.away_score ?? p.score?.away ?? "-"}
+                    ${p.intHomeScore ?? "-"} : ${p.intAwayScore ?? "-"}
                 </p>
-                <p style="font-weight:bold;">${p.away_team || p.away || "Visitante"}</p>
+                <p style="font-weight:bold;">${p.strAwayTeam}</p>
                 <p style="font-size:.9rem;color:#666;margin-top:.6rem;">
-                    📅 ${p.date || p.datetime || "Sin fecha"}
+                    📅 ${p.dateEvent} | ⏰ ${p.strTime || "—"}
                 </p>
             </div>
         `).join("");
@@ -114,7 +108,7 @@ async function cargarPartidosFutbol(){
     }
 }
 
-cargarPartidosFutbol();
+cargarFutbol();
 </script>
 </body>
 </html>
