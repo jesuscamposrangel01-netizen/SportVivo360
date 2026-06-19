@@ -32,7 +32,6 @@
         .card img{height:50px;margin:0 auto .6rem;object-fit:contain;}
         .aviso{color:#dc2626;font-weight:500;text-align:center;padding:1rem;}
         .info{color:#2b6cb0;font-size:.9rem;margin-bottom:.8rem;}
-        /* Tabla */
         .tabla-wrap{overflow-x:auto;border-radius:10px;box-shadow:var(--sombra);margin-top:1rem;}
         .tabla-posiciones{width:100%;border-collapse:collapse;background:#fff;}
         .tabla-posiciones th,.tabla-posiciones td{padding:.8rem .6rem;text-align:center;border-bottom:1px solid var(--gris-claro);font-size:.9rem;}
@@ -75,7 +74,7 @@
     </section>
 
     <section id="tabla">
-        <h2>🏆 Tabla de posiciones — Temporada actual</h2>
+        <h2>🏆 Tabla de posiciones — Temporada 2024‑2025</h2>
         <div class="tabla-wrap">
             <table class="tabla-posiciones">
                 <thead>
@@ -105,18 +104,23 @@
 <script>
 const API_KEY = "3";
 const HOY = new Date().toISOString().split('T')[0];
-const TEMPORADA = "2025‑2026"; // temporada activa
+const TEMPORADA = "2024-2025"; // ✅ Año seguro con datos
 
-// Cargar TABLA
+// Cargar TABLA con protección de respuesta vacía
 async function cargarTabla(idLiga){
     const tb = document.getElementById("cuerpo-tabla");
     try{
         const res = await fetch(`https://www.thesportsdb.com/api/v1/json/${API_KEY}/lookuptable.php?l=${idLiga}&s=${TEMPORADA}`);
-        const datos = await res.json();
+        if(!res.ok) throw new Error(`HTTP ${res.status}`);
+        
+        const texto = await res.text();
+        if(!texto.trim()) throw new Error("Respuesta vacía de la API");
+        
+        const datos = JSON.parse(texto);
         const filas = datos.table || [];
 
         if(!filas.length){
-            tb.innerHTML = "<tr><td colspan='7' class='aviso'>Sin tabla disponible para esta liga/temporada</td></tr>";
+            tb.innerHTML = "<tr><td colspan='7' class='aviso'>Sin tabla disponible para esta liga</td></tr>";
             return;
         }
 
@@ -124,11 +128,11 @@ async function cargarTabla(idLiga){
             <tr>
                 <td>${i+1}</td>
                 <td>${f.strTeam}</td>
-                <td>${f.intPlayed}</td>
-                <td>${f.intWin}</td>
-                <td>${f.intDraw}</td>
-                <td>${f.intLoss}</td>
-                <td><strong>${f.intPoints}</strong></td>
+                <td>${f.intPlayed||0}</td>
+                <td>${f.intWin||0}</td>
+                <td>${f.intDraw||0}</td>
+                <td>${f.intLoss||0}</td>
+                <td><strong>${f.intPoints||0}</strong></td>
             </tr>`).join("");
     }catch(e){
         tb.innerHTML = `<tr><td colspan='7' class='aviso'>Tabla: ${e.message}</td></tr>`;
@@ -152,7 +156,6 @@ async function cargarPartidos(idLiga){
             cont.innerHTML = "<p class='aviso'>Sin partidos disponibles</p>";
             return;
         }
-        // Eliminar duplicados
         const ids = new Set();
         partidos = partidos.filter(p=>ids.has(p.idEvent)?false:ids.add(p.idEvent));
         partidos.sort((a,b)=>new Date(b.dateEvent) - new Date(a.dateEvent));
@@ -174,13 +177,11 @@ async function cargarPartidos(idLiga){
     }
 }
 
-// Cambiar liga → actualizar tabla + partidos
 document.getElementById("ligaSelect").addEventListener("change", e=>{
     cargarTabla(e.target.value);
     cargarPartidos(e.target.value);
 });
 
-// Carga inicial
 cargarTabla("4328");
 cargarPartidos("4328");
 </script>
