@@ -31,6 +31,7 @@
         .card{background:#fff;padding:1.3rem;border-radius:10px;box-shadow:var(--sombra);text-align:center;}
         .card h4{margin:.5rem 0;}
         .aviso{color:#dc2626;font-weight:500;text-align:center;padding:1rem;}
+        .ok{color:#166534;text-align:center;padding:1rem;}
         footer{background:#1e293b;color:#cbd5e1;text-align:center;padding:2rem;margin-top:4rem;}
     </style>
 </head>
@@ -38,7 +39,7 @@
 
 <header>
     <h1>⚽ Sportmax360 — Fútbol</h1>
-    <p>Prueba con datos: openfootball/worldcup.json</p>
+    <p>Prueba con datos: openfootball / mundiales</p>
 </header>
 
 <nav>
@@ -52,7 +53,7 @@
 <main>
     <section id="inicio">
         <h2>Bienvenido — Fútbol</h2>
-        <p>Cargamos datos desde el archivo público <code>openfootball/worldcup.json</code> (resultados de Mundiales).</p>
+        <p>Cargamos datos desde el repositorio público <strong>openfootball</strong> (resultados completos de Mundiales).</p>
     </section>
 
     <section id="partidos">
@@ -71,8 +72,8 @@
 </footer>
 
 <script>
-// ✅ Ruta pública del repositorio openfootball
-const URL_FUTBOL = "https://raw.githubusercontent.com/openfootball/worldcup.json/master/worldcup.json";
+// ✅ RUTA CORRECTA Y ACTUAL
+const URL_FUTBOL = "https://raw.githubusercontent.com/openfootball/world-cup/master/worldcup.json";
 
 async function cargarPartidosFutbol(){
     const cont = document.getElementById("lista-partidos");
@@ -81,14 +82,12 @@ async function cargarPartidosFutbol(){
         if(!res.ok) throw new Error(`HTTP ${res.status}`);
         const datos = await res.json();
 
-        // Datos vienen agrupados por rondas/torneos → extraer todos los partidos
         let todos = [];
+        // Estructura: array de torneos → cada uno tiene .matches
         if(Array.isArray(datos)){
             datos.forEach(torneo => {
                 if(torneo.matches) todos.push(...torneo.matches);
             });
-        } else if(datos.matches){
-            todos = datos.matches;
         }
 
         if(!todos.length){
@@ -96,7 +95,7 @@ async function cargarPartidosFutbol(){
             return;
         }
 
-        // Mostrar primeros 12 partidos de prueba
+        // Mostrar primeros 12 partidos
         cont.innerHTML = todos.slice(0,12).map(p => `
             <div class="card">
                 <p style="font-weight:bold;">${p.home_team || p.home || "Local"}</p>
@@ -115,7 +114,6 @@ async function cargarPartidosFutbol(){
     }
 }
 
-// Ejecutar
 cargarPartidosFutbol();
 </script>
 </body>
