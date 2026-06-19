@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SportVivo360 | MLB</title>
-    <!-- ✅ Google AdSense (SIN CAMBIOS) -->
+    <title>SportVivo360 | MLB • Deportes en vivo</title>
+    <!-- ✅ Google AdSense INTACTO -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3765201153278683"
      crossorigin="anonymous"></script>
     <script src="https://cdn.tailwindcss.com"></script>
@@ -15,12 +15,15 @@
                     colors: {
                         fondo: '#050a14',
                         tarjeta: '#0f1724',
-                        azul: '#00d4ff',
+                        principal: '#00d4ff',
+                        acento: '#7B2FFC',
                         gris: '#88a2b9',
                         vivo: '#ff4456',
+                        campo: '#10b981',
                     },
                     fontFamily: {
                         sans: ['Segoe UI', 'Roboto', 'Arial', 'sans-serif'],
+                        deporte: ['Montserrat', 'Segoe UI', 'sans-serif'],
                     },
                 }
             }
@@ -30,53 +33,61 @@
         @layer utilities {
             .texto-gradiente { background-clip: text; -webkit-background-clip: text; color: transparent; background-image: linear-gradient(90deg, #00D4FF, #7B2FFC); }
             .pulse-vivo { animation: parpadeo 1.2s infinite ease-in-out; }
+            .sombra-deporte { box-shadow: 0 0 10px rgba(0,212,255,0.15); }
+            .borde-luz { border: 1px solid rgba(0,212,255,0.25); }
             @keyframes parpadeo { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
+            .scroll-smooth { scroll-behavior: smooth; }
         }
     </style>
 </head>
-<body class="bg-fondo text-gray-100 font-sans min-h-screen">
+<body class="bg-fondo text-gray-100 font-sans min-h-screen scroll-smooth">
 
-<!-- HEADER -->
-<header class="bg-[#0b1422] py-4 px-4 border-b border-azul/40">
-    <h1 class="text-2xl font-bold texto-gradiente text-center">SportVivo360</h1>
-    <p class="text-gris text-center mt-1 text-xs">Datos oficiales MLB • Zona Lima UTC‑5</p>
+<!-- HEADER CON IDENTIDAD -->
+<header class="bg-[#0b1422] py-5 px-4 border-b border-principal/40 sombra-deporte">
+    <div class="max-w-xl mx-auto flex items-center justify-center gap-3">
+        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-principal to-acento flex items-center justify-center text-black font-bold text-lg">⚾</div>
+        <div class="text-center">
+            <h1 class="text-2xl font-deporte font-bold texto-gradiente tracking-wide">SportVivo360</h1>
+            <p class="text-gris text-xs">Datos oficiales MLB • Zona Lima UTC‑5 • Actualización automática</p>
+        </div>
+    </div>
 </header>
 
-<!-- NAVEGACIÓN -->
-<nav class="bg-tarjeta/80 sticky top-0 z-50 border-b border-gray-700/50 py-2 px-3">
+<!-- NAVEGACIÓN MEJORADA -->
+<nav class="bg-tarjeta/80 sticky top-0 z-50 border-b border-gray-700/50 py-3 px-3 backdrop-blur-sm">
     <div class="max-w-xl mx-auto flex justify-center gap-3 text-xs flex-wrap">
-        <a href="#" class="tab-btn activo px-3 py-2 rounded-lg bg-[#141e2d] border border-[#1b293b] text-azul font-semibold" data-tab="mlb">⚾ Partidos</a>
-        <a href="#" class="tab-btn px-3 py-2 rounded-lg bg-transparent border border-[#1b293b] text-gris hover:border-azul/40 transition" data-tab="estadisticas">📈 Líderes</a>
-        <a href="#" class="tab-btn px-3 py-2 rounded-lg bg-transparent border border-[#1b293b] text-gris hover:border-azul/40 transition" data-tab="plantillas">👥 Equipos</a>
-        <a href="#" class="tab-btn px-3 py-2 rounded-lg bg-transparent border border-[#1b293b] text-gris hover:border-azul/40 transition" data-tab="futbol">⚽ Fútbol</a>
+        <a href="#" class="tab-btn activo px-3 py-2 rounded-lg bg-[#141e2d] borde-luz text-principal font-semibold transition hover:scale-[1.02]" data-tab="mlb">⚾ Partidos</a>
+        <a href="#" class="tab-btn px-3 py-2 rounded-lg bg-transparent borde-luz text-gris hover:bg-[#141e2d] hover:text-principal transition hover:scale-[1.02]" data-tab="estadisticas">📈 Líderes</a>
+        <a href="#" class="tab-btn px-3 py-2 rounded-lg bg-transparent borde-luz text-gris hover:bg-[#141e2d] hover:text-principal transition hover:scale-[1.02]" data-tab="plantillas">👥 Equipos</a>
+        <a href="#" class="tab-btn px-3 py-2 rounded-lg bg-transparent borde-luz text-gris hover:bg-[#141e2d] hover:text-principal transition hover:scale-[1.02]" data-tab="futbol">⚽ Fútbol</a>
     </div>
 </nav>
 
 <!-- CONTENIDO -->
-<main class="max-w-xl mx-auto px-3 py-4">
+<main class="max-w-xl mx-auto px-3 py-5">
     <div class="flex items-center justify-center gap-2 text-gris text-xs mb-6">
-        <span class="w-2 h-2 rounded-full bg-green-400 shadow-[0_0_6px_#4ade80]"></span>
-        <span>Actualización automática cada 45 segundos</span>
+        <span class="w-2 h-2 rounded-full bg-campo shadow-[0_0_6px_#10b981]"></span>
+        <span>Actualización cada 45 segundos • Datos API MLB oficial</span>
     </div>
 
     <!-- PESTAÑA MLB: PARTIDOS -->
     <section id="sect-mlb">
-        <h2 class="text-xl font-bold border-l-[4px] border-azul pl-2 mb-4">📅 Calendario y resultados</h2>
-        <div class="mb-5">
-            <div class="flex items-center justify-center gap-2 bg-[#0b1422] rounded-lg py-2 px-2">
-                <button onclick="cambiarFecha(-1)" class="text-lg px-2 text-gray-300 hover:text-azul">‹</button>
+        <h2 class="text-xl font-deporte font-bold border-l-[4px] border-principal pl-2 mb-4">📅 Calendario y resultados</h2>
+        <div class="mb-6">
+            <div class="flex items-center justify-center gap-2 bg-[#0b1422] rounded-lg py-3 px-2 borde-luz">
+                <button onclick="cambiarFecha(-1)" class="text-lg px-2 text-gray-300 hover:text-principal transition">‹</button>
                 <div id="fechas-lista" class="flex gap-3"></div>
-                <button onclick="cambiarFecha(1)" class="text-lg px-2 text-gray-300 hover:text-azul">›</button>
+                <button onclick="cambiarFecha(1)" class="text-lg px-2 text-gray-300 hover:text-principal transition">›</button>
             </div>
         </div>
-        <div id="lista-partidos-mlb" class="space-y-4 mb-8">
-            <p class="text-center text-gris py-6 text-sm">Cargando encuentros…</p>
+        <div id="lista-partidos-mlb" class="space-y-5 mb-10">
+            <p class="text-center text-gris py-8 text-sm">Cargando encuentros…</p>
         </div>
 
         <!-- TABLAS LIGAS -->
-        <div class="space-y-6">
-            <div class="bg-tarjeta rounded-lg border border-[#1b293b] p-4">
-                <h3 class="text-base text-azul font-semibold mb-3">🏆 Liga Americana</h3>
+        <div class="space-y-7">
+            <div class="bg-tarjeta rounded-lg borde-luz p-4 sombra-deporte">
+                <h3 class="text-base text-principal font-deporte font-semibold mb-3 flex items-center gap-2">🏆 Liga Americana</h3>
                 <div class="overflow-x-auto">
                     <table class="w-full text-xs">
                         <thead>
@@ -94,8 +105,8 @@
                     </table>
                 </div>
             </div>
-            <div class="bg-tarjeta rounded-lg border border-[#1b293b] p-4">
-                <h3 class="text-base text-azul font-semibold mb-3">🏆 Liga Nacional</h3>
+            <div class="bg-tarjeta rounded-lg borde-luz p-4 sombra-deporte">
+                <h3 class="text-base text-principal font-deporte font-semibold mb-3 flex items-center gap-2">🏆 Liga Nacional</h3>
                 <div class="overflow-x-auto">
                     <table class="w-full text-xs">
                         <thead>
@@ -118,17 +129,17 @@
 
     <!-- PESTAÑA: LÍDERES Y ESTADÍSTICAS -->
     <section id="sect-estadisticas" class="hidden">
-        <h2 class="text-xl font-bold border-l-[4px] border-azul pl-2 mb-4">📊 Líderes temporada</h2>
-        <div class="bg-tarjeta rounded-lg border border-[#1b293b] p-4">
-            <div id="bloque-lideres" class="text-xs space-y-4"></div>
+        <h2 class="text-xl font-deporte font-bold border-l-[4px] border-principal pl-2 mb-4">📊 Líderes temporada</h2>
+        <div class="bg-tarjeta rounded-lg borde-luz p-4 sombra-deporte">
+            <div id="bloque-lideres" class="text-xs space-y-5"></div>
         </div>
     </section>
 
     <!-- PESTAÑA: EQUIPOS Y PLANTILLAS -->
     <section id="sect-plantillas" class="hidden">
-        <h2 class="text-xl font-bold border-l-[4px] border-azul pl-2 mb-4">👥 Equipos y plantillas</h2>
-        <div class="bg-tarjeta rounded-lg border border-[#1b293b] p-4">
-            <select id="sel-equipo" class="w-full bg-[#0b1422] border border-[#1b293b] rounded px-2 py-2 text-gray-200 text-sm mb-4">
+        <h2 class="text-xl font-deporte font-bold border-l-[4px] border-principal pl-2 mb-4">👥 Equipos y plantillas</h2>
+        <div class="bg-tarjeta rounded-lg borde-luz p-4 sombra-deporte">
+            <select id="sel-equipo" class="w-full bg-[#0b1422] borde-luz rounded px-2 py-2 text-gray-200 text-sm mb-4 focus:outline-none focus:ring-1 focus:ring-principal">
                 <option value="">Cargando equipos…</option>
             </select>
             <div id="plantilla-equipo" class="text-xs"></div>
@@ -137,9 +148,9 @@
 
     <!-- PESTAÑA FÚTBOL -->
     <section id="sect-futbol" class="hidden">
-        <div class="bg-tarjeta rounded-lg border border-[#1b293b] p-4">
-            <h3 class="text-base text-azul mb-3">⚽ Competiciones</h3>
-            <select id="ligaSelect" class="w-full bg-[#0b1422] border border-[#1b293b] rounded-lg px-2 py-2 text-gray-200 mb-4 text-sm">
+        <div class="bg-tarjeta rounded-lg borde-luz p-4 sombra-deporte">
+            <h3 class="text-base text-principal mb-3">⚽ Competiciones</h3>
+            <select id="ligaSelect" class="w-full bg-[#0b1422] borde-luz rounded-lg px-2 py-2 text-gray-200 mb-4 text-sm focus:outline-none focus:ring-1 focus:ring-principal">
                 <option value="4328">🏴 Premier League</option>
                 <option value="4335">🇪🇸 La Liga</option>
                 <option value="4391">🇮🇹 Serie A</option>
@@ -162,8 +173,8 @@ const API_MLB = "https://statsapi.mlb.com/api/v1";
 
 // 📌 CAMBIO DE PESTAÑAS
 document.querySelectorAll('.tab-btn').forEach(btn => btn.addEventListener('click', () => {
-    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('bg-[#141e2d]','text-azul'));
-    btn.classList.add('bg-[#141e2d]','text-azul');
+    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('bg-[#141e2d]','text-principal','borde-luz'));
+    btn.classList.add('bg-[#141e2d]','text-principal','borde-luz');
     document.getElementById('sect-mlb').classList.toggle('hidden', btn.dataset.tab !== 'mlb');
     document.getElementById('sect-estadisticas').classList.toggle('hidden', btn.dataset.tab !== 'estadisticas');
     document.getElementById('sect-plantillas').classList.toggle('hidden', btn.dataset.tab !== 'plantillas');
@@ -187,18 +198,18 @@ function irFecha(iso){fechaActual=new Date(iso+"T00:00:00");renderFechas();carga
 function renderFechas(){
     const cont=document.getElementById("fechas-lista");let html="";
     for(let i=-1;i<=1;i++){let f=new Date(fechaActual);f.setDate(f.getDate()+i);const activo=fechaISO(f)===fechaISO(fechaActual);
-    html+=`<div class="fecha-item cursor-pointer text-center px-2 py-1.5 rounded-lg transition text-sm ${activo?'bg-azul text-black font-semibold':'text-gray-300 hover:bg-[#141e2d]'}" onclick="irFecha('${fechaISO(f)}')">
+    html+=`<div class="fecha-item cursor-pointer text-center px-3 py-2 rounded-lg transition-all duration-200 text-sm ${activo?'bg-principal text-black font-semibold sombra-deporte':'text-gray-300 hover:bg-[#141e2d]'}" onclick="irFecha('${fechaISO(f)}')">
     <div class="text-xs">${nombreDiaCorto(f)}</div><div>${numMesCorto(f)}</div></div>`;}
     cont.innerHTML=html;
 }
 
-// ⚾ PARTIDOS: detalles completos SOLO API MLB
+// ⚾ PARTIDOS: SOLO API MLB + CORREGIDO [object Object]
 async function cargarPartidos(fecha){
     try{
         const res=await fetch(`${API_MLB}/schedule?sportId=1&date=${fecha}&language=es&hydrate=linescore,probablePitchers,venue,official,weather,lineups`);
         const datos=await res.json();const juegos=datos.dates?.[0]?.games||[];
         const caja=document.getElementById("lista-partidos-mlb");
-        if(!juegos.length){caja.innerHTML=`<p class="text-gris text-center py-6 text-sm">Sin partidos programados</p>`;return;}
+        if(!juegos.length){caja.innerHTML=`<p class="text-gris text-center py-8 text-sm">⚾ Sin partidos programados para esta fecha</p>`;return;}
         caja.innerHTML=juegos.map(p=>{
             const away=p.teams.away; const home=p.teams.home;
             const lanzA=p.probablePitchers?.away?.fullName||"Sin definir";
@@ -206,36 +217,39 @@ async function cargarPartidos(fecha){
             const vivo=p.status.abstractGameState==="Live";
             const estadio=p.venue?.name||"‑";
             const arbitro=p.officials?.[0]?.fullName||"‑";
-            const clima=p.weather||"‑";
+            // ✅ Corregido clima: nunca muestra [object Object]
+            const clima = typeof p.weather === "object" && p.weather && p.weather !== null 
+                ? (p.weather.displayValue || p.weather.description || "Sin dato") 
+                : (typeof p.weather === "string" ? p.weather : "Sin dato");
             const estado=p.status.detailedState||p.status.abstractGameState;
             return `
-            <div class="bg-tarjeta rounded-lg border border-[#1b293b] p-4 relative">
+            <div class="bg-tarjeta rounded-lg borde-luz p-4 relative sombra-deporte transition hover:scale-[1.01]">
                 ${vivo?`<span class="absolute top-2 right-2 bg-vivo/90 text-white text-[0.65rem] font-semibold px-2 py-0.5 rounded-full flex items-center gap-1"><span class="w-1.5 h-1.5 bg-white rounded-full pulse-vivo"></span>EN VIVO</span>`:""}
-                <div class="grid grid-cols-[1fr_auto_1fr] gap-2 items-center">
+                <div class="grid grid-cols-[1fr_auto_1fr] gap-3 items-center">
                     <div class="text-center">
-                        <img src="https://www.mlbstatic.com/team-logos/${away.team.id}.svg" alt="${away.team.name}" class="w-9 h-9 mx-auto mb-1">
+                        <img src="https://www.mlbstatic.com/team-logos/${away.team.id}.svg" alt="${away.team.name}" class="w-11 h-11 mx-auto mb-1 drop-shadow-md">
                         <p class="text-xs font-medium">${away.team.name}</p>
-                        <p class="text-lg font-bold">${away.score??"‑"}</p>
+                        <p class="text-xl font-bold">${away.score??"‑"}</p>
                     </div>
-                    <div class="text-center text-[0.65rem] text-gris">
-                        <p>${formatearHoraET(p.gameDate)}</p>
-                        <p class="text-azul">${estado}</p>
+                    <div class="text-center text-[0.65rem] text-gris max-w-[110px]">
+                        <p class="truncate">${formatearHoraET(p.gameDate)}</p>
+                        <p class="text-principal font-medium">${estado}</p>
                     </div>
                     <div class="text-center">
-                        <img src="https://www.mlbstatic.com/team-logos/${home.team.id}.svg" alt="${home.team.name}" class="w-9 h-9 mx-auto mb-1">
+                        <img src="https://www.mlbstatic.com/team-logos/${home.team.id}.svg" alt="${home.team.name}" class="w-11 h-11 mx-auto mb-1 drop-shadow-md">
                         <p class="text-xs font-medium">${home.team.name}</p>
-                        <p class="text-lg font-bold">${home.score??"‑"}</p>
+                        <p class="text-xl font-bold">${home.score??"‑"}</p>
                     </div>
                 </div>
-                <div class="mt-2 text-[0.65rem] text-gris space-y-1">
-                    <div class="flex justify-between"><span>🎤 Lanzador:</span><span>${lanzA} / ${lanzH}</span></div>
-                    <div class="flex justify-between"><span>📍 Estadio:</span><span>${estadio}</span></div>
+                <div class="mt-3 text-[0.65rem] text-gris space-y-1.5">
+                    <div class="flex justify-between"><span>🎤 Lanzadores:</span><span class="text-right max-w-[60%]">${lanzA} / ${lanzH}</span></div>
+                    <div class="flex justify-between"><span>📍 Estadio:</span><span class="text-right max-w-[60%]">${estadio}</span></div>
                     <div class="flex justify-between"><span>🧑‍⚖️ Árbitro:</span><span>${arbitro}</span></div>
                     <div class="flex justify-between"><span>🌤️ Condición:</span><span>${clima}</span></div>
                 </div>
             </div>`;
         }).join("");
-    }catch(e){document.getElementById("lista-partidos-mlb").innerHTML=`<p class="text-center text-red-400 py-6 text-sm">Error API MLB</p>`;}
+    }catch(e){document.getElementById("lista-partidos-mlb").innerHTML=`<p class="text-center text-red-400 py-8 text-sm">⚠️ Error al leer datos MLB</p>`;}
 }
 
 // 📊 TABLAS CLASIFICACIÓN
@@ -249,7 +263,14 @@ async function cargarTablasMLB(){
             if(rec.league.id===104) nacional.push(...rec.teamRecords);
         });
         const fTabla=arr=>arr.sort((a,b)=>b.winningPercentage-a.winningPercentage).map((t,i)=>
-            `<tr class="border-b border-gray-700/40"><td class="py-1.5">${i+1}</td><td>${t.team.name}</td><td class="text-center">${t.wins}</td><td class="text-center">${t.losses}</td><td class="text-center">${t.winningPercentage.toFixed(3)}</td><td class="text-center">${t.gamesBack||"—"}</td></tr>`
+            `<tr class="border-b border-gray-700/40 hover:bg-white/5">
+                <td class="py-1.5">${i+1}</td>
+                <td>${t.team.name}</td>
+                <td class="text-center">${t.wins}</td>
+                <td class="text-center">${t.losses}</td>
+                <td class="text-center">${Number(t.winningPercentage).toFixed(3)}</td>
+                <td class="text-center">${t.gamesBack||"—"}</td>
+            </tr>`
         ).join("");
         document.getElementById("tabla-americana").innerHTML=fTabla(americana);
         document.getElementById("tabla-nacional").innerHTML=fTabla(nacional);
@@ -263,12 +284,14 @@ async function cargarLideres(){
         const datos=await res.json();
         let html="";
         datos.leaderCategories?.forEach(cat=>{
-            html+=`<div><h4 class="text-sm text-azul font-semibold mb-1">${cat.displayName}</h4><ul class="space-y-0.5">`;
-            cat.leagueLeaders?.forEach(l=>html+=`<li>${l.rank}. ${l.person.fullName} — ${l.value}</li>`);
+            html+=`<div class="p-2 rounded bg-[#0b1422]/60">
+                <h4 class="text-sm text-principal font-deporte font-semibold mb-1">${cat.displayName}</h4>
+                <ul class="space-y-0.5">`;
+            cat.leagueLeaders?.forEach(l=>html+=`<li>• ${l.rank}. ${l.person.fullName} — <strong>${l.value}</strong></li>`);
             html+=`</ul></div>`;
         });
-        document.getElementById("bloque-lideres").innerHTML=html||"<p class='text-gris'>Sin datos</p>";
-    }catch(e){document.getElementById("bloque-lideres").innerHTML="<p class='text-red-400'>Error</p>";}
+        document.getElementById("bloque-lideres").innerHTML=html||"<p class='text-gris'>Sin datos de líderes</p>";
+    }catch(e){document.getElementById("bloque-lideres").innerHTML="<p class='text-red-400'>Error al cargar estadísticas</p>";}
 }
 
 // 👥 EQUIPOS Y PLANTILLAS
@@ -281,15 +304,15 @@ async function cargarEquipos(){
         sel.onchange=async()=>{if(!sel.value) return;
             const r=await fetch(`${API_MLB}/teams/${sel.value}/roster?season=${ANIO_MLB}`);
             const d=await r.json();
-            document.getElementById("plantilla-equipo").innerHTML=`<div class="space-y-1">${d.roster?.map(j=>`<div class="flex justify-between"><span>${j.person.fullName}</span><span class="text-azul">${j.position.abbreviation}</span></div>`).join("")||"Sin plantilla"}</div>`;
+            document.getElementById("plantilla-equipo").innerHTML=`<div class="space-y-1.5">${d.roster?.map(j=>`<div class="flex justify-between items-center py-1 border-b border-gray-700/30"><span>${j.person.fullName}</span><span class="text-principal font-medium">${j.position.abbreviation}</span></div>`).join("")||"<p class='text-gris'>Sin plantilla disponible</p>"}</div>`;
         };
     }catch(e){}
 }
 
-// ⚽ FÚTBOL (se mantiene igual)
+// ⚽ FÚTBOL
 const API_KEY_TSD = "3"; const TEMP_FUT = "2024-2025";
-async function cargarTablaFut(id){const tb=document.getElementById("cuerpo-tabla-fut");try{const res=await fetch(`https://www.thesportsdb.com/api/v1/json/${API_KEY_TSD}/lookuptable.php?l=${id}&s=${TEMP_FUT}`);const d=await res.json();tb.innerHTML=(d.table||[]).map((f,i)=>`<tr class="border-b border-gray-700/40"><td class="py-1.5">${i+1}</td><td>${f.strTeam}</td><td class="text-center">${f.intPlayed||0}</td><td class="text-center">${f.intWin||0}</td><td class="text-center">${f.intDraw||0}</td><td class="text-center">${f.intLoss||0}</td><td class="text-center font-semibold">${f.intPoints||0}</td></tr>`).join("");}catch{tb.innerHTML=`<tr><td colspan="7" class="py-4 text-center text-gris">Sin datos</td></tr>`;}}
-async function cargarPartidosFut(id){const c=document.getElementById("lista-partidos-fut");try{const [r1,r2]=await Promise.all([fetch(`https://www.thesportsdb.com/api/v1/json/${API_KEY_TSD}/eventspastleague.php?id=${id}`),fetch(`https://www.thesportsdb.com/api/v1/json/${API_KEY_TSD}/eventsday.php?d=${fechaISO(new Date())}&l=${id}`)]);const d1=await r1.json(),d2=await r2.json();let p=d1.events||[];if(d2.events)p.push(...d2.events);const ids=new Set();p=p.filter(x=>!ids.has(x.idEvent)&&ids.add(x.idEvent)).sort((a,b)=>new Date(b.dateEvent)-new Date(a.dateEvent));c.innerHTML=p.slice(0,6).map(x=>`<div class="bg-[#141e2d] rounded-lg border border-[#1b293b] p-3 text-center"><h4 class="font-medium text-xs">${x.strHomeTeam}</h4><p class="text-lg font-bold text-azul my-1">${x.intHomeScore??"-"} : ${x.intAwayScore??"-"}</p><h4 class="font-medium text-xs">${x.strAwayTeam}</h4><p class="text-[0.65rem] text-gris mt-1">📅 ${x.dateEvent}</p></div>`).join("");}catch{c.innerHTML=`<p class="col-span-full text-center text-gris py-6 text-sm">Sin datos</p>`;}}
+async function cargarTablaFut(id){const tb=document.getElementById("cuerpo-tabla-fut");try{const res=await fetch(`https://www.thesportsdb.com/api/v1/json/${API_KEY_TSD}/lookuptable.php?l=${id}&s=${TEMP_FUT}`);const d=await res.json();tb.innerHTML=(d.table||[]).map((f,i)=>`<tr class="border-b border-gray-700/40 hover:bg-white/5"><td class="py-1.5">${i+1}</td><td>${f.strTeam}</td><td class="text-center">${f.intPlayed||0}</td><td class="text-center">${f.intWin||0}</td><td class="text-center">${f.intDraw||0}</td><td class="text-center">${f.intLoss||0}</td><td class="text-center font-semibold">${f.intPoints||0}</td></tr>`).join("");}catch{tb.innerHTML=`<tr><td colspan="7" class="py-4 text-center text-gris">Sin datos</td></tr>`;}}
+async function cargarPartidosFut(id){const c=document.getElementById("lista-partidos-fut");try{const [r1,r2]=await Promise.all([fetch(`https://www.thesportsdb.com/api/v1/json/${API_KEY_TSD}/eventspastleague.php?id=${id}`),fetch(`https://www.thesportsdb.com/api/v1/json/${API_KEY_TSD}/eventsday.php?d=${fechaISO(new Date())}&l=${id}`)]);const d1=await r1.json(),d2=await r2.json();let p=d1.events||[];if(d2.events)p.push(...d2.events);const ids=new Set();p=p.filter(x=>!ids.has(x.idEvent)&&ids.add(x.idEvent)).sort((a,b)=>new Date(b.dateEvent)-new Date(a.dateEvent));c.innerHTML=p.slice(0,6).map(x=>`<div class="bg-[#141e2d] rounded-lg borde-luz p-3 text-center hover:scale-[1.02] transition"><h4 class="font-medium text-xs">${x.strHomeTeam}</h4><p class="text-lg font-bold text-principal my-1">${x.intHomeScore??"-"} : ${x.intAwayScore??"-"}</p><h4 class="font-medium text-xs">${x.strAwayTeam}</h4><p class="text-[0.65rem] text-gris mt-1">📅 ${x.dateEvent}</p></div>`).join("");}catch{c.innerHTML=`<p class="col-span-full text-center text-gris py-6 text-sm">Sin datos</p>`;}}
 document.getElementById("ligaSelect").addEventListener("change",e=>{cargarTablaFut(e.target.value);cargarPartidosFut(e.target.value);});
 
 // INICIO
