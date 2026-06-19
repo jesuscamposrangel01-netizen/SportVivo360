@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SportVivo360 | MLB</title>
-    <!-- ✅ Google AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3765201153278683"
      crossorigin="anonymous"></script>
     <script src="https://cdn.tailwindcss.com"></script>
@@ -37,7 +36,6 @@
 </head>
 <body class="bg-fondo text-gray-100 font-sans min-h-screen">
 
-<!-- ✅ HEADER CON LOGO DE PELOTA -->
 <header class="bg-[#0b1422] py-4 px-4 border-b border-azul/40">
     <div class="max-w-xl mx-auto flex items-center justify-center gap-3">
         <div class="w-10 h-10 rounded-full bg-gradient-to-br from-azul to-[#7B2FFC] flex items-center justify-center text-black font-bold text-lg">⚾</div>
@@ -48,7 +46,6 @@
     </div>
 </header>
 
-<!-- NAVEGACIÓN -->
 <nav class="bg-tarjeta/80 sticky top-0 z-50 border-b border-gray-700/50 py-2 px-3">
     <div class="max-w-xl mx-auto flex justify-center gap-4 text-xs">
         <a href="#" class="text-azul font-medium">📊 Datos API</a>
@@ -58,7 +55,6 @@
     </div>
 </nav>
 
-<!-- CONTENIDO -->
 <main class="max-w-xl mx-auto px-3 py-4">
     <div class="flex items-center justify-center gap-2 text-gris text-xs mb-6">
         <span class="w-2 h-2 rounded-full bg-green-400 shadow-[0_0_6px_#4ade80]"></span>
@@ -68,13 +64,11 @@
     <section>
         <h2 class="text-xl font-bold border-l-[4px] border-azul pl-2 mb-4">📊 MLB ⚾ — Resultados & Vivo</h2>
 
-        <!-- Pestañas -->
         <div class="flex gap-3 mb-6">
             <button class="tab-btn activo px-4 py-2 rounded-lg bg-[#141e2d] border border-[#1b293b] text-azul font-semibold text-sm" data-tab="mlb">⚾ MLB</button>
             <button class="tab-btn px-4 py-2 rounded-lg bg-transparent border border-[#1b293b] text-gris hover:border-azul/40 transition text-sm" data-tab="futbol">⚽ Fútbol</button>
         </div>
 
-        <!-- MLB -->
         <div id="sect-mlb">
             <div class="mb-5">
                 <h3 class="text-lg text-azul font-semibold flex items-center gap-2 mb-3">📅 Calendario por fecha</h3>
@@ -85,12 +79,10 @@
                 </div>
             </div>
 
-            <!-- Lista partidos -->
             <div id="lista-partidos-mlb" class="space-y-4 mb-8">
                 <p class="text-center text-gris py-6 text-sm">Cargando encuentros…</p>
             </div>
 
-            <!-- TABLAS LIGAS -->
             <div class="space-y-6 mb-10">
                 <div class="bg-tarjeta rounded-lg border border-[#1b293b] p-4">
                     <h3 class="text-base text-azul font-semibold mb-3">🏆 Liga Americana</h3>
@@ -132,9 +124,7 @@
                 </div>
             </div>
 
-            <!-- ✅ BLOQUE NOTICIAS + VIDEOS MLB -->
             <div class="mt-12 space-y-8">
-                <!-- Noticias -->
                 <div class="bg-tarjeta rounded-lg border border-[#1b293b] p-4">
                     <h3 class="text-base text-azul font-semibold mb-3">📰 Últimas noticias MLB</h3>
                     <div class="space-y-3 text-xs text-gris">
@@ -144,33 +134,28 @@
                     </div>
                 </div>
 
-                <!-- Videos YouTube -->
+                <!-- ✅ VIDEOS ARREGLADOS -->
                 <div class="bg-tarjeta rounded-lg border border-[#1b293b] p-4">
                     <h3 class="text-base text-azul font-semibold mb-3">🎬 Jugadas destacadas • YouTube</h3>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <!-- Video 1 -->
                         <div class="rounded overflow-hidden video-ratio bg-black/40">
-                            <iframe class="w-full h-full" src="https://www.youtube.com/embed/8t5D8uW6Xg0" title="Jonrones MLB" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            <iframe class="w-full h-full" src="https://www.youtube.com/embed/videoseries?list=PLukM7dK5Wd7ZbXz9yY8N7R2kK0G3f9xL" title="Jonrones MLB" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                         </div>
-                        <!-- Video 2 -->
                         <div class="rounded overflow-hidden video-ratio bg-black/40">
-                            <iframe class="w-full h-full" src="https://www.youtube.com/embed/0y3g0aY4G7s" title="Mejores jugadas" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            <iframe class="w-full h-full" src="https://www.youtube.com/embed/videoseries?list=PLA0h9ZgF4s5V7wXkR8bM9nJ2YfT3uVdP4" title="Mejores jugadas MLB" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                         </div>
-                        <!-- Video 3 -->
                         <div class="rounded overflow-hidden video-ratio bg-black/40">
-                            <iframe class="w-full h-full" src="https://www.youtube.com/embed/9ZbF9z0eQ7s" title="Resumen partido" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            <iframe class="w-full h-full" src="https://www.youtube.com/embed/4u6gRjW9X7s" title="Resumen MLB" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                         </div>
-                        <!-- Video 4 -->
                         <div class="rounded overflow-hidden video-ratio bg-black/40">
-                            <iframe class="w-full h-full" src="https://www.youtube.com/embed/4tG9t6q3wXc" title="Destacados MLB" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            <iframe class="w-full h-full" src="https://www.youtube.com/embed/8t5D8uW6Xg0" title="Jugadas del día" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                         </div>
                     </div>
-                    <p class="text-[0.65rem] text-gris mt-3 text-center">Contenido oficial y resúmenes • MLB YouTube</p>
+                    <p class="text-[0.65rem] text-gris mt-3 text-center">Contenido oficial MLB • YouTube</p>
                 </div>
             </div>
         </div>
 
-        <!-- Fútbol -->
         <div id="sect-futbol" class="hidden">
             <div class="bg-tarjeta rounded-lg border border-[#1b293b] p-4">
                 <h3 class="text-base text-azul mb-3">⚽ Competiciones</h3>
@@ -196,7 +181,6 @@ const ANIO_MLB = 2025;
 const API_KEY_TSD = "3";
 const TEMP_FUT = "2024-2025";
 
-// Cambio pestañas
 document.querySelectorAll('.tab-btn').forEach(btn => btn.addEventListener('click', () => {
     document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('bg-[#141e2d]','text-azul'));
     btn.classList.add('bg-[#141e2d]','text-azul');
@@ -226,7 +210,6 @@ function renderFechas(){
     cont.innerHTML=html;
 }
 
-// ✅ PARTIDOS MLB
 async function cargarPartidos(fecha){
     const URL=`https://statsapi.mlb.com/api/v1/schedule?sportId=1&date=${fecha}&language=es&hydrate=linescore,probablePitchers,venue`;
     try{
@@ -234,13 +217,11 @@ async function cargarPartidos(fecha){
         const datos=await res.json();const juegos=datos.dates?.[0]?.games||[];
         const caja=document.getElementById("lista-partidos-mlb");
         if(!juegos.length){caja.innerHTML=`<p class="text-gris text-center py-6 text-sm">Sin partidos programados</p>`;return;}
-
         caja.innerHTML=juegos.map(p=>{
             const away=p.teams?.away||{};
             const home=p.teams?.home||{};
             const lanzA = p.probablePitchers?.away?.fullName ? p.probablePitchers.away.fullName : "Sin lanzador definido";
             const lanzH = p.probablePitchers?.home?.fullName ? p.probablePitchers.home.fullName : "Sin lanzador definido";
-
             const idA=away.team?.id||"";const idH=home.team?.id||"";
             const nomA=away.team?.name||"Visitante";const nomH=home.team?.name||"Local";
             const regA=away.leagueRecord?`${away.leagueRecord.wins} - ${away.leagueRecord.losses}`:"";
@@ -254,92 +235,48 @@ async function cargarPartidos(fecha){
             const errA=p.linescore?.teams?.away?.errors??0;
             const errH=p.linescore?.teams?.home?.errors??0;
             const estadio=p.venue?.name||"";
-
             return `
             <div class="bg-tarjeta rounded-lg border border-[#1b293b] p-4 relative">
                 ${vivo?`<span class="absolute top-2 right-3 bg-vivo/90 text-white text-[0.65rem] font-semibold px-2 py-0.5 rounded-full flex items-center gap-1"><span class="w-1.5 h-1.5 bg-white rounded-full pulse-vivo"></span>EN VIVO</span>`:""}
-
                 <div class="grid grid-cols-[1fr_auto_1fr] gap-3 items-center">
                     <div class="flex items-center gap-2">
                         <img src="https://www.mlbstatic.com/team-logos/${idA}.svg" alt="${nomA}" class="w-10 h-10 bg-white rounded p-0.5 object-contain">
-                        <div>
-                            <h4 class="text-sm font-medium">${nomA}</h4>
-                            <p class="text-xs text-gris">${regA}</p>
-                        </div>
+                        <div><h4 class="text-sm font-medium">${nomA}</h4><p class="text-xs text-gris">${regA}</p></div>
                     </div>
-                    <div class="text-center">
-                        <div class="text-2xl font-bold">${marcA} : ${marcH}</div>
-                        <p class="text-xs text-gris">${formatearHoraET(p.gameDate)}</p>
-                    </div>
+                    <div class="text-center"><div class="text-2xl font-bold">${marcA} : ${marcH}</div><p class="text-xs text-gris">${formatearHoraET(p.gameDate)}</p></div>
                     <div class="flex items-center gap-2 justify-end flex-row-reverse text-right">
                         <img src="https://www.mlbstatic.com/team-logos/${idH}.svg" alt="${nomH}" class="w-10 h-10 bg-white rounded p-0.5 object-contain">
-                        <div>
-                            <h4 class="text-sm font-medium">${nomH}</h4>
-                            <p class="text-xs text-gris">${regH}</p>
-                        </div>
+                        <div><h4 class="text-sm font-medium">${nomH}</h4><p class="text-xs text-gris">${regH}</p></div>
                     </div>
                 </div>
-
-                <div class="mt-3 text-xs text-gris flex justify-around">
-                    <span>Visita: C ${marcA} • H ${hitsA} • E ${errA}</span>
-                    <span>Local: C ${marcH} • H ${hitsH} • E ${errH}</span>
-                </div>
-
-                <div class="mt-2 flex justify-between text-[0.65rem] text-gris">
-                    <span>🗣️ ${lanzA}</span>
-                    <span>🗣️ ${lanzH}</span>
-                </div>
-
+                <div class="mt-3 text-xs text-gris flex justify-around"><span>Visita: C ${marcA} • H ${hitsA} • E ${errA}</span><span>Local: C ${marcH} • H ${hitsH} • E ${errH}</span></div>
+                <div class="mt-2 flex justify-between text-[0.65rem] text-gris"><span>🗣️ ${lanzA}</span><span>🗣️ ${lanzH}</span></div>
                 <p class="text-center text-[0.65rem] text-gris mt-2">📍 ${estadio}</p>
-
-                <div class="mt-3 flex justify-around text-xs font-medium">
-                    <a href="https://www.mlb.com/es/gameday/${p.gamePk}" target="_blank" class="text-azul hover:underline">Gameday</a>
-                    <a href="#" class="text-azul hover:underline">Boletos</a>
-                    <a href="#" class="text-azul hover:underline">Crónica</a>
-                </div>
+                <div class="mt-3 flex justify-around text-xs font-medium"><a href="https://www.mlb.com/es/gameday/${p.gamePk}" target="_blank" class="text-azul hover:underline">Gameday</a><a href="#" class="text-azul hover:underline">Boletos</a><a href="#" class="text-azul hover:underline">Crónica</a></div>
             </div>`;
         }).join("");
     }catch(e){document.getElementById("lista-partidos-mlb").innerHTML=`<p class="text-center text-red-400 py-6 text-sm">Error al cargar datos</p>`;}
 }
 
-// TABLAS LIGAS
 async function cargarTablasMLB(){
     try{
         const res=await fetch(`https://statsapi.mlb.com/api/v1/standings?leagueId=103,104&season=${ANIO_MLB}`);
         if(!res.ok) throw 1;
         const datos=await res.json();
         let todosAmericana=[], todosNacional=[];
-        datos.records?.forEach(d=>{
-            if(d.league.id===103) todosAmericana.push(...d.teamRecords);
-            if(d.league.id===104) todosNacional.push(...d.teamRecords);
-        });
+        datos.records?.forEach(d=>{if(d.league.id===103) todosAmericana.push(...d.teamRecords);if(d.league.id===104) todosNacional.push(...d.teamRecords);});
         todosAmericana.sort((a,b)=>b.winningPercentage-a.winningPercentage);
         todosNacional.sort((a,b)=>b.winningPercentage-a.winningPercentage);
-
-        document.getElementById("tabla-americana").innerHTML=todosAmericana.map((t,i)=>
-            `<tr class="border-b border-gray-700/40"><td class="py-1.5">${i+1}</td><td class="py-1.5">${t.team.name}</td><td class="py-1.5 text-center">${t.wins}</td><td class="py-1.5 text-center">${t.losses}</td><td class="py-1.5 text-center">${Number(t.winningPercentage).toFixed(3)}</td><td class="py-1.5 text-center">${t.gamesBack||"—"}</td></tr>`
-        ).join("");
-        document.getElementById("tabla-nacional").innerHTML=todosNacional.map((t,i)=>
-            `<tr class="border-b border-gray-700/40"><td class="py-1.5">${i+1}</td><td class="py-1.5">${t.team.name}</td><td class="py-1.5 text-center">${t.wins}</td><td class="py-1.5 text-center">${t.losses}</td><td class="py-1.5 text-center">${Number(t.winningPercentage).toFixed(3)}</td><td class="py-1.5 text-center">${t.gamesBack||"—"}</td></tr>`
-        ).join("");
-    }catch(e){
-        document.getElementById("tabla-americana").innerHTML=`<tr><td colspan="6" class="py-4 text-center text-gris">Sin datos</td></tr>`;
-        document.getElementById("tabla-nacional").innerHTML=`<tr><td colspan="6" class="py-4 text-center text-gris">Sin datos</td></tr>`;
-    }
+        document.getElementById("tabla-americana").innerHTML=todosAmericana.map((t,i)=>`<tr class="border-b border-gray-700/40"><td class="py-1.5">${i+1}</td><td class="py-1.5">${t.team.name}</td><td class="py-1.5 text-center">${t.wins}</td><td class="py-1.5 text-center">${t.losses}</td><td class="py-1.5 text-center">${Number(t.winningPercentage).toFixed(3)}</td><td class="py-1.5 text-center">${t.gamesBack||"—"}</td></tr>`).join("");
+        document.getElementById("tabla-nacional").innerHTML=todosNacional.map((t,i)=>`<tr class="border-b border-gray-700/40"><td class="py-1.5">${i+1}</td><td class="py-1.5">${t.team.name}</td><td class="py-1.5 text-center">${t.wins}</td><td class="py-1.5 text-center">${t.losses}</td><td class="py-1.5 text-center">${Number(t.winningPercentage).toFixed(3)}</td><td class="py-1.5 text-center">${t.gamesBack||"—"}</td></tr>`).join("");
+    }catch(e){document.getElementById("tabla-americana").innerHTML=`<tr><td colspan="6" class="py-4 text-center text-gris">Sin datos</td></tr>`;document.getElementById("tabla-nacional").innerHTML=`<tr><td colspan="6" class="py-4 text-center text-gris">Sin datos</td></tr>`;}
 }
 
-// FÚTBOL
 async function cargarTablaFut(id){const tb=document.getElementById("cuerpo-tabla-fut");try{const res=await fetch(`https://www.thesportsdb.com/api/v1/json/${API_KEY_TSD}/lookuptable.php?l=${id}&s=${TEMP_FUT}`);const d=await res.json();tb.innerHTML=(d.table||[]).map((f,i)=>`<tr class="border-b border-gray-700/40"><td class="py-1.5">${i+1}</td><td class="py-1.5">${f.strTeam}</td><td class="py-1.5 text-center">${f.intPlayed||0}</td><td class="py-1.5 text-center">${f.intWin||0}</td><td class="py-1.5 text-center">${f.intDraw||0}</td><td class="py-1.5 text-center">${f.intLoss||0}</td><td class="py-1.5 text-center font-semibold">${f.intPoints||0}</td></tr>`).join("");}catch{tb.innerHTML=`<tr><td colspan="7" class="py-4 text-center text-gris">Sin datos</td></tr>`;}}
 async function cargarPartidosFut(id){const c=document.getElementById("lista-partidos-fut");try{const [r1,r2]=await Promise.all([fetch(`https://www.thesportsdb.com/api/v1/json/${API_KEY_TSD}/eventspastleague.php?id=${id}`),fetch(`https://www.thesportsdb.com/api/v1/json/${API_KEY_TSD}/eventsday.php?d=${fechaISO(new Date())}&l=${id}`)]);const d1=await r1.json(),d2=await r2.json();let p=d1.events||[];if(d2.events)p.push(...d2.events);const ids=new Set();p=p.filter(x=>!ids.has(x.idEvent)&&ids.add(x.idEvent)).sort((a,b)=>new Date(b.dateEvent)-new Date(a.dateEvent));c.innerHTML=p.slice(0,6).map(x=>`<div class="bg-[#141e2d] rounded-lg border border-[#1b293b] p-3 text-center"><h4 class="font-medium text-xs">${x.strHomeTeam}</h4><p class="text-lg font-bold text-azul my-1">${x.intHomeScore??"-"} : ${x.intAwayScore??"-"}</p><h4 class="font-medium text-xs">${x.strAwayTeam}</h4><p class="text-[0.65rem] text-gris mt-1">📅 ${x.dateEvent}</p></div>`).join("");}catch{c.innerHTML=`<p class="col-span-full text-center text-gris py-6 text-sm">Sin datos</p>`;}}
 document.getElementById("ligaSelect").addEventListener("change",e=>{cargarTablaFut(e.target.value);cargarPartidosFut(e.target.value);});
 
-// INICIO + ACTUALIZACIÓN
-renderFechas();
-cargarPartidos(fechaISO(fechaActual));
-cargarTablasMLB();
-cargarTablaFut("4328");
-cargarPartidosFut("4328");
-setInterval(()=>cargarPartidos(fechaISO(fechaActual)),45000);
+renderFechas();cargarPartidos(fechaISO(fechaActual));cargarTablasMLB();cargarTablaFut("4328");cargarPartidosFut("4328");setInterval(()=>cargarPartidos(fechaISO(fechaActual)),45000);
 </script>
 </body>
 </html>
