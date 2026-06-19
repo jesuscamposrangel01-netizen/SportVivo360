@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SportVivo360 | MLB</title>
+    <!-- ✅ Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3765201153278683"
+     crossorigin="anonymous"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -192,7 +195,6 @@ async function cargarPartidos(fecha){
         caja.innerHTML=juegos.map(p=>{
             const away=p.teams?.away||{};
             const home=p.teams?.home||{};
-            // ✅ Si no existe o está vacío → mensaje igual que tu captura
             const lanzA = p.probablePitchers?.away?.fullName ? p.probablePitchers.away.fullName : "Sin lanzador definido";
             const lanzH = p.probablePitchers?.home?.fullName ? p.probablePitchers.home.fullName : "Sin lanzador definido";
 
@@ -240,7 +242,6 @@ async function cargarPartidos(fecha){
                     <span>Local: C ${marcH} • H ${hitsH} • E ${errH}</span>
                 </div>
 
-                <!-- ✅ IGUAL QUE TU IMAGEN -->
                 <div class="mt-2 flex justify-between text-[0.65rem] text-gris">
                     <span>🗣️ ${lanzA}</span>
                     <span>🗣️ ${lanzH}</span>
