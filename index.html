@@ -3,96 +3,141 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sportmax360 | Fútbol — football-data.org</title>
+    <title>Sportmax360 | Deportes en vivo</title>
     <style>
         :root{
-            --verde:#2F855A;
+            --azul-mlb:#00468B;
+            --verde-futbol:#2F855A;
             --gris-fondo:#f8fafc;
             --gris-texto:#2d3748;
             --gris-claro:#e2e8f0;
             --sombra:0 4px 12px rgba(0,0,0,.07);
-            --rojo:#dc2626;
+            --sombra-fuerte:0 6px 16px rgba(0,0,0,.1);
             --verde-vivo:#16a34a;
         }
         *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Roboto,Arial,sans-serif;}
-        body{background:var(--gris-fondo);color:var(--gris-texto);line-height:1.6;}
+        body{background:var(--gris-fondo);color:var(--gris-texto);line-height:1.7;}
 
-        header{background:linear-gradient(135deg,var(--verde),#246c48);color:#fff;padding:2rem 1rem;text-align:center;}
-        header h1{font-size:clamp(1.7rem,3vw,2.2rem);margin-bottom:.3rem;}
+        /* Cabecera */
+        header{background:linear-gradient(135deg,#222,#444);color:#fff;padding:2rem 1rem;text-align:center;}
+        header h1{font-size:clamp(1.8rem,3vw,2.4rem);margin-bottom:.4rem;}
+        .selector-deporte{margin-top:1rem;}
+        .selector-deporte button{padding:.6rem 1.2rem;border:none;border-radius:6px;margin:0 .4rem;font-weight:bold;cursor:pointer;transition:.3s;}
+        .btn-mlb{background:var(--azul-mlb);color:#fff;}
+        .btn-futbol{background:var(--verde-futbol);color:#fff;}
 
         nav{background:#fff;padding:1rem;border-bottom:1px solid var(--gris-claro);position:sticky;top:0;z-index:20;box-shadow:var(--sombra);}
-        nav ul{list-style:none;display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;}
-        nav a{color:var(--gris-texto);text-decoration:none;font-weight:600;padding:.4rem .7rem;border-radius:6px;transition:.3s;}
-        nav a:hover,.activo{color:var(--verde);background:rgba(47,133,90,.08);}
+        nav ul{list-style:none;display:flex;flex-wrap:wrap;gap:.8rem 1.5rem;justify-content:center;}
+        nav a{color:var(--gris-texto);text-decoration:none;font-weight:600;padding:.5rem .8rem;border-radius:6px;transition:.3s;}
+        nav a:hover,.activo{background:rgba(0,0,0,.05);}
 
-        main{max-width:1100px;margin:2rem auto;padding:0 1rem;}
-        section{margin-bottom:3rem;}
-        h2{color:#1e293b;margin-bottom:1.2rem;border-left:4px solid var(--verde);padding-left:.8rem;}
-        .select-liga{padding:.6rem 1rem;border-radius:6px;border:1px solid var(--gris-claro);font-size:1rem;width:100%;max-width:340px;}
-        .grid-partidos{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.3rem;margin-top:1.5rem;}
-        .card{background:#fff;padding:1.3rem;border-radius:10px;box-shadow:var(--sombra);text-align:center;}
-        .etiqueta-vivo{background:var(--verde-vivo);color:#fff;font-size:.8rem;padding:.2rem .5rem;border-radius:12px;animation:parpadeo 1.2s infinite;display:inline-block;margin-bottom:.4rem;}
+        main{max-width:1200px;margin:2rem auto;padding:0 1rem;}
+        section{margin-bottom:3.5rem;}
+        h2{color:#1e293b;margin-bottom:1.2rem;border-left:5px solid;padding-left:.9rem;}
+        .mlb h2{border-color:var(--azul-mlb);}
+        .futbol h2{border-color:var(--verde-futbol);}
+
+        .grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1.8rem;}
+        .grid-partidos{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.6rem;}
+        .grid-equipos{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:1.4rem;}
+        .grid-datos{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.2rem;}
+
+        .card{background:#fff;padding:1.5rem;border-radius:12px;box-shadow:var(--sombra);transition:transform .25s ease;}
+        .card:hover{transform:translateY(-4px);box-shadow:var(--sombra-fuerte);}
+        .etiqueta-vivo{display:inline-block;background:var(--verde-vivo);color:#fff;font-size:.8rem;padding:.2rem .6rem;border-radius:12px;animation:parpadeo 1.2s infinite;}
         @keyframes parpadeo{0%,100%{opacity:1;}50%{opacity:.6;}}
-        .aviso{color:var(--rojo);font-weight:500;text-align:center;padding:1rem;}
-        .tabla-wrap{overflow-x:auto;border-radius:10px;box-shadow:var(--sombra);margin-top:1rem;}
+
+        .tabla-wrap{overflow-x:auto;border-radius:12px;box-shadow:var(--sombra);}
         .tabla{width:100%;border-collapse:collapse;background:#fff;}
-        .tabla th,.tabla td{padding:.8rem .6rem;text-align:center;border-bottom:1px solid var(--gris-claro);font-size:.9rem;}
-        .tabla th{background:var(--verde);color:#fff;}
+        .tabla th,.tabla td{padding:1rem .8rem;text-align:center;border-bottom:1px solid var(--gris-claro);font-size:.9rem;}
+        .tabla th{color:#fff;}
+        .tabla.mlb th{background:var(--azul-mlb);}
+        .tabla.futbol th{background:var(--verde-futbol);}
         .tabla tr:nth-child(even){background:#f8fafc;}
-        footer{background:#1e293b;color:#cbd5e1;text-align:center;padding:2rem;margin-top:4rem;}
+
+        .aviso{color:#dc2626;font-weight:500;text-align:center;padding:1.5rem;}
+        footer{background:#1e293b;color:#cbd5e1;text-align:center;padding:2.5rem 1rem;margin-top:5rem;}
+        .oculto{display:none !important;}
+        .select-liga{padding:.6rem 1rem;border-radius:6px;border:1px solid var(--gris-claro);font-size:1rem;max-width:320px;}
     </style>
 </head>
 <body>
 
 <header>
-    <h1>⚽ Sportmax360 — Fútbol</h1>
-    <p>Datos oficiales • football-data.org</p>
+    <h1>🏟️ Sportmax360 — Deportes</h1>
+    <p>Cobertura profesional • MLB + Fútbol</p>
+    <div class="selector-deporte">
+        <button class="btn-mlb" id="btnMLB" onclick="cambiarDeporte('mlb')">⚾ MLB</button>
+        <button class="btn-futbol" id="btnFUT" onclick="cambiarDeporte('futbol')">⚽ Fútbol</button>
+    </div>
 </header>
 
-<nav>
+<nav id="menu-principal">
     <ul>
         <li><a href="#inicio" class="activo">Inicio</a></li>
-        <li><a href="#tabla">Tabla</a></li>
         <li><a href="#partidos">Partidos</a></li>
+        <li><a href="#tabla">Clasificación</a></li>
+        <li><a href="#equipos">Equipos</a></li>
         <li><a href="#contacto">Contacto</a></li>
     </ul>
 </nav>
 
 <main>
-    <section id="inicio">
-        <h2>Bienvenido</h2>
-        <p>Ligas de Europa y <strong>Mundial FIFA 2022</strong> incluidos.</p>
-    </section>
+    <!-- SECCIÓN MLB -->
+    <div id="seccion-mlb" class="mlb">
+        <section id="inicio">
+            <h2>Bienvenido a MLB</h2>
+            <p>Datos oficiales MLB Stats API — sin límites ni bloqueos.</p>
+        </section>
+        <section id="partidos">
+            <h2>📅 Partidos • En vivo</h2>
+            <div id="lista-partidos-mlb" class="grid-partidos"><p class="aviso">Cargando…</p></div>
+        </section>
+        <section id="tabla">
+            <h2>🏆 Tabla 2026</h2>
+            <div class="tabla-wrap">
+                <table class="tabla mlb">
+                    <thead><tr><th>#</th><th>Equipo</th><th>G</th><th>P</th><th>%</th><th>Dif</th></tr></thead>
+                    <tbody id="cuerpo-tabla-mlb"><tr><td colspan="6" class="aviso">Cargando…</td></tbody>
+                </table>
+            </div>
+        </section>
+        <section id="equipos">
+            <h2>🏟️ Equipos MLB</h2>
+            <div id="lista-equipos-mlb" class="grid-equipos"><p class="aviso">Cargando…</p></div>
+        </section>
+    </div>
 
-    <section>
-        <h2>📌 Selecciona competición</h2>
-        <select id="ligaSelect" class="select-liga">
-            <option value="PL">🏴󠁧󠁢󠁥󠁮󠁧󠁿 Premier League</option>
-            <option value="PD">🇪🇸 La Liga</option>
-            <option value="BL1">🇩🇪 Bundesliga</option>
-            <option value="SA">🇮🇹 Serie A</option>
-            <option value="FL1">🇫🇷 Ligue 1</option>
-            <option value="WC">🌎 Mundial FIFA 2022</option>
-        </select>
-    </section>
-
-    <section id="tabla">
-        <h2>🏆 Tabla de posiciones / Grupos</h2>
-        <div class="tabla-wrap">
-            <table class="tabla">
-                <thead>
-                    <tr><th>#</th><th>Equipo</th><th>PJ</th><th>PG</th><th>PE</th><th>PP</th><th>Pts</th></tr>
-                </thead>
-                <tbody id="cuerpo-tabla"><tr><td colspan="7" class="aviso">Cargando…</td></tr>
-                </tbody>
-            </table>
-        </div>
-    </section>
-
-    <section id="partidos">
-        <h2>📅 Partidos • Últimos y próximos</h2>
-        <div id="lista-partidos" class="grid-partidos"><p class="aviso">Cargando…</p></div>
-    </section>
+    <!-- SECCIÓN FÚTBOL -->
+    <div id="seccion-futbol" class="futbol oculto">
+        <section id="inicio-fut">
+            <h2>Bienvenido a Fútbol</h2>
+            <p>Datos desde The‑SportsDB • Ligas activas.</p>
+        </section>
+        <section>
+            <h2>📌 Selecciona competición</h2>
+            <select id="ligaSelect" class="select-liga">
+                <option value="4328">🏴󠁧󠁢󠁥󠁮󠁧󠁿 Premier League</option>
+                <option value="4335">🇪🇸 La Liga</option>
+                <option value="4391">🇮🇹 Serie A</option>
+                <option value="4346">🇩🇪 Bundesliga</option>
+                <option value="4423">🌎 Copa América</option>
+            </select>
+        </section>
+        <section id="tabla-futbol">
+            <h2>🏆 Tabla posiciones 2024‑2025</h2>
+            <div class="tabla-wrap">
+                <table class="tabla futbol">
+                    <thead><tr><th>#</th><th>Equipo</th><th>PJ</th><th>PG</th><th>PE</th><th>PP</th><th>Pts</th></tr></thead>
+                    <tbody id="cuerpo-tabla-fut"><tr><td colspan="7" class="aviso">Cargando…</td></tbody>
+                </table>
+            </div>
+        </section>
+        <section id="partidos-futbol">
+            <h2>📅 Resultados</h2>
+            <div id="lista-partidos-fut" class="grid-partidos"><p class="aviso">Cargando…</p></div>
+        </section>
+    </div>
 
     <section id="contacto">
         <h2>📬 Contacto</h2>
@@ -100,93 +145,78 @@
     </section>
 </main>
 
-<footer>
-    <p>© 2026 Sportmax360 — Datos: football-data.org</p>
-</footer>
+<footer><p>© 2026 Sportmax360 • GitHub Pages • Datos oficiales</p></footer>
 
 <script>
-// ✅ Tu clave API
-const API_TOKEN = "d0134d9dafae4349b1748ddfc02fab16";
+// --- VARIABLES GENERALES ---
 const HOY = new Date().toISOString().split('T')[0];
-const FECHA_INICIO = "2022-11-01"; // Fecha inicial válida para Mundial
+const API_KEY = "3";
+const TEMP_FUT = "2024‑2025";
 
-// Encabezados correctos
-const cabeceras = {
-    "X-Auth-Token": API_TOKEN,
-    "Accept": "application/json"
-};
-
-// Cargar TABLA / GRUPOS
-async function cargarTabla(codLiga){
-    const tb = document.getElementById("cuerpo-tabla");
-    try{
-        const res = await fetch(`https://api.football-data.org/v4/competitions/${codLiga}/standings`, {headers: cabeceras});
-        if(!res.ok) throw new Error(`HTTP ${res.status}`);
-        const datos = await res.json();
-        const filas = datos.standings?.flatMap(g=>g.table) || datos.standings?.[0]?.table || [];
-
-        if(!filas.length){
-            tb.innerHTML = "<tr><td colspan='7' class='aviso'>Sin clasificación disponible</td></tr>";
-            return;
-        }
-        tb.innerHTML = filas.map(f=>`
-            <tr>
-                <td>${f.position}</td>
-                <td>${f.team.name}</td>
-                <td>${f.playedGames}</td>
-                <td>${f.won}</td>
-                <td>${f.draw}</td>
-                <td>${f.lost}</td>
-                <td><strong>${f.points}</strong></td>
-            </tr>`).join("");
-    }catch(e){
-        tb.innerHTML = `<tr><td colspan='7' class='aviso'>Tabla: ${e.message}</td></tr>`;
+// --- CAMBIO ENTRE DEPORTES ---
+function cambiarDeporte(tipo){
+    if(tipo==='mlb'){
+        document.getElementById('seccion-mlb').classList.remove('oculto');
+        document.getElementById('seccion-futbol').classList.add('oculto');
+    }else{
+        document.getElementById('seccion-mlb').classList.add('oculto');
+        document.getElementById('seccion-futbol').classList.remove('oculto');
     }
 }
 
-// Cargar PARTIDOS
-async function cargarPartidos(codLiga){
-    const cont = document.getElementById("lista-partidos");
-    // Fecha distinta para Mundial (todos sus partidos están en 2022)
-    const desde = codLiga==="WC" ? "2022-11-01" : FECHA_INICIO;
-    const hasta = codLiga==="WC" ? "2022-12-31" : HOY;
-    try{
-        const res = await fetch(`https://api.football-data.org/v4/matches?competitions=${codLiga}&dateFrom=${desde}&dateTo=${hasta}`, {headers: cabeceras});
-        if(!res.ok) throw new Error(`HTTP ${res.status}`);
-        const datos = await res.json();
-        const partidos = datos.matches || [];
+// --- MLB ---
+const URL_MLB_EQ = "https://statsapi.mlb.com/api/v1/teams?sportId=1";
+const URL_MLB_TB = "https://statsapi.mlb.com/api/v1/standings?leagueId=103,104&season=2026";
+const URL_MLB_PT = `https://statsapi.mlb.com/api/v1/schedule?sportId=1&date=${HOY}&language=es&hydrate=linescore,probablePitchers`;
 
-        if(!partidos.length){
-            cont.innerHTML = "<p class='aviso'>Sin partidos disponibles</p>";
-            return;
-        }
-        cont.innerHTML = partidos.map(p=>`
-            <div class="card">
-                ${p.status === "LIVE" || p.status === "IN_PLAY" ? '<span class="etiqueta-vivo">EN VIVO</span>' : ""}
-                <p style="font-weight:bold;">${p.awayTeam.name}</p>
-                <p style="font-size:1.2rem;color:var(--verde);font-weight:bold;margin:.4rem 0;">
-                    ${p.score.fullTime.away ?? "-"} : ${p.score.fullTime.home ?? "-"}
-                </p>
-                <p style="font-weight:bold;">${p.homeTeam.name}</p>
-                <p style="font-size:.9rem;color:#666;margin-top:.6rem;">
-                    📅 ${p.utcDate.split("T")[0]} | ⏰ ${p.utcDate.split("T")[1].slice(0,5)}
-                    <br>Estado: ${p.status}
-                </p>
-            </div>`).join("");
-    }catch(e){
-        cont.innerHTML = `<p class='aviso'>Partidos: ${e.message}</p>`;
-    }
+async function cargarMLB(){
+    // Equipos
+    (await fetch(URL_MLB_EQ)).json().then(d=>{
+        document.getElementById("lista-equipos-mlb").innerHTML=(d.teams||[]).map(e=>`<div class="card"><h4>${e.name}</h4></div>`).join("");
+    });
+    // Tabla
+    (await fetch(URL_MLB_TB)).json().then(d=>{
+        let filas=[];d.records?.forEach(r=>r.teamRecords?.forEach(t=>filas.push({n:t.team.name,g:t.wins,p:t.losses,porc:+t.winningPercentage,dif:t.gamesBack||"—"})));
+        filas.sort((a,b)=>b.porc-a.porc);
+        document.getElementById("cuerpo-tabla-mlb").innerHTML=filas.map((f,i)=>`<tr><td>${i+1}</td><td>${f.n}</td><td>${f.g}</td><td>${f.p}</td><td>${f.porc.toFixed(3)}</td><td>${f.dif}</td></tr>`).join("");
+    });
+    // Partidos
+    (await fetch(URL_MLB_PT)).json().then(d=>{
+        const juegos=d.dates?.[0]?.games||[];
+        document.getElementById("lista-partidos-mlb").innerHTML=juegos.map(p=>`<div class="card ${p.status.abstractGameCode==='L'?'destacado':''}">
+            ${p.status.abstractGameCode==='L'?'<span class="etiqueta-vivo">EN VIVO</span>':''}
+            <p style="font-weight:bold">${p.teams.away.team.name}</p>
+            <p style="font-size:1.3rem;color:var(--azul-mlb)">${p.teams.away.score??"-"} : ${p.teams.home.score??"-"}</p>
+            <p style="font-weight:bold">${p.teams.home.team.name}</p>
+            <p style="font-size:.9rem">📍 ${p.venue?.name||"—"}</p>
+        </div>`).join("");
+    });
 }
 
-// Cambiar liga
-document.getElementById("ligaSelect").addEventListener("change", e=>{
-    cargarTabla(e.target.value);
-    cargarPartidos(e.target.value);
-});
+// --- FÚTBOL ---
+async function cargarTablaFut(id){
+    const tb=document.getElementById("cuerpo-tabla-fut");
+    try{
+        const res=await fetch(`https://www.thesportsdb.com/api/v1/json/${API_KEY}/lookuptable.php?l=${id}&s=${TEMP_FUT}`);
+        const txt=await res.text();if(!txt.trim()) throw 1;
+        const d=JSON.parse(txt);
+        tb.innerHTML=(d.table||[]).map((f,i)=>`<tr><td>${i+1}</td><td>${f.strTeam}</td><td>${f.intPlayed||0}</td><td>${f.intWin||0}</td><td>${f.intDraw||0}</td><td>${f.intLoss||0}</td><td><strong>${f.intPoints||0}</strong></td></tr>`).join("");
+    }catch{tb.innerHTML=`<tr><td colspan="7" class="aviso">Sin datos</td></tr>`;}
+}
+async function cargarPartidosFut(id){
+    const c=document.getElementById("lista-partidos-fut");
+    const [r1,r2]=await Promise.all([fetch(`https://www.thesportsdb.com/api/v1/json/${API_KEY}/eventspastleague.php?id=${id}`),fetch(`https://www.thesportsdb.com/api/v1/json/${API_KEY}/eventsday.php?d=${HOY}&l=${id}`)]);
+    const d1=await r1.json(),d2=await r2.json();
+    let p=d1.events||[];if(d2.events)p.push(...d2.events);
+    const ids=new Set();p=p.filter(x=>ids.has(x.idEvent)?false:ids.add(x.idEvent)).sort((a,b)=>new Date(b.dateEvent)-new Date(a.dateEvent));
+    c.innerHTML=p.map(x=>`<div class="card"><p style="font-weight:bold">${x.strHomeTeam}</p><p style="font-size:1.2rem;color:var(--verde-futbol)">${x.intHomeScore??"-"} : ${x.intAwayScore??"-"}</p><p style="font-weight:bold">${x.strAwayTeam}</p><p style="font-size:.9rem">📅 ${x.dateEvent}</p></div>`).join("");
+}
+document.getElementById("ligaSelect").addEventListener("change",e=>{cargarTablaFut(e.target.value);cargarPartidosFut(e.target.value);});
 
-// Carga inicial
-cargarTabla("PL");
-cargarPartidos("PL");
+// --- INICIO ---
+cargarMLB();
+cargarTablaFut("4328");
+cargarPartidosFut("4328");
 </script>
 </body>
 </html>
