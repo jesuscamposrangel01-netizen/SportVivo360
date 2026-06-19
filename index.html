@@ -26,7 +26,7 @@
         main{max-width:1100px;margin:2rem auto;padding:0 1rem;}
         section{margin-bottom:3rem;}
         h2{color:#1e293b;margin-bottom:1.2rem;border-left:4px solid var(--verde-futbol);padding-left:.8rem;}
-
+        .select-liga{padding:.6rem 1rem;border-radius:6px;border:1px solid var(--gris-claro);font-size:1rem;}
         .grid-partidos{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.3rem;}
         .card{background:#fff;padding:1.3rem;border-radius:10px;box-shadow:var(--sombra);text-align:center;}
         .card img{height:50px;margin:0 auto .6rem;object-fit:contain;}
@@ -38,7 +38,7 @@
 
 <header>
     <h1>⚽ Sportmax360 — Fútbol</h1>
-    <p>Datos oficiales sin errores • Mundiales y ligas</p>
+    <p>Ligas activas, resultados y próximos partidos</p>
 </header>
 
 <nav>
@@ -56,8 +56,13 @@
     </section>
 
     <section id="partidos">
-        <h2>📅 Últimos partidos y próximos • Mundial</h2>
-        <div id="lista-partidos" class="grid-partidos"><p class="aviso">Cargando datos…</p></div>
+        <h2>📅 Partidos por competición</h2>
+        <select id="ligaSelect" class="select-liga">
+            <option value="4328">🏴󠁧󠁢󠁥󠁮󠁧󠁿 Premier League</option>
+            <option value="4335">🇪🇸 La Liga</option>
+            <option value="4423">🌎 Copa América</option>
+        </select>
+        <div id="lista-partidos" class="grid-partidos" style="margin-top:1.5rem;"><p class="aviso">Cargando…</p></div>
     </section>
 
     <section id="contacto">
@@ -71,23 +76,30 @@
 </footer>
 
 <script>
-// ✅ API ESTABLE — ID Mundial = 4
 const API_KEY = "3";
-const ID_MUNDIAL = "4";
-const URL = `https://www.thesportsdb.com/api/v1/json/${API_KEY}/eventspastleague.php?id=${ID_MUNDIAL}`;
+const HOY = new Date().toISOString().split('T')[0];
 
-async function cargarFutbol(){
+async function cargarFutbol(idLiga){
     const cont = document.getElementById("lista-partidos");
     try{
-        const res = await fetch(URL);
-        if(!res.ok) throw new Error(`HTTP ${res.status}`);
+        // Trae partidos pasados + de hoy
+        const res = await fetch(`https://www.thesportsdb.com/api/v1/json/${API_KEY}/eventspastleague.php?id=${idLiga}`);
+        const resHoy = await fetch(`https://www.thesportsdb.com/api/v1/json/${API_KEY}/eventsday.php?d=${HOY}&l=${idLiga}`);
+        
         const datos = await res.json();
-        const partidos = datos.events || [];
+        const datosHoy = await resHoy.json();
+
+        let partidos = datos.events || [];
+        if(datosHoy.events) partidos.push(...datosHoy.events);
 
         if(!partidos.length){
-            cont.innerHTML = "<p class='aviso'>Sin partidos disponibles</p>";
+            cont.innerHTML = "<p class='aviso'>Sin partidos disponibles para esta liga</p>";
             return;
         }
+        // Quita duplicados y ordena por fecha
+        const ids = new Set();
+        partidos = partidos.filter(p=>ids.has(p.idEvent)?false:ids.add(p.idEvent));
+        partidos.sort((a,b)=>new Date(b.dateEvent)-new Date(a.dateEvent));
 
         cont.innerHTML = partidos.slice(0,12).map(p => `
             <div class="card">
@@ -108,7 +120,11 @@ async function cargarFutbol(){
     }
 }
 
-cargarFutbol();
+// Cambiar liga al seleccionar
+document.getElementById("ligaSelect").addEventListener("change", e=>cargarFutbol(e.target.value));
+
+// Carga inicial
+cargarFutbol("4328");
 </script>
 </body>
 </html>
