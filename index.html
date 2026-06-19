@@ -1,236 +1,1266 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-theme="dark">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPORTMAX 360 - Deportes en Vivo</title>
 
-<title>SPORTMAX 360 | Deportes en Vivo</title>
+    <!-- eruda para depuración en móvil -->
+    <script src="https://cdn.jsdelivr.net/npm/eruda@3.2.0/eruda.min.js"></script>
+    <script>eruda.init();</script>
 
-<meta name="description" content="Resultados en vivo, estadísticas, noticias deportivas, NBA, MLB, fútbol y más.">
+    <style>
+        /* ===== RESET Y ESTILOS GLOBALES ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cairo LT', tahoma, sans-serif;
+            transition: background 0.3s, color 0.3s;
+        }
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+        /* ===== TEMA OSCURO (por defecto) ===== */
+        [data-theme="dark"] {
+            --bg-body: #0a0e17;
+            --bg-card: #111927;
+            --bg-header: #0d1b2a;
+            --text-primary: #e0e0e0;
+            --text-secondary: #8899aa;
+            --border-color: #1a2a3a;
+            --shadow: rgba(0, 212, 255, 0.15);
+            --input-bg: #0d1b2a;
+        }
 
-<style>
-:root{
---bg:#0a0f1f;
---card:#111827;
---primary:#00d4ff;
---secondary:#ff2d55;
---text:#ffffff;
-}
+        [data-theme="light"] {
+            --bg-body: #f0f4f8;
+            --bg-card: #ffffff;
+            --bg-header: #e2e8f0;
+            --text-primary: #1a202c;
+            --text-secondary: #4a5568;
+            --border-color: #cbd5e0;
+            --shadow: rgba(0, 0, 0, 0.1);
+            --input-bg: #edf2f7;
+        }
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Poppins',sans-serif;
-}
+        body {
+            background: var(--bg-body);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
 
-body{
-background:var(--bg);
-color:var(--text);
-}
+        /* ===== HEADER ===== */
+        header {
+            background: var(--bg-header);
+            padding: 2rem 1.5rem;
+            text-align: center;
+            border-bottom: 3px solid #00d4ff;
+            box-shadow: 0 4px 30px var(--shadow);
+            position: relative;
+        }
+        header h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            background: linear-gradient(90deg, #00d4ff, #7b2ffc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 40px rgba(0, 212, 255, 0.2);
+            letter-spacing: 2px;
+        }
+        header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-top: 0.3rem;
+        }
 
-header{
-background:linear-gradient(135deg,#00d4ff,#ff2d55);
-padding:20px;
-text-align:center;
-}
+        /* Toggle de tema */
+        .theme-toggle {
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-primary);
+            padding: 0.3rem 0.6rem;
+            border-radius: 20px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+        }
+        .theme-toggle:hover {
+            background: #00d4ff22;
+        }
 
-.logo{
-font-size:2rem;
-font-weight:700;
-}
+        /* ===== NAV ===== */
+        nav {
+            background: var(--bg-card);
+            padding: 0.8rem 1.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.5rem 1.2rem;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+        nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+        nav a:hover {
+            color: #fff;
+            background: rgba(0, 212, 255, 0.15);
+        }
 
-nav{
-display:flex;
-justify-content:center;
-gap:20px;
-padding:15px;
-background:#0f172a;
-flex-wrap:wrap;
-}
+        /* ===== MAIN ===== */
+        main {
+            max-width: 1300px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+        section {
+            margin-bottom: 3.5rem;
+            animation: fadeInUp 0.6s ease forwards;
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-nav a{
-color:white;
-text-decoration:none;
-font-weight:600;
-}
+        h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            padding-left: 1rem;
+            border-left: 5px solid #00d4ff;
+            color: var(--text-primary);
+        }
 
-.hero{
-padding:40px 20px;
-text-align:center;
-}
+        /* ===== TARJETAS ===== */
+        .card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 1.8rem;
+            margin-bottom: 1.8rem;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            transition: transform 0.2s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 48px rgba(0, 0, 0, 0.6);
+            border-color: #00d4ff44;
+        }
+        .card h3 {
+            color: #00d4ff;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .card h4 {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin: 0.8rem 0 0.5rem 0;
+        }
 
-.hero h1{
-font-size:3rem;
-}
+        /* ===== TABLAS ===== */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 0.5rem;
+            font-size: 0.95rem;
+        }
+        th {
+            background: var(--bg-body);
+            color: #00d4ff;
+            padding: 0.8rem 0.6rem;
+            text-align: left;
+            border-bottom: 2px solid #00d4ff44;
+        }
+        td {
+            padding: 0.7rem 0.6rem;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-primary);
+        }
+        tr:hover td { background: var(--bg-body); }
 
-.stats{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-gap:20px;
-padding:20px;
-}
+        /* ===== LISTAS ===== */
+        ul { list-style: none; padding: 0; }
+        li {
+            padding: 0.6rem 0.8rem;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: background 0.2s;
+        }
+        li:hover { background: var(--bg-body); border-radius: 8px; }
+        li:last-child { border-bottom: none; }
 
-.card{
-background:var(--card);
-padding:20px;
-border-radius:15px;
-}
+        /* ===== BADGE EN VIVO ===== */
+        .live-badge {
+            background: #ff0040;
+            color: #fff;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            animation: pulse 1.5s infinite;
+            display: inline-block;
+            margin-right: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        @keyframes pulse {
+            0%,100% { opacity:1; transform:scale(1); }
+            50% { opacity:0.5; transform:scale(0.95); }
+        }
+        .vivo-texto { color:#00d4ff; font-weight:600; font-size:1.2rem; }
 
-.section{
-padding:25px;
-}
+        /* ===== SEDES ===== */
+        .sedes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+        .sede-item {
+            background: var(--bg-body);
+            padding: 1.2rem;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s;
+        }
+        .sede-item:hover {
+            border-color: #00d4ff;
+            transform: scale(1.02);
+            box-shadow: 0 0 30px rgba(0,212,255,0.05);
+        }
+        .sede-item .pais { color: var(--text-secondary); font-size:0.85rem; }
 
-table{
-width:100%;
-border-collapse:collapse;
-}
+        /* ===== VIDEOS ===== */
+        .videos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        .video-item {
+            background: var(--bg-body);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s;
+        }
+        .video-item:hover {
+            border-color: #00d4ff;
+            transform: scale(1.02);
+            box-shadow: 0 0 30px rgba(0,212,255,0.05);
+        }
+        .video-item img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+        .video-item .info { padding: 1rem; }
+        .video-item .info h4 { color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem; }
+        .video-item .info a { color: #00d4ff; text-decoration: none; font-weight: 600; }
 
-th,td{
-padding:12px;
-border-bottom:1px solid #333;
-}
+        /* ===== SHOTMAP ===== */
+        #shotmapCanvas {
+            width: 100%;
+            height: auto;
+            background: var(--bg-body);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
 
-footer{
-padding:20px;
-text-align:center;
-background:#0f172a;
-}
-</style>
+        /* ===== FOOTER ===== */
+        footer {
+            background: var(--bg-card);
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+        footer span { color: #00d4ff; }
+        .update-time { font-size:0.8rem; color: var(--text-secondary); margin-top:0.3rem; }
+
+        /* ===== LOADER ===== */
+        #loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            backdrop-filter: blur(4px);
+        }
+        #loader .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #1a2a3a;
+            border-top: 5px solid #00d4ff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* ===== NOTIFICACIÓN DE ERROR ===== */
+        .error-toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #ff4444;
+            color: #fff;
+            padding: 1rem;
+            border-radius: 8px;
+            z-index: 1001;
+            max-width: 300px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+        }
+        .error-toast strong { display: block; margin-bottom: 0.3rem; }
+
+        /* ===== BUSCADOR ===== */
+        #buscador {
+            width: 100%;
+            padding: 0.6rem 1rem;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            background: var(--input-bg);
+            color: var(--text-primary);
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+        #buscador:focus { outline: none; border-color: #00d4ff; }
+
+        /* ===== FAVORITOS ===== */
+        .fav-btn {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: var(--text-secondary);
+            margin-left: 0.5rem;
+        }
+        .fav-btn.active { color: #ffcc00; }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .sedes-grid { grid-template-columns: repeat(2, 1fr); }
+            .videos-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 768px) {
+            header h1 { font-size: 2rem; }
+            nav { gap: 0.3rem 0.8rem; }
+            nav a { font-size: 0.8rem; padding: 0.3rem 0.6rem; }
+            h2 { font-size: 1.5rem; }
+            .card { padding: 1.2rem; }
+            table { font-size: 0.8rem; }
+            th, td { padding: 0.5rem 0.3rem; }
+            .theme-toggle { top: 0.5rem; right: 0.5rem; font-size: 1.2rem; }
+        }
+
+        @media (max-width: 640px) {
+            header h1 { font-size: 1.5rem; letter-spacing: 1px; }
+            nav { flex-direction: column; align-items: center; }
+            nav a { width: 100%; text-align: center; }
+            table { font-size: 0.7rem; }
+            #shotmapCanvas { height: 250px; }
+            .sedes-grid { grid-template-columns: 1fr; }
+            .videos-grid { grid-template-columns: 1fr; }
+        }
+    </style>
 </head>
-
 <body>
 
-<header>
-<div class="logo">⚽ SPORTMAX 360</div>
-<p>Resultados • Noticias • Estadísticas</p>
-</header>
+    <!-- ===== LOADER ===== -->
+    <div id="loader"><div class="spinner"></div></div>
 
-<nav>
-<a href="#futbol">Fútbol</a>
-<a href="#nba">NBA</a>
-<a href="#mlb">MLB</a>
-<a href="#tenis">Tenis</a>
-<a href="#mundial">Mundial 2026</a>
-</nav>
+    <!-- ===== HEADER ===== -->
+    <header>
+        <h1>🏟️ SPORTMAX 360</h1>
+        <p>⚡ El deporte en tu pantalla — Datos en tiempo real</p>
+        <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema">🌙</button>
+    </header>
 
-<section class="hero">
-<h1>Todo el deporte en un solo lugar</h1>
-<p>Resultados en vivo, clasificaciones y noticias.</p>
-</section>
+    <!-- ===== NAV ===== -->
+    <nav>
+        <a href="#mundial">🌍 Mundial 2026</a>
+        <a href="#nba">🏀 NBA</a>
+        <a href="#mlb">⚾ MLB</a>
+        <a href="#sedes">📍 Sedes</a>
+        <a href="#noticias">📰 Noticias</a>
+        <a href="#galeria">📸 Galería</a>
+        <a href="#videos">🎥 Videos</a>
+        <a href="#foro">💬 Foro</a>
+        <a href="#contacto">📞 Contacto</a>
+    </nav>
 
-<section class="stats">
+    <!-- ===== MAIN ===== -->
+    <main>
 
-<div class="card">
-<h2 id="matches">0</h2>
-<p>Partidos</p>
-</div>
+        <!-- 🌍 MUNDIAL 2026 -->
+        <section id="mundial">
+            <h2>🌍 Mundial 2026 — México · EE.UU. · Canadá</h2>
+            <div class="card">
+                <h3>🔴 <span class="live-badge">En Vivo</span> Partido destacado</h3>
+                <p id="partido-en-vivo" class="vivo-texto">Cargando partido...</p>
+            </div>
+            <div class="card">
+                <h3>📋 Últimos Resultados</h3>
+                <input type="text" id="buscador" placeholder="🔍 Buscar equipo...">
+                <table id="tabla-resultados">
+                    <thead><tr><th>Local</th><th>Visitante</th><th>Resultado</th></tr></thead>
+                    <tbody id="tabla-body"></tbody>
+                </table>
+            </div>
+            <div class="card">
+                <h3>📅 Próximos Partidos</h3>
+                <ul id="lista-proximos"></ul>
+            </div>
+            <div id="contenedor-posiciones"></div>
 
-<div class="card">
-<h2 id="live">0</h2>
-<p>En Vivo</p>
-</div>
+            <!-- 🎯 SHOTMAP -->
+            <div class="card">
+                <h3>🎯 Mapa de Tiros</h3>
+                <canvas id="shotmapCanvas" width="700" height="450"></canvas>
+                <p id="shotmap-info" style="color:var(--text-secondary); font-size:0.85rem; margin-top:0.5rem; text-align:center;">Cargando mapa de tiros...</p>
+            </div>
+        </section>
 
-<div class="card">
-<h2>24/7</h2>
-<p>Actualización</p>
-</div>
+        <!-- 🏀 NBA -->
+        <section id="nba">
+            <h2>🏀 NBA — Temporada 2025‑2026</h2>
+            <div class="card">
+                <h3>📅 Hoy / Próximos</h3>
+                <ul id="lista-nba"></ul>
+            </div>
+            <div class="card">
+                <h3>📋 Últimos Resultados</h3>
+                <table id="tabla-nba-resultados">
+                    <thead><tr><th>Visitante</th><th>Local</th><th>Resultado</th></tr></thead>
+                    <tbody id="nba-body"></tbody>
+                </table>
+            </div>
+            <div id="contenedor-nba-posiciones"></div>
+        </section>
 
-<div class="card">
-<h2>4+</h2>
-<p>Deportes</p>
-</div>
+        <!-- ⚾ MLB -->
+        <section id="mlb">
+            <h2>⚾ MLB — Temporada 2026</h2>
+            <div class="card">
+                <h3>📅 Hoy / Próximos</h3>
+                <ul id="lista-mlb"></ul>
+            </div>
+            <div class="card">
+                <h3>📋 Últimos Resultados</h3>
+                <table id="tabla-mlb-resultados">
+                    <thead><tr><th>Visitante</th><th>Local</th><th>Resultado</th></tr></thead>
+                    <tbody id="mlb-body"></tbody>
+                </table>
+            </div>
+            <div id="contenedor-mlb-posiciones"></div>
+        </section>
 
-</section>
+        <!-- 📍 SEDES -->
+        <section id="sedes">
+            <h2>📍 Sedes del Mundial 2026</h2>
+            <div class="card">
+                <div class="sedes-grid">
+                    <div class="sede-item">🏟️ Estadio Azteca <div class="pais">🇲🇽 México</div></div>
+                    <div class="sede-item">🏟️ MetLife Stadium <div class="pais">🇺🇸 Nueva York</div></div>
+                    <div class="sede-item">🏟️ BC Place <div class="pais">🇨🇦 Vancouver</div></div>
+                    <div class="sede-item">🏟️ AT&T Stadium <div class="pais">🇺🇸 Dallas</div></div>
+                    <div class="sede-item">🏟️ Estadio BBVA <div class="pais">🇲🇽 Monterrey</div></div>
+                    <div class="sede-item">🏟️ SoFi Stadium <div class="pais">🇺🇸 Los Ángeles</div></div>
+                </div>
+            </div>
+        </section>
 
-<section id="futbol" class="section">
-<h2>⚽ Fútbol</h2>
-<div id="footballMatches"></div>
-</section>
+        <!-- 📰 NOTICIAS -->
+        <section id="noticias">
+            <h2>📰 Noticias Deportivas</h2>
+            <div class="card" id="contenedor-noticias"><p>Cargando noticias...</p></div>
+        </section>
 
-<section id="nba" class="section">
-<h2>🏀 NBA</h2>
-<div id="nbaMatches"></div>
-</section>
+        <!-- 🎥 VIDEOS -->
+        <section id="videos">
+            <h2>🎥 Videos Destacados</h2>
+            <div class="card">
+                <div id="contenedor-videos" class="videos-grid">
+                    <p style="color:var(--text-secondary); grid-column:1/-1; text-align:center;">Cargando videos...</p>
+                </div>
+            </div>
+        </section>
 
-<section id="mlb" class="section">
-<h2>⚾ MLB</h2>
-<div id="mlbMatches"></div>
-</section>
+        <!-- GALERÍA, FORO, CONTACTO -->
+        <section id="galeria"><h2>📸 Galería</h2><div class="card">Próximamente...</div></section>
+        <section id="foro"><h2>💬 Foro</h2><div class="card">Próximamente...</div></section>
+        <section id="contacto"><h2>📞 Contacto</h2><div class="card">Próximamente...</div></section>
+    </main>
 
-<section id="tenis" class="section">
-<h2>🎾 Tenis</h2>
-<div id="tennisMatches"></div>
-</section>
+    <!-- ===== FOOTER ===== -->
+    <footer>
+        <p>© 2026 <span>SPORTMAX 360</span> — Todos los derechos reservados ⚡</p>
+        <p class="update-time">📡 Datos actualizados: <span id="hora-actualizacion">--:--</span></p>
+    </footer>
 
-<section id="mundial" class="section">
-<h2>🏆 Mundial 2026</h2>
-<div id="worldCup"></div>
-</section>
+    <!-- ================================================================ -->
+    <!-- ===== JAVASCRIPT ===== -->
+    <!-- ================================================================ -->
+    <script>
+        // ================================================================
+        // 1. CONFIGURACIÓN Y PROXY
+        // ================================================================
+        // Usamos un proxy para evitar CORS y ocultar la clave (solo para demo)
+        const PROXY = 'https://corsproxy.io/?';
+        // Si prefieres usar un proxy local, cambia esta línea.
 
-<section class="section">
-<h2>📰 Noticias Deportivas</h2>
-<div id="news"></div>
-</section>
+        // La clave se mantiene en el frontend solo para pruebas.
+        // En producción, deberías moverla a un backend.
+        const RAPIDAPI_KEY = 'f019ce89dfmhsh54169a00fd80f9b1c5aadjsn50be5f785083';
+        const RAPIDAPI_HOST_FOOTBALL = 'api-football-v1.p.rapidapi.com';
+        const RAPIDAPI_HOST_NBA = 'api-nba-v1.p.rapidapi.com';
+        const RAPIDAPI_HOST_SHOTMAP = 'footapi7.p.rapidapi.com';
 
-<section class="section">
-<h2>💰 Publicidad</h2>
+        // Función para hacer fetch con proxy
+        async function fetchWithProxy(url, options = {}) {
+            const proxyUrl = PROXY + encodeURIComponent(url);
+            const response = await fetch(proxyUrl, {
+                ...options,
+                headers: {
+                    ...options.headers,
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            });
+            return response;
+        }
 
-<!-- ADSENSE -->
-<ins class="adsbygoogle"
-style="display:block"
-data-ad-client="ca-pub-TU_ID"
-data-ad-slot="TU_SLOT"
-data-ad-format="auto"
-data-full-width-responsive="true"></ins>
+        // ================================================================
+        // 2. UTILIDADES
+        // ================================================================
+        const ZONA_LIMA = { timeZone: 'America/Lima', day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' };
 
-</section>
+        function mostrarLoader(show) {
+            document.getElementById('loader').style.display = show ? 'flex' : 'none';
+        }
 
-<footer>
-© 2026 SPORTMAX 360
-</footer>
+        function mostrarError(titulo, mensaje) {
+            const div = document.createElement('div');
+            div.className = 'error-toast';
+            div.innerHTML = `<strong>${titulo}</strong>${mensaje}`;
+            document.body.appendChild(div);
+            setTimeout(() => div.remove(), 6000);
+        }
 
-<script>
+        function actualizarHora() {
+            document.getElementById('hora-actualizacion').textContent =
+                new Date().toLocaleString('es-ES', ZONA_LIMA);
+        }
 
-// TU API FOOTBALL-DATA
-const API_KEY = "TU_API_KEY";
+        // ================================================================
+        // 3. FAVORITOS (Local Storage)
+        // ================================================================
+        const favoritos = {
+            agregar(equipo) {
+                let favs = JSON.parse(localStorage.getItem('favs') || '[]');
+                if (!favs.includes(equipo)) {
+                    favs.push(equipo);
+                    localStorage.setItem('favs', JSON.stringify(favs));
+                }
+            },
+            quitar(equipo) {
+                let favs = JSON.parse(localStorage.getItem('favs') || '[]');
+                favs = favs.filter(e => e !== equipo);
+                localStorage.setItem('favs', JSON.stringify(favs));
+            },
+            obtener() {
+                return JSON.parse(localStorage.getItem('favs') || '[]');
+            },
+            toggle(equipo) {
+                const favs = this.obtener();
+                if (favs.includes(equipo)) {
+                    this.quitar(equipo);
+                    return false;
+                } else {
+                    this.agregar(equipo);
+                    return true;
+                }
+            }
+        };
 
-async function cargarFutbol(){
+        // ================================================================
+        // 4. MOCK (datos de respaldo)
+        // ================================================================
+        const MOCK = {
+            futbol: {
+                enVivo: '🔥 México 1‑0 Argentina (Minuto 67)',
+                resultados: [
+                    { local: 'Brasil', visitante: 'Alemania', resultado: '2‑1' },
+                    { local: 'Francia', visitante: 'Inglaterra', resultado: '0‑0' },
+                    { local: 'España', visitante: 'Holanda', resultado: '3‑2' },
+                    { local: 'Portugal', visitante: 'Uruguay', resultado: '1‑1' }
+                ],
+                proximos: [
+                    { local: 'Argentina', visitante: 'Brasil', fecha: '15/06/2026 20:00' },
+                    { local: 'Alemania', visitante: 'Francia', fecha: '16/06/2026 18:00' },
+                    { local: 'Inglaterra', visitante: 'España', fecha: '17/06/2026 21:00' }
+                ],
+                posiciones: [{
+                    grupo: 'Grupo A',
+                    equipos: [
+                        { pos: 1, nombre: 'México', pts: 6, pj: 2, pg: 2, pe: 0, pp: 0 },
+                        { pos: 2, nombre: 'Argentina', pts: 4, pj: 2, pg: 1, pe: 1, pp: 0 },
+                        { pos: 3, nombre: 'Polonia', pts: 1, pj: 2, pg: 0, pe: 1, pp: 1 }
+                    ]
+                }, {
+                    grupo: 'Grupo B',
+                    equipos: [
+                        { pos: 1, nombre: 'Brasil', pts: 6, pj: 2, pg: 2, pe: 0, pp: 0 },
+                        { pos: 2, nombre: 'Alemania', pts: 3, pj: 2, pg: 1, pe: 0, pp: 1 },
+                        { pos: 3, nombre: 'Japón', pts: 0, pj: 2, pg: 0, pe: 0, pp: 2 }
+                    ]
+                }]
+            },
+            nba: {
+                proximos: ['🏀 Lakers @ Warriors — 15/06 22:00', '🏀 Celtics @ Heat — 16/06 20:30', '🏀 Nuggets @ Suns — 16/06 23:00'],
+                resultados: [
+                    { visitante: 'Timberwolves', local: 'Mavericks', resultado: '112‑108' },
+                    { visitante: 'Knicks', local: '76ers', resultado: '95‑99' }
+                ],
+                posiciones: {
+                    este: [{ pos: 1, equipo: 'Celtics', g: 45, p: 20, pct: '.692' }, { pos: 2, equipo: 'Bucks', g: 43, p: 22, pct: '.662' }, { pos: 3, equipo: '76ers', g: 40, p: 25, pct: '.615' }],
+                    oeste: [{ pos: 1, equipo: 'Nuggets', g: 48, p: 17, pct: '.738' }, { pos: 2, equipo: 'Thunder', g: 44, p: 21, pct: '.677' }, { pos: 3, equipo: 'Lakers', g: 41, p: 24, pct: '.631' }]
+                }
+            },
+            mlb: {
+                proximos: ['⚾ Yankees @ Red Sox — 15/06 19:00', '⚾ Dodgers @ Padres — 15/06 21:00', '⚾ Astros @ Rangers — 16/06 20:00'],
+                resultados: [{ visitante: 'Mets', local: 'Braves', resultado: '6‑4' }, { visitante: 'Giants', local: 'Diamondbacks', resultado: '3‑5' }],
+                posiciones: [
+                    { liga: 'Liga Nacional', equipos: [{ pos: 1, equipo: 'Dodgers', g: 42, p: 22, pct: '.656', dif: '-' }, { pos: 2, equipo: 'Braves', g: 38, p: 26, pct: '.594', dif: '4.0' }] },
+                    { liga: 'Liga Americana', equipos: [{ pos: 1, equipo: 'Yankees', g: 40, p: 24, pct: '.625', dif: '-' }, { pos: 2, equipo: 'Astros', g: 37, p: 27, pct: '.578', dif: '3.0' }] }
+                ]
+            },
+            noticias: [
+                { titulo: '🔥 Messi: "Estamos listos para el Mundial"', fecha: '14/06/2026' },
+                { titulo: '🇧🇷 Brasil golea en amistoso previo', fecha: '14/06/2026' },
+                { titulo: '🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inglaterra pierde a su capitán por lesión', fecha: '13/06/2026' },
+                { titulo: '🌟 Las 10 jóvenes promesas del Mundial 2026', fecha: '12/06/2026' }
+            ]
+        };
 
-try{
+        // ================================================================
+        // 5. FUNCIONES DE RENDERIZADO
+        // ================================================================
 
-const res = await fetch(
-"https://api.football-data.org/v4/matches",
-{
-headers:{
-"X-Auth-Token":API_KEY
-}
-}
-);
+        // --- FÚTBOL ---
+        function mostrarEnVivo(d) {
+            document.getElementById('partido-en-vivo').textContent = d || MOCK.futbol.enVivo;
+        }
 
-const data = await res.json();
+        function mostrarResultados(d) {
+            const body = document.getElementById('tabla-body');
+            const r = d || MOCK.futbol.resultados;
+            body.innerHTML = '';
+            r.forEach(p => {
+                const esFav = favoritos.obtener().includes(p.local);
+                body.innerHTML += `
+                    <tr>
+                        <td>${p.local} <button class="fav-btn ${esFav ? 'active' : ''}" data-equipo="${p.local}">⭐</button></td>
+                        <td>${p.visitante}</td>
+                        <td><strong>${p.resultado}</strong></td>
+                    </tr>
+                `;
+            });
+            // Eventos para favoritos
+            document.querySelectorAll('.fav-btn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const equipo = this.dataset.equipo;
+                    const activo = favoritos.toggle(equipo);
+                    this.classList.toggle('active', activo);
+                });
+            });
+        }
 
-document.getElementById("footballMatches").innerHTML =
-data.matches.slice(0,10).map(match=>`
-<div class="card">
-${match.homeTeam.name}
-vs
-${match.awayTeam.name}
-</div>
-`).join('');
+        function mostrarProximos(d) {
+            const ul = document.getElementById('lista-proximos');
+            const p = d || MOCK.futbol.proximos;
+            ul.innerHTML = '';
+            p.forEach(x => ul.innerHTML += `<li>⚽ ${x.local} vs ${x.visitante} — 📅 ${x.fecha}</li>`);
+        }
 
-}catch(err){
-console.error(err);
-}
+        function mostrarPosiciones(d) {
+            const c = document.getElementById('contenedor-posiciones');
+            const p = d || MOCK.futbol.posiciones;
+            c.innerHTML = `<div class="card"><h3>📊 Posiciones por Grupo</h3></div>`;
+            p.forEach(g => {
+                let html = `<div class="card"><h4>${g.grupo}</h4><table><thead><tr><th>#</th><th>Equipo</th><th>Pts</th><th>PJ</th><th>PG</th><th>PE</th><th>PP</th></tr></thead><tbody>`;
+                g.equipos.forEach(e => html += `<tr><td>${e.pos}</td><td>${e.nombre}</td><td>${e.pts}</td><td>${e.pj}</td><td>${e.pg}</td><td>${e.pe}</td><td>${e.pp}</td></tr>`);
+                c.innerHTML += html + '</tbody></table></div>';
+            });
+        }
 
-}
+        // --- NBA ---
+        function mostrarNBAProximos(d) {
+            const ul = document.getElementById('lista-nba');
+            ul.innerHTML = '';
+            (d || MOCK.nba.proximos).forEach(x => ul.innerHTML += `<li>${x}</li>`);
+        }
 
-cargarFutbol();
+        function mostrarNBAResultados(d) {
+            const body = document.getElementById('nba-body');
+            body.innerHTML = '';
+            (d || MOCK.nba.resultados).forEach(x => body.innerHTML += `<tr><td>${x.visitante}</td><td>${x.local}</td><td><strong>${x.resultado}</strong></td></tr>`);
+        }
 
-</script>
+        function mostrarNBAPosiciones(d) {
+            const c = document.getElementById('contenedor-nba-posiciones');
+            const p = d || MOCK.nba.posiciones;
+            let html = `<div class="card"><h3>📊 Clasificaciones NBA</h3></div>`;
+            html += `<div class="card"><h4>🏆 Conferencia Este</h4><table><thead><tr><th>#</th><th>Equipo</th><th>G</th><th>P</th><th>%</th></tr></thead><tbody>`;
+            p.este.forEach(x => html += `<tr><td>${x.pos}</td><td>${x.equipo}</td><td>${x.g}</td><td>${x.p}</td><td>${x.pct}</td></tr>`);
+            html += `</tbody></table></div><div class="card"><h4>🏆 Conferencia Oeste</h4><table><thead><tr><th>#</th><th>Equipo</th><th>G</th><th>P</th><th>%</th></tr></thead><tbody>`;
+            p.oeste.forEach(x => html += `<tr><td>${x.pos}</td><td>${x.equipo}</td><td>${x.g}</td><td>${x.p}</td><td>${x.pct}</td></tr>`);
+            c.innerHTML = html + '</tbody></table></div>';
+        }
 
+        // --- MLB ---
+        function mostrarMLBProximos(d) {
+            const ul = document.getElementById('lista-mlb');
+            ul.innerHTML = '';
+            (d || MOCK.mlb.proximos).forEach(x => ul.innerHTML += `<li>${x}</li>`);
+        }
+
+        function mostrarMLBResultados(d) {
+            const body = document.getElementById('mlb-body');
+            body.innerHTML = '';
+            (d || MOCK.mlb.resultados).forEach(x => body.innerHTML += `<tr><td>${x.visitante}</td><td>${x.local}</td><td><strong>${x.resultado}</strong></td></tr>`);
+        }
+
+        function mostrarMLBPosiciones(d) {
+            const c = document.getElementById('contenedor-mlb-posiciones');
+            const p = d || MOCK.mlb.posiciones;
+            let html = `<div class="card"><h3>📊 MLB 2026</h3></div>`;
+            p.forEach(l => {
+                html += `<div class="card"><h4>${l.liga}</h4><table><thead><tr><th>#</th><th>Equipo</th><th>G</th><th>P</th><th>%</th><th>Dif</th></tr></thead><tbody>`;
+                l.equipos.forEach(x => html += `<tr><td>${x.pos}</td><td>${x.equipo}</td><td>${x.g}</td><td>${x.p}</td><td>${x.pct}</td><td>${x.dif}</td></tr>`);
+                c.innerHTML = html + '</tbody></table></div>';
+            });
+        }
+
+        // --- NOTICIAS ---
+        function mostrarNoticias(d) {
+            const c = document.getElementById('contenedor-noticias');
+            c.innerHTML = '';
+            (d || MOCK.noticias).forEach(n => c.innerHTML += `<div style="padding:.6rem 0;border-bottom:1px solid var(--border-color);"><strong style="color:var(--text-primary);">${n.titulo}</strong><br><small style="color:var(--text-secondary);">📅 ${n.fecha}</small></div>`);
+        }
+
+        // --- VIDEOS ---
+        function mostrarVideos(d) {
+            const c = document.getElementById('contenedor-videos');
+            c.innerHTML = '';
+            (d || []).forEach(v => {
+                c.innerHTML += `
+                    <div class="video-item">
+                        <img src="${v.thumbnail || 'https://via.placeholder.com/300x150/0d1b2a/00d4ff?text=SPORTMAX'}" alt="${v.title || 'Video'}">
+                        <div class="info"><h4>${v.title || 'Video destacado'}</h4><a href="${v.url || '#'}" target="_blank">Ver video →</a></div>
+                    </div>
+                `;
+            });
+        }
+
+        // ================================================================
+        // 6. FUNCIONES DE API (con proxy y fallback MOCK)
+        // ================================================================
+
+        // ⚽ FÚTBOL
+        async function cargarFutbolRapid() {
+            try {
+                mostrarLoader(true);
+                const hoy = new Date().toISOString().split('T')[0];
+
+                // En vivo
+                const resLive = await fetchWithProxy(
+                    `https://api-football-v1.p.rapidapi.com/v3/fixtures?live=all`, {
+                        headers: {
+                            'X-RapidAPI-Key': RAPIDAPI_KEY,
+                            'X-RapidAPI-Host': RAPIDAPI_HOST_FOOTBALL
+                        }
+                    }
+                );
+                if (!resLive.ok) throw new Error('HTTP ' + resLive.status);
+                const dataLive = await resLive.json();
+
+                if (dataLive.response?.length) {
+                    const v = dataLive.response[0];
+                    mostrarEnVivo(`🔥 ${v.teams.home.name} ${v.goals.home}‑${v.goals.away} ${v.teams.away.name}`);
+                    // Shotmap con el ID del partido en vivo
+                    if (v.fixture?.id) cargarShotmap(v.fixture.id);
+                } else {
+                    mostrarEnVivo('⏳ Esperando partido en vivo...');
+                    // Si no hay partido en vivo, mostrar shotmap de ejemplo
+                    cargarShotmapDemo();
+                }
+
+                // Resultados
+                const resFin = await fetchWithProxy(
+                    `https://api-football-v1.p.rapidapi.com/v3/fixtures?date=${hoy}&status=FT`, {
+                        headers: {
+                            'X-RapidAPI-Key': RAPIDAPI_KEY,
+                            'X-RapidAPI-Host': RAPIDAPI_HOST_FOOTBALL
+                        }
+                    }
+                );
+                if (resFin.ok) {
+                    const dataFin = await resFin.json();
+                    const finalizados = dataFin.response?.slice(0, 6) || [];
+                    if (finalizados.length) {
+                        const resultados = finalizados.map(f => ({ local: f.teams.home.name, visitante: f.teams.away.name, resultado: `${f.goals.home}‑${f.goals.away}` }));
+                        mostrarResultados(resultados);
+                    } else { mostrarResultados(); }
+                } else { mostrarResultados(); }
+
+                // Próximos
+                const resProx = await fetchWithProxy(
+                    `https://api-football-v1.p.rapidapi.com/v3/fixtures?date=${hoy}&status=NS`, {
+                        headers: {
+                            'X-RapidAPI-Key': RAPIDAPI_KEY,
+                            'X-RapidAPI-Host': RAPIDAPI_HOST_FOOTBALL
+                        }
+                    }
+                );
+                if (resProx.ok) {
+                    const dataProx = await resProx.json();
+                    const proximos = dataProx.response?.slice(0, 5) || [];
+                    if (proximos.length) {
+                        const proxData = proximos.map(f => ({ local: f.teams.home.name, visitante: f.teams.away.name, fecha: new Date(f.fixture.date).toLocaleString('es-ES', ZONA_LIMA) }));
+                        mostrarProximos(proxData);
+                    } else { mostrarProximos(); }
+                } else { mostrarProximos(); }
+
+                // Clasificaciones
+                const resStand = await fetchWithProxy(
+                    `https://api-football-v1.p.rapidapi.com/v3/standings?league=1&season=2026`, {
+                        headers: {
+                            'X-RapidAPI-Key': RAPIDAPI_KEY,
+                            'X-RapidAPI-Host': RAPIDAPI_HOST_FOOTBALL
+                        }
+                    }
+                );
+                if (resStand.ok) {
+                    const dataStand = await resStand.json();
+                    if (dataStand.response?.length) {
+                        const liga = dataStand.response[0];
+                        const equipos = liga.league.standings[0]?.slice(0, 5) || [];
+                        const posiciones = [{
+                            grupo: liga.league.name,
+                            equipos: equipos.map((eq, i) => ({ pos: i + 1, nombre: eq.team.name, pts: eq.points, pj: eq.all.played, pg: eq.all.win, pe: eq.all.draw, pp: eq.all.lose }))
+                        }];
+                        mostrarPosiciones(posiciones);
+                    } else { mostrarPosiciones(); }
+                } else { mostrarPosiciones(); }
+
+            } catch (e) {
+                console.error('Error en fútbol:', e);
+                mostrarError('Error de fútbol', 'Usando datos de respaldo');
+                mostrarEnVivo();
+                mostrarResultados();
+                mostrarProximos();
+                mostrarPosiciones();
+                cargarShotmapDemo();
+            } finally {
+                mostrarLoader(false);
+            }
+        }
+
+        // 🏀 NBA
+        async function cargarNBARapid() {
+            try {
+                const hoy = new Date().toISOString().split('T')[0];
+                const res = await fetchWithProxy(
+                    `https://api-nba-v1.p.rapidapi.com/games?date=${hoy}`, {
+                        headers: {
+                            'X-RapidAPI-Key': RAPIDAPI_KEY,
+                            'X-RapidAPI-Host': RAPIDAPI_HOST_NBA
+                        }
+                    }
+                );
+                if (!res.ok) throw new Error('HTTP ' + res.status);
+                const data = await res.json();
+                if (data.response?.length) {
+                    const juegos = data.response;
+                    const proximos = juegos.slice(0, 5).map(g => {
+                        const fecha = new Date(g.date.start).toLocaleString('es-ES', ZONA_LIMA);
+                        return `🏀 ${g.teams.visitors.name} @ ${g.teams.home.name} — ${fecha}`;
+                    });
+                    mostrarNBAProximos(proximos);
+                    const finalizados = juegos.filter(g => g.status.long === 'Finalizado').slice(0, 4);
+                    if (finalizados.length) {
+                        const resultados = finalizados.map(g => ({ visitante: g.teams.visitors.name, local: g.teams.home.name, resultado: `${g.scores.visitors}‑${g.scores.home}` }));
+                        mostrarNBAResultados(resultados);
+                    } else { mostrarNBAResultados(); }
+                } else { mostrarNBAProximos(); mostrarNBAResultados(); }
+
+                const resStand = await fetchWithProxy(
+                    `https://api-nba-v1.p.rapidapi.com/standings?league=standard&season=2025`, {
+                        headers: {
+                            'X-RapidAPI-Key': RAPIDAPI_KEY,
+                            'X-RapidAPI-Host': RAPIDAPI_HOST_NBA
+                        }
+                    }
+                );
+                if (resStand.ok) {
+                    const dataStand = await resStand.json();
+                    if (dataStand.response?.length) {
+                        const este = dataStand.response.filter(t => t.conference.name === 'East').slice(0, 5);
+                        const oeste = dataStand.response.filter(t => t.conference.name === 'West').slice(0, 5);
+                        mostrarNBAPosiciones({
+                            este: este.map((t, i) => ({ pos: i + 1, equipo: t.team.name, g: t.win.total, p: t.loss.total, pct: t.win.percentage })),
+                            oeste: oeste.map((t, i) => ({ pos: i + 1, equipo: t.team.name, g: t.win.total, p: t.loss.total, pct: t.win.percentage }))
+                        });
+                    } else { mostrarNBAPosiciones(); }
+                } else { mostrarNBAPosiciones(); }
+            } catch (e) {
+                console.error('Error en NBA:', e);
+                mostrarError('Error en NBA', 'Usando datos de respaldo');
+                mostrarNBAProximos();
+                mostrarNBAResultados();
+                mostrarNBAPosiciones();
+            }
+        }
+
+        // ⚾ MLB (gratis, sin proxy porque no tiene CORS)
+        async function cargarMLBGratis() {
+            try {
+                const hoy = new Date().toISOString().split('T')[0];
+                const res = await fetch(`https://statsapi.mlb.com/api/v1/schedule?sportId=1&date=${hoy}`);
+                if (!res.ok) throw new Error('MLB API no disponible');
+                const data = await res.json();
+                if (data.dates?.length && data.dates[0].games?.length) {
+                    const juegos = data.dates[0].games;
+                    const proximos = juegos.slice(0, 5).map(g => {
+                        const fecha = new Date(g.gameDate).toLocaleString('es-ES', ZONA_LIMA);
+                        const estado = g.status?.abstractGameState === 'Live' ? '🔴' : '⏰';
+                        return `⚾ ${estado} ${g.teams.away.team.name} @ ${g.teams.home.team.name} — ${fecha}`;
+                    });
+                    mostrarMLBProximos(proximos);
+                    const finalizados = juegos.filter(g => g.status?.abstractGameState === 'Final').slice(0, 4);
+                    if (finalizados.length) {
+                        const resultados = finalizados.map(g => ({ visitante: g.teams.away.team.name, local: g.teams.home.team.name, resultado: `${g.teams.away.score ?? '-'}‑${g.teams.home.score ?? '-'}` }));
+                        mostrarMLBResultados(resultados);
+                    } else { mostrarMLBResultados(); }
+                } else { mostrarMLBProximos(); mostrarMLBResultados(); }
+
+                const resStand = await fetch(`https://statsapi.mlb.com/api/v1/standings?leagueId=103,104&season=2026`);
+                if (resStand.ok) {
+                    const dataStand = await resStand.json();
+                    if (dataStand.records?.length) {
+                        const posiciones = dataStand.records.map(liga => ({
+                            liga: liga.league.name,
+                            equipos: liga.teamRecords.slice(0, 5).map(r => ({ pos: r.divisionRank, equipo: r.team.name, g: r.wins, p: r.losses, pct: r.winningPercentage, dif: r.divisionGamesBack ?? '-' }))
+                        }));
+                        mostrarMLBPosiciones(posiciones);
+                    } else { mostrarMLBPosiciones(); }
+                } else { mostrarMLBPosiciones(); }
+            } catch (e) {
+                console.error('Error en MLB:', e);
+                mostrarError('Error en MLB', 'Usando datos de respaldo');
+                mostrarMLBProximos();
+                mostrarMLBResultados();
+                mostrarMLBPosiciones();
+            }
+        }
+
+        // 📰 NOTICIAS
+        async function cargarNoticiasGratis() {
+            try {
+                const res = await fetch('https://api.rss2json.com/v1/api.json?rss_url=https://www.marca.com/futbol/rss.xml');
+                if (!res.ok) throw new Error('RSS no disponible');
+                const data = await res.json();
+                if (data.items?.length) {
+                    const noticias = data.items.slice(0, 4).map(n => ({ titulo: n.title, fecha: new Date(n.pubDate).toLocaleDateString('es-ES') }));
+                    mostrarNoticias(noticias);
+                } else { mostrarNoticias(); }
+            } catch (e) {
+                console.error('Error en noticias:', e);
+                mostrarError('Error en noticias', 'Usando datos de respaldo');
+                mostrarNoticias();
+            }
+        }
+
+        // 🎥 VIDEOS
+        async function cargarVideosFutbol() {
+            try {
+                const res = await fetchWithProxy(
+                    `https://free-football-soccer-videos.p.rapidapi.com/`, {
+                        headers: {
+                            'x-rapidapi-key': RAPIDAPI_KEY,
+                            'x-rapidapi-host': 'free-football-soccer-videos.p.rapidapi.com'
+                        }
+                    }
+                );
+                if (!res.ok) throw new Error('HTTP ' + res.status);
+                const data = await res.json();
+                if (Array.isArray(data) && data.length > 0) {
+                    const videos = data.slice(0, 6).map(v => ({
+                        title: v.title || 'Video destacado',
+                        thumbnail: v.thumbnail || 'https://via.placeholder.com/300x150/0d1b2a/00d4ff?text=SPORTMAX',
+                        url: v.url || '#'
+                    }));
+                    mostrarVideos(videos);
+                } else { mostrarVideos(); }
+            } catch (e) {
+                console.error('Error en videos:', e);
+                mostrarError('Error en videos', 'Mostrando contenido de respaldo');
+                mostrarVideos();
+            }
+        }
+
+        // 🎯 SHOTMAP
+        async function cargarShotmap(matchId) {
+            try {
+                const res = await fetchWithProxy(
+                    `https://footapi7.p.rapidapi.com/api/match/${matchId}/shotmap`, {
+                        headers: {
+                            'x-rapidapi-key': RAPIDAPI_KEY,
+                            'x-rapidapi-host': RAPIDAPI_HOST_SHOTMAP
+                        }
+                    }
+                );
+                if (!res.ok) throw new Error('HTTP ' + res.status);
+                const data = await res.json();
+                if (data?.shotmap?.length) {
+                    dibujarShotmap(data.shotmap);
+                    document.getElementById('shotmap-info').textContent = `✅ ${data.shotmap.length} tiros registrados.`;
+                } else {
+                    throw new Error('Sin tiros');
+                }
+            } catch (e) {
+                console.error('Shotmap fallido:', e);
+                document.getElementById('shotmap-info').textContent = '⚠️ No se pudo cargar el mapa de tiros. Mostrando demo.';
+                cargarShotmapDemo();
+            }
+        }
+
+        function cargarShotmapDemo() {
+            const demo = [
+                { playerCoordinates: { x: 80, y: 40 }, shotType: 'goal', time: 12, goalMouthCoordinates: { z: 20 } },
+                { playerCoordinates: { x: 75, y: 35 }, shotType: 'save', time: 23 },
+                { playerCoordinates: { x: 85, y: 45 }, shotType: 'block', time: 34 },
+                { playerCoordinates: { x: 70, y: 50 }, shotType: 'miss', time: 45 },
+                { playerCoordinates: { x: 65, y: 30 }, shotType: 'post', time: 56 },
+                { playerCoordinates: { x: 90, y: 60 }, shotType: 'goal', time: 67, goalMouthCoordinates: { z: 30 } },
+            ];
+            dibujarShotmap(demo);
+            document.getElementById('shotmap-info').textContent = '📊 Demo: 6 tiros de ejemplo.';
+        }
+
+        function dibujarShotmap(shotmap) {
+            const canvas = document.getElementById('shotmapCanvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            const w = canvas.width,
+                h = canvas.height;
+
+            ctx.clearRect(0, 0, w, h);
+            ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--bg-body').trim() || '#0d1b2a';
+            ctx.fillRect(0, 0, w, h);
+
+            // Campo
+            ctx.strokeStyle = '#1a3a4a';
+            ctx.lineWidth = 1.5;
+            ctx.strokeRect(50, 50, w - 100, h - 100);
+            ctx.beginPath();
+            ctx.arc(w / 2, h / 2, 40, 0, Math.PI * 2);
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.moveTo(w / 2, 50);
+            ctx.lineTo(w / 2, h - 50);
+            ctx.stroke();
+            ctx.strokeRect(50, h / 2 - 60, 80, 120);
+            ctx.strokeRect(w - 130, h / 2 - 60, 80, 120);
+
+            if (!shotmap || shotmap.length === 0) {
+                ctx.fillStyle = '#667788';
+                ctx.font = '16px Arial';
+                ctx.fillText('No hay tiros', w / 2 - 60, h / 2);
+                return;
+            }
+
+            shotmap.forEach(shot => {
+                const x = (shot.playerCoordinates.x / 100) * (w - 100) + 50;
+                const y = h - ((shot.playerCoordinates.y / 100) * (h - 100) + 50);
+
+                let color;
+                if (shot.shotType === 'goal') color = '#00ff88';
+                else if (shot.shotType === 'save') color = '#ffaa00';
+                else if (shot.shotType === 'block') color = '#ff4444';
+                else if (shot.shotType === 'post') color = '#ff66ff';
+                else color = '#8888ff';
+
+                ctx.beginPath();
+                ctx.arc(x, y, 6, 0, Math.PI * 2);
+                ctx.fillStyle = color;
+                ctx.fill();
+                ctx.strokeStyle = '#fff';
+                ctx.lineWidth = 1;
+                ctx.stroke();
+
+                ctx.fillStyle = '#fff';
+                ctx.font = '9px Arial';
+                ctx.fillText((shot.time || '?') + "'", x + 10, y - 5);
+
+                if (shot.shotType === 'goal' && shot.goalMouthCoordinates) {
+                    ctx.strokeStyle = '#00ff88';
+                    ctx.lineWidth = 2;
+                    ctx.setLineDash([4, 4]);
+                    ctx.beginPath();
+                    ctx.moveTo(x, y);
+                    const gx = w - 70;
+                    const gy = h / 2 + (shot.goalMouthCoordinates.z || 0) / 100 * 60 - 30;
+                    ctx.lineTo(gx, gy);
+                    ctx.stroke();
+                    ctx.setLineDash([]);
+                }
+            });
+
+            // Leyenda
+            ctx.fillStyle = '#8899aa';
+            ctx.font = '10px Arial';
+            ctx.fillText('⚽ Gol', 20, 25);
+            ctx.fillStyle = '#ffaa00';
+            ctx.fillText('🧤 Parada', 90, 25);
+            ctx.fillStyle = '#ff4444';
+            ctx.fillText('🛡️ Bloqueado', 170, 25);
+            ctx.fillStyle = '#8888ff';
+            ctx.fillText('❌ Fallado', 260, 25);
+            ctx.fillStyle = '#ff66ff';
+            ctx.fillText('📯 Palo', 340, 25);
+        }
+
+        // ================================================================
+        // 7. TEMA OSCURO/CLARO
+        // ================================================================
+        function toggleTheme() {
+            const html = document.documentElement;
+            const current = html.getAttribute('data-theme');
+            const next = current === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', next);
+            document.getElementById('themeToggle').textContent = next === 'dark' ? '🌙' : '☀️';
+            localStorage.setItem('theme', next);
+        }
+
+        function cargarTheme() {
+            const saved = localStorage.getItem('theme') || 'dark';
+            document.documentElement.setAttribute('data-theme', saved);
+            document.getElementById('themeToggle').textContent = saved === 'dark' ? '🌙' : '☀️';
+        }
+
+        // ================================================================
+        // 8. BÚSQUEDA EN TABLA
+        // ================================================================
+        function inicializarBuscador() {
+            document.getElementById('buscador').addEventListener('input', function(e) {
+                const query = e.target.value.toLowerCase().trim();
+                const rows = document.querySelectorAll('#tabla-body tr');
+                rows.forEach(row => {
+                    const texto = row.textContent.toLowerCase();
+                    row.style.display = texto.includes(query) ? '' : 'none';
+                });
+            });
+        }
+
+        // ================================================================
+        // 9. NOTIFICACIONES PUSH (ejemplo)
+        // ================================================================
+        function habilitarNotificaciones() {
+            if (!('Notification' in window)) return;
+            if (Notification.permission === 'granted') return;
+            Notification.requestPermission();
+        }
+
+        function notificarPartido(evento) {
+            if (Notification.permission === 'granted') {
+                new Notification('⚽ SPORTMAX 360', {
+                    body: evento,
+                    icon: 'https://img.icons8.com/color/48/000000/football2.png'
+                });
+            }
+        }
+
+        // Ejemplo: notificar si hay gol (podrías llamarlo desde la API)
+        function verificarGol(datos) {
+            // Si detectas un gol, llama a notificarPartido('¡Gol de X!')
+        }
+
+        // ================================================================
+        // 10. CARGA PRINCIPAL
+        // ================================================================
+        async function iniciarTodo() {
+            // Cargar tema
+            cargarTheme();
+
+            // Mostrar MOCK inmediatamente
+            mostrarEnVivo(MOCK.futbol.enVivo);
+            mostrarResultados(MOCK.futbol.resultados);
+            mostrarProximos(MOCK.futbol.proximos);
+            mostrarPosiciones(MOCK.futbol.posiciones);
+            mostrarNBAProximos(MOCK.nba.proximos);
+            mostrarNBAResultados(MOCK.nba.resultados);
+            mostrarNBAPosiciones(MOCK.nba.posiciones);
+            mostrarMLBProximos(MOCK.mlb.proximos);
+            mostrarMLBResultados(MOCK.mlb.resultados);
+            mostrarMLBPosiciones(MOCK.mlb.posiciones);
+            mostrarNoticias(MOCK.noticias);
+            mostrarVideos([]);
+            cargarShotmapDemo();
+            actualizarHora();
+            inicializarBuscador();
+            habilitarNotificaciones();
+
+            // Evento del toggle de tema
+            document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+
+            // Cargar datos reales con proxy
+            setTimeout(async () => {
+                await cargarFutbolRapid();
+                await cargarNBARapid();
+                await cargarMLBGratis();
+                await cargarNoticiasGratis();
+                await cargarVideosFutbol();
+                actualizarHora();
+            }, 500);
+
+            // Actualizar cada 5 minutos
+            setInterval(async () => {
+                await cargarFutbolRapid();
+                await cargarNBARapid();
+                await cargarMLBGratis();
+                await cargarNoticiasGratis();
+                await cargarVideosFutbol();
+                actualizarHora();
+            }, 300000);
+        }
+
+        document.addEventListener('DOMContentLoaded', iniciarTodo);
+    </script>
 </body>
 </html>
