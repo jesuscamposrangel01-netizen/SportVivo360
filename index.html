@@ -81,9 +81,9 @@
                 <p class="text-center text-gris py-6 text-sm">Cargando encuentros…</p>
             </div>
 
-            <!-- ✅ TABLA DE POSICIONES POR LIGA -->
+            <!-- TABLA DE POSICIONES COMPLETA -->
             <div class="space-y-6">
-                <!-- Liga Americana -->
+                <!-- Liga Americana → 15 equipos -->
                 <div class="bg-tarjeta rounded-lg border border-[#1b293b] p-4">
                     <h3 class="text-base text-azul font-semibold mb-3">🏆 Liga Americana</h3>
                     <div class="overflow-x-auto">
@@ -105,7 +105,7 @@
                     </div>
                 </div>
 
-                <!-- Liga Nacional -->
+                <!-- Liga Nacional → 15 equipos -->
                 <div class="bg-tarjeta rounded-lg border border-[#1b293b] p-4">
                     <h3 class="text-base text-azul font-semibold mb-3">🏆 Liga Nacional</h3>
                     <div class="overflow-x-auto">
@@ -187,9 +187,9 @@ function renderFechas(){
     cont.innerHTML=html;
 }
 
-// Cargar partidos
+// ✅ Cargar partidos → Lanzadores CORREGIDOS
 async function cargarPartidos(fecha){
-    const URL=`https://statsapi.mlb.com/api/v1/schedule?sportId=1&date=${fecha}&language=es&hydrate=linescore,probablePitchers,venue`;
+    const URL=`https://statsapi.mlb.com/api/v1/schedule?sportId=1&date=${fecha}&language=es&hydrate=linescore,probablePitchers,team,venue`;
     try{
         const res=await fetch(URL);if(!res.ok) throw 1;
         const datos=await res.json();const juegos=datos.dates?.[0]?.games||[];
@@ -197,8 +197,11 @@ async function cargarPartidos(fecha){
         if(!juegos.length){caja.innerHTML=`<p class="text-gris text-center py-6 text-sm">Sin partidos programados</p>`;return;}
 
         caja.innerHTML=juegos.map(p=>{
-            const away=p.teams?.away||{};const home=p.teams?.home||{};
-            const lanzA=p.probablePitchers?.away||{};const lanzH=p.probablePitchers?.home||{};
+            const away=p.teams?.away||{};
+            const home=p.teams?.home||{};
+            // ✅ Lectura correcta de lanzadores
+            const lanzA = p.probablePitchers?.away || {};
+            const lanzH = p.probablePitchers?.home || {};
             const idA=away.team?.id||"";const idH=home.team?.id||"";
             const nomA=away.team?.name||"Visitante";const nomH=home.team?.name||"Local";
             const regA=away.leagueRecord?`${away.leagueRecord.wins} - ${away.leagueRecord.losses}`:"";
@@ -243,9 +246,10 @@ async function cargarPartidos(fecha){
                     <span>Local: C ${marcH} • H ${hitsH} • E ${errH}</span>
                 </div>
 
+                <!-- ✅ Lanzadores visibles siempre -->
                 <div class="mt-2 flex justify-between text-[0.65rem] text-gris">
-                    <span>🧢 ${lanzA.fullName||"Sin lanzador definido"}</span>
-                    <span>🧢 ${lanzH.fullName||"Sin lanzador definido"}</span>
+                    <span>🧢 ${lanzA.fullName || "Sin lanzador definido"} ${lanzA.pitchHand?.code || ""}</span>
+                    <span>🧢 ${lanzH.fullName || "Sin lanzador definido"} ${lanzH.pitchHand?.code || ""}</span>
                 </div>
 
                 <p class="text-center text-[0.65rem] text-gris mt-2">📍 ${estadio}</p>
@@ -260,22 +264,50 @@ async function cargarPartidos(fecha){
     }catch(e){document.getElementById("lista-partidos-mlb").innerHTML=`<p class="text-center text-red-400 py-6 text-sm">Error al cargar datos</p>`;}
 }
 
-// ✅ Cargar tablas separadas por liga
+// ✅ Tablas COMPLETAS: une todas las divisiones → 15 + 15 = 30 equipos
 async function cargarTablasMLB(){
     try{
-        const res=await fetch(`https://statsapi.mlb.com/api/v1/standings?leagueId=103,104&season=${ANIO_MLB}`);
+        const res=await fetch(`https://statsapi.mlb.com/api/v1/standings?leagueId=103,104&season=${ANIO_MLB}&hydrate=division`);
         if(!res.ok) throw 1;
         const datos=await res.json();
 
-        // Liga Americana → ID 103
-        const americana = datos.records?.find(r=>r.league.id===103)?.teamRecords||[];
-        document.getElementById("tabla-americana").innerHTML=americana.sort((a,b)=>b.winningPercentage-a.winningPercentage)
-        .map((t,i)=>`<tr class="border-b border-gray-700/40"><td class="py-1.5">${i+1}</td><td class="py-1.5">${t.team.name}</td><td class="py-1.5 text-center">${t.wins}</td><td class="py-1.5 text-center">${t.losses}</td><td class="py-1.5 text-center">${Number(t.winningPercentage).toFixed(3)}</td><td class="py-1.5 text-center">${t.gamesBack||"—"}</td></tr>`).join("");
+        let todosAmericana = [];
+        let todosNacional = [];
 
-        // Liga Nacional → ID 104
-        const nacional = datos.records?.find(r=>r.league.id===104)?.teamRecords||[];
-        document.getElementById("tabla-nacional").innerHTML=nacional.sort((a,b)=>b.winningPercentage-a.winningPercentage)
-        .map((t,i)=>`<tr class="border-b border-gray-700/40"><td class="py-1.5">${i+1}</td><td class="py-1.5">${t.team.name}</td><td class="py-1.5 text-center">${t.wins}</td><td class="py-1.5 text-center">${t.losses}</td><td class="py-1.5 text-center">${Number(t.winningPercentage).toFixed(3)}</td><td class="py-1.5 text-center">${t.gamesBack||"—"}</td></tr>`).join("");
+        // Recorre todas las divisiones y junta equipos
+        datos.records?.forEach(div => {
+            if(div.league?.id === 103) todosAmericana.push(...div.teamRecords);
+            if(div.league?.id === 104) todosNacional.push(...div.teamRecords);
+        });
+
+        // Ordena por % victorias
+        todosAmericana.sort((a,b) => b.winningPercentage - a.winningPercentage);
+        todosNacional.sort((a,b) => b.winningPercentage - a.winningPercentage);
+
+        // Pinta tabla Americana
+        document.getElementById("tabla-americana").innerHTML = todosAmericana.map((t,i)=>
+            `<tr class="border-b border-gray-700/40">
+                <td class="py-1.5">${i+1}</td>
+                <td class="py-1.5">${t.team.name}</td>
+                <td class="py-1.5 text-center">${t.wins}</td>
+                <td class="py-1.5 text-center">${t.losses}</td>
+                <td class="py-1.5 text-center">${Number(t.winningPercentage).toFixed(3)}</td>
+                <td class="py-1.5 text-center">${t.gamesBack || "—"}</td>
+            </tr>`
+        ).join("");
+
+        // Pinta tabla Nacional
+        document.getElementById("tabla-nacional").innerHTML = todosNacional.map((t,i)=>
+            `<tr class="border-b border-gray-700/40">
+                <td class="py-1.5">${i+1}</td>
+                <td class="py-1.5">${t.team.name}</td>
+                <td class="py-1.5 text-center">${t.wins}</td>
+                <td class="py-1.5 text-center">${t.losses}</td>
+                <td class="py-1.5 text-center">${Number(t.winningPercentage).toFixed(3)}</td>
+                <td class="py-1.5 text-center">${t.gamesBack || "—"}</td>
+            </tr>`
+        ).join("");
+
     }catch(e){
         document.getElementById("tabla-americana").innerHTML=`<tr><td colspan="6" class="py-4 text-center text-gris">Sin datos</td></tr>`;
         document.getElementById("tabla-nacional").innerHTML=`<tr><td colspan="6" class="py-4 text-center text-gris">Sin datos</td></tr>`;
