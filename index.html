@@ -14,6 +14,7 @@
             --rojo-aviso:#ff4d4f;
             --borde-suave:#1c2738;
             --verde-conectado:#36d399;
+            --rojo-vivo:#ff4456;
         }
         *{margin:0;padding:0;box-sizing:border-box;font-family:Segoe UI, Roboto, Arial, sans-serif;}
         body{background:var(--fondo-principal);color:var(--texto-claro);min-height:100vh;}
@@ -26,6 +27,9 @@
         main{max-width:1250px;margin:2rem auto;padding:0 1.2rem;}
         .estado-sincro{display:flex;align-items:center;justify-content:center;gap:.5rem;background:var(--fondo-tarjeta);border:1px solid var(--borde-suave);color:var(--texto-suave);padding:.5rem 1.2rem;border-radius:25px;width:fit-content;margin:0 auto 2rem auto;font-size:.9rem;}
         .punto-verde{width:10px;height:10px;border-radius:50%;background:var(--verde-conectado);box-shadow:0 0 8px var(--verde-conectado);}
+        .vivo-badge{display:inline-flex;align-items:center;gap:.3rem;background:var(--rojo-vivo);color:#fff;font-size:.75rem;padding:.2rem .6rem;border-radius:12px;font-weight:600;box-shadow:0 0 6px rgba(255,68,86,.4);}
+        .punto-vivo{width:6px;height:6px;border-radius:50%;background:#fff;animation:parpadeo 1.2s infinite;}
+        @keyframes parpadeo{0%,100%{opacity:1;}50%{opacity:.3;}}
         h2{font-size:1.9rem;border-left:5px solid var(--azul-neon);padding-left:.8rem;margin-bottom:1.5rem;}
         .contenedor-pestanas{display:flex;gap:1rem;margin-bottom:1.8rem;}
         .boton-pestana{background:transparent;border:1px solid var(--borde-suave);color:var(--texto-suave);padding:.7rem 1.4rem;border-radius:10px;font-size:1rem;cursor:pointer;transition:.3s;}
@@ -42,19 +46,23 @@
 
         /* Tarjeta partido */
         .tarjeta{background:var(--fondo-tarjeta);border:1px solid var(--borde-suave);border-radius:16px;padding:1.6rem;margin-bottom:1.2rem;box-shadow:0 6px 20px rgba(0,0,0,.25);}
-        .tarjeta-partido{display:grid;grid-template-columns:1fr auto 1fr;gap:1rem;align-items:center;min-height:120px;}
+        .tarjeta-partido{display:grid;grid-template-columns:1fr auto 1fr;gap:1rem;align-items:center;min-height:140px;}
         .bloque-equipo{display:flex;align-items:center;gap:.8rem;}
         .bloque-equipo.local{justify-content:flex-end;text-align:right;flex-direction:row-reverse;}
         .logo-partido{width:46px;height:46px;object-fit:contain;background:#fff;border-radius:4px;padding:3px;flex-shrink:0;}
         .datos-equipo{display:flex;flex-direction:column;gap:.2rem;}
         .nombre-equipo{font-size:1rem;font-weight:600;line-height:1.3;}
         .registro-equipo{font-size:.9rem;color:var(--texto-suave);}
+        .marcador-centro{font-size:1.6rem;font-weight:bold;letter-spacing:1px;}
         .info-centro{text-align:center;}
-        .hora-partido{font-size:1rem;font-weight:500;margin-bottom:.3rem;}
-        .transmision{font-size:.85rem;color:var(--texto-suave);min-height:1.2rem;}
-        .lanzadores{margin-top:1rem;padding-top:.8rem;border-top:1px solid var(--borde-suave);display:flex;justify-content:space-between;font-size:.85rem;color:var(--texto-suave);grid-column: 1 / -1;}
-        .enlace-accion{margin-top:.8rem;display:flex;justify-content:space-around;grid-column: 1 / -1;}
-        .enlace-accion a{color:var(--azul-neon);text-decoration:none;font-weight:500;font-size:.95rem;}
+        .estado-juego{font-size:.8rem;color:var(--texto-claro);margin-bottom:.2rem;}
+        .hora-partido{font-size:.95rem;font-weight:500;margin-bottom:.2rem;}
+        .transmision{font-size:.8rem;color:var(--texto-suave);min-height:1rem;}
+        .resumen-carreras{grid-column:1/-1;display:flex;justify-content:center;gap:2rem;font-size:.85rem;color:var(--texto-suave);padding:.4rem 0;border-top:1px dashed var(--borde-suave);}
+        .lanzadores{margin-top:.6rem;padding-top:.8rem;border-top:1px solid var(--borde-suave);display:flex;justify-content:space-between;font-size:.8rem;color:var(--texto-suave);grid-column:1/-1;}
+        .estadio{grid-column:1/-1;text-align:center;font-size:.8rem;color:var(--texto-suave);margin-top:.2rem;}
+        .enlace-accion{margin-top:.8rem;display:flex;justify-content:space-around;grid-column:1/-1;}
+        .enlace-accion a{color:var(--azul-neon);text-decoration:none;font-weight:500;font-size:.9rem;}
 
         .titulo-seccion{display:flex;align-items:center;gap:.6rem;color:var(--azul-neon);font-size:1.6rem;margin-bottom:1.2rem;}
         .aviso{color:var(--texto-suave);text-align:center;padding:2rem 0;font-size:1.1rem;}
@@ -67,6 +75,7 @@
             .tarjeta-partido{grid-template-columns:1fr;gap:1.5rem;}
             .bloque-equipo.local{justify-content:flex-start;text-align:left;flex-direction:row;}
             .lanzadores{flex-direction:column;gap:.4rem;}
+            .resumen-carreras{gap:1rem;}
         }
     </style>
 </head>
@@ -174,8 +183,9 @@ function renderNavegacionFechas(){
 }
 function irFecha(iso){fechaActual=new Date(iso+"T00:00:00");renderNavegacionFechas();cargarPartidosFecha(iso);}
 
+// 🚀 Carga completa con datos extra de API
 async function cargarPartidosFecha(fecha){
-    const URL=`https://statsapi.mlb.com/api/v1/schedule?sportId=1&date=${fecha}&language=es&hydrate=probablePitchers`;
+    const URL=`https://statsapi.mlb.com/api/v1/schedule?sportId=1&date=${fecha}&language=es&hydrate=linescore,probablePitchers,team,venue`;
     try{
         const res=await fetch(URL);if(!res.ok) throw 1;
         const datos=await res.json();const juegos=datos.dates?.[0]?.games||[];
@@ -188,8 +198,19 @@ async function cargarPartidosFecha(fecha){
             const nomA=away.team?.name||"Visitante";const nomH=home.team?.name||"Local";
             const regA=away.leagueRecord?`${away.leagueRecord.wins} - ${away.leagueRecord.losses}`:"";
             const regH=home.leagueRecord?`${home.leagueRecord.wins} - ${home.leagueRecord.losses}`:"";
-            // ✅ Aquí quitamos "Sin señal"
             const trans = p.broadcasts?.[0]?.name ?? "";
+            const estado=p.status||{};
+            const vivo=estado.abstractGameState==="Live";
+            const marcA=p.linescore?.teams?.away?.runs??"-";
+            const marcH=p.linescore?.teams?.home?.runs??"-";
+            const hitsA=p.linescore?.teams?.away?.hits??0;
+            const hitsH=p.linescore?.teams?.home?.hits??0;
+            const errA=p.linescore?.teams?.away?.errors??0;
+            const errH=p.linescore?.teams?.home?.errors??0;
+            const inning=p.linescore?.inning||"";
+            const mitad=p.linescore?.inningHalf||"";
+            const outs=p.linescore?.outs;
+            const estadio=p.venue?.name||"";
             return `
             <div class="tarjeta tarjeta-partido">
                 <div class="bloque-equipo">
@@ -200,6 +221,9 @@ async function cargarPartidosFecha(fecha){
                     </div>
                 </div>
                 <div class="info-centro">
+                    ${vivo?`<div class="vivo-badge"><span class="punto-vivo"></span>EN VIVO</div>`:""}
+                    <div class="marcador-centro">${marcA} - ${marcH}</div>
+                    ${vivo&&inning?`<div class="estado-juego">${mitad} ${inning} • Outs: ${outs}</div>`:""}
                     <div class="hora-partido">${formatearHoraET(p.gameDate)}</div>
                     <div class="transmision">${trans}</div>
                 </div>
@@ -210,10 +234,15 @@ async function cargarPartidosFecha(fecha){
                         <div class="registro-equipo">${regH}</div>
                     </div>
                 </div>
-                <div class="lanzadores">
-                    <span>${lanzA.fullName||""} ${lanzA.pitchHand?.code||""}</span>
-                    <span>${lanzH.fullName||""} ${lanzH.pitchHand?.code||""}</span>
+                <div class="resumen-carreras">
+                    <span>Visita: C ${marcA} H ${hitsA} E ${errA}</span>
+                    <span>Local: C ${marcH} H ${hitsH} E ${errH}</span>
                 </div>
+                <div class="lanzadores">
+                    <span>🧢 ${lanzA.fullName||"—"} ${lanzA.pitchHand?.code||""} ${lanzA.record?.summary||""}</span>
+                    <span>🧢 ${lanzH.fullName||"—"} ${lanzH.pitchHand?.code||""} ${lanzH.record?.summary||""}</span>
+                </div>
+                <div class="estadio">📍 ${estadio}</div>
                 <div class="enlace-accion">
                     <a href="https://www.mlb.com/es/gameday/${p.gamePk}" target="_blank" rel="noopener">Gameday</a>
                     <a href="#">Boletos</a>
@@ -239,6 +268,8 @@ async function cargarPartidosFut(id){const c=document.getElementById("lista-part
 document.getElementById("ligaSelect").addEventListener("change",e=>{cargarTablaFut(e.target.value);cargarPartidosFut(e.target.value);});
 
 renderNavegacionFechas();cargarPartidosFecha(fechaISO(fechaActual));cargarTablaMLB();cargarTablaFut("4328");cargarPartidosFut("4328");
+// ⏳ Actualización automática cada 45s
+setInterval(()=>cargarPartidosFecha(fechaISO(fechaActual)),45000);
 </script>
 </body>
 </html>
