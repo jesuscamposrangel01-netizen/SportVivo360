@@ -137,7 +137,7 @@ function aHoraPeru(fechaISO){
     if(!fechaISO) return "-";
     const f = new Date(fechaISO);
     f.setHours(f.getHours() - 5);
-    const fecha = f.toLocaleDateString("es‑PE");
+    const fecha = f.toLocaleDateString("es-PE");
     const hora = f.toTimeString().slice(0,5);
     return `${fecha} ${hora}`;
 }
@@ -148,9 +148,12 @@ const hace30 = new Date(hoy.getTime() - 30*24*60*60*1000);
 const FECHA_HASTA = hoy.toISOString().split('T')[0];
 const FECHA_DESDE = hace30.toISOString().split('T')[0];
 
-// Cabeceras
+// ✅ CABECERAS 100% ASCII — SIN CARACTERES OCULTOS
 function cabeceras(host){
-    return {"x‑rapidapi‑key": API_KEY, "x‑rapidapi‑host": host};
+    return {
+        "x-rapidapi-key": API_KEY,
+        "x-rapidapi-host": host
+    };
 }
 
 // Cambio vista
@@ -162,7 +165,7 @@ function cambiarDep(tipo){
 }
 
 // --- FÚTBOL ---
-const HOST_FUT = "v3.football.api‑sports.io";
+const HOST_FUT = "v3.football.api-sports.io";
 
 async function cargarPartidosFut(liga){
     const el = document.getElementById("listaFut");
@@ -174,13 +177,13 @@ async function cargarPartidosFut(liga){
 
         el.innerHTML = datos.slice(0,10).map(p=>`
         <div class="card">
-            ${["LIVE","IN_PLAY"].includes(p.fixture.status.short) ? '<span class="etiqueta‑vivo">EN VIVO</span>' : ""}
-            <img class="logo‑equipo" src="${p.teams.home.logo}" alt="${p.teams.home.name}">
-            <p style="font‑weight:bold">${p.teams.home.name}</p>
-            <p style="color:var(--verde‑fut);font‑weight:bold;font‑size:1.2rem">${p.goals.home ?? "-"} : ${p.goals.away ?? "-"}</p>
-            <p style="font‑weight:bold">${p.teams.away.name}</p>
-            <img class="logo‑equipo" src="${p.teams.away.logo}" alt="${p.teams.away.name}">
-            <p style="font‑size:.9rem">🕒 ${aHoraPeru(p.fixture.date)}</p>
+            ${["LIVE","IN_PLAY"].includes(p.fixture.status.short) ? '<span class="etiqueta-vivo">EN VIVO</span>' : ""}
+            <img class="logo-equipo" src="${p.teams.home.logo}" alt="${p.teams.home.name}">
+            <p style="font-weight:bold">${p.teams.home.name}</p>
+            <p style="color:var(--verde-fut);font-weight:bold;font-size:1.2rem">${p.goals.home ?? "-"} : ${p.goals.away ?? "-"}</p>
+            <p style="font-weight:bold">${p.teams.away.name}</p>
+            <img class="logo-equipo" src="${p.teams.away.logo}" alt="${p.teams.away.name}">
+            <p style="font-size:.9rem">🕒 ${aHoraPeru(p.fixture.date)}</p>
         </div>`).join("");
     }catch(err){
         el.innerHTML = `<p class="aviso">⚠️ ${err}</p>`;
@@ -204,7 +207,7 @@ async function cargarTablaFut(liga){
         el.innerHTML = filas.map((f,i)=>`
         <tr>
             <td>${f.position ?? i+1}</td>
-            <td><img class="tabla‑logo" src="${f.team.logo}" alt="">${f.team.name}</td>
+            <td><img class="tabla-logo" src="${f.team.logo}" alt="">${f.team.name}</td>
             <td>${f.all.played}</td>
             <td>${f.all.win}</td>
             <td>${f.all.draw}</td>
@@ -222,7 +225,7 @@ document.getElementById("ligaFut").addEventListener("change", e=>{
 });
 
 // --- MLB ---
-const HOST_MLB = "v3.baseball.api‑sports.io";
+const HOST_MLB = "v3.baseball.api-sports.io";
 const LIGA_MLB = "1";
 
 async function cargarPartidosMLB(){
@@ -235,13 +238,13 @@ async function cargarPartidosMLB(){
 
         el.innerHTML = datos.slice(0,10).map(p=>`
         <div class="card">
-            ${["LIVE","IN_PLAY"].includes(p.status.short) ? '<span class="etiqueta‑vivo">EN VIVO</span>' : ""}
-            <img class="logo‑equipo" src="${p.teams.away.logo}" alt="${p.teams.away.name}">
-            <p style="font‑weight:bold">${p.teams.away.name}</p>
-            <p style="color:var(--azul‑mlb);font‑weight:bold;font‑size:1.2rem">${p.scores.away.total ?? "-"} : ${p.scores.home.total ?? "-"}</p>
-            <p style="font‑weight:bold">${p.teams.home.name}</p>
-            <img class="logo‑equipo" src="${p.teams.home.logo}" alt="${p.teams.home.name}">
-            <p style="font‑size:.9rem">🕒 ${aHoraPeru(p.date)}</p>
+            ${["LIVE","IN_PLAY"].includes(p.status.short) ? '<span class="etiqueta-vivo">EN VIVO</span>' : ""}
+            <img class="logo-equipo" src="${p.teams.away.logo}" alt="${p.teams.away.name}">
+            <p style="font-weight:bold">${p.teams.away.name}</p>
+            <p style="color:var(--azul-mlb);font-weight:bold;font-size:1.2rem">${p.scores.away.total ?? "-"} : ${p.scores.home.total ?? "-"}</p>
+            <p style="font-weight:bold">${p.teams.home.name}</p>
+            <img class="logo-equipo" src="${p.teams.home.logo}" alt="${p.teams.home.name}">
+            <p style="font-size:.9rem">🕒 ${aHoraPeru(p.date)}</p>
         </div>`).join("");
     }catch(err){
         el.innerHTML = `<p class="aviso">⚠️ ${err}</p>`;
@@ -259,7 +262,7 @@ async function cargarTablaMLB(){
         el.innerHTML = filas.map((f,i)=>`
         <tr>
             <td>${i+1}</td>
-            <td><img class="tabla‑logo" src="${f.team.logo}" alt="">${f.team.name}</td>
+            <td><img class="tabla-logo" src="${f.team.logo}" alt="">${f.team.name}</td>
             <td>${f.games.win}</td>
             <td>${f.games.lose}</td>
             <td>${f.percentage}</td>
