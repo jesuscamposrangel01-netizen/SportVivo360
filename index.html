@@ -27,7 +27,9 @@
         .parpadeo { animation: parpadeo 1.2s infinite ease-in-out; }
         @keyframes parpadeo { 0%,100% {opacity:1;} 50% {opacity:0.4;} }
         .diamante-base { width:10px; height:10px; transform:rotate(45deg); }
-        .grid-entradas { grid-template-columns: repeat(9, minmax(1.4rem, 1fr)) 2rem 2rem 2rem; }
+        /* ✅ Columnas fijas → SIEMPRE alineado */
+        .grid-entradas { grid-template-columns: repeat(9, 1.6rem) 2rem 2rem 2rem; }
+        .grid-entradas > span { text-align: center; display: flex; align-items: center; justify-content: center; }
     </style>
 </head>
 <body class="bg-gray-50 text-gris font-sans min-h-screen">
@@ -140,15 +142,22 @@ function mostrarFechas() {
     document.getElementById('selector-fechas').innerHTML = html;
 }
 
-// Leer entradas y totales — compatible con partidos en curso
-function leerEntradas(ls, visitante) {
-    let fila = []; let C=0, H=0, E=0;
+// ✅ Lectura segura y alineada de entradas
+function leerEntradas(ls, box, visitante) {
     const inn = ls?.innings || [];
+    const fila = [];
+    let C = 0, H = 0, E = 0;
     for(let i=0; i<9; i++){
-        let v = inn[i] ? (visitante ? inn[i].away?.runs : inn[i].home?.runs) : null;
+        const v = inn[i] ? (visitante ? inn[i].away?.runs : inn[i].home?.runs) : null;
         fila.push(v === null ? '-' : v);
     }
-    if(ls.away || ls.home){
+    // Leer totales desde boxscore para coincidir con Google
+    if(box && box.teams){
+        const eq = visitante ? box.teams.away : box.teams.home;
+        C = eq?.stats?.runs ?? 0;
+        H = eq?.stats?.hits ?? 0;
+        E = eq?.stats?.errors ?? 0;
+    } else {
         C = visitante ? ls.away?.runs ?? 0 : ls.home?.runs ?? 0;
         H = visitante ? ls.away?.hits ?? 0 : ls.home?.hits ?? 0;
         E = visitante ? ls.away?.errors ?? 0 : ls.home?.errors ?? 0;
@@ -168,7 +177,7 @@ function dibujarBases(ataque){
     </div>`;
 }
 
-// ✅ URL completa con boxscore para leer marcador en vivo
+// ✅ URL con boxscore + lectura correcta de estado vivo
 async function cargarPartidos(fecha){
     try{
         const res = await fetch(`https://statsapi.mlb.com/api/v1/schedule?sportId=1&date=${fecha}&language=es&hydrate=linescore,probablePitchers,status,linescore.offense,boxscore,gameDate`);
@@ -194,7 +203,9 @@ async function cargarPartidos(fecha){
             const horaTexto = `${horaLocal.toLocaleTimeString('es-PE',{hour:'2-digit',minute:'2-digit'})}`;
 
             const ls = p.linescore || {};
-            const v = leerEntradas(ls, true); const h = leerEntradas(ls, false);
+            const box = p.boxscore || {};
+            const v = leerEntradas(ls, box, true);
+            const h = leerEntradas(ls, box, false);
             const actInn = ls.currentInning || '';
             const mitad = ls.inningHalf === 'Top' ? 'Arriba' : ls.inningHalf === 'Bottom' ? 'Abajo' : '';
             const bol = ls.balls ?? '-'; const str = ls.strikes ?? '-'; const out = ls.outs ?? '-';
@@ -212,23 +223,24 @@ async function cargarPartidos(fecha){
                         <img src="https://www.mlbstatic.com/team-logos/${idA}.svg" alt="${nomA}" class="w-9 h-9">
                         <div><div class="font-semibold text-sm">${nomA}</div><div class="text-xs">${regA}</div></div>
                     </div>
-                    <div class="text-2xl font-bold">${v.C} - ${h.C}</div>
+                    <div class="text-2xl font-bold min-w-[4rem] text-center">${v.C} - ${h.C}</div>
                     <div class="flex items-center gap-2 text-right flex-row-reverse">
                         <img src="https://www.mlbstatic.com/team-logos/${idH}.svg" alt="${nomH}" class="w-9 h-9">
                         <div><div class="font-semibold text-sm">${nomH}</div><div class="text-xs">${regH}</div></div>
                     </div>
                 </div>
 
+                <!-- ✅ Tabla entradas SIEMPRE alineada -->
                 <div class="overflow-x-auto">
-                    <div class="grid grid-entradas gap-1 text-xs text-center font-medium">
-                        ${[1,2,3,4,5,6,7,8,9].map(n=>`<span class="text-gris/70">${n}</span>`).join('')}
+                    <div class="grid grid-entradas gap-x-1 text-xs text-center font-medium text-gris/80">
+                        ${[1,2,3,4,5,6,7,8,9].map(n=>`<span>${n}</span>`).join('')}
                         <span class="border-l border-grisClaro">C</span><span>H</span><span>E</span>
                     </div>
-                    <div class="grid grid-entradas gap-1 text-xs text-center py-1 border-t border-grisClaro mt-1">
+                    <div class="grid grid-entradas gap-x-1 text-xs text-center py-1 border-t border-grisClaro mt-1">
                         ${v.fila.map(x=>`<span>${x}</span>`).join('')}
                         <span class="font-semibold border-l border-grisClaro">${v.C}</span><span class="font-semibold">${v.H}</span><span class="font-semibold">${v.E}</span>
                     </div>
-                    <div class="grid grid-entradas gap-1 text-xs text-center py-1">
+                    <div class="grid grid-entradas gap-x-1 text-xs text-center py-1">
                         ${h.fila.map(x=>`<span>${x}</span>`).join('')}
                         <span class="font-semibold border-l border-grisClaro">${h.C}</span><span class="font-semibold">${h.H}</span><span class="font-semibold">${h.E}</span>
                     </div>
@@ -241,8 +253,8 @@ async function cargarPartidos(fecha){
                 </div>` : ''}
 
                 <div class="mt-4 grid grid-cols-2 gap-2 text-xs">
-                    <div><div class="text-gris">Lanzando</div><div class="font-medium">${lanzA.fullName || 'Por confirmar'}</div>${lanzA.era?`<div>${lanzA.era} EFE</div>`:''}</div>
-                    <div class="text-right"><div class="text-gris">Al bate</div><div class="font-medium">${lanzH.fullName || 'Por confirmar'}</div>${lanzH.era?`<div>${lanzH.era} EFE</div>`:''}</div>
+                    <div><div class="text-gris">Lanzando</div><div class="font-medium">${lanzA.fullName || 'Por confirmar'}</div>${lanzA.era ? `<div>${lanzA.era} EFE</div>` : ''}</div>
+                    <div class="text-right"><div class="text-gris">Al bate</div><div class="font-medium">${lanzH.fullName || 'Por confirmar'}</div>${lanzH.era ? `<div>${lanzH.era} EFE</div>` : ''}</div>
                 </div>
 
                 <div class="mt-3 flex justify-around text-xs font-medium text-azul">
