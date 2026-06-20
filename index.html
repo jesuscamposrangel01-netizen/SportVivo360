@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SportVivo360 | MLB</title>
-    <meta name="description" content="SportVivo360: MLB en vivo, resultados completos, entradas, bases ocupadas. Lima UTC‑5">
+    <meta name="description" content="SportVivo360: MLB en vivo, horarios, resultados, bases ocupadas. Zona Lima UTC‑5">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -119,6 +119,7 @@
 <script>
 let fechaActual = new Date();
 const ANIO = 2026;
+const ZONA_UTC = -5;
 
 // Fechas
 function iso(d) { return d.toISOString().split('T')[0]; }
@@ -139,17 +140,19 @@ function mostrarFechas() {
     document.getElementById('selector-fechas').innerHTML = html;
 }
 
-// Entradas
+// Entradas — respeta vacío cuando no hay datos
 function leerEntradas(ls, visitante) {
-    let fila = []; let C=0, H=0, E=0;
+    let fila = []; let C=null, H=null, E=null;
     const inn = ls?.innings || [];
     for(let i=0; i<9; i++){
         let v = inn[i] ? (visitante ? inn[i].away?.runs : inn[i].home?.runs) : null;
         fila.push(v === null ? '-' : v);
     }
-    C = visitante ? ls.away?.runs ?? 0 : ls.home?.runs ?? 0;
-    H = visitante ? ls.away?.hits ?? 0 : ls.home?.hits ?? 0;
-    E = visitante ? ls.away?.errors ?? 0 : ls.home?.errors ?? 0;
+    if(ls.away || ls.home){
+        C = visitante ? ls.away?.runs : ls.home?.runs;
+        H = visitante ? ls.away?.hits : ls.home?.hits;
+        E = visitante ? ls.away?.errors : ls.home?.errors;
+    }
     return {fila, C, H, E};
 }
 
@@ -165,10 +168,10 @@ function dibujarBases(ataque){
     </div>`;
 }
 
-// Cargar partidos
+// ✅ LECTURA CORRECTA DE ESTADOS API
 async function cargarPartidos(fecha){
     try{
-        const res = await fetch(`https://statsapi.mlb.com/api/v1/schedule?sportId=1&date=${fecha}&language=es&hydrate=linescore,probablePitchers,status,linescore.offense`);
+        const res = await fetch(`https://statsapi.mlb.com/api/v1/schedule?sportId=1&date=${fecha}&language=es&hydrate=linescore,probablePitchers,status,linescore.offense,gameDate`);
         const datos = await res.json();
         const juegos = datos.dates?.[0]?.games || [];
         const cont = document.getElementById('lista-partidos');
@@ -178,21 +181,35 @@ async function cargarPartidos(fecha){
             const away = p.teams?.away || {}; const home = p.teams?.home || {};
             const lanzA = p.probablePitchers?.away || {}; const lanzH = p.probablePitchers?.home || {};
             const idA = away.team?.id; const idH = home.team?.id;
-            const nomA = away.team?.name; const nomH = home.team?.name;
+            const nomA = away.team?.name || 'Visitante'; const nomH = home.team?.name || 'Local';
             const regA = away.leagueRecord ? `${away.leagueRecord.wins}-${away.leagueRecord.losses}` : '';
             const regH = home.leagueRecord ? `${home.leagueRecord.wins}-${home.leagueRecord.losses}` : '';
-            const vivo = p.status?.abstractGameState === 'Live';
-            const final = p.status?.abstractGameState === 'Final';
+
+            // ✅ ESTADOS REALES DE LA API
+            const estado = p.status || {};
+            const vivo = estado.abstractGameState === 'Live';
+            const final = estado.abstractGameState === 'Final';
+            const programado = estado.abstractGameState === 'Preview';
+            const horaUTC = new Date(p.gameDate);
+            const horaLocal = new Date(horaUTC.getTime() + ZONA_UTC*3600000);
+            const horaTexto = `${horaLocal.toLocaleTimeString('es-PE',{hour:'2-digit',minute:'2-digit'})}`;
+
             const ls = p.linescore || {};
             const v = leerEntradas(ls, true); const h = leerEntradas(ls, false);
-            const actInn = ls.currentInning || ''; const mitad = ls.inningHalf === 'Top' ? 'Arriba' : 'Abajo';
+            const actInn = ls.currentInning || '';
+            const mitad = ls.inningHalf === 'Top' ? 'Arriba' : ls.inningHalf === 'Bottom' ? 'Abajo' : '';
             const bol = ls.balls ?? '-'; const str = ls.strikes ?? '-'; const out = ls.outs ?? '-';
             const tipo = p.seriesDescription || 'Temporada Regular';
+
+            // ✅ Mostrar marcador solo si hay datos
+            const marcadorA = v.C !== null ? v.C : '-';
+            const marcadorH = h.C !== null ? h.C : '-';
 
             return `
             <div class="bg-white rounded-lg shadow-sm border border-grisClaro p-4 relative">
                 ${vivo ? `<span class="absolute top-2 right-3 bg-rojoVivo text-white text-[0.7rem] px-2 py-0.5 rounded-full flex items-center gap-1"><span class="w-1.5 h-1.5 bg-white rounded-full parpadeo"></span>EN VIVO ${actInn}° ${mitad}</span>` : ''}
                 ${final ? `<span class="absolute top-2 right-3 bg-gris text-white text-[0.7rem] px-2 py-0.5 rounded-full">FINAL</span>` : ''}
+                ${programado ? `<span class="absolute top-2 right-3 bg-blue-50 text-blue-700 text-[0.7rem] px-2 py-0.5 rounded-full">${horaTexto}</span>` : ''}
                 <div class="text-center text-xs text-gris mb-3">${tipo}</div>
 
                 <div class="flex items-center justify-between mb-4">
@@ -200,7 +217,7 @@ async function cargarPartidos(fecha){
                         <img src="https://www.mlbstatic.com/team-logos/${idA}.svg" alt="${nomA}" class="w-9 h-9">
                         <div><div class="font-semibold text-sm">${nomA}</div><div class="text-xs">${regA}</div></div>
                     </div>
-                    <div class="text-2xl font-bold">${v.C} - ${h.C}</div>
+                    <div class="text-2xl font-bold">${marcadorA} - ${marcadorH}</div>
                     <div class="flex items-center gap-2 text-right flex-row-reverse">
                         <img src="https://www.mlbstatic.com/team-logos/${idH}.svg" alt="${nomH}" class="w-9 h-9">
                         <div><div class="font-semibold text-sm">${nomH}</div><div class="text-xs">${regH}</div></div>
@@ -214,11 +231,11 @@ async function cargarPartidos(fecha){
                     </div>
                     <div class="grid grid-entradas gap-1 text-xs text-center py-1 border-t border-grisClaro mt-1">
                         ${v.fila.map(x=>`<span>${x}</span>`).join('')}
-                        <span class="font-semibold border-l border-grisClaro">${v.C}</span><span class="font-semibold">${v.H}</span><span class="font-semibold">${v.E}</span>
+                        <span class="font-semibold border-l border-grisClaro">${v.C??'-'}</span><span class="font-semibold">${v.H??'-'}</span><span class="font-semibold">${v.E??'-'}</span>
                     </div>
                     <div class="grid grid-entradas gap-1 text-xs text-center py-1">
                         ${h.fila.map(x=>`<span>${x}</span>`).join('')}
-                        <span class="font-semibold border-l border-grisClaro">${h.C}</span><span class="font-semibold">${h.H}</span><span class="font-semibold">${h.E}</span>
+                        <span class="font-semibold border-l border-grisClaro">${h.C??'-'}</span><span class="font-semibold">${h.H??'-'}</span><span class="font-semibold">${h.E??'-'}</span>
                     </div>
                 </div>
 
@@ -239,7 +256,7 @@ async function cargarPartidos(fecha){
                 </div>
             </div>`;
         }).join('');
-    }catch(e){ console.error(e); cont.innerHTML = `<p class="text-center text-red-600 py-8">Error al cargar</p>`; }
+    }catch(e){ console.error(e); cont.innerHTML = `<p class="text-center text-red-600 py-8">Error al cargar datos</p>`; }
 }
 
 // Tablas posiciones
@@ -263,11 +280,11 @@ async function cargarTablas(){
     }catch(e){ console.error(e); }
 }
 
-// Inicio
+// Inicio + refresco frecuente
 mostrarFechas();
 cargarPartidos(iso(fechaActual));
 cargarTablas();
-setInterval(()=>cargarPartidos(iso(fechaActual)),35000);
+setInterval(()=>cargarPartidos(iso(fechaActual)),25000);
 </script>
 </body>
 </html>
