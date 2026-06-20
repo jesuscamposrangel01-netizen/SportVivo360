@@ -337,6 +337,27 @@
             background: #334155;
             color: #94a3b8;
         }
+        .btn-rapido {
+            padding: 4px 12px;
+            border-radius: 999px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            background: #e2e8f0;
+            color: #1e293b;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+        }
+        .btn-rapido:hover {
+            background: #cbd5e1;
+        }
+        .dark .btn-rapido {
+            background: #334155;
+            color: #e2e8f0;
+        }
+        .dark .btn-rapido:hover {
+            background: #475569;
+        }
     </style>
 </head>
 <body>
@@ -369,17 +390,17 @@
             <span class="dark:text-gray-400">Actualizado • Lima (UTC‑5)</span>
         </div>
 
-        <!-- ============================================================ -->
-        <!-- MLB                                                          -->
-        <!-- ============================================================ -->
+        <!-- MLB -->
         <div id="tab-mlb" class="tab-content active">
             <section>
                 <h2 class="text-2xl font-bold text-mlbAzul border-l-4 border-azul pl-4 mb-6 dark:text-white">📋 Resultados & En vivo</h2>
 
-                <div class="flex items-center justify-center gap-3 bg-white/70 dark:bg-gray-800/90 backdrop-blur-sm rounded-2xl py-2 px-4 mb-6 border border-grisClaro/60 dark:border-gray-700 shadow-md">
+                <div class="flex items-center justify-center gap-3 bg-white/70 dark:bg-gray-800/90 backdrop-blur-sm rounded-2xl py-2 px-4 mb-6 border border-grisClaro/60 dark:border-gray-700 shadow-md flex-wrap">
                     <button onclick="cambiarFecha(-1)" class="text-lg px-4 py-1 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition font-semibold">‹</button>
                     <div id="selector-fechas" class="flex gap-2 text-sm font-medium"></div>
                     <button onclick="cambiarFecha(1)" class="text-lg px-4 py-1 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition font-semibold">›</button>
+                    <button onclick="irFecha(iso(hoyLima()))" class="btn-rapido">Hoy</button>
+                    <button onclick="cambiarFecha(-1)" class="btn-rapido">Ayer</button>
                 </div>
 
                 <div id="lista-partidos" class="space-y-5 mb-8">
@@ -389,7 +410,7 @@
                     </div>
                 </div>
 
-                <!-- Posiciones manuales -->
+                <!-- Posiciones manuales (sin cambios) -->
                 <div class="space-y-6">
                     <div class="card-glass rounded-2xl p-5 shadow-lg transition-all">
                         <h3 class="font-bold text-mlbAzul dark:text-white text-lg mb-4 flex items-center gap-2">🏆 Liga Americana</h3>
@@ -448,11 +469,11 @@
                             <table class="w-full text-xs tabla-posiciones dark:text-gray-300">
                                 <thead><tr><th class="text-left">Equipo</th><th class="text-center">G</th><th class="text-center">P</th><th class="text-center">PCT</th><th class="text-center">DIF</th><th class="text-center">DIFWC</th></tr></thead>
                                 <tbody>
-                                    <tr><td>Milwaukee Brewers</td><td class="text-center">45</td><td class="text-center">27</td><td class="text-center">.625</td><td class="text-center">-</td><td class="text-center">-</td></tr>
-                                    <tr><td>St. Louis Cardinals</td><td class="text-center">39</td><td class="text-center">34</td><td class="text-center">.534</td><td class="text-center">6.5</td><td class="text-center">+1.5</td></tr>
-                                    <tr><td>Chicago Cubs</td><td class="text-center">38</td><td class="text-center">36</td><td class="text-center">.514</td><td class="text-center">8.0</td><td class="text-center">-</td></tr>
-                                    <tr><td>Pittsburgh Pirates</td><td class="text-center">38</td><td class="text-center">37</td><td class="text-center">.507</td><td class="text-center">8.5</td><td class="text-center">0.5</td></tr>
-                                    <tr><td>Cincinnati Reds</td><td class="text-center">35</td><td class="text-center">39</td><td class="text-center">.473</td><td class="text-center">11.0</td><td class="text-center">3.0</td></tr>
+                                    <tr><td>Milwaukee Brewers</td><td class="text-center">45</td><td class="text-center">28</td><td class="text-center">.616</td><td class="text-center">-</td><td class="text-center">-</td></tr>
+                                    <tr><td>St. Louis Cardinals</td><td class="text-center">39</td><td class="text-center">34</td><td class="text-center">.534</td><td class="text-center">6.0</td><td class="text-center">+1.5</td></tr>
+                                    <tr><td>Chicago Cubs</td><td class="text-center">38</td><td class="text-center">36</td><td class="text-center">.514</td><td class="text-center">7.5</td><td class="text-center">-</td></tr>
+                                    <tr><td>Pittsburgh Pirates</td><td class="text-center">38</td><td class="text-center">37</td><td class="text-center">.507</td><td class="text-center">8.0</td><td class="text-center">0.5</td></tr>
+                                    <tr><td>Cincinnati Reds</td><td class="text-center">35</td><td class="text-center">39</td><td class="text-center">.473</td><td class="text-center">10.5</td><td class="text-center">3.0</td></tr>
                                 </tbody>
                             </table>
                             <div class="division-titulo dark:bg-gray-700 dark:text-gray-300">OESTE</div>
@@ -491,9 +512,7 @@
             </section>
         </div>
 
-        <!-- ============================================================ -->
-        <!-- FÚTBOL                                                       -->
-        <!-- ============================================================ -->
+        <!-- FÚTBOL (sin cambios) -->
         <div id="tab-futbol" class="tab-content">
             <section>
                 <h2 class="text-2xl font-bold text-mlbAzul border-l-4 border-azul pl-4 mb-6 dark:text-white">⚽ Mundial 2026</h2>
@@ -521,9 +540,7 @@
             </section>
         </div>
 
-        <!-- ============================================================ -->
-        <!-- NBA                                                          -->
-        <!-- ============================================================ -->
+        <!-- NBA (sin cambios) -->
         <div id="tab-nba" class="tab-content">
             <section>
                 <h2 class="text-2xl font-bold text-mlbAzul border-l-4 border-azul pl-4 mb-6 dark:text-white">🏀 NBA</h2>
@@ -670,18 +687,18 @@
             cont.innerHTML = html;
         }
 
-        // ========================= EXTRACCIÓN DATOS MLB (CORREGIDA) =========================
-        function obtenerTotales(linescore, boxscore, esVisitante) {
-            // 1. Intentar desde linescore
+        // ========================= EXTRACCIÓN DE DATOS (VERSIÓN SIMPLIFICADA Y ROBUSTA) =========================
+        function extraerTotales(linescore, boxscore, esVisitante) {
+            // Primero intentamos desde linescore (más fiable)
             const equipoLS = esVisitante ? linescore?.away : linescore?.home;
-            if (equipoLS && equipoLS.runs !== undefined) {
+            if (equipoLS && equipoLS.runs !== undefined && equipoLS.runs !== null) {
                 return {
-                    runs: equipoLS.runs || 0,
+                    runs: equipoLS.runs,
                     hits: equipoLS.hits || 0,
                     errors: equipoLS.errors || 0
                 };
             }
-            // 2. Desde boxscore
+            // Segundo intento desde boxscore
             if (boxscore && boxscore.teams) {
                 const eqBox = esVisitante ? boxscore.teams.away : boxscore.teams.home;
                 if (eqBox && eqBox.stats) {
@@ -692,7 +709,7 @@
                     };
                 }
             }
-            // 3. Desde linescore.teams (alternativo)
+            // Tercer intento desde linescore.teams (estructura alternativa)
             if (linescore && linescore.teams) {
                 const eqAlt = esVisitante ? linescore.teams.away : linescore.teams.home;
                 if (eqAlt) {
@@ -703,7 +720,7 @@
                     };
                 }
             }
-            // Si no hay datos, devolver 0
+            // Si no hay nada, devolvemos 0
             return { runs: 0, hits: 0, errors: 0 };
         }
 
@@ -719,7 +736,7 @@
                 const runs = esVisitante ? inn.away?.runs : inn.home?.runs;
                 fila.push(runs !== undefined && runs !== null ? runs : '-');
             }
-            const totals = obtenerTotales(linescore, boxscore, esVisitante);
+            const totals = extraerTotales(linescore, boxscore, esVisitante);
             return { fila, C: totals.runs, H: totals.hits, E: totals.errors };
         }
 
@@ -745,6 +762,8 @@
                 const res = await fetch(url);
                 if (!res.ok) throw new Error(`HTTP ${res.status}`);
                 const datos = await res.json();
+
+                console.log('📦 Datos de la API:', datos); // Para depurar
 
                 msgCarga.style.display = 'none';
 
@@ -777,8 +796,12 @@
                     const ls = p.linescore || {};
                     const box = p.boxscore || {};
 
+                    // Extraer datos usando la función robusta
                     const v = leerEntradas(ls, box, true);
                     const h = leerEntradas(ls, box, false);
+
+                    // Log para ver qué valores llegan
+                    console.log(`Partido ${nomA} vs ${nomH}:`, { visitante: v, local: h });
 
                     const actInn = ls.currentInning || '';
                     const mitad = ls.inningHalf === 'Top' ? 'Arriba' : ls.inningHalf === 'Bottom' ? 'Abajo' : '';
@@ -802,7 +825,6 @@
                     if (!lanzA.fullName) lanzA.fullName = vivo ? 'En vivo' : 'Por confirmar';
                     if (!lanzH.fullName) lanzH.fullName = vivo ? 'En vivo' : 'Por confirmar';
 
-                    // Iniciales para placeholder de logo
                     const iniA = nomA.split(' ').map(p => p[0]).join('').substring(0, 2).toUpperCase();
                     const iniH = nomH.split(' ').map(p => p[0]).join('').substring(0, 2).toUpperCase();
 
