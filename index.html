@@ -5,26 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SportVive360 | MLB Béisbol en Vivo – Resultados, Estadísticas y Noticias</title>
     <meta name="description" content="SportVive360 – MLB: Cobertura en vivo de la Liga Mayor de Béisbol. Resultados, estadísticas de lanzadores y bateadores, clasificaciones, noticias y análisis. Datos oficiales MLB.">
-    <meta name="keywords" content="MLB, béisbol, resultados MLB, estadísticas MLB, lanzadores, bateadores, Liga Mayor, Béisbol en vivo, MLB hoy, partidos MLB, clasificación MLB, noticias MLB, análisis MLB">
+    <meta name="keywords" content="MLB, béisbol, resultados MLB, estadísticas MLB, lanzadores, bateadores, Liga Mayor, Béisbol en vivo, MLB hoy, partidos MLB, clasificación MLB, noticias MLB, análisis MLB, Mundial 2026, NBA">
     <link rel="canonical" href="https://sportvive360.cyou/">
-    <!-- Open Graph para redes sociales -->
+    <!-- Open Graph -->
     <meta property="og:title" content="SportVive360 – MLB Béisbol en Vivo">
     <meta property="og:description" content="Resultados, estadísticas y noticias de la MLB. Sigue a tus equipos favoritos.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://sportvive360.cyou/">
-    <!-- Datos estructurados (Schema.org) -->
+    <meta property="og:image" content="https://sportvive360.cyou/og-image.jpg">
+    <!-- Datos estructurados -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "WebSite",
+      "@type": "SportsOrganization",
       "name": "SportVive360",
       "url": "https://sportvive360.cyou/",
       "description": "Cobertura completa de la MLB, Mundial 2026 y NBA.",
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": "https://sportvive360.cyou/buscar?q={search_term_string}",
-        "query-input": "required name=search_term_string"
-      }
+      "sport": ["Baseball", "Soccer", "Basketball"]
     }
     </script>
     <!-- Google AdSense -->
@@ -51,7 +48,7 @@
         }
     </script>
     <style>
-        /* Estilos base */
+        /* Estilos mejorados */
         .fade-in { animation: fadeIn 0.5s ease-out forwards; opacity: 0; }
         @keyframes fadeIn { to { opacity: 1; } }
         .pulse-dot { animation: pulse 1.5s infinite; }
@@ -158,6 +155,17 @@
         @media (min-width: 641px) {
             .mobile-menu { display: none; }
         }
+        /* Nuevo: estilos para la sección de características */
+        .feature-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px;
+        }
+        .feature-item {
+            background: white; padding: 16px; border-radius: 12px; text-align: center;
+            border: 1px solid #e2e8f0; transition: 0.2s;
+        }
+        .dark .feature-item { background: #1e293b; border-color: #334155; }
+        .feature-item:hover { border-color: #1a56db; transform: scale(1.02); }
+        .feature-item .icon { font-size: 2rem; }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-700 font-sans min-h-screen transition-colors duration-300 dark:bg-gray-900 dark:text-gray-200">
@@ -168,9 +176,9 @@
         <button onclick="aceptarCookies()">Aceptar</button>
     </div>
 
-    <!-- Header con navegación -->
+    <!-- Header con navegación mejorada -->
     <header class="bg-primary text-white py-3 px-4 sticky top-0 z-50 shadow-lg transition-colors dark:bg-gray-800">
-        <div class="max-w-6xl mx-auto">
+        <div class="max-w-7xl mx-auto">
             <div class="flex items-center justify-between flex-wrap gap-2">
                 <div class="flex items-center gap-2">
                     <span class="text-2xl">⚾</span>
@@ -178,7 +186,7 @@
                     <span class="text-xs bg-white/10 px-3 py-1 rounded-full hidden sm:inline">MLB • Béisbol</span>
                 </div>
                 <div class="flex items-center gap-4">
-                    <span class="text-xs hidden sm:inline-block bg-green-500/20 px-3 py-1 rounded-full">📺 En vivo</span>
+                    <span class="text-xs hidden sm:inline-block bg-green-500/20 px-3 py-1 rounded-full animate-pulse">📺 En vivo</span>
                     <label class="theme-toggle" title="Cambiar tema">
                         <span class="text-sm hidden sm:inline">🌙</span>
                         <input type="checkbox" id="themeCheckbox">
@@ -193,6 +201,7 @@
                 <span class="nav-link" data-page="clasificacion">Clasificación</span>
                 <span class="nav-link" data-page="equipos">Equipos</span>
                 <span class="nav-link" data-page="noticias">Noticias</span>
+                <span class="nav-link" data-page="analisis">Análisis</span>
                 <span class="nav-link" data-page="contacto">Contacto</span>
             </nav>
             <!-- Menú móvil -->
@@ -202,6 +211,7 @@
                 <span class="nav-link" data-page="clasificacion">Clasificación</span>
                 <span class="nav-link" data-page="equipos">Equipos</span>
                 <span class="nav-link" data-page="noticias">Noticias</span>
+                <span class="nav-link" data-page="analisis">Análisis</span>
                 <span class="nav-link" data-page="contacto">Contacto</span>
                 <span class="nav-link" data-page="acerca">Acerca</span>
                 <span class="nav-link" data-page="privacidad">Privacidad</span>
@@ -209,14 +219,31 @@
         </div>
     </header>
 
-    <main class="max-w-6xl mx-auto px-3 py-5">
+    <main class="max-w-7xl mx-auto px-3 py-5">
 
         <!-- ==================== PÁGINA: INICIO ==================== -->
         <section id="page-inicio" class="page-section active">
-            <!-- Banner de bienvenida -->
+            <!-- Banner de bienvenida con características -->
             <div class="bg-gradient-to-r from-primary to-secondary text-white p-5 rounded-2xl shadow-lg mb-6">
                 <h2 class="text-2xl font-bold">Liga Mayor de Béisbol • Cobertura en vivo, estadísticas, lanzadores y bateadores</h2>
                 <p class="text-sm opacity-80 mt-1">Resultados en tiempo real, análisis y noticias de la MLB 2026</p>
+                <div class="feature-grid mt-4">
+                    <div class="feature-item bg-white/10 backdrop-blur-sm border-0 text-white">
+                        <div class="icon">🔒</div>
+                        <p class="font-semibold">En tiempo real</p>
+                        <p class="text-xs opacity-75">Seguimiento minuto a minuto, marcadores y cambios</p>
+                    </div>
+                    <div class="feature-item bg-white/10 backdrop-blur-sm border-0 text-white">
+                        <div class="icon">📊</div>
+                        <p class="font-semibold">Datos completos</p>
+                        <p class="text-xs opacity-75">Lanzadores titulares, estadísticas de bateo y más</p>
+                    </div>
+                    <div class="feature-item bg-white/10 backdrop-blur-sm border-0 text-white">
+                        <div class="icon">📰</div>
+                        <p class="font-semibold">Noticias y análisis</p>
+                        <p class="text-xs opacity-75">Artículos originales de nuestros expertos</p>
+                    </div>
+                </div>
             </div>
 
             <!-- Indicador zona horaria -->
@@ -232,7 +259,7 @@
                 <button class="tab-btn" data-tab="nba">🏀 NBA</button>
             </div>
 
-            <!-- Contenido MLB (principal) -->
+            <!-- Contenido MLB -->
             <div id="tab-mlb" class="tab-content active">
                 <section>
                     <h3 class="text-xl font-bold text-secondary border-l-4 border-accent pl-3 mb-4 dark:text-white flex items-center gap-2">
@@ -319,7 +346,7 @@
                 </section>
             </div>
 
-            <!-- Fútbol y NBA (se mantienen pero con menos énfasis) -->
+            <!-- Fútbol -->
             <div id="tab-futbol" class="tab-content">
                 <section>
                     <h2 class="text-2xl font-bold text-secondary border-l-4 border-accent pl-3 mb-5 dark:text-white">⚽ Mundial 2026 – Fase de Grupos</h2>
@@ -328,31 +355,31 @@
                             <div class="flex justify-center py-6"><div class="spinner"></div></div>
                         </div>
                     </div>
-                    <!-- Tablas de grupos (resumido) -->
-                    <div class="space-y-4">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <div class="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 p-4 shadow-sm card-hover">
                             <div class="group-header">Grupo A</div>
-                            <div class="overflow-x-auto">
-                                <table class="w-full text-xs table-standings dark:text-gray-300">
-                                    <thead><tr><th>Equipo</th><th>Pts</th></tr></thead>
-                                    <tbody><tr><td>🇦🇷 Argentina</td><td>6</td></tr><tr><td>🇵🇹 Portugal</td><td>4</td></tr></tbody>
-                                </table>
-                            </div>
+                            <table class="w-full text-xs table-standings dark:text-gray-300"><tr><td>🇦🇷 Argentina</td><td>6</td></tr><tr><td>🇵🇹 Portugal</td><td>4</td></tr></table>
+                        </div>
+                        <div class="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 p-4 shadow-sm card-hover">
+                            <div class="group-header">Grupo B</div>
+                            <table class="w-full text-xs table-standings dark:text-gray-300"><tr><td>🇧🇷 Brasil</td><td>6</td></tr><tr><td>🇫🇷 Francia</td><td>4</td></tr></table>
+                        </div>
+                        <div class="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 p-4 shadow-sm card-hover">
+                            <div class="group-header">Grupo C</div>
+                            <table class="w-full text-xs table-standings dark:text-gray-300"><tr><td>🇪🇸 España</td><td>4</td></tr><tr><td>🇩🇪 Alemania</td><td>3</td></tr></table>
                         </div>
                     </div>
                 </section>
             </div>
 
+            <!-- NBA -->
             <div id="tab-nba" class="tab-content">
                 <section>
                     <h2 class="text-2xl font-bold text-secondary border-l-4 border-accent pl-3 mb-5 dark:text-white">🏀 NBA – Temporada 2025-26</h2>
                     <div class="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 p-4 shadow-sm card-hover space-y-4">
-                        <h3 class="font-semibold">Conferencia Este</h3>
-                        <div class="overflow-x-auto">
-                            <table class="w-full text-xs table-standings dark:text-gray-300">
-                                <thead><tr><th>Equipo</th><th>G</th><th>P</th></tr></thead>
-                                <tbody><tr><td>Boston Celtics</td><td>58</td><td>24</td></tr></tbody>
-                            </table>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div><h3 class="font-semibold">Este</h3><table class="w-full text-xs table-standings"><tr><td>Boston Celtics</td><td>58-24</td></tr><tr><td>Milwaukee Bucks</td><td>55-27</td></tr></table></div>
+                            <div><h3 class="font-semibold">Oeste</h3><table class="w-full text-xs table-standings"><tr><td>Denver Nuggets</td><td>57-25</td></tr><tr><td>OKC Thunder</td><td>54-28</td></tr></table></div>
                         </div>
                     </div>
                 </section>
@@ -365,9 +392,10 @@
             <div class="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 p-4 shadow-sm">
                 <p class="text-sm">Próximos partidos y resultados de la temporada 2026. Actualización constante.</p>
                 <div class="mt-4 space-y-2">
-                    <div class="flex justify-between border-b border-gray-100 dark:border-gray-700 py-2"><span>NYY vs BOS</span><span>21 jun, 7:05 PM</span></div>
-                    <div class="flex justify-between border-b border-gray-100 dark:border-gray-700 py-2"><span>LAD vs SFG</span><span>21 jun, 9:45 PM</span></div>
-                    <div class="flex justify-between border-b border-gray-100 dark:border-gray-700 py-2"><span>ATL vs PHI</span><span>22 jun, 1:20 PM</span></div>
+                    <div class="flex justify-between border-b border-gray-100 dark:border-gray-700 py-2"><span>⚾ NYY vs BOS</span><span>21 jun, 7:05 PM</span></div>
+                    <div class="flex justify-between border-b border-gray-100 dark:border-gray-700 py-2"><span>⚾ LAD vs SFG</span><span>21 jun, 9:45 PM</span></div>
+                    <div class="flex justify-between border-b border-gray-100 dark:border-gray-700 py-2"><span>⚾ ATL vs PHI</span><span>22 jun, 1:20 PM</span></div>
+                    <div class="flex justify-between border-b border-gray-100 dark:border-gray-700 py-2"><span>⚾ HOU vs SEA</span><span>22 jun, 8:10 PM</span></div>
                 </div>
             </div>
         </section>
@@ -385,6 +413,7 @@
                                 <tr><td>New York Yankees</td><td>45</td><td>28</td><td>.616</td></tr>
                                 <tr><td>Tampa Bay Rays</td><td>41</td><td>30</td><td>.577</td></tr>
                                 <tr><td>Baltimore Orioles</td><td>34</td><td>39</td><td>.466</td></tr>
+                                <tr><td>Toronto Blue Jays</td><td>34</td><td>38</td><td>.472</td></tr>
                             </tbody>
                         </table>
                     </div>
@@ -398,6 +427,7 @@
                                 <tr><td>Atlanta Braves</td><td>46</td><td>25</td><td>.648</td></tr>
                                 <tr><td>Philadelphia Phillies</td><td>40</td><td>34</td><td>.541</td></tr>
                                 <tr><td>Washington Nationals</td><td>38</td><td>37</td><td>.507</td></tr>
+                                <tr><td>New York Mets</td><td>34</td><td>41</td><td>.453</td></tr>
                             </tbody>
                         </table>
                     </div>
@@ -409,31 +439,14 @@
         <section id="page-equipos" class="page-section">
             <h2 class="text-2xl font-bold text-secondary border-l-4 border-accent pl-3 mb-5 dark:text-white">🏟️ Equipos MLB</h2>
             <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-                <div class="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-3 text-center card-hover">
-                    <span class="text-3xl">⚾</span>
-                    <p class="font-semibold text-sm">Yankees</p>
-                </div>
-                <div class="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-3 text-center card-hover">
-                    <span class="text-3xl">⚾</span>
-                    <p class="font-semibold text-sm">Dodgers</p>
-                </div>
-                <div class="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-3 text-center card-hover">
-                    <span class="text-3xl">⚾</span>
-                    <p class="font-semibold text-sm">Braves</p>
-                </div>
-                <div class="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-3 text-center card-hover">
-                    <span class="text-3xl">⚾</span>
-                    <p class="font-semibold text-sm">Phillies</p>
-                </div>
-                <div class="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-3 text-center card-hover">
-                    <span class="text-3xl">⚾</span>
-                    <p class="font-semibold text-sm">Red Sox</p>
-                </div>
-                <div class="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-3 text-center card-hover">
-                    <span class="text-3xl">⚾</span>
-                    <p class="font-semibold text-sm">Cubs</p>
-                </div>
-                <!-- más equipos... -->
+                <div class="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-3 text-center card-hover"><span class="text-3xl">⚾</span><p class="font-semibold text-sm">Yankees</p></div>
+                <div class="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-3 text-center card-hover"><span class="text-3xl">⚾</span><p class="font-semibold text-sm">Dodgers</p></div>
+                <div class="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-3 text-center card-hover"><span class="text-3xl">⚾</span><p class="font-semibold text-sm">Braves</p></div>
+                <div class="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-3 text-center card-hover"><span class="text-3xl">⚾</span><p class="font-semibold text-sm">Phillies</p></div>
+                <div class="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-3 text-center card-hover"><span class="text-3xl">⚾</span><p class="font-semibold text-sm">Red Sox</p></div>
+                <div class="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-3 text-center card-hover"><span class="text-3xl">⚾</span><p class="font-semibold text-sm">Cubs</p></div>
+                <div class="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-3 text-center card-hover"><span class="text-3xl">⚾</span><p class="font-semibold text-sm">Astros</p></div>
+                <div class="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-3 text-center card-hover"><span class="text-3xl">⚾</span><p class="font-semibold text-sm">Giants</p></div>
             </div>
         </section>
 
@@ -445,11 +458,37 @@
                     <div class="meta">21 de junio, 2026 | Por Redacción</div>
                     <h3>Yankees y Braves lideran la MLB; Judge y Acuña pelean por el MVP</h3>
                     <p>La temporada 2026 está siendo histórica para ambos jugadores. Aaron Judge lidera en jonrones y carreras impulsadas, mientras que Ronald Acuña Jr. es el líder en bases robadas y promedio. El duelo por el premio al Jugador Más Valioso se intensifica.</p>
+                    <p>Ambos equipos están empatados con el mejor récord de la liga y se perfilan como los favoritos para ganar la Serie Mundial. Los Yankees cuentan con una rotación de pitcheo sólida, mientras que los Braves tienen un lineup letal. El enfrentamiento entre estos dos equipos en la postemporada sería épico.</p>
                 </article>
                 <article class="article-card">
                     <div class="meta">20 de junio, 2026</div>
                     <h3>Shohei Ohtani lanza joya y conecta su 25to jonrón en la victoria de los Dodgers</h3>
-                    <p>El japonés sigue demostrando por qué es el jugador más talentoso del planeta. En la victoria 5-1 sobre los Giants, Ohtani lanzó 7 entradas sin carreras y pegó un cuadrangular de 3 carreras.</p>
+                    <p>El japonés sigue demostrando por qué es el jugador más talentoso del planeta. En la victoria 5-1 sobre los Giants, Ohtani lanzó 7 entradas sin carreras y pegó un cuadrangular de 3 carreras. Su promedio de bateo subió a .328 y su ERA bajó a 2.95.</p>
+                    <p>Ohtani se convierte en el primer jugador en la historia en tener 25 jonrones y 10 victorias como lanzador antes del receso del Juego de Estrellas. Los Dodgers pagan por verlo y no defrauda.</p>
+                </article>
+                <article class="article-card">
+                    <div class="meta">19 de junio, 2026</div>
+                    <h3>El dominicano Juan Soto brilla con los Yankees; 4 hits y 5 RBIs</h3>
+                    <p>Soto está teniendo una temporada espectacular. En el juego contra los Red Sox, conectó dos jonrones y un doble, impulsando 5 carreras. Su OPS supera 1.000 y se perfila como uno de los mejores bateadores de la liga.</p>
+                </article>
+            </div>
+        </section>
+
+        <!-- ==================== PÁGINA: ANÁLISIS ==================== -->
+        <section id="page-analisis" class="page-section">
+            <h2 class="text-2xl font-bold text-secondary border-l-4 border-accent pl-3 mb-5 dark:text-white">🔍 Análisis y Previas</h2>
+            <div class="space-y-6">
+                <article class="article-card">
+                    <div class="meta">Análisis MLB | Por Juan Pérez</div>
+                    <h3>¿Quién ganará la Serie Mundial 2026? Dodgers, Yankees o Braves</h3>
+                    <p>La temporada de la MLB ha estado marcada por el poder ofensivo. Los Dodgers, con Mookie Betts y Shohei Ohtani, tienen el mejor roster de la liga. Los Yankees, con Judge y Soto, son imparables en el Bronx. Los Braves, con Acuña y Olson, tienen una alineación letal.</p>
+                    <p>Sin embargo, el pitcheo es clave: los equipos con mejores rotaciones (Astros, Phillies) podrían dar la sorpresa. Nuestro pronóstico: Yankees vs. Dodgers en la Serie Mundial, con los Yankees llevándose el título en 6 juegos.</p>
+                </article>
+                <article class="article-card">
+                    <div class="meta">Previa Mundial 2026 | Por Carlos Rodríguez</div>
+                    <h3>Análisis táctico de los grupos: ¿quién puede dar la sorpresa?</h3>
+                    <p>El Mundial 2026, con 48 selecciones, promete ser el más impredecible. Argentina, Brasil y Francia parten como favoritos, pero equipos como Portugal, España y Alemania tienen planteles de lujo.</p>
+                    <p>Las selecciones africanas (Marruecos, Nigeria, Egipto) y asiáticas (Japón, Australia) han mejorado notablemente. El formato de grupos de 4 equipos aún deja poco margen de error. Claves: el estado físico de los veteranos (Messi, CR7, Lewandowski) y el impacto de jóvenes promesas como Garnacho, Bellingham o Musiala.</p>
                 </article>
             </div>
         </section>
@@ -458,50 +497,95 @@
         <section id="page-contacto" class="page-section">
             <h2 class="text-2xl font-bold text-secondary border-l-4 border-accent pl-3 mb-5 dark:text-white">📬 Contacto</h2>
             <div class="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 p-6 shadow-sm max-w-2xl">
-                <p>¿Tienes preguntas o sugerencias? Escríbenos.</p>
-                <form onsubmit="event.preventDefault(); alert('Mensaje enviado (simulación).');">
+                <p class="mb-4">¿Tienes preguntas, sugerencias o quieres colaborar? Completa el formulario y te responderemos a la brevedad.</p>
+                <form onsubmit="event.preventDefault(); alert('Mensaje enviado (simulación). Gracias por contactarnos.');">
                     <div class="mb-4"><label class="block text-sm font-medium mb-1">Nombre</label><input type="text" class="w-full p-2 border rounded-lg dark:bg-gray-700" required></div>
                     <div class="mb-4"><label class="block text-sm font-medium mb-1">Email</label><input type="email" class="w-full p-2 border rounded-lg dark:bg-gray-700" required></div>
                     <div class="mb-4"><label class="block text-sm font-medium mb-1">Mensaje</label><textarea rows="5" class="w-full p-2 border rounded-lg dark:bg-gray-700" required></textarea></div>
                     <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-lg transition">Enviar</button>
                 </form>
+                <div class="mt-6 text-sm text-gray-500 dark:text-gray-400">
+                    <p>Email: <a href="mailto:info@sportvive360.cyou" class="text-blue-400">info@sportvive360.cyou</a></p>
+                    <p>Síguenos en redes sociales: 
+                        <a href="#" class="text-blue-400 hover:underline">Twitter</a> · 
+                        <a href="#" class="text-blue-400 hover:underline">Facebook</a> · 
+                        <a href="#" class="text-blue-400 hover:underline">Instagram</a>
+                    </p>
+                </div>
             </div>
         </section>
 
         <!-- ==================== PÁGINA: ACERCA DE ==================== -->
         <section id="page-acerca" class="page-section">
             <h2 class="text-2xl font-bold text-secondary border-l-4 border-accent pl-3 mb-5 dark:text-white">📖 Acerca de SportVive360</h2>
-            <div class="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 p-6 shadow-sm max-w-3xl">
-                <p>SportVive360 es tu fuente de información deportiva con enfoque en MLB, Fútbol y NBA. Ofrecemos resultados en vivo, estadísticas detalladas y análisis profundos.</p>
-                <!-- más contenido -->
+            <div class="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 p-6 shadow-sm max-w-3xl space-y-4">
+                <p>SportVive360 es un portal deportivo independiente fundado en 2025 con la misión de ofrecer a los aficionados información actualizada, análisis profundos y contenido original sobre los deportes más populares del mundo: fútbol, béisbol y baloncesto.</p>
+                <p>Nos enfocamos en el Mundial de la FIFA 2026, la Major League Baseball (MLB) y la National Basketball Association (NBA), brindando resultados en vivo, tablas de posiciones, noticias de última hora y previas exclusivas.</p>
+                <p>Nuestro equipo está compuesto por periodistas deportivos y analistas apasionados, todos con amplia experiencia en la cobertura de eventos internacionales. Estamos basados en Lima, Perú, y operamos en la zona horaria UTC‑5.</p>
+                <p>Creemos en el deporte como un vehículo de unión y emoción, y trabajamos día a día para que nuestros lectores vivan cada partido como si estuvieran en la cancha.</p>
+                <p>¡Gracias por ser parte de nuestra comunidad!</p>
             </div>
         </section>
 
         <!-- ==================== PÁGINA: PRIVACIDAD ==================== -->
         <section id="page-privacidad" class="page-section">
             <h2 class="text-2xl font-bold text-secondary border-l-4 border-accent pl-3 mb-5 dark:text-white">🔒 Política de Privacidad</h2>
-            <div class="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 p-6 shadow-sm max-w-3xl text-sm">
+            <div class="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 p-6 shadow-sm max-w-3xl space-y-4 text-sm">
                 <p><strong>Última actualización:</strong> 21 de junio de 2026</p>
-                <p>En SportVive360 usamos cookies para mejorar tu experiencia. Consulta nuestra política completa en esta sección.</p>
-                <!-- contenido resumido, pero completo en el código anterior -->
+                <p>En SportVive360 (sportvive360.cyou), nos tomamos muy en serio la privacidad de nuestros usuarios. Esta política explica cómo recopilamos, usamos y protegemos tu información personal cuando visitas nuestro sitio web.</p>
+                
+                <h4 class="font-bold text-base mt-4">1. Información que recopilamos</h4>
+                <p>Recopilamos información que nos proporcionas voluntariamente, como tu nombre y correo electrónico cuando nos contactas a través del formulario de contacto. Además, podemos recopilar datos de navegación anónimos (dirección IP, tipo de navegador, páginas visitadas) a través de cookies y herramientas de análisis.</p>
+
+                <h4 class="font-bold text-base mt-4">2. Uso de cookies</h4>
+                <p>Utilizamos cookies propias y de terceros para mejorar la experiencia del usuario, analizar el tráfico y mostrar anuncios personalizados de Google AdSense. Las cookies son pequeños archivos que se almacenan en tu dispositivo. Puedes configurar tu navegador para rechazarlas, aunque algunas funcionalidades del sitio podrían verse afectadas.</p>
+                <p>Google AdSense utiliza cookies para mostrar anuncios basados en tus visitas previas a este y otros sitios web. Puedes desactivar la personalización de anuncios en la <a href="https://adssettings.google.com" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:underline">configuración de anuncios de Google</a>.</p>
+
+                <h4 class="font-bold text-base mt-4">3. Uso de la información</h4>
+                <p>La información recopilada se utiliza para:</p>
+                <ul class="list-disc pl-6 space-y-1">
+                    <li>Responder a tus consultas y comentarios.</li>
+                    <li>Mejorar nuestro contenido y la navegación del sitio.</li>
+                    <li>Mostrar anuncios relevantes a través de Google AdSense.</li>
+                    <li>Analizar tendencias y estadísticas de uso.</li>
+                </ul>
+
+                <h4 class="font-bold text-base mt-4">4. Compartir datos</h4>
+                <p>No vendemos ni compartimos tu información personal con terceros, excepto cuando sea necesario para cumplir con la ley o proteger nuestros derechos. Los datos de navegación pueden ser compartidos con Google Analytics y AdSense para fines publicitarios y de análisis, siempre de forma agregada y anónima.</p>
+
+                <h4 class="font-bold text-base mt-4">5. Seguridad</h4>
+                <p>Implementamos medidas de seguridad razonables para proteger tu información contra accesos no autorizados, alteración o divulgación. Sin embargo, ningún método de transmisión por Internet es 100% seguro, por lo que no podemos garantizar la seguridad absoluta.</p>
+
+                <h4 class="font-bold text-base mt-4">6. Enlaces a terceros</h4>
+                <p>Nuestro sitio puede contener enlaces a otros sitios web. No nos responsabilizamos por las políticas de privacidad de estos terceros. Te recomendamos revisar sus políticas antes de proporcionarles cualquier información personal.</p>
+
+                <h4 class="font-bold text-base mt-4">7. Tus derechos</h4>
+                <p>Puedes solicitar la eliminación o modificación de tus datos personales en cualquier momento enviándonos un correo a <a href="mailto:info@sportvive360.cyou" class="text-blue-400 hover:underline">info@sportvive360.cyou</a>. También puedes optar por no recibir comunicaciones nuestras en el futuro.</p>
+
+                <h4 class="font-bold text-base mt-4">8. Cambios en esta política</h4>
+                <p>Nos reservamos el derecho de actualizar esta política de privacidad. Publicaremos cualquier cambio en esta página con la fecha de actualización.</p>
+
+                <p class="mt-4">Si tienes preguntas sobre esta política, contáctanos a través de nuestro <span class="nav-link text-blue-400 hover:underline" onclick="navegar('contacto')">formulario de contacto</span>.</p>
             </div>
         </section>
 
     </main>
 
     <footer class="text-center text-xs text-gray-500 dark:text-gray-400 border-t border-gray-200 dark:border-gray-700 py-6 mt-8">
-        <div class="max-w-6xl mx-auto px-3 flex flex-wrap justify-center gap-4 mb-2">
+        <div class="max-w-7xl mx-auto px-3 flex flex-wrap justify-center gap-4 mb-2">
             <span class="nav-link" onclick="navegar('inicio')">Inicio</span>
             <span class="nav-link" onclick="navegar('partidos')">Partidos</span>
             <span class="nav-link" onclick="navegar('clasificacion')">Clasificación</span>
             <span class="nav-link" onclick="navegar('equipos')">Equipos</span>
             <span class="nav-link" onclick="navegar('noticias')">Noticias</span>
+            <span class="nav-link" onclick="navegar('analisis')">Análisis</span>
             <span class="nav-link" onclick="navegar('contacto')">Contacto</span>
             <span class="nav-link" onclick="navegar('acerca')">Acerca</span>
             <span class="nav-link" onclick="navegar('privacidad')">Privacidad</span>
         </div>
         <p>© 2026 SportVive360 – Todos los derechos reservados. Datos en tiempo real.</p>
         <p class="mt-1">Lima, Perú · <span id="footer-fecha"></span></p>
+        <p class="mt-1 text-gray-400">Optimizado para SEO y rendimiento</p>
     </footer>
 
     <script>
@@ -530,7 +614,7 @@
             }
         });
 
-        // ======== NAVEGACIÓN ENTRE PÁGINAS ========
+        // ======== NAVEGACIÓN ========
         function navegar(pageId) {
             document.querySelectorAll('.page-section').forEach(sec => sec.classList.remove('active'));
             const target = document.getElementById('page-' + pageId);
@@ -598,6 +682,7 @@
                     { local: 'Los Angeles Dodgers', visitante: 'San Francisco Giants', score: '3-2', status: 'Vivo', badge: 'badge-vivo' },
                     { local: 'Chicago Cubs', visitante: 'St. Louis Cardinals', score: 'vs', status: 'Programado', badge: 'badge-programado' },
                     { local: 'Houston Astros', visitante: 'Seattle Mariners', score: '8-1', status: 'Final', badge: 'badge-final' },
+                    { local: 'Atlanta Braves', visitante: 'Philadelphia Phillies', score: 'vs', status: 'Programado', badge: 'badge-programado' },
                 ];
                 let html = '';
                 partidos.forEach(p => {
@@ -629,6 +714,8 @@
                 const partidos = [
                     { local: 'Argentina', visitante: 'Australia', score: '2-0', status: 'Final', badge: 'badge-final', flagL: '🇦🇷', flagV: '🇦🇺' },
                     { local: 'Portugal', visitante: 'Egipto', score: '1-1', status: 'Final', badge: 'badge-final', flagL: '🇵🇹', flagV: '🇪🇬' },
+                    { local: 'Brasil', visitante: 'EE.UU.', score: '3-1', status: 'Vivo', badge: 'badge-vivo', flagL: '🇧🇷', flagV: '🇺🇸' },
+                    { local: 'Francia', visitante: 'Marruecos', score: 'vs', status: 'Programado', badge: 'badge-programado', flagL: '🇫🇷', flagV: '🇲🇦' },
                 ];
                 let html = '';
                 partidos.forEach(p => {
