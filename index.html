@@ -12,7 +12,7 @@
     <meta property="og:description" content="Resultados, estadísticas y noticias del Mundial 2026, MLB y NBA.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://sportvivo360.cyou/">
-    <!-- Google Analytics (reemplaza G-XXXXXXXXXX con tu ID) -->
+    <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -43,296 +43,294 @@
         }
     </script>
     <style>
-        /* Estilos base (se mantienen igual que antes) */
+        /* ===== RESET Y BASE ===== */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Inter', 'Segoe UI', Roboto, system-ui, sans-serif;
+            min-height: 100vh;
+            background:
+                radial-gradient(circle at 20% 50%, rgba(26,86,219,0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(225,29,72,0.03) 0%, transparent 40%),
+                linear-gradient(135deg, #f0f4ff 0%, #e8edf5 50%, #f5f0ff 100%);
+            background-attachment: fixed;
+            color: #1e293b;
+            transition: background 0.3s, color 0.3s;
+        }
+        .dark body {
+            background:
+                radial-gradient(circle at 20% 50%, rgba(26,86,219,0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(225,29,72,0.05) 0%, transparent 40%),
+                linear-gradient(135deg, #0f172a 0%, #1a2332 50%, #1e1a2e 100%);
+            color: #e2e8f0;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            background:
+                repeating-linear-gradient(45deg, transparent, transparent 40px, rgba(255,255,255,0.02) 40px, rgba(255,255,255,0.02) 41px),
+                repeating-linear-gradient(-45deg, transparent, transparent 40px, rgba(255,255,255,0.02) 40px, rgba(255,255,255,0.02) 41px);
+        }
+        .dark body::before {
+            background:
+                repeating-linear-gradient(45deg, transparent, transparent 40px, rgba(255,255,255,0.01) 40px, rgba(255,255,255,0.01) 41px),
+                repeating-linear-gradient(-45deg, transparent, transparent 40px, rgba(255,255,255,0.01) 40px, rgba(255,255,255,0.01) 41px);
+        }
+        main, header, footer { position: relative; z-index: 1; }
+
+        /* ===== UTILIDADES ===== */
         .fade-in { animation: fadeIn 0.5s ease-out forwards; opacity: 0; }
         @keyframes fadeIn { to { opacity: 1; } }
         .pulse-dot { animation: pulse 1.5s infinite; }
         @keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:0.3; } }
         .card-hover { transition: transform 0.2s, box-shadow 0.2s; }
         .card-hover:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(0,0,0,0.12); }
-        .tab-btn {
-            padding: 8px 18px; border-radius: 999px; font-weight: 600; cursor: pointer;
-            transition: all 0.2s; background: transparent; border: none; color: #94a3b8;
+        .dark .card-hover:hover { box-shadow: 0 12px 30px rgba(0,0,0,0.4); }
+
+        /* ===== TARJETAS CON BLUR ===== */
+        .match-card, .stat-card, .article-card, .news-feed, .standings-table,
+        .bg-white, .dark .bg-gray-800 {
+            background: rgba(255,255,255,0.88) !important;
+            backdrop-filter: blur(12px) !important;
+            border: 1px solid rgba(226,232,240,0.4) !important;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.04);
         }
-        .tab-btn:hover { background: rgba(255,255,255,0.1); color: white; }
-        .tab-btn.active { background: #1a56db; color: white; box-shadow: 0 4px 14px rgba(26,86,219,0.4); }
-        .tab-content { display: none; }
-        .tab-content.active { display: block; animation: fadeIn 0.4s; }
+        .dark .match-card, .dark .stat-card, .dark .article-card,
+        .dark .news-feed, .dark .standings-table, .dark .bg-gray-800 {
+            background: rgba(30,41,59,0.90) !important;
+            border-color: rgba(51,65,85,0.5) !important;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        /* ===== BOTONES ===== */
+        .deporte-btn, .fecha-btn {
+            padding: 6px 16px;
+            border-radius: 999px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: rgba(255,255,255,0.2);
+            border: 1px solid transparent;
+            color: #94a3b8;
+            font-size: 0.8rem;
+            backdrop-filter: blur(4px);
+        }
+        .dark .deporte-btn, .dark .fecha-btn {
+            background: rgba(30,41,59,0.5);
+            color: #cbd5e1;
+        }
+        .deporte-btn:hover, .fecha-btn:hover {
+            background: rgba(255,255,255,0.4);
+            transform: scale(1.02);
+            color: #1e293b;
+        }
+        .dark .deporte-btn:hover, .dark .fecha-btn:hover {
+            background: rgba(51,65,85,0.6);
+            color: white;
+        }
+        .deporte-btn.active, .fecha-btn.active {
+            background: #1a56db;
+            color: white;
+            border-color: #1a56db;
+            box-shadow: 0 4px 12px rgba(26,86,219,0.3);
+        }
+        .dark .deporte-btn.active, .dark .fecha-btn.active {
+            background: #2563eb;
+            border-color: #2563eb;
+        }
+
+        /* ===== TARJETA DE PARTIDO ===== */
         .match-card {
-            background: rgba(255,255,255,0.92);
             border-radius: 16px;
             padding: 16px;
-            border: 1px solid rgba(226, 232, 240, 0.6);
             transition: all 0.2s;
             margin-bottom: 12px;
-            backdrop-filter: blur(8px);
-            box-shadow: 0 4px 16px rgba(0,0,0,0.04);
         }
-        .dark .match-card { background: rgba(30,41,59,0.92); border-color: rgba(51,65,85,0.6); }
         .match-card:hover { border-color: #1a56db; transform: translateY(-2px); }
+
         .match-status {
-            font-size: 0.6rem; padding: 2px 12px; border-radius: 999px; font-weight: 600;
+            font-size: 0.6rem;
+            padding: 2px 12px;
+            border-radius: 999px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
         }
         .badge-vivo { background: #dc2626; color: white; animation: pulse 1.2s infinite; }
         .badge-final { background: #64748b; color: white; }
         .badge-programado { background: #dbeafe; color: #1e40af; }
         .dark .badge-programado { background: #1e293b; color: #93c5fd; }
-        .group-header {
-            background: linear-gradient(135deg, #0f2b3d, #1a4971);
-            color: white; padding: 8px 16px; border-radius: 12px; margin-top: 20px;
-            font-weight: 700; letter-spacing: 0.5px;
-        }
-        .table-standings th {
-            background: #f1f5f9; font-weight: 600; padding: 8px 6px; font-size: 0.7rem;
-            text-transform: uppercase; letter-spacing: 0.3px;
-        }
-        .dark .table-standings th { background: #1e293b; }
-        .table-standings td { padding: 6px 6px; border-bottom: 1px solid #e2e8f0; font-size: 0.8rem; }
-        .dark .table-standings td { border-color: #334155; }
-        .table-standings tr:hover td { background: #f8fafc; }
-        .dark .table-standings tr:hover td { background: #1e293b; }
-        .stat-card {
-            background: rgba(255,255,255,0.9);
-            border-radius: 12px;
-            padding: 12px;
-            text-align: center;
-            border: 1px solid rgba(226,232,240,0.6);
-            transition: 0.2s;
-            backdrop-filter: blur(4px);
-        }
-        .dark .stat-card { background: rgba(30,41,59,0.9); border-color: rgba(51,65,85,0.6); }
-        .stat-card:hover { border-color: #1a56db; }
-        .stat-card .number { font-size: 1.8rem; font-weight: 800; color: #1a56db; }
-        .dark .stat-card .number { color: #60a5fa; }
-        .article-card {
-            border-left: 4px solid #1a56db;
-            padding-left: 16px;
-            margin-bottom: 24px;
-            background: rgba(255,255,255,0.85);
-            padding: 16px 16px 16px 20px;
-            border-radius: 0 12px 12px 0;
-            backdrop-filter: blur(4px);
-        }
-        .dark .article-card { background: rgba(30,41,59,0.85); }
-        .article-card .meta { font-size: 0.7rem; color: #64748b; }
-        .dark .article-card .meta { color: #94a3b8; }
-        .article-card h3 { font-size: 1.1rem; font-weight: 700; margin: 4px 0; }
-        .article-card p { font-size: 0.9rem; color: #475569; }
-        .dark .article-card p { color: #cbd5e1; }
-        .nav-link {
-            cursor: pointer; transition: color 0.2s; font-weight: 500;
-        }
-        .nav-link:hover { color: #93c5fd; }
-        .nav-link.active { color: white; border-bottom: 2px solid #1a56db; }
-        .page-section { display: none; }
-        .page-section.active { display: block; animation: fadeIn 0.5s; }
-        .cookie-banner {
-            position: fixed; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.85);
-            backdrop-filter: blur(6px); color: white; padding: 12px 20px; text-align: center;
-            font-size: 0.85rem; z-index: 999; display: none; justify-content: center;
-            align-items: center; gap: 16px; flex-wrap: wrap;
-        }
-        .cookie-banner a { color: #93c5fd; text-decoration: underline; }
-        .cookie-banner button {
-            background: #1a56db; border: none; color: white; padding: 6px 20px;
-            border-radius: 999px; font-weight: 600; cursor: pointer; transition: background 0.2s;
-        }
-        .cookie-banner button:hover { background: #2563eb; }
-        .cookie-banner.show { display: flex; }
-        .theme-toggle { cursor: pointer; display: flex; align-items: center; gap: 6px; font-size: 0.85rem; }
-        .theme-toggle input { display: none; }
-        .theme-toggle .slider {
-            width: 40px; height: 22px; background: #cbd5e1; border-radius: 999px;
-            position: relative; transition: background 0.3s;
-        }
-        .theme-toggle .slider::after {
-            content: ''; position: absolute; width: 18px; height: 18px; background: white;
-            border-radius: 50%; top: 2px; left: 2px; transition: transform 0.3s;
-        }
-        .dark .theme-toggle .slider { background: #1a56db; }
-        .dark .theme-toggle .slider::after { transform: translateX(18px); }
-        .ad-container { min-height: 90px; background: rgba(0,0,0,0.02); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; color: #94a3b8; margin: 20px 0; }
-        .dark .ad-container { background: rgba(255,255,255,0.02); }
-        .spinner {
-            border: 4px solid rgba(0,0,0,0.1); border-left-color: #1a56db; border-radius: 50%;
-            width: 40px; height: 40px; animation: spin 0.8s linear infinite; margin: 20px auto;
-        }
-        @keyframes spin { to { transform: rotate(360deg); } }
-        @media (max-width: 640px) {
-            .tab-btn { padding: 6px 12px; font-size: 0.8rem; }
-            .match-card { padding: 12px; }
-            .stat-card .number { font-size: 1.4rem; }
-            .desktop-menu { display: none; }
-            .mobile-menu { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; }
-            .deporte-selector { flex-wrap: wrap; justify-content: center; }
-            .fecha-selector { flex-wrap: wrap; justify-content: center; }
-        }
-        @media (min-width: 641px) {
-            .mobile-menu { display: none; }
-        }
-        .deporte-btn {
-            padding: 4px 14px; border-radius: 999px; font-weight: 600; cursor: pointer;
-            transition: all 0.2s; background: rgba(255,255,255,0.05); border: 1px solid transparent;
-            color: #94a3b8; font-size: 0.8rem;
-        }
-        .deporte-btn:hover { background: rgba(255,255,255,0.1); color: white; }
-        .deporte-btn.active { background: #1a56db; color: white; border-color: #1a56db; }
-        .news-feed {
-            background: rgba(255,255,255,0.92);
-            border-radius: 16px;
-            padding: 16px;
-            border: 1px solid rgba(226,232,240,0.6);
-            transition: all 0.3s;
-            min-height: 80px;
-            backdrop-filter: blur(8px);
-        }
-        .dark .news-feed { background: rgba(30,41,59,0.92); border-color: rgba(51,65,85,0.6); }
-        .news-feed .text { font-size: 0.95rem; font-weight: 500; }
-        .news-feed .time { font-size: 0.7rem; color: #64748b; }
-        .dark .news-feed .time { color: #94a3b8; }
-        body {
-            min-height: 100vh;
-            background:
-                radial-gradient(circle at 20% 50%, rgba(26,86,219,0.03) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(225,29,72,0.02) 0%, transparent 40%),
-                linear-gradient(135deg, #f0f4ff 0%, #e8edf5 50%, #f5f0ff 100%);
-            background-attachment: fixed;
-            background-size: 100% 100%;
-            position: relative;
-        }
-        .dark body {
-            background:
-                radial-gradient(circle at 20% 50%, rgba(26,86,219,0.06) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(225,29,72,0.04) 0%, transparent 40%),
-                linear-gradient(135deg, #0f172a 0%, #1a2332 50%, #1e1a2e 100%);
-            background-attachment: fixed;
-        }
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-            background:
-                repeating-linear-gradient(45deg,
-                    transparent,
-                    transparent 40px,
-                    rgba(255,255,255,0.02) 40px,
-                    rgba(255,255,255,0.02) 41px),
-                repeating-linear-gradient(-45deg,
-                    transparent,
-                    transparent 40px,
-                    rgba(255,255,255,0.02) 40px,
-                    rgba(255,255,255,0.02) 41px);
-        }
-        .dark body::before {
-            background:
-                repeating-linear-gradient(45deg,
-                    transparent,
-                    transparent 40px,
-                    rgba(255,255,255,0.01) 40px,
-                    rgba(255,255,255,0.01) 41px),
-                repeating-linear-gradient(-45deg,
-                    transparent,
-                    transparent 40px,
-                    rgba(255,255,255,0.01) 40px,
-                    rgba(255,255,255,0.01) 41px);
-        }
-        main, header, footer { position: relative; z-index: 1; }
-        .match-card, .stat-card, .article-card, .news-feed,
-        .bg-white, .dark .bg-gray-800 {
-            background: rgba(255,255,255,0.85) !important;
-            backdrop-filter: blur(12px) !important;
-            border: 1px solid rgba(226,232,240,0.4) !important;
-        }
-        .dark .match-card, .dark .stat-card, .dark .article-card,
-        .dark .news-feed, .dark .bg-gray-800 {
-            background: rgba(30,41,59,0.88) !important;
-            border-color: rgba(51,65,85,0.4) !important;
-        }
-        .bg-gradient-to-r {
-            background: linear-gradient(135deg, rgba(11,30,46,0.92), rgba(26,73,113,0.92)) !important;
-            backdrop-filter: blur(4px);
-        }
-        .fecha-btn {
-            padding: 6px 14px;
-            border-radius: 999px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-            background: rgba(255,255,255,0.3);
-            border: 1px solid rgba(255,255,255,0.2);
-            color: #1e293b;
-            font-size: 0.8rem;
-            backdrop-filter: blur(4px);
-        }
-        .dark .fecha-btn { background: rgba(30,41,59,0.5); color: #cbd5e1; border-color: rgba(51,65,85,0.3); }
-        .fecha-btn:hover { background: rgba(255,255,255,0.5); transform: scale(1.02); }
-        .dark .fecha-btn:hover { background: rgba(51,65,85,0.6); }
-        .fecha-btn.active { background: #1a56db; color: white; border-color: #1a56db; box-shadow: 0 4px 12px rgba(26,86,219,0.3); }
-        .dark .fecha-btn.active { background: #2563eb; border-color: #2563eb; }
-        .max-w-7xl { margin-left: auto; margin-right: auto; }
-        main { padding-top: 1.25rem; padding-bottom: 1.25rem; }
-        .card-hover { box-shadow: 0 4px 20px rgba(0,0,0,0.04); }
-        .dark .card-hover { box-shadow: 0 4px 20px rgba(0,0,0,0.2); }
+
         .live-counter {
-            display: inline-block;
             background: #dc2626;
             color: white;
             padding: 2px 12px;
             border-radius: 999px;
             font-size: 0.7rem;
             animation: pulse 1.2s infinite;
+            display: inline-block;
         }
-        /* Estilo para las tablas de clasificación */
+
+        /* ===== TABLAS DE CLASIFICACIÓN ===== */
         .standings-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 24px;
         }
         .standings-table {
-            background: rgba(255,255,255,0.9);
             border-radius: 16px;
-            padding: 16px;
-            border: 1px solid rgba(226,232,240,0.6);
-            backdrop-filter: blur(8px);
+            padding: 18px;
+            transition: all 0.2s;
         }
-        .dark .standings-table {
-            background: rgba(30,41,59,0.9);
-            border-color: rgba(51,65,85,0.6);
-        }
+        .standings-table:hover { border-color: #1a56db; }
         .standings-table h4 {
             font-weight: 700;
-            font-size: 1rem;
-            margin-bottom: 10px;
-            padding-bottom: 6px;
-            border-bottom: 2px solid #1a56db;
+            font-size: 1.1rem;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 3px solid #1a56db;
+            color: #0b1e2e;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
+        .dark .standings-table h4 { color: #e2e8f0; }
         .standings-table table {
             width: 100%;
-            font-size: 0.75rem;
+            font-size: 0.78rem;
+            border-collapse: collapse;
         }
         .standings-table th {
-            background: #f1f5f9;
-            padding: 4px 6px;
+            background: rgba(241,245,249,0.7);
+            padding: 6px 8px;
             text-align: center;
             font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.65rem;
+            letter-spacing: 0.3px;
         }
-        .dark .standings-table th { background: #1e293b; }
+        .dark .standings-table th {
+            background: rgba(30,41,59,0.8);
+            color: #cbd5e1;
+        }
         .standings-table td {
-            padding: 4px 6px;
-            border-bottom: 1px solid #e2e8f0;
+            padding: 6px 8px;
+            border-bottom: 1px solid rgba(226,232,240,0.6);
             text-align: center;
         }
-        .dark .standings-table td { border-color: #334155; }
-        .standings-table .pos { font-weight: 700; }
-        .standings-table .equipo { text-align: left; }
-        .standings-table tr:hover td { background: #f8fafc; }
-        .dark .standings-table tr:hover td { background: #1e293b; }
-        .standings-table .clasificado { border-left: 3px solid #22c55e; }
+        .dark .standings-table td { border-color: rgba(51,65,85,0.6); }
+        .standings-table .equipo { text-align: left; font-weight: 500; }
+        .standings-table tr:hover td { background: rgba(248,250,252,0.5); }
+        .dark .standings-table tr:hover td { background: rgba(30,41,59,0.5); }
+        .standings-table .clasificado {
+            border-left: 4px solid #22c55e;
+            background: rgba(34,197,94,0.05);
+        }
+        .dark .standings-table .clasificado {
+            background: rgba(34,197,94,0.08);
+        }
+        .standings-table .pos { font-weight: 700; width: 28px; }
+        .standings-table .pts { font-weight: 700; color: #1a56db; }
+        .dark .standings-table .pts { color: #60a5fa; }
+
+        /* ===== FEED DE NOTICIAS ===== */
+        .news-feed {
+            border-radius: 16px;
+            padding: 16px;
+            min-height: 80px;
+        }
+        .news-feed .text { font-size: 0.95rem; font-weight: 500; }
+        .news-feed .time { font-size: 0.7rem; color: #64748b; }
+        .dark .news-feed .time { color: #94a3b8; }
+
+        /* ===== BANNER ===== */
+        .bg-gradient-to-r {
+            background: linear-gradient(135deg, rgba(11,30,46,0.92), rgba(26,73,113,0.92)) !important;
+            backdrop-filter: blur(4px);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 640px) {
+            .standings-grid { grid-template-columns: 1fr; }
+            .match-card { padding: 12px; }
+            .standings-table { padding: 12px; }
+            .deporte-btn, .fecha-btn { padding: 4px 12px; font-size: 0.7rem; }
+            .desktop-menu { display: none; }
+            .mobile-menu { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; }
+        }
+        @media (min-width: 641px) { .mobile-menu { display: none; } }
+
+        /* ===== SPINNER ===== */
+        .spinner {
+            border: 4px solid rgba(0,0,0,0.1);
+            border-left-color: #1a56db;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 0.8s linear infinite;
+            margin: 20px auto;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* ===== COOKIE BANNER ===== */
+        .cookie-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0,0,0,0.85);
+            backdrop-filter: blur(6px);
+            color: white;
+            padding: 12px 20px;
+            text-align: center;
+            font-size: 0.85rem;
+            z-index: 999;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        .cookie-banner a { color: #93c5fd; text-decoration: underline; }
+        .cookie-banner button {
+            background: #1a56db;
+            border: none;
+            color: white;
+            padding: 6px 20px;
+            border-radius: 999px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .cookie-banner button:hover { background: #2563eb; }
+        .cookie-banner.show { display: flex; }
+
+        /* ===== THEME TOGGLE ===== */
+        .theme-toggle { cursor: pointer; display: flex; align-items: center; gap: 6px; font-size: 0.85rem; }
+        .theme-toggle input { display: none; }
+        .theme-toggle .slider {
+            width: 40px;
+            height: 22px;
+            background: #cbd5e1;
+            border-radius: 999px;
+            position: relative;
+            transition: background 0.3s;
+        }
+        .theme-toggle .slider::after {
+            content: '';
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            background: white;
+            border-radius: 50%;
+            top: 2px;
+            left: 2px;
+            transition: transform 0.3s;
+        }
+        .dark .theme-toggle .slider { background: #1a56db; }
+        .dark .theme-toggle .slider::after { transform: translateX(18px); }
     </style>
 </head>
 <body>
@@ -403,7 +401,6 @@
                 <p class="text-sm opacity-80 mt-1" id="banner-desc">Todos los partidos, marcadores y programación del torneo.</p>
             </div>
 
-            <!-- Feed de noticias rotatorio -->
             <div class="news-feed mb-6" id="newsFeed">
                 <div class="flex items-center justify-between">
                     <span class="text-xs font-bold text-blue-600 dark:text-blue-400">📰 ÚLTIMA HORA</span>
@@ -417,10 +414,7 @@
                 <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-green-500 pulse-dot"></span> Actualizado</span>
             </div>
 
-            <!-- Selector de fechas -->
-            <div class="flex flex-wrap gap-2 mb-4 fecha-selector" id="fechaSelector">
-                <!-- Los botones se generan dinámicamente con JS -->
-            </div>
+            <div class="flex flex-wrap gap-2 mb-4 fecha-selector" id="fechaSelector"></div>
 
             <div id="contenido-inicio">
                 <div class="flex justify-center py-10"><div class="spinner"></div></div>
@@ -447,11 +441,10 @@
             </div>
         </section>
 
-        <!-- PÁGINA: CLASIFICACIÓN - AQUÍ VAN TODAS LAS TABLAS -->
+        <!-- PÁGINA: CLASIFICACIÓN -->
         <section id="page-clasificacion" class="page-section">
             <h2 class="text-2xl font-bold text-secondary border-l-4 border-accent pl-3 mb-5 dark:text-white">📊 Clasificación Mundial 2026 – Grupos</h2>
             <div id="clasificacion-contenido" class="standings-grid">
-                <!-- Las tablas se generan dinámicamente con JS -->
                 <div class="flex justify-center py-10 col-span-full"><div class="spinner"></div></div>
             </div>
         </section>
@@ -580,7 +573,26 @@
         let paginaActual = 'inicio';
         let fechaSeleccionada = '21';
 
-        // ======== DATOS POR DEPORTE ========
+        // ======== NAVEGACIÓN ========
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                const page = this.dataset.page;
+                if (page) navegar(page);
+            });
+        });
+
+        function navegar(pageId) {
+            paginaActual = pageId;
+            document.querySelectorAll('.page-section').forEach(sec => sec.classList.remove('active'));
+            const target = document.getElementById('page-' + pageId);
+            if (target) target.classList.add('active');
+            document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
+            document.querySelectorAll(`.nav-link[data-page="${pageId}"]`).forEach(link => link.classList.add('active'));
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            if (pageId === 'envivo') renderizarEnVivo();
+        }
+
+        // ======== DATOS COMPLETOS ========
         const datosDeportes = {
             futbol: {
                 nombre: 'Mundial 2026',
@@ -685,88 +697,76 @@
                         { local: 'Nueva Zelanda', visitante: 'Bélgica', score: 'vs', status: 'Programado', flagL: '🇳🇿', flagV: '🇧🇪' },
                     ],
                 },
-                // ===== TODAS LAS TABLAS DE POSICIONES (A a L) =====
+                // ===== CLASIFICACIÓN COMPLETA (GRUPOS A-L) =====
                 clasificacion: {
                     titulo: '📊 Clasificación Mundial 2026 – Grupos',
                     conferencias: [
-                        // Grupo A
                         { nombre: 'Grupo A', equipos: [
                             { nombre: '🇲🇽 México', Pts: 6, PJ: 2, G: 2, E: 0, P: 0, GF: 3, GC: 0 },
                             { nombre: '🇰🇷 Corea del Sur', Pts: 3, PJ: 2, G: 1, E: 0, P: 1, GF: 2, GC: 2 },
                             { nombre: '🇿🇦 Sudáfrica', Pts: 1, PJ: 2, G: 0, E: 1, P: 1, GF: 1, GC: 3 },
                             { nombre: '🇨🇿 Rep. Checa', Pts: 1, PJ: 2, G: 0, E: 1, P: 1, GF: 2, GC: 3 },
                         ]},
-                        // Grupo B
                         { nombre: 'Grupo B', equipos: [
                             { nombre: '🇨🇦 Canadá', Pts: 4, PJ: 2, G: 1, E: 1, P: 0, GF: 7, GC: 1 },
                             { nombre: '🇨🇭 Suiza', Pts: 4, PJ: 2, G: 1, E: 1, P: 0, GF: 5, GC: 2 },
                             { nombre: '🇧🇦 Bosnia', Pts: 1, PJ: 2, G: 0, E: 1, P: 1, GF: 2, GC: 5 },
                             { nombre: '🇶🇦 Qatar', Pts: 1, PJ: 2, G: 0, E: 1, P: 1, GF: 1, GC: 7 },
                         ]},
-                        // Grupo C
                         { nombre: 'Grupo C', equipos: [
                             { nombre: '🇧🇷 Brasil', Pts: 4, PJ: 2, G: 1, E: 1, P: 0, GF: 4, GC: 1 },
                             { nombre: '🇲🇦 Marruecos', Pts: 4, PJ: 2, G: 1, E: 1, P: 0, GF: 2, GC: 1 },
                             { nombre: '🏴󠁧󠁢󠁳󠁣󠁴󠁿 Escocia', Pts: 0, PJ: 1, G: 0, E: 0, P: 1, GF: 0, GC: 1 },
                             { nombre: '🇭🇹 Haití', Pts: 0, PJ: 1, G: 0, E: 0, P: 1, GF: 0, GC: 3 },
                         ]},
-                        // Grupo D
                         { nombre: 'Grupo D', equipos: [
                             { nombre: '🇺🇸 EE.UU.', Pts: 6, PJ: 2, G: 2, E: 0, P: 0, GF: 6, GC: 1 },
                             { nombre: '🇦🇺 Australia', Pts: 3, PJ: 2, G: 1, E: 0, P: 1, GF: 2, GC: 2 },
                             { nombre: '🇹🇷 Turquía', Pts: 0, PJ: 1, G: 0, E: 0, P: 1, GF: 0, GC: 2 },
                             { nombre: '🇵🇾 Paraguay', Pts: 0, PJ: 1, G: 0, E: 0, P: 1, GF: 1, GC: 4 },
                         ]},
-                        // Grupo E
                         { nombre: 'Grupo E', equipos: [
                             { nombre: '🇩🇪 Alemania', Pts: 6, PJ: 2, G: 2, E: 0, P: 0, GF: 9, GC: 2 },
                             { nombre: '🇨🇮 Costa de Marfil', Pts: 3, PJ: 2, G: 1, E: 0, P: 1, GF: 2, GC: 2 },
                             { nombre: '🇪🇨 Ecuador', Pts: 1, PJ: 2, G: 0, E: 1, P: 1, GF: 0, GC: 1 },
                             { nombre: '🇨🇼 Curazao', Pts: 1, PJ: 2, G: 0, E: 1, P: 1, GF: 1, GC: 7 },
                         ]},
-                        // Grupo F
                         { nombre: 'Grupo F', equipos: [
                             { nombre: '🇳🇱 Países Bajos', Pts: 4, PJ: 2, G: 1, E: 1, P: 0, GF: 7, GC: 3 },
                             { nombre: '🇯🇵 Japón', Pts: 4, PJ: 2, G: 1, E: 1, P: 0, GF: 6, GC: 2 },
                             { nombre: '🇸🇪 Suecia', Pts: 3, PJ: 2, G: 1, E: 0, P: 1, GF: 6, GC: 6 },
                             { nombre: '🇹🇳 Túnez', Pts: 0, PJ: 2, G: 0, E: 0, P: 2, GF: 1, GC: 9 },
                         ]},
-                        // Grupo G
                         { nombre: 'Grupo G', equipos: [
                             { nombre: '🇧🇪 Bélgica', Pts: 1, PJ: 1, G: 0, E: 1, P: 0, GF: 1, GC: 1 },
                             { nombre: '🇪🇬 Egipto', Pts: 1, PJ: 1, G: 0, E: 1, P: 0, GF: 1, GC: 1 },
                             { nombre: '🇮🇷 Irán', Pts: 1, PJ: 1, G: 0, E: 1, P: 0, GF: 2, GC: 2 },
                             { nombre: '🇳🇿 Nueva Zelanda', Pts: 1, PJ: 1, G: 0, E: 1, P: 0, GF: 2, GC: 2 },
                         ]},
-                        // Grupo H
                         { nombre: 'Grupo H', equipos: [
                             { nombre: '🇪🇸 España', Pts: 1, PJ: 1, G: 0, E: 1, P: 0, GF: 0, GC: 0 },
                             { nombre: '🇨🇻 Cabo Verde', Pts: 1, PJ: 1, G: 0, E: 1, P: 0, GF: 0, GC: 0 },
                             { nombre: '🇸🇦 Arabia Saudita', Pts: 1, PJ: 1, G: 0, E: 1, P: 0, GF: 1, GC: 1 },
                             { nombre: '🇺🇾 Uruguay', Pts: 1, PJ: 1, G: 0, E: 1, P: 0, GF: 1, GC: 1 },
                         ]},
-                        // Grupo I
                         { nombre: 'Grupo I', equipos: [
                             { nombre: '🇫🇷 Francia', Pts: 3, PJ: 1, G: 1, E: 0, P: 0, GF: 3, GC: 1 },
                             { nombre: '🇳🇴 Noruega', Pts: 3, PJ: 1, G: 1, E: 0, P: 0, GF: 4, GC: 1 },
                             { nombre: '🇸🇳 Senegal', Pts: 0, PJ: 1, G: 0, E: 0, P: 1, GF: 1, GC: 3 },
                             { nombre: '🇮🇶 Irak', Pts: 0, PJ: 1, G: 0, E: 0, P: 1, GF: 1, GC: 4 },
                         ]},
-                        // Grupo J
                         { nombre: 'Grupo J', equipos: [
                             { nombre: '🇦🇷 Argentina', Pts: 3, PJ: 1, G: 1, E: 0, P: 0, GF: 3, GC: 0 },
                             { nombre: '🇦🇹 Austria', Pts: 3, PJ: 1, G: 1, E: 0, P: 0, GF: 2, GC: 1 },
                             { nombre: '🇯🇴 Jordania', Pts: 0, PJ: 1, G: 0, E: 0, P: 1, GF: 1, GC: 2 },
                             { nombre: '🇩🇿 Argelia', Pts: 0, PJ: 1, G: 0, E: 0, P: 1, GF: 0, GC: 3 },
                         ]},
-                        // Grupo K
                         { nombre: 'Grupo K', equipos: [
                             { nombre: '🇨🇴 Colombia', Pts: 3, PJ: 1, G: 1, E: 0, P: 0, GF: 3, GC: 1 },
                             { nombre: '🇵🇹 Portugal', Pts: 1, PJ: 1, G: 0, E: 1, P: 0, GF: 1, GC: 1 },
                             { nombre: '🇨🇩 R.D. Congo', Pts: 1, PJ: 1, G: 0, E: 1, P: 0, GF: 1, GC: 1 },
                             { nombre: '🇺🇿 Uzbekistán', Pts: 0, PJ: 1, G: 0, E: 0, P: 1, GF: 1, GC: 3 },
                         ]},
-                        // Grupo L
                         { nombre: 'Grupo L', equipos: [
                             { nombre: '🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inglaterra', Pts: 3, PJ: 1, G: 1, E: 0, P: 0, GF: 4, GC: 2 },
                             { nombre: '🇬🇭 Ghana', Pts: 3, PJ: 1, G: 1, E: 0, P: 0, GF: 1, GC: 0 },
@@ -859,13 +859,13 @@
             }
         };
 
-        // ======== FUNCIONES DE RENDERIZADO ========
+        // ======== RENDERIZADO ========
         function renderizarTodo() {
             renderizarBanner();
             renderizarSelectorFechas();
             renderizarInicio();
             renderizarPartidos();
-            renderizarClasificacion();
+            renderizarClasificacion();  // <--- AHORA RENDERIZA BIEN
             renderizarEquipos();
             renderizarNoticias();
             renderizarAnalisis();
@@ -890,7 +890,7 @@
         }
 
         function renderizarSelectorFechas() {
-            const fechas = ['11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26'];
+            const fechas = ['11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26'];
             const contenedorInicio = document.getElementById('fechaSelector');
             const contenedorPartidos = document.getElementById('fechaSelectorPartidos');
             const html = fechas.map(f => `
@@ -959,7 +959,7 @@
                 html += `</div></div>`;
             }
 
-            // Estadísticas (se mantienen)
+            // Estadísticas
             html += `<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
                 <div class="stat-card card-hover">
                     <h4 class="font-bold text-lg mb-2">⚽ Máximos goleadores</h4>
@@ -1011,10 +1011,9 @@
             contenedor.innerHTML = html;
         }
 
-        // ===== NUEVA FUNCIÓN DE CLASIFICACIÓN CON TODOS LOS GRUPOS =====
+        // ===== FUNCIÓN DE CLASIFICACIÓN (CON TODOS LOS GRUPOS) =====
         function renderizarClasificacion() {
             const datos = datosDeportes[deporteActual];
-            document.getElementById('clasificacion-titulo').textContent = datos.clasificacion.titulo;
             const contenedor = document.getElementById('clasificacion-contenido');
             if (!datos.clasificacion || !datos.clasificacion.conferencias) {
                 contenedor.innerHTML = '<p class="text-center py-8 text-gray-500">No hay datos de clasificación.</p>';
@@ -1022,21 +1021,18 @@
             }
             let html = '';
             datos.clasificacion.conferencias.forEach(conf => {
-                // Determinar el ancho de columnas según el grupo
                 const keys = conf.equipos[0] ? Object.keys(conf.equipos[0]) : [];
                 html += `<div class="standings-table">
                     <h4>${conf.nombre}</h4>
                     <div class="overflow-x-auto">
                         <table>
                             <thead><tr>`;
-                // Cabeceras
                 keys.forEach(key => {
                     const label = key === 'nombre' ? 'Equipo' : key;
                     html += `<th>${label}</th>`;
                 });
                 html += `</tr></thead><tbody>`;
                 conf.equipos.forEach(eq => {
-                    // Marcar al líder con verde
                     const isLeader = conf.equipos.indexOf(eq) === 0;
                     html += `<tr class="${isLeader ? 'clasificado' : ''}">`;
                     keys.forEach(key => {
@@ -1181,37 +1177,17 @@
         }
 
         // ======== CAMBIO DE DEPORTE ========
-        function cambiarDeporte(deporte) {
-            if (deporte === deporteActual) return;
-            deporteActual = deporte;
-            renderizarTodo();
-        }
+        document.querySelectorAll('.deporte-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const nuevo = this.dataset.deporte;
+                if (nuevo === deporteActual) return;
+                deporteActual = nuevo;
+                renderizarTodo();
+            });
+        });
 
-        // ======== NAVEGACIÓN ========
-        function navegar(pageId) {
-            paginaActual = pageId;
-            document.querySelectorAll('.page-section').forEach(sec => sec.classList.remove('active'));
-            const target = document.getElementById('page-' + pageId);
-            if (target) target.classList.add('active');
-            document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
-            document.querySelectorAll(`.nav-link[data-page="${pageId}"]`).forEach(link => link.classList.add('active'));
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-            if (pageId === 'envivo') renderizarEnVivo();
-        }
-
-        // ======== EVENT LISTENERS ========
+        // ======== INICIO ========
         document.addEventListener('DOMContentLoaded', function() {
-            document.querySelectorAll('.deporte-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    cambiarDeporte(this.dataset.deporte);
-                });
-            });
-            document.querySelectorAll('.nav-link').forEach(link => {
-                link.addEventListener('click', function(e) {
-                    const page = this.dataset.page;
-                    if (page) navegar(page);
-                });
-            });
             document.getElementById('footer-fecha').textContent = new Date().toLocaleDateString('es-ES', { year:'numeric', month:'long', day:'numeric' });
             renderizarTodo();
             navegar('inicio');
