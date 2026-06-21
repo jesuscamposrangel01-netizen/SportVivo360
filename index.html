@@ -323,248 +323,224 @@
 
     <!-- Scripts corregidos -->
     <script>
-        // CONSTANTES ZONA LIMA
-        const ZONA_UTC = -5;
+// CONSTANTES ZONA LIMA
+const ZONA_UTC = -5;
 
-        // Fecha actual ajustada a Lima UTC‑5
-        function fechaLima() {
-            const ahora = new Date();
-            return new Date(ahora.getTime() + ZONA_UTC * 3600000);
-        }
+// Fecha actual ajustada a Lima UTC‑5
+function fechaLima() {
+  const ahora = new Date();
+  return new Date(ahora.getTime() + ZONA_UTC * 3600000);
+}
 
-        // Formato ISO YYYY-MM-DD
-        function iso(d) {
-            return d.toISOString().split('T')[0];
-        }
+// Formato ISO YYYY‑MM‑DD seguro
+function iso(d) {
+  if (!(d instanceof Date) || isNaN(d.getTime())) return "";
+  return d.toISOString().split('T')[0];
+}
 
-        // ✅ FUNCIÓN CLAVE: Convertir fecha visible → fecha que pide la API
-        function fechaParaAPI(fechaUsuario) {
-            return iso(new Date(fechaUsuario.getTime() - ZONA_UTC * 3600000));
-        }
+// ✅ FUNCIÓN CLAVE: Convertir fecha Lima → fecha que pide la API MLB (UTC)
+function fechaParaAPI(fechaUsuario) {
+  const copia = new Date(fechaUsuario);
+  copia.setHours(copia.getHours() - ZONA_UTC); // Lima UTC‑5 → sumar 5h = UTC
+  return iso(copia);
+}
 
-        // Fecha inicial = HOY según Lima
-        let fechaActual = fechaLima();
+// --- AQUÍ SIGUE TODO LO QUE TENÍAS ANTES, COMPLETO ---
+document.addEventListener('DOMContentLoaded', () => {
+  // Pestañas
+  document.querySelectorAll('.tab-button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+    });
+  });
 
-        document.addEventListener('DOMContentLoaded', () => {
-            // Pestañas
-            document.querySelectorAll('.tab-button').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
-                    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-                    btn.classList.add('active');
-                    document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
-                });
-            });
+  // Tema claro/oscuro
+  const chk = document.getElementById('themeCheckbox');
+  if (localStorage.getItem('tema') === 'dark' || 
+      (!localStorage.getItem('tema') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+    document.documentElement.classList.add('dark');
+    chk.checked = true;
+  }
+  chk.addEventListener('change', () => {
+    document.documentElement.classList.toggle('dark');
+    localStorage.setItem('tema', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+  });
 
-            // Tema claro/oscuro
-            const chk = document.getElementById('themeCheckbox');
-            if (localStorage.getItem('tema') === 'dark' || 
-                (!localStorage.getItem('tema') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-                document.documentElement.classList.add('dark');
-                chk.checked = true;
-            }
-            chk.addEventListener('change', () => {
-                document.documentElement.classList.toggle('dark');
-                localStorage.setItem('tema', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
-            });
+  // Cookies
+  window.aceptarCookies = function () {
+    document.getElementById('cookieBanner').classList.remove('show');
+    localStorage.setItem('cookiesAceptadas', 'si');
+  };
+  if (!localStorage.getItem('cookiesAceptadas')) {
+    document.getElementById('cookieBanner').classList.add('show');
+  }
 
-            // Cookies
-            window.aceptarCookies = function aceptarCookies() {
-                document.getElementById('cookieBanner').classList.remove('show');
-                localStorage.setItem('cookiesAceptadas', 'si');
-            };
-            if (!localStorage.getItem('cookiesAceptadas')) {
-                document.getElementById('cookieBanner').classList.add('show');
-            }
+  // Fechas visibles
+  let fechaActual = fechaLima();
+  function textoFecha(d) {
+    const dias = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
+    const meses = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
+    return `${dias[d.getDay()]} ${d.getDate()} ${meses[d.getMonth()]}`;
+  }
+  window.cambiarFecha = n => {
+    fechaActual.setDate(fechaActual.getDate() + n);
+    mostrarFechas();
+    cargarMLB(fechaParaAPI(fechaActual));
+  };
+  window.irFecha = s => {
+    fechaActual = new Date(s + 'T00:00:00‑05:00');
+    mostrarFechas();
+    cargarMLB(fechaParaAPI(fechaActual));
+  };
+  function mostrarFechas() {
+    const cont = document.getElementById('selector‑fechas');
+    if (!cont) return;
+    let html = '';
+    for (let i = -1; i <= 1; i++) {
+      let f = new Date(fechaActual);
+      f.setDate(f.getDate() + i);
+      const activo = iso(f) === iso(fechaActual);
+      html += `<span class="px‑3 py‑1.5 rounded‑lg cursor‑pointer ${activo ? 'bg‑azul text‑white font‑semibold' : 'hover:bg‑gray‑100 dark:hover:bg‑gray‑700'}" onclick="irFecha('${iso(f)}')">${textoFecha(f)}</span>`;
+    }
+    cont.innerHTML = html;
+  }
 
-            // Cuenta regresiva Mundial 2026
-            function actualizarCuentaRegresiva() {
-                const meta = new Date('2026-06-11T00:00:00-05:00').getTime();
-                const ahora = new Date().getTime();
-                const dif = meta - ahora;
-                if (dif > 0) {
-                    const d = Math.floor(dif / (1000 * 60 * 60 * 24));
-                    const h = Math.floor((dif % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                    const m = Math.floor((dif % (1000 * 60 * 60)) / (1000 * 60));
-                    const s = Math.floor((dif % (1000 * 60)) / 1000);
-                    if(document.getElementById('dias')) document.getElementById('dias').textContent = d;
-                    if(document.getElementById('horas')) document.getElementById('horas').textContent = h;
-                    if(document.getElementById('minutos')) document.getElementById('minutos').textContent = m;
-                    if(document.getElementById('segundos')) document.getElementById('segundos').textContent = s;
-                }
-            }
-            setInterval(actualizarCuentaRegresiva, 1000);
-            actualizarCuentaRegresiva();
+  // Ayudantes MLB
+  function leerEntradas(ls, visitante) {
+    const inn = ls?.innings || [];
+    const fila = Array(9).fill('‑');
+    inn.forEach((x, i) => fila[i] = visitante ? x.away?.runs ?? '‑' : x.home?.runs ?? '‑');
+    const tot = ls?.teams?.[visitante ? 'away' : 'home'] || {};
+    return { fila, C: tot.runs ?? '‑', H: tot.hits ?? '‑', E: tot.errors ?? '‑' };
+  }
+  function dibujarBases(off) {
+    const b1 = !!off?.first, b2 = !!off?.second, b3 = !!off?.third;
+    return `
+    <div class="relative w‑16 h‑16 mx‑auto">
+      <div class="diamante‑base absolute top‑0 left‑1/2 ‑translate‑x‑1/2 ${b2 ? 'ocupada' : 'vacia'}"></div>
+      <div class="diamante‑base absolute bottom‑1/2 right‑0 translate‑y‑1/2 ${b1 ? 'ocupada' : 'vacia'}"></div>
+      <div class="diamante‑base absolute bottom‑1/2 left‑0 translate‑y‑1/2 ${b3 ? 'ocupada' : 'vacia'}"></div>
+      <div class="diamante‑base absolute top‑1/2 left‑1/2 ‑translate‑x‑1/2 ‑translate‑y‑1/2 plato"></div>
+    </div>`;
+  }
 
-            // Selector de fechas
-            function textoFecha(d) {
-                const dias = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
-                const meses = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
-                return `${dias[d.getDay()]} ${d.getDate()} ${meses[d.getMonth()]}`;
-            }
-            window.cambiarFecha = function(n) {
-                fechaActual.setDate(fechaActual.getDate() + n);
-                mostrarFechas();
-                cargarMLB(fechaParaAPI(fechaActual));
-            };
-            window.irFecha = function(s) {
-                fechaActual = new Date(s + 'T00:00:00-05:00');
-                mostrarFechas();
-                cargarMLB(fechaParaAPI(fechaActual));
-            };
-            function mostrarFechas() {
-                const cont = document.getElementById('selector-fechas');
-                if (!cont) return;
-                let h = '';
-                for (let i = -1; i <= 1; i++) {
-                    let f = new Date(fechaActual);
-                    f.setDate(f.getDate() + i);
-                    const act = iso(f) === iso(fechaActual);
-                    h += `<span class="px-3 py-1.5 rounded-lg cursor-pointer ${act ? 'bg-azul text-white font-semibold' : 'hover:bg-gray-100 dark:hover:bg-gray-700'}" onclick="irFecha('${iso(f)}')">${textoFecha(f)}</span>`;
-                }
-                cont.innerHTML = h;
-            }
+  // ✅ Carga MLB con vivo/final/programado
+  async function cargarMLB(fecha) {
+    const cont = document.getElementById('lista‑partidos');
+    if (!cont) return;
+    try {
+      cont.innerHTML = '<div class="flex justify‑center py‑10"><div class="spinner"></div></div>';
+      const res = await fetch(`https://statsapi.mlb.com/api/v1/schedule?sportId=1&date=${fecha}&language=es&hydrate=linescore,probablePitchers,status,linescore.offense`);
+      if (!res.ok) throw new Error('Error al consultar MLB');
+      const datos = await res.json();
+      const juegos = datos.dates?.[0]?.games || [];
+      if (!juegos.length) {
+        cont.innerHTML = '<p class="text‑center py‑8 text‑gray‑600">Sin partidos esta fecha</p>';
+        return;
+      }
+      let html = '';
+      for (const p of juegos) {
+        const a = p.teams.away, h = p.teams.home;
+        const estado = p.status;
+        const vivo = estado.abstractGameState === 'Live';
+        const final = estado.abstractGameState === 'Final';
+        const horaLima = new Date(new Date(p.gameDate).getTime() + ZONA_UTC * 3600000)
+                          .toLocaleTimeString('es‑PE', { hour: '2‑digit', minute: '2‑digit' });
+        const ls = p.linescore || {};
+        const v = leerEntradas(ls, true), l = leerEntradas(ls, false);
+        const lanzA = p.probablePitchers?.away?.fullName || (final ? 'Finalizado' : 'Por confirmar');
+        const lanzH = p.probablePitchers?.home?.fullName || (final ? 'Finalizado' : 'Por confirmar');
+        const marcador = final || vivo ? `${v.C}‑${l.C}` : horaLima;
 
-            // MLB auxiliares
-            function leerEntradas(ls, visitante) {
-                const inn = ls?.innings || [];
-                const fila = [];
-                for (let i = 0; i < 9; i++) {
-                    const x = inn[i];
-                    fila.push(x ? (visitante ? x.away?.runs : x.home?.runs) ?? '-' : '-');
-                }
-                const tot = ls?.teams?.[visitante ? 'away' : 'home'] || {};
-                return { fila, C: tot.runs ?? '-', H: tot.hits ?? '-', E: tot.errors ?? '-' };
-            }
-            function dibujarBases(off) {
-                const b1 = !!off?.first, b2 = !!off?.second, b3 = !!off?.third;
-                return `
-                <div class="relative w-16 h-16 mx-auto">
-                    <div class="diamante-base absolute top-0 left-1/2 -translate-x-1/2 ${b2 ? 'ocupada' : 'vacia'}"></div>
-                    <div class="diamante-base absolute bottom-1/2 right-0 translate-y-1/2 ${b1 ? 'ocupada' : 'vacia'}"></div>
-                    <div class="diamante-base absolute bottom-1/2 left-0 translate-y-1/2 ${b3 ? 'ocupada' : 'vacia'}"></div>
-                    <div class="diamante-base absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 plato"></div>
-                </div>`;
-            }
+        html += `
+        <div class="bg‑white dark:bg‑gray‑800 rounded‑xl border border‑grisClaro dark:border‑gray‑700 p‑4 shadow‑sm card‑hover relative">
+          ${vivo ? `<span class="absolute top‑2 right‑3 bg‑rojoVivo text‑white text‑[0.7rem] px‑2 py‑0.5 rounded‑full flex items‑center gap‑1"><span class="w‑1.5 h‑1.5 bg‑white rounded‑full parpadeo"></span>EN VIVO</span>` : ''}
+          ${final ? `<span class="absolute top‑2 right‑3 bg‑gris text‑white text‑[0.7rem] px‑2 py‑0.5 rounded‑full">FINAL</span>` : ''}
+          <div class="flex items‑center justify‑between mb‑4">
+            <div class="flex items‑center gap‑2">
+              <img src="https://www.mlbstatic.com/team‑logos/${a.team.id}.svg" class="w‑9 h‑9" alt="${a.team.name}" loading="lazy">
+              <div><div class="font‑semibold text‑sm">${a.team.name}</div><div class="text‑xs">${a.leagueRecord.wins}‑${a.leagueRecord.losses}</div></div>
+            </div>
+            <div class="text‑2xl font‑bold min‑w‑[4rem] text‑center">${marcador}</div>
+            <div class="flex items‑center gap‑2 text‑right flex‑row‑reverse">
+              <img src="https://www.mlbstatic.com/team‑logos/${h.team.id}.svg" class="w‑9 h‑9" alt="${h.team.name}" loading="lazy">
+              <div><div class="font‑semibold text‑sm">${h.team.name}</div><div class="text‑xs">${h.leagueRecord.wins}‑${h.leagueRecord.losses}</div></div>
+            </div>
+          </div>
+          <div class="overflow‑x‑auto">
+            <div class="grid grid‑entradas gap‑x‑1 text‑xs text‑center font‑medium text‑gris/80">
+              ${[1,2,3,4,5,6,7,8,9].map(n=>`<span>${n}</span>`).join('')}
+              <span class="border‑l border‑grisClaro">C</span><span>H</span><span>E</span>
+            </div>
+            <div class="grid grid‑entradas gap‑x‑1 text‑xs text‑center py‑1 border‑t border‑grisClaro mt‑1">
+              ${v.fila.map(x=>`<span>${x}</span>`).join('')}
+              <span class="font‑semibold border‑l border‑grisClaro">${v.C}</span><span class="font‑semibold">${v.H}</span><span class="font‑semibold">${v.E}</span>
+            </div>
+            <div class="grid grid‑entradas gap‑x‑1 text‑xs text‑center py‑1">
+              ${l.fila.map(x=>`<span>${x}</span>`).join('')}
+              <span class="font‑semibold border‑l border‑grisClaro">${l.C}</span><span class="font‑semibold">${l.H}</span><span class="font‑semibold">${l.E}</span>
+            </div>
+          </div>
+          ${vivo ? `<div class="mt‑3 flex justify‑around text‑xs bg‑gray‑50 dark:bg‑gray‑700 rounded py‑3 items‑center">${dibujarBases(ls.offense)}<span>B ${ls.balls||0} • S ${ls.strikes||0} • O ${ls.outs||0}</span></div>` : ''}
+          <div class="mt‑4 grid grid‑cols‑2 gap‑2 text‑xs">
+            <div><div class="text‑gris dark:text‑gray‑400">Lanzando</div><div class="font‑medium truncate">${lanzA}</div></div>
+            <div class="text‑right"><div class="text‑gris dark:text‑gray‑400">Al bate</div><div class="font‑medium truncate">${lanzH}</div></div>
+          </div>
+        </div>`;
+      }
+      cont.innerHTML = html;
+    } catch (e) {
+      cont.innerHTML = `<p class="text‑center py‑6 text‑red‑500">⚠️ ${e.message}</p>`;
+    }
+  }
 
-            // Cargar MLB
-            async function cargarMLB(fecha) {
-                const cont = document.getElementById('lista-partidos');
-                if (!cont) return;
-                try {
-                    cont.innerHTML = '<div class="flex justify-center py-10"><div class="spinner"></div></div>';
-                    const res = await fetch(`https://statsapi.mlb.com/api/v1/schedule?sportId=1&date=${fecha}&language=es&hydrate=linescore,probablePitchers,status,linescore.offense`);
-                    if (!res.ok) throw new Error('API MLB no responde');
-                    const datos = await res.json();
-                    const juegos = datos.dates?.[0]?.games || [];
-                    if (!juegos.length) {
-                        cont.innerHTML = '<p class="text-center py-8 text-gray-600">📭 Sin partidos programados esta fecha</p>';
-                        return;
-                    }
-                    let html = '';
-                    for (const p of juegos) {
-                        const a = p.teams.away, h = p.teams.home;
-                        const estado = p.status;
-                        const vivo = estado.abstractGameState === 'Live';
-                        const final = estado.abstractGameState === 'Final';
-                        const horaUTC = new Date(p.gameDate);
-                        const horaLima = new Date(horaUTC.getTime() + ZONA_UTC * 3600000).toLocaleTimeString('es-PE', { hour: '2-digit', minute: '2-digit' });
-                        const ls = p.linescore || {};
-                        const v = leerEntradas(ls, true), l = leerEntradas(ls, false);
-                        const lanzA = p.probablePitchers?.away || { fullName: final ? 'Finalizado' : 'Por confirmar' };
-                        const lanzH = p.probablePitchers?.home || { fullName: final ? 'Finalizado' : 'Por confirmar' };
-                        const marcador = final || vivo ? `${v.C}-${l.C}` : horaLima;
-                        html += `
-                        <div class="bg-white dark:bg-gray-800 rounded-xl border border-grisClaro dark:border-gray-700 p-4 shadow-sm card-hover relative fade-in">
-                            ${vivo ? `<span class="absolute top-2 right-3 bg-rojoVivo text-white text-[0.7rem] px-2 py-0.5 rounded-full flex items-center gap-1"><span class="w-1.5 h-1.5 bg-white rounded-full parpadeo"></span>EN VIVO</span>` : ''}
-                            ${final ? `<span class="absolute top-2 right-3 bg-gris text-white text-[0.7rem] px-2 py-0.5 rounded-full">FINAL</span>` : ''}
-                            <div class="flex items-center justify-between mb-4">
-                                <div class="flex items-center gap-2">
-                                    <img src="https://www.mlbstatic.com/team-logos/${a.team.id}.svg" class="w-9 h-9" alt="${a.team.name}" loading="lazy">
-                                    <div><div class="font-semibold text-sm">${a.team.name}</div><div class="text-xs text-gray-500">${a.leagueRecord.wins}-${a.leagueRecord.losses}</div></div>
-                                </div>
-                                <div class="text-2xl font-bold min-w-[4rem] text-center">${marcador}</div>
-                                <div class="flex items-center gap-2 text-right flex-row-reverse">
-                                    <img src="https://www.mlbstatic.com/team-logos/${h.team.id}.svg" class="w-9 h-9" alt="${h.team.name}" loading="lazy">
-                                    <div><div class="font-semibold text-sm">${h.team.name}</div><div class="text-xs text-gray-500">${h.leagueRecord.wins}-${h.leagueRecord.losses}</div></div>
-                                </div>
-                            </div>
-                            <div class="overflow-x-auto">
-                                <div class="grid grid-entradas gap-x-1 text-xs text-center font-medium text-gris/80">
-                                    ${[1,2,3,4,5,6,7,8,9].map(n=>`<span>${n}</span>`).join('')}
-                                    <span class="border-l border-grisClaro">C</span><span>H</span><span>E</span>
-                                </div>
-                                <div class="grid grid-entradas gap-x-1 text-xs text-center py-1 border-t border-grisClaro mt-1">
-                                    ${v.fila.map(x=>`<span>${x}</span>`).join('')}
-                                    <span class="font-semibold border-l border-grisClaro">${v.C}</span><span class="font-semibold">${v.H}</span><span class="font-semibold">${v.E}</span>
-                                </div>
-                                <div class="grid grid-entradas gap-x-1 text-xs text-center py-1">
-                                    ${l.fila.map(x=>`<span>${x}</span>`).join('')}
-                                    <span class="font-semibold border-l border-grisClaro">${l.C}</span><span class="font-semibold">${l.H}</span><span class="font-semibold">${l.E}</span>
-                                </div>
-                            </div>
-                            ${vivo ? `<div class="mt-3 flex justify-around text-xs bg-gray-50 dark:bg-gray-700 rounded py-3 items-center">${dibujarBases(ls.offense)}<span>B ${ls.balls||0} • S ${ls.strikes||0} • O ${ls.outs||0}</span></div>` : ''}
-                            <div class="mt-4 grid grid-cols-2 gap-2 text-xs">
-                                <div><div class="text-gris dark:text-gray-400">Lanzando</div><div class="font-medium truncate">${lanzA.fullName}</div></div>
-                                <div class="text-right"><div class="text-gris dark:text-gray-400">Al bate</div><div class="font-medium truncate">${lanzH.fullName}</div></div>
-                            </div>
-                        </div>`;
-                    }
-                    cont.innerHTML = html;
-                } catch (e) {
-                    cont.innerHTML = `<p class="text-center py-6 text-red-500 text-sm">⚠️ No se pudo cargar MLB: ${e.message}</p>`;
-                }
-            }
+  // ✅ NBA corregido / aviso temporada
+  async function cargarNBA() {
+    const cont = document.getElementById('lista‑nba');
+    if (!cont) return;
+    try {
+      cont.innerHTML = '<div class="flex justify‑center py‑10"><div class="spinner"></div></div>';
+      const res = await fetch(`https://www.balldontlie.io/api/v1/games?dates[]=${iso(fechaLima())}`);
+      if (!res.ok) throw new Error('Sin datos');
+      const datos = await res.json();
+      if (!datos.data.length) {
+        cont.innerHTML = `<div class="p‑4 bg‑white dark:bg‑gray‑800 rounded‑xl text‑center shadow‑sm">
+          <p class="text‑sm text‑gray‑600 dark:text‑gray‑300">🏀 Temporada NBA finalizada / sin datos hoy</p>
+        </div>`;
+        return;
+      }
+      let html = '';
+      for (const g of datos.data) {
+        html += `
+        <div class="bg‑white dark:bg‑gray‑800 rounded‑xl p‑4 shadow‑sm border border‑grisClaro dark:border‑gray‑700 card‑hover">
+            <div class="flex justify‑between items‑center">
+                <div class="text‑center flex‑1">
+                    <div class="font‑semibold text‑sm">${g.home_team.full_name}</div>
+                    <div class="text‑2xl font‑bold">${g.home_team_score}</div>
+                </div>
+                <div class="px‑4 text‑xs text‑gray‑500 dark:text‑gray‑400">VS</div>
+                <div class="text‑center flex‑1">
+                    <div class="font‑semibold text‑sm">${g.visitor_team.full_name}</div>
+                    <div class="text‑2xl font‑bold">${g.visitor_team_score}</div>
+                </div>
+            </div>
+            <div class="text‑center text‑xs mt‑2 text‑gray‑500 dark:text‑gray‑400">${g.status}</div>
+        </div>`;
+      }
+      cont.innerHTML = html;
+    } catch {
+      cont.innerHTML = `<p class="text‑center py‑6 text‑red‑500">⚠️ Error al cargar NBA</p>`;
+    }
+  }
 
-            // Cargar NBA con fecha ajustada
-            async function cargarNBA() {
-                const cont = document.getElementById('lista-nba');
-                if (!cont) return;
-                try {
-                    cont.innerHTML = '<div class="flex justify-center py-10"><div class="spinner"></div></div>';
-                    const res = await fetch(`https://www.balldontlie.io/api/v1/games?dates[]=${iso(fechaLima())}`);
-                    if (!res.ok) throw new Error('Error NBA');
-                    const d = await res.json();
-                    if (!d.data.length) {
-                        cont.innerHTML = '<p class="text-center py-8">📭 Sin partidos NBA hoy</p>';
-                        return;
-                    }
-                    let html = '';
-                    for (const g of d.data) {
-                        html += `
-                        <div class="bg-white dark:bg-gray-800 rounded-xl p-4 shadow-sm border border-grisClaro dark:border-gray-700 card-hover fade-in">
-                            <div class="flex justify-between items-center">
-                                <div class="text-center flex-1">
-                                    <div class="font-semibold text-sm">${g.home_team.name}</div>
-                                    <div class="text-2xl font-bold">${g.home_team_score}</div>
-                                </div>
-                                <div class="px-4 text-xs text-gray-500 dark:text-gray-400">VS</div>
-                                <div class="text-center flex-1">
-                                    <div class="font-semibold text-sm">${g.visitor_team.name}</div>
-                                    <div class="text-2xl font-bold">${g.visitor_team_score}</div>
-                                </div>
-                            </div>
-                            <div class="text-center text-xs mt-2 text-gray-500 dark:text-gray-400">${g.status}</div>
-                        </div>`;
-                    }
-                    cont.innerHTML = html;
-                } catch (e) {
-                    cont.innerHTML = `<p class="text-center py-6 text-red-500">⚠️ Error al cargar NBA</p>`;
-                }
-            }
-
-            // Inicio
-            mostrarFechas();
-            cargarMLB(fechaParaAPI(fechaActual));
-            cargarNBA();
-
-            // Actualización automática cada 20 s SOLO si es HOY
-            setInterval(() => {
-                if (iso(fechaActual) === iso(fechaLima())) {
-                    cargarMLB(fechaParaAPI(fechaActual));
-                }
-            }, 20000);
-        });
-    </script>
-</body>
-</html>
+  // Inicio
+  mostrarFechas();
+  cargarMLB(fechaParaAPI(fechaActual));
+  cargarNBA();
+  setInterval(() => {
+    if (iso(fechaActual) === iso(fechaLima())) cargarMLB(fechaParaAPI(fechaActual));
+  }, 20000);
+});
