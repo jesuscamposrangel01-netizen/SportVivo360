@@ -3,15 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SportVive360 | Fútbol, MLB y NBA – Resultados, Estadísticas y Noticias</title>
-    <meta name="description" content="SportVive360 – Cobertura en vivo del Mundial 2026, MLB y NBA. Resultados, estadísticas, clasificaciones y noticias.">
-    <meta name="keywords" content="fútbol, Mundial 2026, MLB, béisbol, NBA, baloncesto, resultados, estadísticas, noticias deportivas">
-    <link rel="canonical" href="https://sportvive360.cyou/">
+    <title>SportVive360 | Fútbol, MLB y NBA – Resultados en vivo y estadísticas</title>
+    <meta name="description" content="Cobertura del Mundial 2026, MLB y NBA. Resultados, clasificaciones, estadísticas, noticias y análisis actualizados.">
+    <meta name="keywords" content="fútbol, Mundial 2026, MLB, béisbol, NBA, baloncesto, resultados, estadísticas, noticias deportivas, en vivo">
+    <link rel="canonical" href="https://sportvivo360.cyou/">
+    <!-- Favicon (emoji como SVG) -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚽</text></svg>">
     <!-- Open Graph -->
     <meta property="og:title" content="SportVive360 – Fútbol, MLB y NBA en Vivo">
-    <meta property="og:description" content="Cobertura del Mundial 2026, MLB y NBA. Resultados, estadísticas y noticias.">
+    <meta property="og:description" content="Resultados, estadísticas y noticias del Mundial 2026, MLB y NBA.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://sportvive360.cyou/">
+    <meta property="og:url" content="https://sportvivo360.cyou/">
+    <!-- Google Analytics (reemplaza G-XXXXXXXXXX con tu ID) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){ dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX');
+    </script>
     <!-- Google AdSense -->
     <meta name="google-adsense-account" content="ca-pub-3765201153278683">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3765201153278683" crossorigin="anonymous"></script>
@@ -36,7 +46,7 @@
         }
     </script>
     <style>
-        /* Estilos base */
+        /* Estilos mejorados */
         .fade-in { animation: fadeIn 0.5s ease-out forwards; opacity: 0; }
         @keyframes fadeIn { to { opacity: 1; } }
         .pulse-dot { animation: pulse 1.5s infinite; }
@@ -151,9 +161,44 @@
         }
         .deporte-btn:hover { background: rgba(255,255,255,0.1); color: white; }
         .deporte-btn.active { background: #1a56db; color: white; border-color: #1a56db; }
+        /* Feed de noticias */
+        .news-feed {
+            background: white; border-radius: 16px; padding: 16px;
+            border: 1px solid #e2e8f0; transition: all 0.3s;
+            min-height: 80px;
+        }
+        .dark .news-feed { background: #1e293b; border-color: #334155; }
+        .news-feed .text { font-size: 0.95rem; font-weight: 500; }
+        .news-feed .time { font-size: 0.7rem; color: #64748b; }
+        .dark .news-feed .time { color: #94a3b8; }
+        /* Fondo con gradiente sutil */
+        body {
+            background: linear-gradient(135deg, #f0f4ff 0%, #e8edf5 100%);
+        }
+        .dark body {
+            background: linear-gradient(135deg, #0f172a 0%, #1a2332 100%);
+        }
+        /* Tarjetas con borde sutil */
+        .match-card, .stat-card, .article-card, .news-feed {
+            backdrop-filter: blur(4px);
+            background: rgba(255,255,255,0.9);
+        }
+        .dark .match-card, .dark .stat-card, .dark .article-card, .dark .news-feed {
+            background: rgba(30,41,59,0.9);
+        }
+        /* Contador en vivo animado */
+        .live-counter {
+            display: inline-block;
+            background: #dc2626;
+            color: white;
+            padding: 2px 12px;
+            border-radius: 999px;
+            font-size: 0.7rem;
+            animation: pulse 1.2s infinite;
+        }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-700 font-sans min-h-screen transition-colors duration-300 dark:bg-gray-900 dark:text-gray-200">
+<body>
 
     <!-- Cookie Banner -->
     <div id="cookieBanner" class="cookie-banner">
@@ -185,9 +230,10 @@
                 <button class="deporte-btn" data-deporte="mlb">⚾ MLB</button>
                 <button class="deporte-btn" data-deporte="nba">🏀 NBA</button>
             </div>
-            <!-- Menú escritorio -->
+            <!-- Menú escritorio (con nuevo item "En vivo") -->
             <nav class="desktop-menu flex flex-wrap gap-4 mt-2 border-t border-white/10 pt-2 text-sm">
                 <span class="nav-link active" data-page="inicio">Inicio</span>
+                <span class="nav-link" data-page="envivo">🔴 En vivo</span>
                 <span class="nav-link" data-page="partidos">Partidos</span>
                 <span class="nav-link" data-page="clasificacion">Clasificación</span>
                 <span class="nav-link" data-page="equipos">Equipos</span>
@@ -198,6 +244,7 @@
             <!-- Menú móvil -->
             <nav class="mobile-menu mt-2 border-t border-white/10 pt-2 text-xs">
                 <span class="nav-link active" data-page="inicio">Inicio</span>
+                <span class="nav-link" data-page="envivo">🔴 En vivo</span>
                 <span class="nav-link" data-page="partidos">Partidos</span>
                 <span class="nav-link" data-page="clasificacion">Clasificación</span>
                 <span class="nav-link" data-page="equipos">Equipos</span>
@@ -219,12 +266,29 @@
                 <p class="text-sm opacity-80 mt-1" id="banner-desc">Todos los partidos, marcadores y programación del torneo.</p>
             </div>
 
+            <!-- Feed de noticias rotatorio -->
+            <div class="news-feed mb-6" id="newsFeed">
+                <div class="flex items-center justify-between">
+                    <span class="text-xs font-bold text-blue-600 dark:text-blue-400">📰 ÚLTIMA HORA</span>
+                    <span class="time" id="newsTime">hace 5s</span>
+                </div>
+                <p class="text" id="newsText">Bienvenido a SportVive360. Sigue toda la actualidad del Mundial 2026.</p>
+            </div>
+
             <div class="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400 mb-4">
                 <span>📍 Lima, UTC‑5</span>
                 <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-green-500 pulse-dot"></span> Actualizado</span>
             </div>
 
             <div id="contenido-inicio">
+                <div class="flex justify-center py-10"><div class="spinner"></div></div>
+            </div>
+        </section>
+
+        <!-- PÁGINA: EN VIVO -->
+        <section id="page-envivo" class="page-section">
+            <h2 class="text-2xl font-bold text-secondary border-l-4 border-accent pl-3 mb-5 dark:text-white">🔴 Partidos en vivo</h2>
+            <div id="envivo-contenido" class="space-y-4">
                 <div class="flex justify-center py-10"><div class="spinner"></div></div>
             </div>
         </section>
@@ -326,6 +390,7 @@
     <footer class="text-center text-xs text-gray-500 dark:text-gray-400 border-t border-gray-200 dark:border-gray-700 py-6 mt-8">
         <div class="max-w-7xl mx-auto px-3 flex flex-wrap justify-center gap-4 mb-2">
             <span class="nav-link" onclick="navegar('inicio')">Inicio</span>
+            <span class="nav-link" onclick="navegar('envivo')">🔴 En vivo</span>
             <span class="nav-link" onclick="navegar('partidos')">Partidos</span>
             <span class="nav-link" onclick="navegar('clasificacion')">Clasificación</span>
             <span class="nav-link" onclick="navegar('equipos')">Equipos</span>
@@ -379,7 +444,6 @@
                     titulo: 'Mundial 2026 • Resultados y calendario completo',
                     desc: 'Todos los partidos, marcadores y programación del torneo.'
                 },
-                // ===== PARTIDOS EXTRAÍDOS DE LAS IMÁGENES =====
                 partidos: [
                     // 18 de junio
                     { local: 'República Checa', visitante: 'Sudáfrica', score: '1-1', status: 'Final', flagL: '🇨🇿', flagV: '🇿🇦' },
@@ -395,7 +459,8 @@
                     { local: 'Países Bajos', visitante: 'Suecia', score: '5-1', status: 'Final', flagL: '🇳🇱', flagV: '🇸🇪' },
                     { local: 'Alemania', visitante: 'Costa de Marfil', score: '2-1', status: 'Final', flagL: '🇩🇪', flagV: '🇨🇮' },
                     { local: 'Ecuador', visitante: 'Curazao', score: '0-0', status: 'Final', flagL: '🇪🇨', flagV: '🇨🇼' },
-                    { local: 'Túnez', visitante: 'Japón', score: 'vs', status: 'Vivo', flagL: '🇹🇳', flagV: '🇯🇵' },
+                    // Partido en vivo con contador (se actualizará cada 5s)
+                    { local: 'Túnez', visitante: 'Japón', score: '0-0', status: 'Vivo', flagL: '🇹🇳', flagV: '🇯🇵', live: true },
                     // 21 de junio
                     { local: 'España', visitante: 'Arabia Saudí', score: 'vs', status: 'Programado', flagL: '🇪🇸', flagV: '🇸🇦' },
                     { local: 'Bélgica', visitante: 'Irán', score: 'vs', status: 'Programado', flagL: '🇧🇪', flagV: '🇮🇷' },
@@ -478,16 +543,18 @@
                     { autor: 'Por Carlos Rodríguez', titulo: 'Claves del éxito de Países Bajos: juego ofensivo y efectividad', texto: 'El equipo de Van Gaal ha demostrado una capacidad goleadora impresionante. Con jugadores como Depay, Gakpo y Malen, los holandeses son una de las selecciones más temidas. Su presión alta y transiciones rápidas son sus principales armas.' },
                 ]
             },
-            // MLB y NBA con datos anteriores (no se modifican)
             mlb: {
                 nombre: 'MLB',
                 icono: '⚾',
                 banner: { titulo: 'Liga Mayor de Béisbol • Cobertura en vivo, estadísticas, lanzadores y bateadores', desc: 'Resultados en tiempo real, análisis y noticias de la MLB 2026' },
                 partidos: [
-                    { local: 'New York Yankees', visitante: 'Boston Red Sox', score: '6-4', status: 'Final', badge: 'badge-final' },
-                    { local: 'Los Angeles Dodgers', visitante: 'San Francisco Giants', score: '3-2', status: 'Vivo', badge: 'badge-vivo' },
-                    { local: 'Chicago Cubs', visitante: 'St. Louis Cardinals', score: 'vs', status: 'Programado', badge: 'badge-programado' },
-                    { local: 'Houston Astros', visitante: 'Seattle Mariners', score: '8-1', status: 'Final', badge: 'badge-final' },
+                    { local: 'New York Yankees', visitante: 'Boston Red Sox', score: '6-4', status: 'Final' },
+                    { local: 'Los Angeles Dodgers', visitante: 'San Francisco Giants', score: '3-2', status: 'Vivo' },
+                    { local: 'Chicago Cubs', visitante: 'St. Louis Cardinals', score: 'vs', status: 'Programado' },
+                    { local: 'Houston Astros', visitante: 'Seattle Mariners', score: '8-1', status: 'Final' },
+                    { local: 'Atlanta Braves', visitante: 'Philadelphia Phillies', score: 'vs', status: 'Programado' },
+                    { local: 'Toronto Blue Jays', visitante: 'Tampa Bay Rays', score: '5-3', status: 'Final' },
+                    { local: 'New York Mets', visitante: 'Washington Nationals', score: 'vs', status: 'Programado' },
                 ],
                 clasificacion: {
                     titulo: '📊 Clasificación MLB 2026',
@@ -504,7 +571,7 @@
                         ]}
                     ]
                 },
-                equipos: ['Yankees', 'Dodgers', 'Braves', 'Phillies', 'Red Sox', 'Cubs', 'Astros', 'Giants'],
+                equipos: ['Yankees', 'Dodgers', 'Braves', 'Phillies', 'Red Sox', 'Cubs', 'Astros', 'Giants', 'Blue Jays', 'Mets'],
                 noticias: [
                     { fecha: '21 de junio, 2026', titulo: 'Yankees y Braves lideran la MLB; Judge y Acuña pelean por el MVP', resumen: 'La temporada 2026 está siendo histórica para ambos jugadores.' },
                 ],
@@ -517,8 +584,12 @@
                 icono: '🏀',
                 banner: { titulo: 'NBA • Temporada 2025-26 – Resultados, estadísticas y clasificación', desc: 'Sigue a tus equipos favoritos.' },
                 partidos: [
-                    { local: 'Boston Celtics', visitante: 'Los Angeles Lakers', score: '112-108', status: 'Final', badge: 'badge-final' },
-                    { local: 'Denver Nuggets', visitante: 'Golden State Warriors', score: '105-98', status: 'Vivo', badge: 'badge-vivo' },
+                    { local: 'Boston Celtics', visitante: 'Los Angeles Lakers', score: '112-108', status: 'Final' },
+                    { local: 'Denver Nuggets', visitante: 'Golden State Warriors', score: '105-98', status: 'Vivo' },
+                    { local: 'Milwaukee Bucks', visitante: 'Phoenix Suns', score: 'vs', status: 'Programado' },
+                    { local: 'Philadelphia 76ers', visitante: 'Dallas Mavericks', score: '121-115', status: 'Final' },
+                    { local: 'Miami Heat', visitante: 'New York Knicks', score: '98-95', status: 'Final' },
+                    { local: 'Oklahoma City Thunder', visitante: 'LA Clippers', score: 'vs', status: 'Programado' },
                 ],
                 clasificacion: {
                     titulo: '📊 Clasificación NBA 2025-26',
@@ -526,14 +597,16 @@
                         { nombre: 'Conferencia Este', equipos: [
                             { nombre: 'Boston Celtics', G: 58, P: 24, PCT: '.707' },
                             { nombre: 'Milwaukee Bucks', G: 55, P: 27, PCT: '.671' },
+                            { nombre: 'Philadelphia 76ers', G: 50, P: 32, PCT: '.610' },
                         ]},
                         { nombre: 'Conferencia Oeste', equipos: [
                             { nombre: 'Denver Nuggets', G: 57, P: 25, PCT: '.695' },
                             { nombre: 'OKC Thunder', G: 54, P: 28, PCT: '.659' },
+                            { nombre: 'Phoenix Suns', G: 49, P: 33, PCT: '.598' },
                         ]}
                     ]
                 },
-                equipos: ['Celtics', 'Lakers', 'Nuggets', 'Warriors', 'Bucks', 'Suns'],
+                equipos: ['Celtics', 'Lakers', 'Nuggets', 'Warriors', 'Bucks', 'Suns', '76ers', 'Mavericks', 'Heat', 'Knicks', 'Thunder', 'Clippers'],
                 noticias: [
                     { fecha: '21 de junio, 2026', titulo: 'Celtics y Nuggets, los reyes de la temporada regular', resumen: 'Boston y Denver han sido los equipos más consistentes.' },
                 ],
@@ -552,7 +625,10 @@
             renderizarEquipos();
             renderizarNoticias();
             renderizarAnalisis();
+            renderizarEnVivo();
             actualizarHeader();
+            iniciarContadorVivo();
+            iniciarFeedNoticias();
         }
 
         function actualizarHeader() {
@@ -582,9 +658,10 @@
                     <span class="text-xs bg-accent/10 text-accent px-3 py-1 rounded-full">${datos.partidos.filter(p => p.status === 'Vivo').length} en vivo</span>
                 </div>
                 <div class="space-y-3">`;
-            datos.partidos.forEach(p => {
+            datos.partidos.slice(0, 15).forEach(p => {
                 const flagL = p.flagL || '';
                 const flagV = p.flagV || '';
+                const badgeClass = p.status === 'Final' ? 'badge-final' : p.status === 'Vivo' ? 'badge-vivo' : 'badge-programado';
                 html += `
                     <div class="match-card">
                         <div class="flex items-center justify-between flex-wrap gap-2">
@@ -594,10 +671,11 @@
                                 <span class="text-gray-400 text-sm">vs</span>
                                 ${flagV ? `<span class="text-xl">${flagV}</span>` : ''}
                                 <span class="font-semibold">${p.visitante}</span>
+                                ${p.live ? '<span class="live-counter ml-2">🔴 EN VIVO</span>' : ''}
                             </div>
                             <div class="flex items-center gap-3">
-                                <span class="font-bold text-lg">${p.score}</span>
-                                <span class="match-status ${p.badge || 'badge-' + (p.status === 'Final' ? 'final' : p.status === 'Vivo' ? 'vivo' : 'programado')}">${p.status}</span>
+                                <span class="font-bold text-lg" id="score-${p.local}-${p.visitante}">${p.score}</span>
+                                <span class="match-status ${badgeClass}">${p.status}</span>
                             </div>
                         </div>
                     </div>
@@ -605,7 +683,7 @@
             });
             html += `</div></div>`;
 
-            // Estadísticas de goleadores
+            // Estadísticas de goleadores y asistencias
             html += `<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
                 <div class="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 p-4 shadow-sm card-hover">
                     <h4 class="font-bold text-lg mb-2">⚽ Máximos goleadores</h4>
@@ -650,6 +728,40 @@
             contenedor.innerHTML = html;
         }
 
+        function renderizarEnVivo() {
+            const datos = datosDeportes[deporteActual];
+            const contenedor = document.getElementById('envivo-contenido');
+            const vivos = datos.partidos.filter(p => p.status === 'Vivo');
+            if (vivos.length === 0) {
+                contenedor.innerHTML = '<p class="text-gray-500">No hay partidos en vivo en este momento.</p>';
+                return;
+            }
+            let html = '';
+            vivos.forEach(p => {
+                const flagL = p.flagL || '';
+                const flagV = p.flagV || '';
+                html += `
+                    <div class="match-card">
+                        <div class="flex items-center justify-between flex-wrap gap-2">
+                            <div class="flex items-center gap-3">
+                                ${flagL ? `<span class="text-xl">${flagL}</span>` : ''}
+                                <span class="font-semibold">${p.local}</span>
+                                <span class="text-gray-400 text-sm">vs</span>
+                                ${flagV ? `<span class="text-xl">${flagV}</span>` : ''}
+                                <span class="font-semibold">${p.visitante}</span>
+                                <span class="live-counter ml-2">🔴 EN VIVO</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <span class="font-bold text-lg" id="score-${p.local}-${p.visitante}-envivo">${p.score}</span>
+                                <span class="match-status badge-vivo">Vivo</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            contenedor.innerHTML = html;
+        }
+
         function renderizarPartidos() {
             const datos = datosDeportes[deporteActual];
             document.getElementById('partidos-titulo').textContent = `📅 Calendario de Partidos ${datos.nombre}`;
@@ -659,10 +771,11 @@
             datos.partidos.forEach(p => {
                 const flagL = p.flagL || '';
                 const flagV = p.flagV || '';
+                const badgeClass = p.status === 'Final' ? 'badge-final' : p.status === 'Vivo' ? 'badge-vivo' : 'badge-programado';
                 html += `
                     <div class="flex justify-between border-b border-gray-100 dark:border-gray-700 py-2">
                         <span>${flagL} ${p.local} vs ${p.visitante} ${flagV}</span>
-                        <span>${p.score} <span class="match-status ${p.badge || 'badge-' + (p.status === 'Final' ? 'final' : p.status === 'Vivo' ? 'vivo' : 'programado')}">${p.status}</span></span>
+                        <span>${p.score} <span class="match-status ${badgeClass}">${p.status}</span></span>
                     </div>
                 `;
             });
@@ -761,6 +874,58 @@
             contenedor.innerHTML = html || '<p class="text-gray-500">No hay análisis disponibles.</p>';
         }
 
+        // ======== CONTADOR EN VIVO (Túnez vs Japón) ========
+        let liveInterval = null;
+        function iniciarContadorVivo() {
+            if (liveInterval) clearInterval(liveInterval);
+            liveInterval = setInterval(() => {
+                // Buscar el partido en vivo de Túnez vs Japón en los datos
+                const partido = datosDeportes.futbol.partidos.find(p => p.local === 'Túnez' && p.visitante === 'Japón' && p.status === 'Vivo');
+                if (!partido) return;
+                // Generar marcador aleatorio (simular goles)
+                const golesTunez = Math.floor(Math.random() * 4);
+                const golesJapon = Math.floor(Math.random() * 3);
+                const nuevoScore = `${golesTunez}-${golesJapon}`;
+                partido.score = nuevoScore;
+                // Actualizar en la UI (tanto en inicio como en página en vivo)
+                const elementos = document.querySelectorAll(`[id^="score-${partido.local}-${partido.visitante}"]`);
+                elementos.forEach(el => el.textContent = nuevoScore);
+            }, 5000);
+        }
+
+        // ======== FEED DE NOTICIAS ROTATORIO ========
+        const noticiasFeed = [
+            '⚽ ¡Gol de Gakpo! Países Bajos amplía su ventaja ante Suecia (5-1).',
+            '🇦🇷 Argentina golea 3-0 a Argelia con doblete de Messi.',
+            '🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inglaterra vence 4-2 a Croacia en un partidazo.',
+            '🇧🇷 Brasil derrota 3-0 a Haití con goles de Vinicius y Endrick.',
+            '🇫🇷 Francia se impone 3-1 a Senegal con doblete de Mbappé.',
+            '🇩🇪 Alemania sufre pero vence 2-1 a Costa de Marfil.',
+            '🇳🇱 Países Bajos, la sensación del torneo con 5 goles en su debut.',
+            '🔴 ¡Túnez y Japón empatan en un partido vibrante!',
+            '🇪🇸 España y Cabo Verde firman un empate sin goles (0-0).',
+            '🇧🇪 Bélgica y Egipto reparten puntos (1-1).'
+        ];
+        let indiceNoticia = 0;
+        let feedInterval = null;
+
+        function iniciarFeedNoticias() {
+            if (feedInterval) clearInterval(feedInterval);
+            // Mostrar primera noticia
+            actualizarNoticia();
+            feedInterval = setInterval(() => {
+                indiceNoticia = (indiceNoticia + 1) % noticiasFeed.length;
+                actualizarNoticia();
+            }, 8000);
+        }
+
+        function actualizarNoticia() {
+            const texto = document.getElementById('newsText');
+            const tiempo = document.getElementById('newsTime');
+            if (texto) texto.textContent = noticiasFeed[indiceNoticia];
+            if (tiempo) tiempo.textContent = 'hace ' + (Math.floor(Math.random() * 10) + 1) + 's';
+        }
+
         // ======== CAMBIO DE DEPORTE ========
         function cambiarDeporte(deporte) {
             if (deporte === deporteActual) return;
@@ -777,6 +942,8 @@
             document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
             document.querySelectorAll(`.nav-link[data-page="${pageId}"]`).forEach(link => link.classList.add('active'));
             window.scrollTo({ top: 0, behavior: 'smooth' });
+            // Si es la página de en vivo, refrescar contenido
+            if (pageId === 'envivo') renderizarEnVivo();
         }
 
         // ======== EVENT LISTENERS ========
