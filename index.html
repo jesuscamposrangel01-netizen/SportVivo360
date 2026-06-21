@@ -441,7 +441,7 @@
             </div>
         </section>
 
-        <!-- PÁGINA: CLASIFICACIÓN -->
+        <!-- PÁGINA: CLASIFICACIÓN (SOLO AQUÍ SE MUESTRA) -->
         <section id="page-clasificacion" class="page-section">
             <h2 class="text-2xl font-bold text-secondary border-l-4 border-accent pl-3 mb-5 dark:text-white">📊 Clasificación Mundial 2026 – Grupos</h2>
             <div id="clasificacion-contenido" class="standings-grid">
@@ -865,7 +865,7 @@
             renderizarSelectorFechas();
             renderizarInicio();
             renderizarPartidos();
-            renderizarClasificacion();  // <--- AHORA RENDERIZA BIEN
+            renderizarClasificacion();  // Ahora solo se llama aquí
             renderizarEquipos();
             renderizarNoticias();
             renderizarAnalisis();
@@ -959,7 +959,7 @@
                 html += `</div></div>`;
             }
 
-            // Estadísticas
+            // Estadísticas (no incluye clasificación)
             html += `<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
                 <div class="stat-card card-hover">
                     <h4 class="font-bold text-lg mb-2">⚽ Máximos goleadores</h4>
@@ -1011,7 +1011,7 @@
             contenedor.innerHTML = html;
         }
 
-        // ===== FUNCIÓN DE CLASIFICACIÓN (CON TODOS LOS GRUPOS) =====
+        // ===== CLASIFICACIÓN: SOLO SE RENDERIZA AQUÍ =====
         function renderizarClasificacion() {
             const datos = datosDeportes[deporteActual];
             const contenedor = document.getElementById('clasificacion-contenido');
