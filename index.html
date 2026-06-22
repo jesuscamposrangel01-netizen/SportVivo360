@@ -11,10 +11,29 @@
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3765201153278683" crossorigin="anonymous"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-/* ===== ESTILOS (idénticos a los que tenías) ===== */
 *{box-sizing:border-box;margin:0;padding:0}
-:root{--primary:#0b1e2e;--secondary:#1a4971;--accent:#e11d48;--blue:#1a56db;--green:#22c55e;--gold:#fbbf24;--bg:#f0f4ff;--card:#ffffff;--text:#1e293b;--muted:#64748b;--border:#e2e8f0;--card-shadow:0 4px 20px rgba(0,0,0,0.06);}
-.dark{--bg:#0f172a;--card:#1e293b;--text:#e2e8f0;--muted:#94a3b8;--border:#334155;--card-shadow:0 4px 20px rgba(0,0,0,0.3);}
+:root{
+  --primary:#0b1e2e;
+  --secondary:#1a4971;
+  --accent:#e11d48;
+  --blue:#1a56db;
+  --green:#22c55e;
+  --gold:#fbbf24;
+  --bg:#f0f4ff;
+  --card:#ffffff;
+  --text:#1e293b;
+  --muted:#64748b;
+  --border:#e2e8f0;
+  --card-shadow:0 4px 20px rgba(0,0,0,0.06);
+}
+.dark{
+  --bg:#0f172a;
+  --card:#1e293b;
+  --text:#e2e8f0;
+  --muted:#94a3b8;
+  --border:#334155;
+  --card-shadow:0 4px 20px rgba(0,0,0,0.3);
+}
 body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;transition:background .3s,color .3s;}
 a{color:var(--blue);text-decoration:none}
 button{cursor:pointer;border:none;background:none;font-family:inherit}
@@ -182,7 +201,7 @@ footer{background:var(--primary);color:rgba(255,255,255,.55);text-align:center;p
   </div>
   <div class="ticker">
     <span class="ticker-label">Última hora</span>
-    <span class="ticker-text" id="tickerText">Países Bajos golea 5-1 a Suecia; Alemania vence 2-1 a Costa de Marfil</span>
+    <span class="ticker-text" id="tickerText">España golea 4-0 a Arabia Saudita; Egipto vence 3-1 a Nueva Zelanda</span>
   </div>
   <div class="date-selector" id="dateSelector"></div>
   <div class="grid-main">
@@ -315,212 +334,217 @@ footer{background:var(--primary);color:rgba(255,255,255,.55);text-align:center;p
   <p>© 2026 SportVivo360 – Todos los derechos reservados | Lima, Perú · <span id="footerFecha"></span></p>
 </footer>
 
-<!-- ============================================================ -->
-<!-- JAVASCRIPT COMPLETO CON DATOS ACTUALIZADOS DEL MUNDIAL 2026   -->
-<!-- ============================================================ -->
+<!-- JAVASCRIPT COMPLETO ACTUALIZADO -->
 <script>
-// ============================================================
-// DATOS DEL MUNDIAL 2026 ACTUALIZADOS (HASTA EL 21 DE JUNIO)
-// ============================================================
-const DATOS = {
-        
-  mlb: {futbol: {
-  nombre: 'Mundial 2026',
-  icono: '⚽',
-  banner: {
-    titulo: 'Mundial 2026 • Resultados y calendario completo',
-    desc: 'Todos los partidos, marcadores y programación del torneo.'
-  },
-  partidosPorFecha: {
-    '11': [
-      { local: 'México', visit: 'Sudáfrica', flagL: '🇲🇽', flagV: '🇿🇦', score: '2-0', st: 'Final' },
-      { local: 'Corea del Sur', visit: 'Rep. Checa', flagL: '🇰🇷', flagV: '🇨🇿', score: '2-1', st: 'Final' }
+// --------------------------
+// DATOS COMPLETOS ACTUALIZADOS (MUNDIAL 2026 + MLB + NBA)
+// --------------------------
+const datosDeportes = {
+  futbol: {
+    nombre: 'Mundial 2026',
+    icono: '⚽',
+    banner: {
+      titulo: 'Mundial 2026 • Resultados y calendario completo',
+      desc: 'Todos los partidos, marcadores y programación del torneo.'
+    },
+    partidosPorFecha: {
+      '11': [
+        { local: 'México', visitante: 'Sudáfrica', score: '2-0', status: 'Final', flagL: '🇲🇽', flagV: '🇿🇦' },
+        { local: 'Corea del Sur', visitante: 'República Checa', score: '2-1', status: 'Final', flagL: '🇰🇷', flagV: '🇨🇿' }
+      ],
+      '12': [
+        { local: 'Canadá', visitante: 'Bosnia y Herzegovina', score: '1-1', status: 'Final', flagL: '🇨🇦', flagV: '🇧🇦' }
+      ],
+      '13': [
+        { local: 'Estados Unidos', visitante: 'Paraguay', score: '4-1', status: 'Final', flagL: '🇺🇸', flagV: '🇵🇾' },
+        { local: 'Australia', visitante: 'Turquía', score: '2-0', status: 'Final', flagL: '🇦🇺', flagV: '🇹🇷' },
+        { local: 'Qatar', visitante: 'Suiza', score: '1-1', status: 'Final', flagL: '🇶🇦', flagV: '🇨🇭' }
+      ],
+      '14': [
+        { local: 'Alemania', visitante: 'Curazao', score: '7-1', status: 'Final', flagL: '🇩🇪', flagV: '🇨🇼' },
+        { local: 'Países Bajos', visitante: 'Japón', score: '2-2', status: 'Final', flagL: '🇳🇱', flagV: '🇯🇵' },
+        { local: 'Costa de Marfil', visitante: 'Ecuador', score: '1-0', status: 'Final', flagL: '🇨🇮', flagV: '🇪🇨' },
+        { local: 'Suecia', visitante: 'Túnez', score: '5-1', status: 'Final', flagL: '🇸🇪', flagV: '🇹🇳' },
+        { local: 'Brasil', visitante: 'Marruecos', score: '1-1', status: 'Final', flagL: '🇧🇷', flagV: '🇲🇦' }
+      ],
+      '15': [
+        { local: 'Bélgica', visitante: 'Egipto', score: '1-1', status: 'Final', flagL: '🇧🇪', flagV: '🇪🇬' },
+        { local: 'Irán', visitante: 'Nueva Zelanda', score: '2-2', status: 'Final', flagL: '🇮🇷', flagV: '🇳🇿' },
+        { local: 'Arabia Saudita', visitante: 'Uruguay', score: '1-1', status: 'Final', flagL: '🇸🇦', flagV: '🇺🇾' },
+        { local: 'España', visitante: 'Cabo Verde', score: '0-0', status: 'Final', flagL: '🇪🇸', flagV: '🇨🇻' }
+      ],
+      '16': [
+        { local: 'Francia', visitante: 'Senegal', score: '3-1', status: 'Final', flagL: '🇫🇷', flagV: '🇸🇳' },
+        { local: 'Irak', visitante: 'Noruega', score: '1-4', status: 'Final', flagL: '🇮🇶', flagV: '🇳🇴' },
+        { local: 'Argentina', visitante: 'Argelia', score: '3-0', status: 'Final', flagL: '🇦🇷', flagV: '🇩🇿' },
+        { local: 'Austria', visitante: 'Jordania', score: '2-1', status: 'Final', flagL: '🇦🇹', flagV: '🇯🇴' }
+      ],
+      '17': [
+        { local: 'Portugal', visitante: 'R.D. del Congo', score: '1-1', status: 'Final', flagL: '🇵🇹', flagV: '🇨🇩' },
+        { local: 'Inglaterra', visitante: 'Croacia', score: '4-2', status: 'Final', flagL: '🏴󠁧󠁢󠁥󠁮󠁧󠁿', flagV: '🇭🇷' },
+        { local: 'Ghana', visitante: 'Panamá', score: '1-0', status: 'Final', flagL: '🇬🇭', flagV: '🇵🇦' },
+        { local: 'Colombia', visitante: 'Uzbekistán', score: '3-1', status: 'Final', flagL: '🇨🇴', flagV: '🇺🇿' }
+      ],
+      '18': [
+        { local: 'México', visitante: 'Corea del Sur', score: '1-0', status: 'Final', flagL: '🇲🇽', flagV: '🇰🇷' },
+        { local: 'República Checa', visitante: 'Sudáfrica', score: '1-1', status: 'Final', flagL: '🇨🇿', flagV: '🇿🇦' },
+        { local: 'Suiza', visitante: 'Bosnia y Herzegovina', score: '4-1', status: 'Final', flagL: '🇨🇭', flagV: '🇧🇦' },
+        { local: 'Canadá', visitante: 'Qatar', score: '6-0', status: 'Final', flagL: '🇨🇦', flagV: '🇶🇦' }
+      ],
+      '19': [
+        { local: 'Estados Unidos', visitante: 'Australia', score: '2-0', status: 'Final', flagL: '🇺🇸', flagV: '🇦🇺' },
+        { local: 'Marruecos', visitante: 'Escocia', score: '1-0', status: 'Final', flagL: '🇲🇦', flagV: '🏴󠁧󠁢󠁳󠁣󠁴󠁿' },
+        { local: 'Brasil', visitante: 'Haití', score: '3-0', status: 'Final', flagL: '🇧🇷', flagV: '🇭🇹' }
+      ],
+      '20': [
+        { local: 'Alemania', visitante: 'Costa de Marfil', score: '2-1', status: 'Final', flagL: '🇩🇪', flagV: '🇨🇮' },
+        { local: 'Ecuador', visitante: 'Curazao', score: '0-0', status: 'Final', flagL: '🇪🇨', flagV: '🇨🇼' },
+        { local: 'Países Bajos', visitante: 'Suecia', score: '5-1', status: 'Final', flagL: '🇳🇱', flagV: '🇸🇪' },
+        { local: 'Japón', visitante: 'Túnez', score: '4-0', status: 'Final', flagL: '🇯🇵', flagV: '🇹🇳' }
+      ],
+      // ==============================================
+      // ✅ 21 DE JUNIO (AYER) - RESULTADOS REALES
+      // ==============================================
+      '21': [
+        { local: 'España', visitante: 'Arabia Saudita', score: '4-0', status: 'Final', flagL: '🇪🇸', flagV: '🇸🇦' },
+        { local: 'Bélgica', visitante: 'Irán', score: '0-0', status: 'Final', flagL: '🇧🇪', flagV: '🇮🇷' },
+        { local: 'Uruguay', visitante: 'Cabo Verde', score: '2-2', status: 'Final', flagL: '🇺🇾', flagV: '🇨🇻' },
+        { local: 'Nueva Zelanda', visitante: 'Egipto', score: '1-3', status: 'Final', flagL: '🇳🇿', flagV: '🇪🇬' }
+      ],
+      // 22 DE JUNIO (HOY) - PROGRAMADOS
+      '22': [
+        { local: 'Argentina', visitante: 'Austria', score: 'vs', status: 'Programado', flagL: '🇦🇷', flagV: '🇦🇹' },
+        { local: 'Francia', visitante: 'Irak', score: 'vs', status: 'Programado', flagL: '🇫🇷', flagV: '🇮🇶' },
+        { local: 'Noruega', visitante: 'Senegal', score: 'vs', status: 'Programado', flagL: '🇳🇴', flagV: '🇸🇳' },
+        { local: 'Colombia', visitante: 'Portugal', score: 'vs', status: 'Programado', flagL: '🇨🇴', flagV: '🇵🇹' }
+      ],
+      '23': [
+        { local: 'Brasil', visitante: 'Escocia', score: 'vs', status: 'Programado', flagL: '🇧🇷', flagV: '🏴󠁧󠁢󠁳󠁣󠁴󠁿' },
+        { local: 'EE.UU.', visitante: 'Turquía', score: 'vs', status: 'Programado', flagL: '🇺🇸', flagV: '🇹🇷' },
+        { local: 'Alemania', visitante: 'Ecuador', score: 'vs', status: 'Programado', flagL: '🇩🇪', flagV: '🇪🇨' }
+      ],
+      '24': [
+        { local: 'Portugal', visitante: 'Colombia', score: 'vs', status: 'Programado', flagL: '🇵🇹', flagV: '🇨🇴' },
+        { local: 'Inglaterra', visitante: 'Ghana', score: 'vs', status: 'Programado', flagL: '🏴󠁧󠁢󠁥󠁮󠁧󠁿', flagV: '🇬🇭' },
+        { local: 'Países Bajos', visitante: 'Túnez', score: 'vs', status: 'Programado', flagL: '🇳🇱', flagV: '🇹🇳' }
+      ],
+      '25': [
+        { local: 'España', visitante: 'Uruguay', score: 'vs', status: 'Programado', flagL: '🇪🇸', flagV: '🇺🇾' },
+        { local: 'Argentina', visitante: 'Francia', score: 'vs', status: 'Programado', flagL: '🇦🇷', flagV: '🇫🇷' },
+        { local: 'Alemania', visitante: 'Brasil', score: 'vs', status: 'Programado', flagL: '🇩🇪', flagV: '🇧🇷' }
+      ],
+      '26': [
+        { local: 'México', visitante: 'EE.UU.', score: 'vs', status: 'Programado', flagL: '🇲🇽', flagV: '🇺🇸' },
+        { local: 'Japón', visitante: 'Países Bajos', score: 'vs', status: 'Programado', flagL: '🇯🇵', flagV: '🇳🇱' }
+      ]
+    },
+    // ==============================================
+    // CLASIFICACIÓN ACTUALIZADA (CON PUNTOS REALES)
+    // ==============================================
+    clasificacion: {
+      titulo: '📊 Clasificación Mundial 2026',
+      grupos: [
+        { nombre: 'Grupo A', equipos: [
+          { nombre: '🇲🇽 México', Pts: 4, PJ: 2, G: 1, E: 1, P: 0, GF: 3, GC: 0 },
+          { nombre: '🇰🇷 Corea del Sur', Pts: 3, PJ: 2, G: 1, E: 0, P: 1, GF: 3, GC: 2 },
+          { nombre: '🇿🇦 Sudáfrica', Pts: 1, PJ: 2, G: 0, E: 1, P: 1, GF: 1, GC: 2 },
+          { nombre: '🇨🇿 Rep. Checa', Pts: 1, PJ: 2, G: 0, E: 1, P: 1, GF: 2, GC: 3 }
+        ]},
+        { nombre: 'Grupo B', equipos: [
+          { nombre: '🇨🇦 Canadá', Pts: 4, PJ: 2, G: 1, E: 1, P: 0, GF: 7, GC: 1 },
+          { nombre: '🇨🇭 Suiza', Pts: 4, PJ: 2, G: 1, E: 1, P: 0, GF: 5, GC: 2 },
+          { nombre: '🇧🇦 Bosnia', Pts: 1, PJ: 2, G: 0, E: 1, P: 1, GF: 2, GC: 5 },
+          { nombre: '🇶🇦 Qatar', Pts: 1, PJ: 2, G: 0, E: 1, P: 1, GF: 1, GC: 7 }
+        ]},
+        { nombre: 'Grupo C', equipos: [
+          { nombre: '🇧🇷 Brasil', Pts: 4, PJ: 2, G: 1, E: 1, P: 0, GF: 4, GC: 1 },
+          { nombre: '🇲🇦 Marruecos', Pts: 4, PJ: 2, G: 1, E: 1, P: 0, GF: 2, GC: 1 },
+          { nombre: '🏴󠁧󠁢󠁳󠁣󠁴󠁿 Escocia', Pts: 0, PJ: 1, G: 0, E: 0, P: 1, GF: 0, GC: 1 },
+          { nombre: '🇭🇹 Haití', Pts: 0, PJ: 1, G: 0, E: 0, P: 1, GF: 0, GC: 3 }
+        ]},
+        { nombre: 'Grupo D', equipos: [
+          { nombre: '🇺🇸 EE.UU.', Pts: 6, PJ: 2, G: 2, E: 0, P: 0, GF: 6, GC: 1 },
+          { nombre: '🇦🇺 Australia', Pts: 3, PJ: 2, G: 1, E: 0, P: 1, GF: 2, GC: 2 },
+          { nombre: '🇹🇷 Turquía', Pts: 0, PJ: 1, G: 0, E: 0, P: 1, GF: 0, GC: 2 },
+          { nombre: '🇵🇾 Paraguay', Pts: 0, PJ: 1, G: 0, E: 0, P: 1, GF: 1, GC: 4 }
+        ]},
+        { nombre: 'Grupo E', equipos: [
+          { nombre: '🇩🇪 Alemania', Pts: 9, PJ: 3, G: 3, E: 0, P: 0, GF: 11, GC: 3 },
+          { nombre: '🇨🇮 Costa de Marfil', Pts: 3, PJ: 3, G: 1, E: 0, P: 2, GF: 2, GC: 4 },
+          { nombre: '🇪🇨 Ecuador', Pts: 2, PJ: 3, G: 0, E: 2, P: 1, GF: 0, GC: 1 },
+          { nombre: '🇨🇼 Curazao', Pts: 2, PJ: 3, G: 0, E: 2, P: 1, GF: 1, GC: 8 }
+        ]},
+        { nombre: 'Grupo F', equipos: [
+          { nombre: '🇳🇱 Países Bajos', Pts: 7, PJ: 3, G: 2, E: 1, P: 0, GF: 12, GC: 4 },
+          { nombre: '🇯🇵 Japón', Pts: 7, PJ: 3, G: 2, E: 1, P: 0, GF: 10, GC: 2 },
+          { nombre: '🇸🇪 Suecia', Pts: 3, PJ: 3, G: 1, E: 0, P: 2, GF: 7, GC: 11 },
+          { nombre: '🇹🇳 Túnez', Pts: 0, PJ: 3, G: 0, E: 0, P: 3, GF: 1, GC: 13 }
+        ]},
+        { nombre: 'Grupo G', equipos: [
+          { nombre: '🇪🇬 Egipto', Pts: 4, PJ: 3, G: 1, E: 1, P: 1, GF: 5, GC: 4 },
+          { nombre: '🇧🇪 Bélgica', Pts: 2, PJ: 3, G: 0, E: 2, P: 1, GF: 2, GC: 3 },
+          { nombre: '🇮🇷 Irán', Pts: 2, PJ: 3, G: 0, E: 2, P: 1, GF: 3, GC: 4 },
+          { nombre: '🇳🇿 Nueva Zelanda', Pts: 1, PJ: 3, G: 0, E: 1, P: 2, GF: 5, GC: 7 }
+        ]},
+        { nombre: 'Grupo H', equipos: [
+          { nombre: '🇪🇸 España', Pts: 4, PJ: 3, G: 1, E: 1, P: 1, GF: 4, GC: 1 },
+          { nombre: '🇺🇾 Uruguay', Pts: 2, PJ: 3, G: 0, E: 2, P: 1, GF: 3, GC: 4 },
+          { nombre: '🇨🇻 Cabo Verde', Pts: 2, PJ: 3, G: 0, E: 2, P: 1, GF: 2, GC: 3 },
+          { nombre: '🇸🇦 Arabia Saudita', Pts: 1, PJ: 3, G: 0, E: 1, P: 2, GF: 1, GC: 5 }
+        ]},
+        { nombre: 'Grupo I', equipos: [
+          { nombre: '🇫🇷 Francia', Pts: 3, PJ: 1, G: 1, E: 0, P: 0, GF: 3, GC: 1 },
+          { nombre: '🇳🇴 Noruega', Pts: 3, PJ: 1, G: 1, E: 0, P: 0, GF: 4, GC: 1 },
+          { nombre: '🇸🇳 Senegal', Pts: 0, PJ: 1, G: 0, E: 0, P: 1, GF: 1, GC: 3 },
+          { nombre: '🇮🇶 Irak', Pts: 0, PJ: 1, G: 0, E: 0, P: 1, GF: 1, GC: 4 }
+        ]},
+        { nombre: 'Grupo J', equipos: [
+          { nombre: '🇦🇷 Argentina', Pts: 3, PJ: 1, G: 1, E: 0, P: 0, GF: 3, GC: 0 },
+          { nombre: '🇦🇹 Austria', Pts: 3, PJ: 1, G: 1, E: 0, P: 0, GF: 2, GC: 1 },
+          { nombre: '🇯🇴 Jordania', Pts: 0, PJ: 1, G: 0, E: 0, P: 1, GF: 1, GC: 2 },
+          { nombre: '🇩🇿 Argelia', Pts: 0, PJ: 1, G: 0, E: 0, P: 1, GF: 0, GC: 3 }
+        ]},
+        { nombre: 'Grupo K', equipos: [
+          { nombre: '🇨🇴 Colombia', Pts: 3, PJ: 1, G: 1, E: 0, P: 0, GF: 3, GC: 1 },
+          { nombre: '🇵🇹 Portugal', Pts: 2, PJ: 2, G: 0, E: 2, P: 0, GF: 2, GC: 2 },
+          { nombre: '🇨🇩 R.D. Congo', Pts: 1, PJ: 1, G: 0, E: 1, P: 0, GF: 1, GC: 1 },
+          { nombre: '🇺🇿 Uzbekistán', Pts: 0, PJ: 1, G: 0, E: 0, P: 1, GF: 1, GC: 3 }
+        ]},
+        { nombre: 'Grupo L', equipos: [
+          { nombre: '🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inglaterra', Pts: 3, PJ: 1, G: 1, E: 0, P: 0, GF: 4, GC: 2 },
+          { nombre: '🇬🇭 Ghana', Pts: 3, PJ: 1, G: 1, E: 0, P: 0, GF: 1, GC: 0 },
+          { nombre: '🇭🇷 Croacia', Pts: 0, PJ: 1, G: 0, E: 0, P: 1, GF: 2, GC: 4 },
+          { nombre: '🇵🇦 Panamá', Pts: 0, PJ: 1, G: 0, E: 0, P: 1, GF: 0, GC: 1 }
+        ]}
+      ]
+    },
+    equipos: ['Argentina','Brasil','Francia','España','Alemania','Portugal','Inglaterra','Países Bajos','Croacia','Bélgica','Uruguay','Marruecos','Senegal','Australia','EE.UU.','México','Canadá','Japón','Corea del Sur','Suecia','Suiza','Turquía','Italia'],
+    noticias: [
+      { titulo: 'España golea 4-0 a Arabia Saudita y se coloca líder del Grupo H', fecha: '21 jun 2026', resumen: 'La selección española mostró su mejor versión con goles de Yamal, Oyarzabal y un autogol.' },
+      { titulo: 'Egipto vence 3-1 a Nueva Zelanda y se pone líder del Grupo G', fecha: '21 jun 2026', resumen: 'Los faraones sumaron su primera victoria y se colocan primeros del grupo.' },
+      { titulo: 'Alemania, primera clasificada a octavos de final', fecha: '20 jun 2026', resumen: 'La victoria ante Costa de Marfil le dio el pase matemático.' }
     ],
-    '12': [
-      { local: 'Canadá', visit: 'Bosnia', flagL: '🇨🇦', flagV: '🇧🇦', score: '1-1', st: 'Final' }
+    analisis: [
+      { titulo: 'Análisis de la segunda jornada: España y Países Bajos arrasan', autor: 'Por Juan Pérez', fecha: '21 jun 2026', texto: 'La segunda fecha del Mundial nos dejó goleadas históricas y la primera clasificada: Alemania.' },
+      { titulo: 'Cabo Verde y Curazao hacen historia con sus primeros puntos', autor: 'Por Carlos Rodríguez', fecha: '21 jun 2026', texto: 'Los equipos africanos y caribeños lograron empates que quedarán en la memoria de sus aficiones.' }
     ],
-    '13': [
-      { local: 'EE.UU.', visit: 'Paraguay', flagL: '🇺🇸', flagV: '🇵🇾', score: '4-1', st: 'Final' },
-      { local: 'Australia', visit: 'Turquía', flagL: '🇦🇺', flagV: '🇹🇷', score: '2-0', st: 'Final' },
-      { local: 'Qatar', visit: 'Suiza', flagL: '🇶🇦', flagV: '🇨🇭', score: '1-1', st: 'Final' }
+    goleadores: [
+      { n: 'Gakpo / Depay (Países Bajos)', v: '5 goles' },
+      { n: 'Kane / Bellingham (Inglaterra)', v: '4 goles' },
+      { n: 'Messi / Álvarez (Argentina)', v: '3 goles' },
+      { n: 'Vinicius / Endrick (Brasil)', v: '3 goles' }
     ],
-    '14': [
-      { local: 'Alemania', visit: 'Curazao', flagL: '🇩🇪', flagV: '🇨🇼', score: '7-1', st: 'Final' },
-      { local: 'Países Bajos', visit: 'Japón', flagL: '🇳🇱', flagV: '🇯🇵', score: '2-2', st: 'Final' },
-      { local: 'Costa de Marfil', visit: 'Ecuador', flagL: '🇨🇮', flagV: '🇪🇨', score: '1-0', st: 'Final' },
-      { local: 'Suecia', visit: 'Túnez', flagL: '🇸🇪', flagV: '🇹🇳', score: '5-1', st: 'Final' },
-      { local: 'Brasil', visit: 'Marruecos', flagL: '🇧🇷', flagV: '🇲🇦', score: '1-1', st: 'Final' }
-    ],
-    '15': [
-      { local: 'Bélgica', visit: 'Egipto', flagL: '🇧🇪', flagV: '🇪🇬', score: '1-1', st: 'Final' },
-      { local: 'Irán', visit: 'Nueva Zelanda', flagL: '🇮🇷', flagV: '🇳🇿', score: '2-2', st: 'Final' },
-      { local: 'Arabia Saudita', visit: 'Uruguay', flagL: '🇸🇦', flagV: '🇺🇾', score: '1-1', st: 'Final' },
-      { local: 'España', visit: 'Cabo Verde', flagL: '🇪🇸', flagV: '🇨🇻', score: '0-0', st: 'Final' }
-    ],
-    '16': [
-      { local: 'Francia', visit: 'Senegal', flagL: '🇫🇷', flagV: '🇸🇳', score: '3-1', st: 'Final' },
-      { local: 'Irak', visit: 'Noruega', flagL: '🇮🇶', flagV: '🇳🇴', score: '1-4', st: 'Final' },
-      { local: 'Argentina', visit: 'Argelia', flagL: '🇦🇷', flagV: '🇩🇿', score: '3-0', st: 'Final' },
-      { local: 'Austria', visit: 'Jordania', flagL: '🇦🇹', flagV: '🇯🇴', score: '2-1', st: 'Final' }
-    ],
-    '17': [
-      { local: 'Portugal', visit: 'R.D. Congo', flagL: '🇵🇹', flagV: '🇨🇩', score: '1-1', st: 'Final' },
-      { local: 'Inglaterra', visit: 'Croacia', flagL: '🏴󠁧󠁢󠁥󠁮󠁧󠁿', flagV: '🇭🇷', score: '4-2', st: 'Final' },
-      { local: 'Ghana', visit: 'Panamá', flagL: '🇬🇭', flagV: '🇵🇦', score: '1-0', st: 'Final' },
-      { local: 'Colombia', visit: 'Uzbekistán', flagL: '🇨🇴', flagV: '🇺🇿', score: '3-1', st: 'Final' }
-    ],
-    '18': [
-      { local: 'México', visit: 'Corea del Sur', flagL: '🇲🇽', flagV: '🇰🇷', score: '1-0', st: 'Final' },
-      { local: 'Rep. Checa', visit: 'Sudáfrica', flagL: '🇨🇿', flagV: '🇿🇦', score: '1-1', st: 'Final' },
-      { local: 'Suiza', visit: 'Bosnia', flagL: '🇨🇭', flagV: '🇧🇦', score: '4-1', st: 'Final' },
-      { local: 'Canadá', visit: 'Qatar', flagL: '🇨🇦', flagV: '🇶🇦', score: '6-0', st: 'Final' }
-    ],
-    '19': [
-      { local: 'EE.UU.', visit: 'Australia', flagL: '🇺🇸', flagV: '🇦🇺', score: '2-0', st: 'Final' },
-      { local: 'Marruecos', visit: 'Escocia', flagL: '🇲🇦', flagV: '🏴󠁧󠁢󠁳󠁣󠁴󠁿', score: '1-0', st: 'Final' },
-      { local: 'Brasil', visit: 'Haití', flagL: '🇧🇷', flagV: '🇭🇹', score: '3-0', st: 'Final' }
-    ],
-    // ✅ 20 DE JUNIO - RESULTADOS REALES
-    '20': [
-      { local: 'Alemania', visit: 'Costa de Marfil', flagL: '🇩🇪', flagV: '🇨🇮', score: '2-1', st: 'Final' },
-      { local: 'Ecuador', visit: 'Curazao', flagL: '🇪🇨', flagV: '🇨🇼', score: '0-0', st: 'Final' },
-      { local: 'Países Bajos', visit: 'Suecia', flagL: '🇳🇱', flagV: '🇸🇪', score: '5-1', st: 'Final' },
-      { local: 'Japón', visit: 'Túnez', flagL: '🇯🇵', flagV: '🇹🇳', score: '4-0', st: 'Final' }
-    ],
-    // ✅ 21 DE JUNIO (AYER) - RESULTADOS REALES (según tu captura)
-    '21': [
-      { local: 'España', visit: 'Arabia Saudita', flagL: '🇪🇸', flagV: '🇸🇦', score: '4-0', st: 'Final' },
-      { local: 'Bélgica', visit: 'Irán', flagL: '🇧🇪', flagV: '🇮🇷', score: '0-0', st: 'Final' },
-      { local: 'Uruguay', visit: 'Cabo Verde', flagL: '🇺🇾', flagV: '🇨🇻', score: '2-2', st: 'Final' },
-      { local: 'Nueva Zelanda', visit: 'Egipto', flagL: '🇳🇿', flagV: '🇪🇬', score: '1-3', st: 'Final' }
-    ],
-    // 22 DE JUNIO (HOY) - PROGRAMADOS
-    '22': [
-      { local: 'Argentina', visit: 'Austria', flagL: '🇦🇷', flagV: '🇦🇹', score: 'vs', st: 'Programado' },
-      { local: 'Francia', visit: 'Irak', flagL: '🇫🇷', flagV: '🇮🇶', score: 'vs', st: 'Programado' },
-      { local: 'Noruega', visit: 'Senegal', flagL: '🇳🇴', flagV: '🇸🇳', score: 'vs', st: 'Programado' },
-      { local: 'Colombia', visit: 'Portugal', flagL: '🇨🇴', flagV: '🇵🇹', score: 'vs', st: 'Programado' }
-    ],
-    '23': [
-      { local: 'Brasil', visit: 'Escocia', flagL: '🇧🇷', flagV: '🏴󠁧󠁢󠁳󠁣󠁴󠁿', score: 'vs', st: 'Programado' },
-      { local: 'EE.UU.', visit: 'Turquía', flagL: '🇺🇸', flagV: '🇹🇷', score: 'vs', st: 'Programado' },
-      { local: 'Alemania', visit: 'Ecuador', flagL: '🇩🇪', flagV: '🇪🇨', score: 'vs', st: 'Programado' }
-    ],
-    '24': [
-      { local: 'Portugal', visit: 'Colombia', flagL: '🇵🇹', flagV: '🇨🇴', score: 'vs', st: 'Programado' },
-      { local: 'Inglaterra', visit: 'Ghana', flagL: '🏴󠁧󠁢󠁥󠁮󠁧󠁿', flagV: '🇬🇭', score: 'vs', st: 'Programado' },
-      { local: 'Países Bajos', visit: 'Túnez', flagL: '🇳🇱', flagV: '🇹🇳', score: 'vs', st: 'Programado' }
-    ],
-    '25': [
-      { local: 'España', visit: 'Uruguay', flagL: '🇪🇸', flagV: '🇺🇾', score: 'vs', st: 'Programado' },
-      { local: 'Argentina', visit: 'Francia', flagL: '🇦🇷', flagV: '🇫🇷', score: 'vs', st: 'Programado' },
-      { local: 'Alemania', visit: 'Brasil', flagL: '🇩🇪', flagV: '🇧🇷', score: 'vs', st: 'Programado' }
-    ],
-    '26': [
-      { local: 'México', visit: 'EE.UU.', flagL: '🇲🇽', flagV: '🇺🇸', score: 'vs', st: 'Programado' },
-      { local: 'Japón', visit: 'Países Bajos', flagL: '🇯🇵', flagV: '🇳🇱', score: 'vs', st: 'Programado' }
+    asistencias: [
+      { n: 'Ángel Di María (Argentina)', v: '3' },
+      { n: 'Kevin De Bruyne (Bélgica)', v: '2' },
+      { n: 'Antoine Griezmann (Francia)', v: '2' },
+      { n: 'Dani Olmo (España)', v: '2' }
     ]
   },
   // ============================================================
-  // CLASIFICACIÓN ACTUALIZADA (con puntos reales)
+  // MLB - CON DATOS DE RESPALDO
   // ============================================================
-  clasificacion: [
-    { nombre: 'Grupo A', equipos: [
-      { n: '🇲🇽 México', Pts: 4, PJ: 2, G: 1, E: 1, P: 0, GF: 3, GC: 0 },
-      { n: '🇰🇷 Corea del Sur', Pts: 3, PJ: 2, G: 1, E: 0, P: 1, GF: 3, GC: 2 },
-      { n: '🇿🇦 Sudáfrica', Pts: 1, PJ: 2, G: 0, E: 1, P: 1, GF: 1, GC: 2 },
-      { n: '🇨🇿 Rep. Checa', Pts: 0, PJ: 1, G: 0, E: 0, P: 1, GF: 1, GC: 2 }
-    ]},
-    { nombre: 'Grupo B', equipos: [
-      { n: '🇨🇦 Canadá', Pts: 4, PJ: 2, G: 1, E: 1, P: 0, GF: 7, GC: 1 },
-      { n: '🇨🇭 Suiza', Pts: 4, PJ: 2, G: 1, E: 1, P: 0, GF: 5, GC: 2 },
-      { n: '🇧🇦 Bosnia', Pts: 1, PJ: 2, G: 0, E: 1, P: 1, GF: 2, GC: 5 },
-      { n: '🇶🇦 Qatar', Pts: 0, PJ: 1, G: 0, E: 0, P: 1, GF: 0, GC: 6 }
-    ]},
-    { nombre: 'Grupo C', equipos: [
-      { n: '🇧🇷 Brasil', Pts: 4, PJ: 2, G: 1, E: 1, P: 0, GF: 4, GC: 1 },
-      { n: '🇲🇦 Marruecos', Pts: 4, PJ: 2, G: 1, E: 1, P: 0, GF: 2, GC: 1 },
-      { n: '🏴󠁧󠁢󠁳󠁣󠁴󠁿 Escocia', Pts: 0, PJ: 1, G: 0, E: 0, P: 1, GF: 0, GC: 1 },
-      { n: '🇭🇹 Haití', Pts: 0, PJ: 1, G: 0, E: 0, P: 1, GF: 0, GC: 3 }
-    ]},
-    { nombre: 'Grupo D', equipos: [
-      { n: '🇺🇸 EE.UU.', Pts: 6, PJ: 2, G: 2, E: 0, P: 0, GF: 6, GC: 1 },
-      { n: '🇦🇺 Australia', Pts: 3, PJ: 2, G: 1, E: 0, P: 1, GF: 2, GC: 2 },
-      { n: '🇹🇷 Turquía', Pts: 0, PJ: 1, G: 0, E: 0, P: 1, GF: 0, GC: 2 },
-      { n: '🇵🇾 Paraguay', Pts: 0, PJ: 1, G: 0, E: 0, P: 1, GF: 1, GC: 4 }
-    ]},
-    { nombre: 'Grupo E', equipos: [
-      { n: '🇩🇪 Alemania', Pts: 9, PJ: 3, G: 3, E: 0, P: 0, GF: 11, GC: 3 },
-      { n: '🇨🇮 Costa de Marfil', Pts: 3, PJ: 3, G: 1, E: 0, P: 2, GF: 2, GC: 4 },
-      { n: '🇪🇨 Ecuador', Pts: 2, PJ: 3, G: 0, E: 2, P: 1, GF: 0, GC: 1 },
-      { n: '🇨🇼 Curazao', Pts: 2, PJ: 3, G: 0, E: 2, P: 1, GF: 1, GC: 8 }
-    ]},
-    { nombre: 'Grupo F', equipos: [
-      { n: '🇳🇱 Países Bajos', Pts: 7, PJ: 3, G: 2, E: 1, P: 0, GF: 12, GC: 4 },
-      { n: '🇯🇵 Japón', Pts: 7, PJ: 3, G: 2, E: 1, P: 0, GF: 10, GC: 2 },
-      { n: '🇸🇪 Suecia', Pts: 3, PJ: 3, G: 1, E: 0, P: 2, GF: 7, GC: 11 },
-      { n: '🇹🇳 Túnez', Pts: 0, PJ: 3, G: 0, E: 0, P: 3, GF: 1, GC: 13 }
-    ]},
-    { nombre: 'Grupo G', equipos: [
-      { n: '🇪🇬 Egipto', Pts: 4, PJ: 3, G: 1, E: 1, P: 1, GF: 5, GC: 4 },
-      { n: '🇧🇪 Bélgica', Pts: 2, PJ: 3, G: 0, E: 2, P: 1, GF: 2, GC: 3 },
-      { n: '🇮🇷 Irán', Pts: 2, PJ: 3, G: 0, E: 2, P: 1, GF: 3, GC: 4 },
-      { n: '🇳🇿 Nueva Zelanda', Pts: 1, PJ: 3, G: 0, E: 1, P: 2, GF: 5, GC: 7 }
-    ]},
-    { nombre: 'Grupo H', equipos: [
-      { n: '🇪🇸 España', Pts: 4, PJ: 3, G: 1, E: 1, P: 1, GF: 4, GC: 1 },
-      { n: '🇺🇾 Uruguay', Pts: 2, PJ: 3, G: 0, E: 2, P: 1, GF: 3, GC: 4 },
-      { n: '🇨🇻 Cabo Verde', Pts: 2, PJ: 3, G: 0, E: 2, P: 1, GF: 2, GC: 3 },
-      { n: '🇸🇦 Arabia Saudita', Pts: 1, PJ: 3, G: 0, E: 1, P: 2, GF: 1, GC: 5 }
-    ]},
-    { nombre: 'Grupo I', equipos: [
-      { n: '🇫🇷 Francia', Pts: 3, PJ: 1, G: 1, E: 0, P: 0, GF: 3, GC: 1 },
-      { n: '🇳🇴 Noruega', Pts: 3, PJ: 1, G: 1, E: 0, P: 0, GF: 4, GC: 1 },
-      { n: '🇸🇳 Senegal', Pts: 0, PJ: 1, G: 0, E: 0, P: 1, GF: 1, GC: 3 },
-      { n: '🇮🇶 Irak', Pts: 0, PJ: 1, G: 0, E: 0, P: 1, GF: 1, GC: 4 }
-    ]},
-    { nombre: 'Grupo J', equipos: [
-      { n: '🇦🇷 Argentina', Pts: 3, PJ: 1, G: 1, E: 0, P: 0, GF: 3, GC: 0 },
-      { n: '🇦🇹 Austria', Pts: 3, PJ: 1, G: 1, E: 0, P: 0, GF: 2, GC: 1 },
-      { n: '🇯🇴 Jordania', Pts: 0, PJ: 1, G: 0, E: 0, P: 1, GF: 1, GC: 2 },
-      { n: '🇩🇿 Argelia', Pts: 0, PJ: 1, G: 0, E: 0, P: 1, GF: 0, GC: 3 }
-    ]},
-    { nombre: 'Grupo K', equipos: [
-      { n: '🇨🇴 Colombia', Pts: 3, PJ: 1, G: 1, E: 0, P: 0, GF: 3, GC: 1 },
-      { n: '🇵🇹 Portugal', Pts: 2, PJ: 2, G: 0, E: 2, P: 0, GF: 2, GC: 2 },
-      { n: '🇨🇩 R.D. Congo', Pts: 1, PJ: 1, G: 0, E: 1, P: 0, GF: 1, GC: 1 },
-      { n: '🇺🇿 Uzbekistán', Pts: 0, PJ: 1, G: 0, E: 0, P: 1, GF: 1, GC: 3 }
-    ]},
-    { nombre: 'Grupo L', equipos: [
-      { n: '🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inglaterra', Pts: 3, PJ: 1, G: 1, E: 0, P: 0, GF: 4, GC: 2 },
-      { n: '🇬🇭 Ghana', Pts: 3, PJ: 1, G: 1, E: 0, P: 0, GF: 1, GC: 0 },
-      { n: '🇭🇷 Croacia', Pts: 0, PJ: 1, G: 0, E: 0, P: 1, GF: 2, GC: 4 },
-      { n: '🇵🇦 Panamá', Pts: 0, PJ: 1, G: 0, E: 0, P: 1, GF: 0, GC: 1 }
-    ]}
-  ],
-  equipos: ['Argentina','Brasil','Francia','España','Alemania','Portugal','Inglaterra','Países Bajos','Croacia','Bélgica','Uruguay','Marruecos','Senegal','Australia','EE.UU.','México','Canadá','Japón','Corea del Sur','Suecia','Suiza','Turquía','Italia'],
-  noticias: [
-    { titulo: 'España golea 4-0 a Arabia Saudita y se coloca líder del Grupo H', fecha: '21 jun 2026', resumen: 'La selección española mostró su mejor versión con goles de Yamal, Oyarzabal y un autogol.' },
-    { titulo: 'Países Bajos y Japón lideran el Grupo F con 7 puntos', fecha: '21 jun 2026', resumen: 'Ambos equipos ganaron sus partidos y se perfilan como favoritos.' },
-    { titulo: 'Alemania, primera clasificada a octavos de final', fecha: '20 jun 2026', resumen: 'La victoria ante Costa de Marfil le dio el pase matemático.' }
-  ],
-  analisis: [
-    { titulo: 'Análisis de la segunda jornada: España y Países Bajos arrasan', autor: 'Por Juan Pérez', fecha: '21 jun 2026', texto: 'La segunda fecha del Mundial nos dejó goleadas históricas y la primera clasificada: Alemania.' },
-    { titulo: 'Cabo Verde y Curazao hacen historia con sus primeros puntos', autor: 'Por Carlos Rodríguez', fecha: '21 jun 2026', texto: 'Los equipos africanos y caribeños lograron empates que quedarán en la memoria de sus aficiones.' }
-  ],
-  goleadores: [
-    { n: 'Gakpo / Depay (Países Bajos)', v: '5 goles' },
-    { n: 'Kane / Bellingham (Inglaterra)', v: '4 goles' },
-    { n: 'Messi / Álvarez (Argentina)', v: '3 goles' },
-    { n: 'Vinicius / Endrick (Brasil)', v: '3 goles' }
-  ],
-  asistencias: [
-    { n: 'Ángel Di María (Argentina)', v: '3' },
-    { n: 'Kevin De Bruyne (Bélgica)', v: '2' },
-    { n: 'Antoine Griezmann (Francia)', v: '2' },
-    { n: 'Dani Olmo (España)', v: '2' }
-  ]
-}
+  mlb: {
     nombre: 'MLB',
     icono: '⚾',
     banner: {
@@ -528,34 +552,39 @@ const DATOS = {
       desc: 'Partidos, marcadores y tablas de posiciones de la MLB actualizadas en tiempo real.'
     },
     partidos: [
-      { local: 'New York Yankees', visit: 'Boston Red Sox', score: '6-4', st: 'Final' },
-      { local: 'Los Ángeles Dodgers', visit: 'San Francisco Giants', score: '3-2', st: 'Vivo' },
-      { local: 'Chicago Cubs', visit: 'St. Louis Cardinals', score: 'vs', st: 'Programado' },
-      { local: 'Houston Astros', visit: 'Seattle Mariners', score: '8-1', st: 'Final' },
-      { local: 'Atlanta Braves', visit: 'Philadelphia Phillies', score: 'vs', st: 'Programado' },
-      { local: 'Toronto Blue Jays', visit: 'Tampa Bay Rays', score: '5-3', st: 'Final' },
-      { local: 'New York Mets', visit: 'Washington Nationals', score: 'vs', st: 'Programado' }
+      { local: 'New York Yankees', visitante: 'Boston Red Sox', score: '6-4', status: 'Final' },
+      { local: 'Los Ángeles Dodgers', visitante: 'San Francisco Giants', score: '3-2', status: 'Vivo' },
+      { local: 'Chicago Cubs', visitante: 'St. Louis Cardinals', score: 'vs', status: 'Programado' },
+      { local: 'Houston Astros', visitante: 'Seattle Mariners', score: '8-1', status: 'Final' },
+      { local: 'Atlanta Braves', visitante: 'Philadelphia Phillies', score: 'vs', status: 'Programado' },
+      { local: 'Toronto Blue Jays', visitante: 'Tampa Bay Rays', score: '5-3', status: 'Final' }
     ],
-    clasificacion: [
-      { nombre: 'Liga Americana – Este', equipos: [
-        { n: 'New York Yankees', G: 45, P: 28, PCT: '.616' },
-        { n: 'Tampa Bay Rays', G: 41, P: 30, PCT: '.577' },
-        { n: 'Toronto Blue Jays', G: 34, P: 38, PCT: '.472' }
-      ]},
-      { nombre: 'Liga Nacional – Este', equipos: [
-        { n: 'Atlanta Braves', G: 46, P: 25, PCT: '.648' },
-        { n: 'Philadelphia Phillies', G: 40, P: 34, PCT: '.541' },
-        { n: 'Washington Nationals', G: 38, P: 37, PCT: '.507' }
-      ]}
-    ],
+    clasificacion: {
+      titulo: '📊 Clasificación MLB 2026',
+      grupos: [
+        { nombre: 'Liga Americana – Este', equipos: [
+          { nombre: 'New York Yankees', G: 45, P: 28, PCT: '.616' },
+          { nombre: 'Tampa Bay Rays', G: 41, P: 30, PCT: '.577' },
+          { nombre: 'Toronto Blue Jays', G: 34, P: 38, PCT: '.472' }
+        ]},
+        { nombre: 'Liga Nacional – Este', equipos: [
+          { nombre: 'Atlanta Braves', G: 46, P: 25, PCT: '.648' },
+          { nombre: 'Philadelphia Phillies', G: 40, P: 34, PCT: '.541' },
+          { nombre: 'Washington Nationals', G: 38, P: 37, PCT: '.507' }
+        ]}
+      ]
+    },
     equipos: ['Yankees','Dodgers','Braves','Phillies','Red Sox','Cubs','Astros','Giants','Blue Jays','Mets','Cardinals','Mariners','Rays','Nationals'],
     noticias: [
-      { titulo: 'Yankees y Braves lideran la MLB; Judge y Acuña pelean por el MVP', fecha: '21 jun 2026', resumen: 'La temporada 2026 está siendo histórica para ambos jugadores. Judge lidera en jonrones.' }
+      { titulo: 'Yankees y Braves lideran la MLB; Judge y Acuña pelean por el MVP', fecha: '21 jun 2026', resumen: 'La temporada 2026 está siendo histórica para ambos jugadores.' }
     ],
     analisis: [
-      { titulo: '¿Quién ganará la Serie Mundial 2026?', autor: 'Por Juan Pérez', fecha: '20 jun 2026', texto: 'Dodgers, Yankees y Braves son los principales candidatos a alzar el trofeo este año.' }
+      { titulo: '¿Quién ganará la Serie Mundial 2026?', autor: 'Por Juan Pérez', fecha: '20 jun 2026', texto: 'Dodgers, Yankees y Braves son los principales candidatos.' }
     ]
   },
+  // ============================================================
+  // NBA - DATOS ESTÁTICOS
+  // ============================================================
   nba: {
     nombre: 'NBA',
     icono: '🏀',
@@ -564,44 +593,46 @@ const DATOS = {
       desc: 'Sigue a tus equipos favoritos con estadísticas actualizadas.'
     },
     partidos: [
-      { local: 'Boston Celtics', visit: 'Los Ángeles Lakers', score: '112-108', st: 'Final' },
-      { local: 'Denver Nuggets', visit: 'Golden State Warriors', score: '105-98', st: 'Vivo' },
-      { local: 'Milwaukee Bucks', visit: 'Phoenix Suns', score: 'vs', st: 'Programado' },
-      { local: 'Philadelphia 76ers', visit: 'Dallas Mavericks', score: '121-115', st: 'Final' },
-      { local: 'Miami Heat', visit: 'New York Knicks', score: '98-95', st: 'Final' },
-      { local: 'Oklahoma City Thunder', visit: 'LA Clippers', score: 'vs', st: 'Programado' }
+      { local: 'Boston Celtics', visitante: 'Los Ángeles Lakers', score: '112-108', status: 'Final' },
+      { local: 'Denver Nuggets', visitante: 'Golden State Warriors', score: '105-98', status: 'Vivo' },
+      { local: 'Milwaukee Bucks', visitante: 'Phoenix Suns', score: 'vs', status: 'Programado' },
+      { local: 'Philadelphia 76ers', visitante: 'Dallas Mavericks', score: '121-115', status: 'Final' },
+      { local: 'Miami Heat', visitante: 'New York Knicks', score: '98-95', status: 'Final' }
     ],
-    clasificacion: [
-      { nombre: 'Conferencia Este', equipos: [
-        { n: 'Boston Celtics', G: 58, P: 24, PCT: '.707' },
-        { n: 'Milwaukee Bucks', G: 55, P: 27, PCT: '.671' },
-        { n: 'Philadelphia 76ers', G: 50, P: 32, PCT: '.610' }
-      ]},
-      { nombre: 'Conferencia Oeste', equipos: [
-        { n: 'Denver Nuggets', G: 57, P: 25, PCT: '.695' },
-        { n: 'OKC Thunder', G: 54, P: 28, PCT: '.659' },
-        { n: 'Phoenix Suns', G: 49, P: 33, PCT: '.598' }
-      ]}
-    ],
+    clasificacion: {
+      titulo: '📊 Clasificación NBA 2025-26',
+      grupos: [
+        { nombre: 'Conferencia Este', equipos: [
+          { nombre: 'Boston Celtics', G: 58, P: 24, PCT: '.707' },
+          { nombre: 'Milwaukee Bucks', G: 55, P: 27, PCT: '.671' },
+          { nombre: 'Philadelphia 76ers', G: 50, P: 32, PCT: '.610' }
+        ]},
+        { nombre: 'Conferencia Oeste', equipos: [
+          { nombre: 'Denver Nuggets', G: 57, P: 25, PCT: '.695' },
+          { nombre: 'OKC Thunder', G: 54, P: 28, PCT: '.659' },
+          { nombre: 'Phoenix Suns', G: 49, P: 33, PCT: '.598' }
+        ]}
+      ]
+    },
     equipos: ['Celtics','Lakers','Nuggets','Warriors','Bucks','Suns','76ers','Mavericks','Heat','Knicks','Thunder','Clippers'],
     noticias: [
-      { titulo: 'Celtics y Nuggets, los reyes de la temporada regular', fecha: '21 jun 2026', resumen: 'Boston y Denver han sido los equipos más consistentes de la temporada 2025-26.' }
+      { titulo: 'Celtics y Nuggets, los reyes de la temporada regular', fecha: '21 jun 2026', resumen: 'Boston y Denver han sido los equipos más consistentes.' }
     ],
     analisis: [
-      { titulo: 'Playoffs NBA 2026: predicciones y favoritos', autor: 'Por Laura Gómez', fecha: '18 jun 2026', texto: 'Celtics y Nuggets son los grandes favoritos. Giannis Antetokounmpo podría ser el factor decisivo.' }
+      { titulo: 'Playoffs NBA 2026: predicciones y favoritos', autor: 'Por Laura Gómez', fecha: '18 jun 2026', texto: 'Celtics y Nuggets son los grandes favoritos.' }
     ]
   }
 };
 
 // ============================================================
-// TICKER (noticias rápidas)
+// TICKER
 // ============================================================
 const TICKER = [
   'Bienvenido a SportVivo360. Sigue toda la actualidad del Mundial 2026.',
-  'Argentina golea 3-0 a Argelia con doblete de Messi en el Grupo J',
-  'Países Bajos y Japón empatan en el Grupo F; Alemania lidera el Grupo E',
-  'MLB: Dodgers en vivo vs Giants | NBA: Nuggets en vivo vs Warriors',
-  'Hoy: Argentina vs Austria | Francia vs Irak | Colombia vs Portugal'
+  'España golea 4-0 a Arabia Saudita; Egipto vence 3-1 a Nueva Zelanda.',
+  'Países Bajos y Japón empatan en el Grupo F; Alemania lidera el Grupo E.',
+  'MLB: Dodgers en vivo vs Giants | NBA: Nuggets en vivo vs Warriors.',
+  'Hoy: Argentina vs Austria | Francia vs Irak | Colombia vs Portugal.'
 ];
 
 // ============================================================
@@ -652,7 +683,7 @@ function cambiarDeporte(btn) {
   deporte = btn.dataset.sport;
   document.querySelectorAll('.sport-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
-  const d = DATOS[deporte];
+  const d = datosDeportes[deporte];
   document.getElementById('headerIcon').textContent = d.icono;
   document.getElementById('headerSportLabel').textContent = d.nombre;
   renderTodo();
@@ -678,7 +709,7 @@ function iniciarTicker() {
 // RENDERIZADO PRINCIPAL
 // ============================================================
 function renderTodo() {
-  const d = DATOS[deporte];
+  const d = datosDeportes[deporte];
   document.getElementById('bannerTitulo').textContent = d.banner.titulo;
   document.getElementById('bannerDesc').textContent = d.banner.desc;
   document.getElementById('partidosTitulo').textContent = `📅 Calendario de Partidos – ${d.nombre}`;
@@ -716,7 +747,7 @@ function matchCardHtml(m) {
   const score = m.score && m.score !== 'vs' ? m.score.split('-') : null;
   const s1 = score ? score[0] : '-';
   const s2 = score ? score[1] : '-';
-  return `<div class="match-card"><div class="match-header">${badgeHtml(m.st)}${m.fecha ? '<span class="match-date">Jun ' + m.fecha + '</span>' : ''}</div><div class="team-row"><div class="team-info">${flagL ? '<span class="team-flag">' + flagL + '</span>' : ''}<span class="team-name">${m.local || m.visit_l || ''}</span></div><span class="team-score">${s1}</span></div><div class="team-row"><div class="team-info">${flagV ? '<span class="team-flag">' + flagV + '</span>' : ''}<span class="team-name">${m.visit}</span></div><span class="team-score">${s2}</span></div></div>`;
+  return `<div class="match-card"><div class="match-header">${badgeHtml(m.status)}${m.fecha ? '<span class="match-date">Jun ' + m.fecha + '</span>' : ''}</div><div class="team-row"><div class="team-info">${flagL ? '<span class="team-flag">' + flagL + '</span>' : ''}<span class="team-name">${m.local || m.visit_l || ''}</span></div><span class="team-score">${s1}</span></div><div class="team-row"><div class="team-info">${flagV ? '<span class="team-flag">' + flagV + '</span>' : ''}<span class="team-name">${m.visitante}</span></div><span class="team-score">${s2}</span></div></div>`;
 }
 
 function standingsHtml(grupo, tipo) {
@@ -724,7 +755,7 @@ function standingsHtml(grupo, tipo) {
   const cols = isFutbol ? '<th>PTS</th><th>PJ</th><th>G</th><th>E</th><th>P</th><th>GF</th><th>GC</th>' : '<th>G</th><th>P</th><th>PCT</th>';
   let rows = grupo.equipos.map((eq, i) => {
     const cells = isFutbol ? `<td class="pts">${eq.Pts}</td><td>${eq.PJ}</td><td>${eq.G}</td><td>${eq.E}</td><td>${eq.P}</td><td>${eq.GF}</td><td>${eq.GC}</td>` : `<td>${eq.G}</td><td>${eq.P}</td><td style="font-weight:700">${eq.PCT}</td>`;
-    return `<tr class="${isFutbol && i < 2 ? 'clasificado' : ''}"><td style="text-align:left;font-weight:600;padding-left:${isFutbol ? '14px' : '10px'}">${i+1}. ${eq.n}</td>${cells}</tr>`;
+    return `<tr class="${isFutbol && i < 2 ? 'clasificado' : ''}"><td style="text-align:left;font-weight:600;padding-left:${isFutbol ? '14px' : '10px'}">${i+1}. ${eq.nombre}</td>${cells}</tr>`;
   }).join('');
   return `<div class="standings-card"><div class="standings-card-header">${grupo.nombre}</div><div style="overflow-x:auto"><table class="standings-table"><thead><tr><th style="text-align:left;padding-left:${isFutbol?'14px':'10px'}">Equipo</th>${cols}</tr></thead><tbody>${rows}</tbody></table></div></div>`;
 }
@@ -762,7 +793,7 @@ function parseMLBGame(game, fechaStr) {
     st = 'Vivo';
     score = `${teams.home.score}-${teams.away.score}`;
   }
-  return { local, visit, score, st, fecha: fechaStr };
+  return { local, visitante: visit, score, status: st, fecha: fechaStr };
 }
 
 function parseMLBStandings(data) {
@@ -771,7 +802,7 @@ function parseMLBStandings(data) {
   records.forEach(rec => {
     const nombre = rec.division ? rec.division.name : 'División';
     const equipos = rec.teamRecords.map(tr => ({
-      n: tr.team.name,
+      nombre: tr.team.name,
       G: parseInt(tr.wins),
       P: parseInt(tr.losses),
       PCT: tr.winningPercentage || '.000'
@@ -811,12 +842,12 @@ async function fetchMLBStandings() {
 }
 
 // ============================================================
-// RENDERIZADO DE SECCIONES (con API para MLB)
+// RENDERIZADO DE SECCIONES
 // ============================================================
 
 // --- INICIO ---
 function renderInicio() {
-  const d = DATOS[deporte];
+  const d = datosDeportes[deporte];
   iniciarTicker();
 
   const ds = document.getElementById('dateSelector');
@@ -848,7 +879,7 @@ function renderInicio() {
 
 function cargarPartidosInicio() {
   const ml = document.getElementById('matchesList');
-  const d = DATOS[deporte];
+  const d = datosDeportes[deporte];
 
   if (deporte === 'futbol') {
     const partidos = d.partidosPorFecha[fecha] || [];
@@ -885,33 +916,33 @@ function selFecha(f) {
 
 // --- EN VIVO ---
 function renderEnVivo() {
-  const d = DATOS[deporte];
+  const d = datosDeportes[deporte];
   const lv = document.getElementById('liveList');
   if (deporte === 'futbol') {
     let vivos = [];
-    Object.values(d.partidosPorFecha).forEach(lista => lista.forEach(p => { if (p.st === 'Vivo') vivos.push(p); }));
+    Object.values(d.partidosPorFecha).forEach(lista => lista.forEach(p => { if (p.status === 'Vivo') vivos.push(p); }));
     lv.innerHTML = vivos.length ? vivos.map(p => matchCardHtml(p)).join('') : emptyHtml('No hay partidos en vivo.');
   } else if (deporte === 'mlb') {
     lv.innerHTML = spinnerHtml();
     const fechaMLB = getFechaMLB();
     fetchMLBSchedule(fechaMLB).then(games => {
       if (games) {
-        const vivos = games.filter(g => g.st === 'Vivo');
+        const vivos = games.filter(g => g.status === 'Vivo');
         lv.innerHTML = vivos.length ? vivos.map(p => matchCardHtml(p)).join('') : emptyHtml('No hay partidos en vivo en este momento.');
       } else {
-        const vivos = d.partidos.filter(p => p.st === 'Vivo');
+        const vivos = d.partidos.filter(p => p.status === 'Vivo');
         lv.innerHTML = vivos.length ? vivos.map(p => matchCardHtml(p)).join('') : emptyHtml('No hay partidos en vivo.');
       }
     });
   } else {
-    const vivos = d.partidos.filter(p => p.st === 'Vivo');
+    const vivos = d.partidos.filter(p => p.status === 'Vivo');
     lv.innerHTML = vivos.length ? vivos.map(p => matchCardHtml(p)).join('') : emptyHtml('No hay partidos en vivo.');
   }
 }
 
 // --- PARTIDOS ---
 function renderPartidos() {
-  const d = DATOS[deporte];
+  const d = datosDeportes[deporte];
   const pl = document.getElementById('partidosList');
   const ds = document.getElementById('dateSelectorPartidos');
 
@@ -947,42 +978,42 @@ function cargarMLBPartidos() {
 
 // --- CLASIFICACIÓN ---
 function renderClasificacion() {
-  const d = DATOS[deporte];
+  const d = datosDeportes[deporte];
   const cg = document.getElementById('clasificacionGrid');
+  
   if (deporte === 'futbol') {
-    // Mostrar clasificación de fútbol (array de grupos)
-    cg.innerHTML = d.clasificacion.map(g => standingsHtml(g, deporte)).join('');
+    cg.innerHTML = d.clasificacion.grupos.map(g => standingsHtml(g, deporte)).join('');
   } else if (deporte === 'mlb') {
     cg.innerHTML = spinnerHtml();
     fetchMLBStandings().then(data => {
       if (data && data.length > 0) {
         cg.innerHTML = data.map(g => standingsHtml(g, deporte)).join('');
       } else {
-        cg.innerHTML = d.clasificacion.map(g => standingsHtml(g, deporte)).join('');
+        cg.innerHTML = d.clasificacion.grupos.map(g => standingsHtml(g, deporte)).join('');
       }
     });
   } else {
-    cg.innerHTML = d.clasificacion.map(g => standingsHtml(g, deporte)).join('');
+    cg.innerHTML = d.clasificacion.grupos.map(g => standingsHtml(g, deporte)).join('');
   }
 }
 
 // --- EQUIPOS ---
 function renderEquipos() {
-  const d = DATOS[deporte];
+  const d = datosDeportes[deporte];
   const eq = document.getElementById('equiposGrid');
   eq.innerHTML = d.equipos.map(e => `<div class="team-card"><div class="team-icon">${d.icono}</div><div class="team-card-name">${e}</div></div>`).join('');
 }
 
 // --- NOTICIAS ---
 function renderNoticias() {
-  const d = DATOS[deporte];
+  const d = datosDeportes[deporte];
   const nl = document.getElementById('noticiasList');
   nl.innerHTML = d.noticias.map(n => `<div class="news-card"><div class="news-meta"><span class="news-sport-tag">${d.nombre}</span><span class="news-date">${n.fecha}</span></div><div class="news-title">${n.titulo}</div><div class="news-summary">${n.resumen}</div><div class="news-more">Leer más →</div></div>`).join('');
 }
 
 // --- ANÁLISIS ---
 function renderAnalisis() {
-  const d = DATOS[deporte];
+  const d = datosDeportes[deporte];
   const al = document.getElementById('analisisList');
   al.innerHTML = d.analisis.map(a => `<div class="news-card"><div class="news-meta"><span class="news-sport-tag">${a.autor}</span><span class="news-date">${a.fecha}</span></div><div class="news-title">${a.titulo}</div><div class="news-summary">${a.texto}</div><div class="news-more">Leer análisis completo →</div></div>`).join('');
 }
