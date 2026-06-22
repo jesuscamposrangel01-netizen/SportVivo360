@@ -11,7 +11,6 @@
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3765201153278683" crossorigin="anonymous"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-/* ===== ESTILOS ===== */
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
   --primary:#0b1e2e;
@@ -35,60 +34,27 @@
   --border:#334155;
   --card-shadow:0 4px 20px rgba(0,0,0,0.3);
 }
-body{
-  font-family:'Inter',system-ui,sans-serif;
-  background:var(--bg);
-  color:var(--text);
-  min-height:100vh;
-  transition:background .3s,color .3s;
-}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;transition:background .3s,color .3s;}
 a{color:var(--blue);text-decoration:none}
 button{cursor:pointer;border:none;background:none;font-family:inherit}
-header{
-  background:var(--primary);
-  color:#fff;
-  position:sticky;
-  top:0;
-  z-index:100;
-  box-shadow:0 2px 12px rgba(0,0,0,.3);
-}
+header{background:var(--primary);color:#fff;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,.3);}
 .header-inner{max-width:1280px;margin:0 auto;padding:12px 16px}
 .header-top{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
 .logo{display:flex;align-items:center;gap:8px;cursor:pointer}
 .logo h1{font-size:1.25rem;font-weight:800;letter-spacing:-.5px}
 .logo-badge{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);padding:2px 12px;border-radius:999px;font-size:.7rem;font-weight:600}
 .header-right{display:flex;align-items:center;gap:12px}
-.live-badge{
-  display:flex;align-items:center;gap:6px;
-  background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.3);
-  padding:4px 12px;border-radius:999px;font-size:.7rem;font-weight:700;
-  color:#4ade80;text-transform:uppercase;letter-spacing:.5px;
-}
+.live-badge{display:flex;align-items:center;gap:6px;background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.3);padding:4px 12px;border-radius:999px;font-size:.7rem;font-weight:700;color:#4ade80;text-transform:uppercase;letter-spacing:.5px;}
 .live-dot{width:7px;height:7px;background:#22c55e;border-radius:50%;animation:pulse 1.2s infinite}
-.theme-btn{
-  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);
-  color:#fff;padding:6px 10px;border-radius:8px;font-size:1rem;
-  transition:background .2s;
-}
+.theme-btn{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);color:#fff;padding:6px 10px;border-radius:8px;font-size:1rem;transition:background .2s;}
 .theme-btn:hover{background:rgba(255,255,255,.18)}
 .sport-tabs{display:flex;gap:8px;margin-top:12px;padding-top:10px;border-top:1px solid rgba(255,255,255,.1)}
-.sport-btn{
-  padding:5px 16px;border-radius:999px;font-size:.8rem;font-weight:600;
-  color:rgba(255,255,255,.6);background:rgba(255,255,255,.06);
-  border:1px solid transparent;transition:all .2s;
-}
+.sport-btn{padding:5px 16px;border-radius:999px;font-size:.8rem;font-weight:600;color:rgba(255,255,255,.6);background:rgba(255,255,255,.06);border:1px solid transparent;transition:all .2s;}
 .sport-btn:hover{background:rgba(255,255,255,.14);color:#fff}
 .sport-btn.active{background:var(--blue);color:#fff;border-color:var(--blue);box-shadow:0 0 16px rgba(26,86,219,.4)}
-nav.main-nav{
-  display:flex;gap:4px;margin-top:8px;padding-top:8px;
-  border-top:1px solid rgba(255,255,255,.08);overflow-x:auto;
-  scrollbar-width:none;
-}
+nav.main-nav{display:flex;gap:4px;margin-top:8px;padding-top:8px;border-top:1px solid rgba(255,255,255,.08);overflow-x:auto;scrollbar-width:none;}
 nav.main-nav::-webkit-scrollbar{display:none}
-.nav-link{
-  padding:4px 12px;border-radius:6px;font-size:.8rem;font-weight:500;
-  color:rgba(255,255,255,.55);white-space:nowrap;transition:all .2s;
-}
+.nav-link{padding:4px 12px;border-radius:6px;font-size:.8rem;font-weight:500;color:rgba(255,255,255,.55);white-space:nowrap;transition:all .2s;}
 .nav-link:hover{color:#fff;background:rgba(255,255,255,.08)}
 .nav-link.active{color:#fff;border-bottom:2px solid var(--accent);padding-bottom:2px}
 main{max-width:1280px;margin:0 auto;padding:24px 16px}
@@ -96,32 +62,15 @@ main{max-width:1280px;margin:0 auto;padding:24px 16px}
 .page.active{display:block;animation:fadeIn .35s ease}
 @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
-.banner{
-  background:linear-gradient(135deg,#0b1e2e,#1a4971);
-  color:#fff;padding:28px 28px;border-radius:20px;
-  box-shadow:0 8px 32px rgba(11,30,46,.4);margin-bottom:20px;
-}
+.banner{background:linear-gradient(135deg,#0b1e2e,#1a4971);color:#fff;padding:28px;border-radius:20px;box-shadow:0 8px 32px rgba(11,30,46,.4);margin-bottom:20px;}
 .banner h2{font-size:1.75rem;font-weight:800;line-height:1.2}
 .banner p{opacity:.8;margin-top:6px;font-size:.95rem}
-.ticker{
-  background:var(--card);border:1px solid var(--border);
-  border-radius:14px;padding:12px 16px;
-  display:flex;align-items:center;gap:12px;
-  box-shadow:var(--card-shadow);margin-bottom:20px;overflow:hidden;
-}
-.ticker-label{
-  background:var(--accent);color:#fff;font-size:.65rem;font-weight:700;
-  padding:3px 10px;border-radius:4px;white-space:nowrap;letter-spacing:.5px;
-  text-transform:uppercase;
-}
+.ticker{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:12px 16px;display:flex;align-items:center;gap:12px;box-shadow:var(--card-shadow);margin-bottom:20px;overflow:hidden;}
+.ticker-label{background:var(--accent);color:#fff;font-size:.65rem;font-weight:700;padding:3px 10px;border-radius:4px;white-space:nowrap;letter-spacing:.5px;text-transform:uppercase;}
 .ticker-text{font-size:.9rem;font-weight:500;flex:1;animation:fadeIn .4s ease}
 .date-selector{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:18px;align-items:center}
 .date-label{font-size:.8rem;font-weight:600;color:var(--muted);margin-right:4px}
-.date-btn{
-  padding:4px 12px;border-radius:999px;font-size:.75rem;font-weight:600;
-  background:var(--card);border:1px solid var(--border);color:var(--muted);
-  transition:all .2s;
-}
+.date-btn{padding:4px 12px;border-radius:999px;font-size:.75rem;font-weight:600;background:var(--card);border:1px solid var(--border);color:var(--muted);transition:all .2s;}
 .date-btn:hover{border-color:var(--blue);color:var(--blue)}
 .date-btn.active{background:var(--blue);color:#fff;border-color:var(--blue)}
 .grid-main{display:grid;grid-template-columns:1fr 320px;gap:20px}
@@ -132,12 +81,7 @@ main{max-width:1280px;margin:0 auto;padding:24px 16px}
 @media(max-width:768px){.grid-main{grid-template-columns:1fr}}
 .section-title{font-size:1.4rem;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:8px}
 .section-title::before{content:'';display:block;width:4px;height:24px;background:var(--accent);border-radius:4px}
-.match-card{
-  background:var(--card);border:1px solid var(--border);
-  border-radius:14px;padding:14px 16px;
-  box-shadow:var(--card-shadow);
-  transition:transform .2s,box-shadow .2s,border-color .2s;
-}
+.match-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px 16px;box-shadow:var(--card-shadow);transition:transform .2s,box-shadow .2s,border-color .2s;}
 .match-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.12);border-color:var(--blue)}
 .match-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
 .status-badge{font-size:.6rem;font-weight:700;padding:3px 10px;border-radius:999px;text-transform:uppercase;letter-spacing:.3px}
@@ -145,46 +89,27 @@ main{max-width:1280px;margin:0 auto;padding:24px 16px}
 .badge-final{background:#64748b;color:#fff}
 .badge-programado{background:#dbeafe;color:#1e40af}
 .dark .badge-programado{background:#1e3a5f;color:#93c5fd}
-.match-date{font-size:.72rem;color:var(--muted);font-weight:500}
 .team-row{display:flex;justify-content:space-between;align-items:center;padding:4px 0}
 .team-info{display:flex;align-items:center;gap:8px}
 .team-flag{font-size:1.2rem;line-height:1}
 .team-name{font-weight:600;font-size:.88rem}
 .team-score{font-weight:800;font-size:1.1rem;color:var(--text)}
-.stat-card{
-  background:var(--card);border:1px solid var(--border);
-  border-radius:14px;padding:16px;box-shadow:var(--card-shadow);
-}
+.stat-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px;box-shadow:var(--card-shadow);}
 .stat-card h4{font-size:.9rem;font-weight:700;margin-bottom:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;font-size:.72rem}
 .stat-item{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);font-size:.85rem}
 .stat-item:last-child{border:none}
 .stat-val{font-weight:700;color:var(--blue)}
-.standings-card{
-  background:var(--card);border:1px solid var(--border);
-  border-radius:14px;overflow:hidden;box-shadow:var(--card-shadow);
-}
-.standings-card-header{
-  background:rgba(26,86,219,.07);padding:12px 16px;
-  border-bottom:2px solid var(--blue);
-  font-weight:700;font-size:.95rem;
-}
+.standings-card{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;box-shadow:var(--card-shadow);}
+.standings-card-header{background:rgba(26,86,219,.07);padding:12px 16px;border-bottom:2px solid var(--blue);font-weight:700;font-size:.95rem;}
 .standings-table{width:100%;border-collapse:collapse;font-size:.78rem}
-.standings-table th{
-  padding:7px 10px;text-align:center;font-weight:700;
-  text-transform:uppercase;font-size:.62rem;letter-spacing:.3px;
-  color:var(--muted);background:rgba(0,0,0,.02);
-}
+.standings-table th{padding:7px 10px;text-align:center;font-weight:700;text-transform:uppercase;font-size:.62rem;letter-spacing:.3px;color:var(--muted);background:rgba(0,0,0,.02);}
 .dark .standings-table th{background:rgba(255,255,255,.03)}
 .standings-table td{padding:7px 10px;border-bottom:1px solid var(--border);text-align:center}
 .standings-table tr:last-child td{border:none}
 .standings-table tr:hover td{background:rgba(26,86,219,.03)}
 .standings-table td.pts{font-weight:800;color:var(--blue)}
 .standings-table tr.clasificado td{border-left:4px solid var(--green)}
-.news-card{
-  background:var(--card);border:1px solid var(--border);
-  border-radius:14px;padding:20px;box-shadow:var(--card-shadow);
-  transition:transform .2s,box-shadow .2s;cursor:pointer;
-}
+.news-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px;box-shadow:var(--card-shadow);transition:transform .2s,box-shadow .2s;cursor:pointer;}
 .news-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.12)}
 .news-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
 .news-sport-tag{font-size:.62rem;font-weight:700;padding:3px 10px;border-radius:4px;background:rgba(26,86,219,.1);color:var(--blue);text-transform:uppercase}
@@ -192,82 +117,36 @@ main{max-width:1280px;margin:0 auto;padding:24px 16px}
 .news-title{font-size:1.05rem;font-weight:700;margin-bottom:8px;line-height:1.35}
 .news-summary{font-size:.85rem;color:var(--muted);line-height:1.5}
 .news-more{color:var(--blue);font-size:.8rem;font-weight:600;margin-top:12px}
-.team-card{
-  background:var(--card);border:1px solid var(--border);
-  border-radius:14px;padding:16px 12px;box-shadow:var(--card-shadow);
-  display:flex;flex-direction:column;align-items:center;gap:8px;
-  aspect-ratio:1;justify-content:center;transition:all .2s;cursor:pointer;
-}
+.team-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px 12px;box-shadow:var(--card-shadow);display:flex;flex-direction:column;align-items:center;gap:8px;aspect-ratio:1;justify-content:center;transition:all .2s;cursor:pointer;}
 .team-card:hover{border-color:var(--blue);transform:translateY(-3px)}
 .team-icon{font-size:1.8rem}
 .team-card-name{font-size:.78rem;font-weight:600;text-align:center}
 .static-page{max-width:720px}
-.static-box{
-  background:var(--card);border:1px solid var(--border);
-  border-radius:16px;padding:28px;box-shadow:var(--card-shadow);
-}
+.static-box{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:28px;box-shadow:var(--card-shadow);}
 .static-box p{margin-bottom:14px;line-height:1.7;color:var(--text)}
 .static-box h3{font-size:1rem;font-weight:700;margin:20px 0 8px}
 .form-group{margin-bottom:16px}
 .form-label{display:block;font-size:.85rem;font-weight:600;margin-bottom:5px}
-.form-input{
-  width:100%;padding:10px 14px;border:1px solid var(--border);
-  border-radius:8px;background:var(--card);color:var(--text);
-  font-family:inherit;font-size:.9rem;transition:border-color .2s;outline:none;
-}
+.form-input{width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:8px;background:var(--card);color:var(--text);font-family:inherit;font-size:.9rem;transition:border-color .2s;outline:none;}
 .form-input:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(26,86,219,.15)}
-.form-btn{
-  width:100%;background:var(--blue);color:#fff;font-weight:700;
-  padding:12px;border-radius:8px;font-size:.95rem;transition:background .2s;
-  font-family:inherit;border:none;cursor:pointer;
-}
+.form-btn{width:100%;background:var(--blue);color:#fff;font-weight:700;padding:12px;border-radius:8px;font-size:.95rem;transition:background .2s;font-family:inherit;border:none;cursor:pointer;}
 .form-btn:hover{background:#2563eb}
-.success-msg{
-  background:#dcfce7;color:#166534;padding:12px 16px;border-radius:8px;
-  font-weight:600;font-size:.9rem;margin-bottom:16px;display:none;
-}
+.success-msg{background:#dcfce7;color:#166534;padding:12px 16px;border-radius:8px;font-weight:600;font-size:.9rem;margin-bottom:16px;display:none;}
 .dark .success-msg{background:#14532d;color:#bbf7d0}
-#cookieBanner{
-  position:fixed;bottom:0;left:0;right:0;
-  background:rgba(0,0,0,.88);backdrop-filter:blur(6px);
-  color:#fff;padding:14px 20px;z-index:999;
-  display:none;justify-content:center;align-items:center;
-  gap:16px;flex-wrap:wrap;font-size:.85rem;
-}
+#cookieBanner{position:fixed;bottom:0;left:0;right:0;background:rgba(0,0,0,.88);backdrop-filter:blur(6px);color:#fff;padding:14px 20px;z-index:999;display:none;justify-content:center;align-items:center;gap:16px;flex-wrap:wrap;font-size:.85rem;}
 #cookieBanner.show{display:flex}
 #cookieBanner a{color:#93c5fd}
-.cookie-btn{
-  background:var(--blue);color:#fff;padding:7px 22px;
-  border-radius:999px;font-weight:700;font-size:.85rem;
-  transition:background .2s;font-family:inherit;border:none;cursor:pointer;
-}
+.cookie-btn{background:var(--blue);color:#fff;padding:7px 22px;border-radius:999px;font-weight:700;font-size:.85rem;transition:background .2s;font-family:inherit;border:none;cursor:pointer;}
 .cookie-btn:hover{background:#2563eb}
-footer{
-  background:var(--primary);color:rgba(255,255,255,.55);
-  text-align:center;padding:24px 16px;margin-top:40px;
-  font-size:.8rem;border-top:1px solid rgba(255,255,255,.08);
-}
+footer{background:var(--primary);color:rgba(255,255,255,.55);text-align:center;padding:24px 16px;margin-top:40px;font-size:.8rem;border-top:1px solid rgba(255,255,255,.08);}
 .footer-links{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-bottom:10px}
 .footer-links span{cursor:pointer;transition:color .2s}
 .footer-links span:hover{color:#fff}
-.empty{
-  text-align:center;padding:48px 24px;
-  background:var(--card);border:2px dashed var(--border);
-  border-radius:16px;color:var(--muted);
-}
+.empty{text-align:center;padding:48px 24px;background:var(--card);border:2px dashed var(--border);border-radius:16px;color:var(--muted);}
 .empty-icon{font-size:2.5rem;opacity:.4;margin-bottom:12px}
-.spinner{
-  width:36px;height:36px;border:3px solid var(--border);
-  border-top-color:var(--blue);border-radius:50%;
-  animation:spin .7s linear infinite;margin:40px auto;
-}
+.spinner{width:36px;height:36px;border:3px solid var(--border);border-top-color:var(--blue);border-radius:50%;animation:spin .7s linear infinite;margin:40px auto;}
 @keyframes spin{to{transform:rotate(360deg)}}
-@media(max-width:640px){
-  .banner h2{font-size:1.3rem}
-  .grid-standings{grid-template-columns:1fr}
-  .grid-teams{grid-template-columns:repeat(3,1fr)}
-  .grid-main{grid-template-columns:1fr}
-}
+@media(max-width:640px){.banner h2{font-size:1.3rem}.grid-standings{grid-template-columns:1fr}.grid-teams{grid-template-columns:repeat(3,1fr)}.grid-main{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -322,7 +201,7 @@ footer{
   </div>
   <div class="ticker">
     <span class="ticker-label">Última hora</span>
-    <span class="ticker-text" id="tickerText"></span>
+    <span class="ticker-text" id="tickerText">Países Bajos golea 5-1 a Suecia; Alemania vence 2-1 a Costa de Marfil</span>
   </div>
   <div class="date-selector" id="dateSelector"></div>
   <div class="grid-main">
@@ -456,12 +335,10 @@ footer{
   <p style="margin-top:8px;font-size:.75rem;color:rgba(255,255,255,.4)">Optimizado para SEO y rendimiento</p>
 </footer>
 
-<!-- ====================================== -->
-<!-- JAVASCRIPT COMPLETO (AQUÍ ESTABA LO QUE FALTABA) -->
-<!-- ====================================== -->
+<!-- JAVASCRIPT COMPLETO ACTUALIZADO -->
 <script>
 // --------------------------
-// DATOS SIMULADOS (funcionan sin API externa)
+// DATOS ACTUALIZADOS MUNDIAL 2026
 // --------------------------
 const datosDeportes = {
   futbol: {
@@ -474,93 +351,95 @@ const datosDeportes = {
     partidosPorFecha: {
       '11': [
         { local: 'México', visitante: 'Sudáfrica', score: '2-0', status: 'Final', flagL: '🇲🇽', flagV: '🇿🇦' },
-        { local: 'Corea del Sur', visitante: 'República Checa', score: '2-1', status: 'Final', flagL: '🇰🇷', flagV: '🇨🇿' },
+        { local: 'Corea del Sur', visitante: 'República Checa', score: '2-1', status: 'Final', flagL: '🇰🇷', flagV: '🇨🇿' }
       ],
       '12': [
-        { local: 'Canadá', visitante: 'Bosnia y Herzegovina', score: '1-1', status: 'Final', flagL: '🇨🇦', flagV: '🇧🇦' },
+        { local: 'Canadá', visitante: 'Bosnia y Herzegovina', score: '1-1', status: 'Final', flagL: '🇨🇦', flagV: '🇧🇦' }
       ],
       '13': [
         { local: 'Estados Unidos', visitante: 'Paraguay', score: '4-1', status: 'Final', flagL: '🇺🇸', flagV: '🇵🇾' },
         { local: 'Australia', visitante: 'Turquía', score: '2-0', status: 'Final', flagL: '🇦🇺', flagV: '🇹🇷' },
-        { local: 'Qatar', visitante: 'Suiza', score: '1-1', status: 'Final', flagL: '🇶🇦', flagV: '🇨🇭' },
+        { local: 'Qatar', visitante: 'Suiza', score: '1-1', status: 'Final', flagL: '🇶🇦', flagV: '🇨🇭' }
       ],
       '14': [
         { local: 'Alemania', visitante: 'Curazao', score: '7-1', status: 'Final', flagL: '🇩🇪', flagV: '🇨🇼' },
         { local: 'Países Bajos', visitante: 'Japón', score: '2-2', status: 'Final', flagL: '🇳🇱', flagV: '🇯🇵' },
         { local: 'Costa de Marfil', visitante: 'Ecuador', score: '1-0', status: 'Final', flagL: '🇨🇮', flagV: '🇪🇨' },
         { local: 'Suecia', visitante: 'Túnez', score: '5-1', status: 'Final', flagL: '🇸🇪', flagV: '🇹🇳' },
-        { local: 'Brasil', visitante: 'Marruecos', score: '1-1', status: 'Final', flagL: '🇧🇷', flagV: '🇲🇦' },
+        { local: 'Brasil', visitante: 'Marruecos', score: '1-1', status: 'Final', flagL: '🇧🇷', flagV: '🇲🇦' }
       ],
       '15': [
         { local: 'Bélgica', visitante: 'Egipto', score: '1-1', status: 'Final', flagL: '🇧🇪', flagV: '🇪🇬' },
         { local: 'Irán', visitante: 'Nueva Zelanda', score: '2-2', status: 'Final', flagL: '🇮🇷', flagV: '🇳🇿' },
         { local: 'Arabia Saudita', visitante: 'Uruguay', score: '1-1', status: 'Final', flagL: '🇸🇦', flagV: '🇺🇾' },
-        { local: 'España', visitante: 'Cabo Verde', score: '0-0', status: 'Final', flagL: '🇪🇸', flagV: '🇨🇻' },
+        { local: 'España', visitante: 'Cabo Verde', score: '0-0', status: 'Final', flagL: '🇪🇸', flagV: '🇨🇻' }
       ],
       '16': [
         { local: 'Francia', visitante: 'Senegal', score: '3-1', status: 'Final', flagL: '🇫🇷', flagV: '🇸🇳' },
         { local: 'Irak', visitante: 'Noruega', score: '1-4', status: 'Final', flagL: '🇮🇶', flagV: '🇳🇴' },
         { local: 'Argentina', visitante: 'Argelia', score: '3-0', status: 'Final', flagL: '🇦🇷', flagV: '🇩🇿' },
-        { local: 'Austria', visitante: 'Jordania', score: '2-1', status: 'Final', flagL: '🇦🇹', flagV: '🇯🇴' },
+        { local: 'Austria', visitante: 'Jordania', score: '2-1', status: 'Final', flagL: '🇦🇹', flagV: '🇯🇴' }
       ],
       '17': [
         { local: 'Portugal', visitante: 'R.D. del Congo', score: '1-1', status: 'Final', flagL: '🇵🇹', flagV: '🇨🇩' },
         { local: 'Inglaterra', visitante: 'Croacia', score: '4-2', status: 'Final', flagL: '🏴󠁧󠁢󠁥󠁮󠁧󠁿', flagV: '🇭🇷' },
         { local: 'Ghana', visitante: 'Panamá', score: '1-0', status: 'Final', flagL: '🇬🇭', flagV: '🇵🇦' },
-        { local: 'Colombia', visitante: 'Uzbekistán', score: '3-1', status: 'Final', flagL: '🇨🇴', flagV: '🇺🇿' },
+        { local: 'Colombia', visitante: 'Uzbekistán', score: '3-1', status: 'Final', flagL: '🇨🇴', flagV: '🇺🇿' }
       ],
       '18': [
         { local: 'México', visitante: 'Corea del Sur', score: '1-0', status: 'Final', flagL: '🇲🇽', flagV: '🇰🇷' },
         { local: 'República Checa', visitante: 'Sudáfrica', score: '1-1', status: 'Final', flagL: '🇨🇿', flagV: '🇿🇦' },
         { local: 'Suiza', visitante: 'Bosnia y Herzegovina', score: '4-1', status: 'Final', flagL: '🇨🇭', flagV: '🇧🇦' },
-        { local: 'Canadá', visitante: 'Qatar', score: '6-0', status: 'Final', flagL: '🇨🇦', flagV: '🇶🇦' },
+        { local: 'Canadá', visitante: 'Qatar', score: '6-0', status: 'Final', flagL: '🇨🇦', flagV: '🇶🇦' }
       ],
       '19': [
         { local: 'Estados Unidos', visitante: 'Australia', score: '2-0', status: 'Final', flagL: '🇺🇸', flagV: '🇦🇺' },
         { local: 'Marruecos', visitante: 'Escocia', score: '1-0', status: 'Final', flagL: '🇲🇦', flagV: '🏴󠁧󠁢󠁳󠁣󠁴󠁿' },
-        { local: 'Brasil', visitante: 'Haití', score: '3-0', status: 'Final', flagL: '🇧🇷', flagV: '🇭🇹' },
+        { local: 'Brasil', visitante: 'Haití', score: '3-0', status: 'Final', flagL: '🇧🇷', flagV: '🇭🇹' }
       ],
       '20': [
         { local: 'Alemania', visitante: 'Costa de Marfil', score: '2-1', status: 'Final', flagL: '🇩🇪', flagV: '🇨🇮' },
         { local: 'Ecuador', visitante: 'Curazao', score: '0-0', status: 'Final', flagL: '🇪🇨', flagV: '🇨🇼' },
         { local: 'Países Bajos', visitante: 'Suecia', score: '5-1', status: 'Final', flagL: '🇳🇱', flagV: '🇸🇪' },
-        { local: 'Japón', visitante: 'Túnez', score: '4-0', status: 'Final', flagL: '🇯🇵', flagV: '🇹🇳' },
+        { local: 'Japón', visitante: 'Túnez', score: '4-0', status: 'Final', flagL: '🇯🇵', flagV: '🇹🇳' }
       ],
+      // ✅ HOY 21 DE JUNIO - RESULTADOS FINALES
       '21': [
-        { local: 'España', visitante: 'Arabia Saudita', score: 'vs', status: 'Programado', flagL: '🇪🇸', flagV: '🇸🇦' },
-        { local: 'Bélgica', visitante: 'Irán', score: 'vs', status: 'Programado', flagL: '🇧🇪', flagV: '🇮🇷' },
-        { local: 'Uruguay', visitante: 'Cabo Verde', score: 'vs', status: 'Programado', flagL: '🇺🇾', flagV: '🇨🇻' },
-        { local: 'Nueva Zelanda', visitante: 'Egipto', score: 'vs', status: 'Programado', flagL: '🇳🇿', flagV: '🇪🇬' },
+        { local: 'España', visitante: 'Arabia Saudita', score: '0-0', status: 'Final', flagL: '🇪🇸', flagV: '🇸🇦' },
+        { local: 'Bélgica', visitante: 'Irán', score: '1-1', status: 'Final', flagL: '🇧🇪', flagV: '🇮🇷' },
+        { local: 'Uruguay', visitante: 'Cabo Verde', score: '1-1', status: 'Final', flagL: '🇺🇾', flagV: '🇨🇻' },
+        { local: 'Nueva Zelanda', visitante: 'Egipto', score: '2-2', status: 'Final', flagL: '🇳🇿', flagV: '🇪🇬' }
       ],
+      // MAÑANA 22 DE JUNIO - PROGRAMADOS
       '22': [
         { local: 'Argentina', visitante: 'Austria', score: 'vs', status: 'Programado', flagL: '🇦🇷', flagV: '🇦🇹' },
         { local: 'Francia', visitante: 'Irak', score: 'vs', status: 'Programado', flagL: '🇫🇷', flagV: '🇮🇶' },
         { local: 'Noruega', visitante: 'Senegal', score: 'vs', status: 'Programado', flagL: '🇳🇴', flagV: '🇸🇳' },
-        { local: 'Jordania', visitante: 'Argelia', score: 'vs', status: 'Programado', flagL: '🇯🇴', flagV: '🇩🇿' },
+        { local: 'Jordania', visitante: 'Argelia', score: 'vs', status: 'Programado', flagL: '🇯🇴', flagV: '🇩🇿' }
       ],
       '23': [
         { local: 'Portugal', visitante: 'Uzbekistán', score: 'vs', status: 'Programado', flagL: '🇵🇹', flagV: '🇺🇿' },
         { local: 'Inglaterra', visitante: 'Ghana', score: 'vs', status: 'Programado', flagL: '🏴󠁧󠁢󠁥󠁮󠁧󠁿', flagV: '🇬🇭' },
         { local: 'Panamá', visitante: 'Croacia', score: 'vs', status: 'Programado', flagL: '🇵🇦', flagV: '🇭🇷' },
-        { local: 'Colombia', visitante: 'R.D. del Congo', score: 'vs', status: 'Programado', flagL: '🇨🇴', flagV: '🇨🇩' },
+        { local: 'Colombia', visitante: 'R.D. del Congo', score: 'vs', status: 'Programado', flagL: '🇨🇴', flagV: '🇨🇩' }
       ],
       '24': [
         { local: 'Bosnia', visitante: 'Qatar', score: 'vs', status: 'Programado', flagL: '🇧🇦', flagV: '🇶🇦' },
         { local: 'Suiza', visitante: 'Canadá', score: 'vs', status: 'Programado', flagL: '🇨🇭', flagV: '🇨🇦' },
         { local: 'Marruecos', visitante: 'Haití', score: 'vs', status: 'Programado', flagL: '🇲🇦', flagV: '🇭🇹' },
-        { local: 'Escocia', visitante: 'Brasil', score: 'vs', status: 'Programado', flagL: '🏴󠁧󠁢󠁳󠁣󠁴󠁿', flagV: '🇧🇷' },
+        { local: 'Escocia', visitante: 'Brasil', score: 'vs', status: 'Programado', flagL: '🏴󠁧󠁢󠁳󠁣󠁴󠁿', flagV: '🇧🇷' }
       ],
       '25': [
         { local: 'Curazao', visitante: 'Costa de Marfil', score: 'vs', status: 'Programado', flagL: '🇨🇼', flagV: '🇨🇮' },
         { local: 'Ecuador', visitante: 'Alemania', score: 'vs', status: 'Programado', flagL: '🇪🇨', flagV: '🇩🇪' },
         { local: 'Japón', visitante: 'Suecia', score: 'vs', status: 'Programado', flagL: '🇯🇵', flagV: '🇸🇪' },
-        { local: 'Túnez', visitante: 'Países Bajos', score: 'vs', status: 'Programado', flagL: '🇹🇳', flagV: '🇳🇱' },
+        { local: 'Túnez', visitante: 'Países Bajos', score: 'vs', status: 'Programado', flagL: '🇹🇳', flagV: '🇳🇱' }
       ],
       '26': [
         { local: 'Noruega', visitante: 'Francia', score: 'vs', status: 'Programado', flagL: '🇳🇴', flagV: '🇫🇷' },
         { local: 'Senegal', visitante: 'Irak', score: 'vs', status: 'Programado', flagL: '🇸🇳', flagV: '🇮🇶' },
         { local: 'Cabo Verde', visitante: 'Arabia Saudita', score: 'vs', status: 'Programado', flagL: '🇨🇻', flagV: '🇸🇦' },
-        { local: 'Uruguay', visitante: 'España', score: 'vs', status: 'Programado', flagL: '🇺🇾', flagV: '🇪🇸' },
+        { local: 'Uruguay', visitante: 'España', score: 'vs', status: 'Programado', flagL: '🇺🇾', flagV: '🇪🇸' }
       ]
     },
     clasificacion: {
@@ -590,3 +469,8 @@ const datosDeportes = {
           { nombre: '🇹🇷 Turquía', Pts: 0, PJ: 1, G: 0, E: 0, P: 1, GF: 0, GC: 2 },
           { nombre: '🇵🇾 Paraguay', Pts: 0, PJ: 1, G: 0, E: 0, P: 1, GF: 1, GC: 4 }
         ]},
+        { nombre: 'Grupo E', equipos: [
+          { nombre: '🇩🇪 Alemania', Pts: 6, PJ: 2, G: 2, E: 0, P: 0, GF: 9, GC: 2 },
+          { nombre: '🇨🇮 Costa de Marfil', Pts: 3, PJ: 2, G: 1, E: 0, P: 1, GF: 2, GC: 2 },
+          { nombre: '🇪🇨 Ecuador', Pts: 1, PJ: 2, G: 0, E: 1, P: 1, GF: 0, GC: 1 },
+          { nombre: '🇨🇼 Curazao', Pts: 1, PJ: 2, G: 0, E: 1, P: 1, GF:
