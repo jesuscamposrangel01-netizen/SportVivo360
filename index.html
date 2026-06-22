@@ -11,7 +11,6 @@
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3765201153278683" crossorigin="anonymous"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-/* ===== ESTILOS BASE ===== */
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
   --primary:#0b1e2e;
@@ -67,7 +66,6 @@ main{max-width:1280px;margin:0 auto;padding:24px 16px}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
 @keyframes slideIn{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:translateX(0)}}
 
-/* ===== BANNER MEJORADO ===== */
 .banner{
   background:linear-gradient(135deg,#0b1e2e 0%,#1a4971 100%);
   color:#fff;padding:32px 36px;border-radius:20px;
@@ -81,7 +79,6 @@ main{max-width:1280px;margin:0 auto;padding:24px 16px}
 .banner h2{font-size:1.8rem;font-weight:900;line-height:1.2}
 .banner p{opacity:.85;margin-top:6px;font-size:.95rem;max-width:600px}
 
-/* ===== TICKER ===== */
 .ticker{
   background:var(--card);border:1px solid var(--border);border-radius:14px;
   padding:14px 20px;display:flex;align-items:center;gap:14px;
@@ -94,7 +91,6 @@ main{max-width:1280px;margin:0 auto;padding:24px 16px}
 }
 .ticker-text{font-size:.9rem;font-weight:500;flex:1;animation:fadeIn .4s ease}
 
-/* ===== CARRUSEL DE NOTICIAS ===== */
 .carousel-container{
   position:relative;margin-bottom:28px;border-radius:16px;
   overflow:hidden;box-shadow:var(--card-shadow);
@@ -143,7 +139,6 @@ main{max-width:1280px;margin:0 auto;padding:24px 16px}
 }
 .carousel-dot.active{background:var(--blue);border-color:var(--blue);}
 
-/* ===== ESTADÍSTICAS RÁPIDAS ===== */
 .stats-grid{
   display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
   gap:16px;margin-bottom:28px;
@@ -162,7 +157,6 @@ main{max-width:1280px;margin:0 auto;padding:24px 16px}
   text-transform:uppercase;letter-spacing:.3px;margin-top:4px;
 }
 
-/* ===== VIDEO DESTACADO ===== */
 .video-highlight{
   background:var(--card);border:1px solid var(--border);
   border-radius:16px;padding:20px;margin-bottom:28px;
@@ -179,10 +173,24 @@ main{max-width:1280px;margin:0 auto;padding:24px 16px}
 .video-highlight .video-wrapper iframe{
   position:absolute;top:0;left:0;width:100%;height:100%;border:none;
 }
+.video-fallback{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  background:#1a1a2e;color:#fff;padding:30px 20px;border-radius:12px;
+  min-height:200px;text-align:center;gap:12px;
+}
+.video-fallback .icon{font-size:3rem;opacity:.6}
+.video-fallback h4{font-size:1rem;font-weight:600}
+.video-fallback p{font-size:.85rem;opacity:.7;max-width:400px}
+.video-fallback .btn-youtube{
+  background:#ff0000;color:#fff;padding:8px 24px;border-radius:999px;
+  font-weight:600;font-size:.85rem;transition:background .2s;
+  display:inline-flex;align-items:center;gap:6px;border:none;cursor:pointer;
+  text-decoration:none;
+}
+.video-fallback .btn-youtube:hover{background:#cc0000}
 
-/* ===== CLASIFICACIÓN RESUMIDA ===== */
 .standings-mini{
-  display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
   gap:16px;margin-bottom:28px;
 }
 .standings-mini-card{
@@ -202,7 +210,6 @@ main{max-width:1280px;margin:0 auto;padding:24px 16px}
 .standings-mini-item .team{font-weight:600;flex:1}
 .standings-mini-item .pts{font-weight:700;color:var(--blue)}
 
-/* ===== TARJETAS DE PARTIDOS MEJORADAS ===== */
 .match-card{
   background:var(--card);border:1px solid var(--border);
   border-radius:16px;padding:16px 20px;
@@ -226,7 +233,6 @@ main{max-width:1280px;margin:0 auto;padding:24px 16px}
 .team-name{font-weight:600;font-size:.9rem}
 .team-score{font-weight:800;font-size:1.2rem;color:var(--text)}
 
-/* ===== OTROS ELEMENTOS ===== */
 .grid-main{display:grid;grid-template-columns:1fr 320px;gap:24px}
 .grid-2{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
 .grid-teams{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px}
@@ -236,14 +242,12 @@ main{max-width:1280px;margin:0 auto;padding:24px 16px}
 .section-title::before{content:'';display:block;width:4px;height:28px;background:var(--accent);border-radius:4px}
 .section-title .sub{font-size:.75rem;font-weight:500;color:var(--muted);margin-left:auto}
 
-/* ===== STAT CARD (panel lateral) ===== */
 .stat-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;box-shadow:var(--card-shadow);}
 .stat-card h4{font-size:.7rem;font-weight:700;margin-bottom:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
 .stat-item{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);font-size:.85rem}
 .stat-item:last-child{border:none}
 .stat-val{font-weight:700;color:var(--blue)}
 
-/* ===== STANDINGS COMPLETAS ===== */
 .standings-card{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;box-shadow:var(--card-shadow);}
 .standings-card-header{background:rgba(26,86,219,.07);padding:12px 16px;border-bottom:2px solid var(--blue);font-weight:700;font-size:.95rem;}
 .standings-table{width:100%;border-collapse:collapse;font-size:.78rem}
@@ -255,7 +259,6 @@ main{max-width:1280px;margin:0 auto;padding:24px 16px}
 .standings-table td.pts{font-weight:800;color:var(--blue)}
 .standings-table tr.clasificado td{border-left:4px solid var(--green)}
 
-/* ===== NOTICIAS Y VIDEOS ===== */
 .news-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px;box-shadow:var(--card-shadow);transition:transform .2s,box-shadow .2s;cursor:pointer;}
 .news-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-hover)}
 .news-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
@@ -265,13 +268,11 @@ main{max-width:1280px;margin:0 auto;padding:24px 16px}
 .news-summary{font-size:.85rem;color:var(--muted);line-height:1.5}
 .news-more{color:var(--blue);font-size:.8rem;font-weight:600;margin-top:12px}
 
-/* ===== VIDEO CARD ===== */
 .video-card{padding:20px !important;border-left:4px solid var(--blue)}
 .video-wrapper{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:10px;margin:12px 0;background:#000}
 .video-wrapper iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:none}
 .news-card.video-card .news-title{font-size:1.2rem}
 
-/* ===== OTROS ===== */
 .team-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px 12px;box-shadow:var(--card-shadow);display:flex;flex-direction:column;align-items:center;gap:8px;aspect-ratio:1;justify-content:center;transition:all .2s;cursor:pointer;}
 .team-card:hover{border-color:var(--blue);transform:translateY(-3px)}
 .team-icon{font-size:1.8rem}
@@ -349,7 +350,7 @@ footer{background:var(--primary);color:rgba(255,255,255,.55);text-align:center;p
 <main>
 
 <!-- ============================================================ -->
-<!-- INICIO MEJORADO CON CARRUSEL, ESTADÍSTICAS Y VIDEO           -->
+<!-- INICIO MEJORADO -->
 <!-- ============================================================ -->
 <div id="page-inicio" class="page active">
   <!-- Banner -->
@@ -413,35 +414,37 @@ footer{background:var(--primary);color:rgba(255,255,255,.55);text-align:center;p
     </div>
   </div>
 
-  <!-- Video destacado -->
+  <!-- ✅ VIDEO DESTACADO CON NUEVO ENLACE -->
   <div class="video-highlight">
     <div class="video-title">🎥 Resumen: España 4-0 Arabia Saudita</div>
     <div class="video-wrapper">
-      <iframe src="https://www.youtube.com/embed/YiFE-jbe1TA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      <iframe src="https://www.youtube.com/embed/Xwnk6khO1Pc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    </div>
+    <div id="videoFallback" style="display:none;" class="video-fallback">
+      <div class="icon">🚫</div>
+      <h4>Video no disponible</h4>
+      <p>El propietario del video inhabilitó la reproducción en otros sitios web.</p>
+      <a href="https://youtu.be/Xwnk6khO1Pc" target="_blank" class="btn-youtube">▶ Mirar en YouTube</a>
     </div>
   </div>
 
-  <!-- Clasificación resumida -->
+  <!-- Clasificación resumida (Top 1 de cada grupo) -->
   <div class="section-title">📊 Líderes de grupo <span class="sub">Top 1 de cada grupo</span></div>
   <div class="standings-mini" id="standingsMini"></div>
 
-  <!-- Selector de fechas -->
+  <!-- Selector de fechas y partidos -->
   <div class="date-selector" id="dateSelector"></div>
-
-  <!-- Partidos y panel lateral -->
   <div class="grid-main">
     <div>
       <div class="section-title" id="matchesTitle">Partidos del 21 de Junio</div>
       <div class="grid-2" id="matchesList"></div>
     </div>
-    <div id="statsPanel">
-      <!-- Los goleadores y asistencias se renderizan aquí -->
-    </div>
+    <div id="statsPanel"></div>
   </div>
 </div>
 
 <!-- ============================================================ -->
-<!-- RESTO DE PÁGINAS (sin cambios)                               -->
+<!-- RESTO DE PÁGINAS                                              -->
 <!-- ============================================================ -->
 
 <!-- EN VIVO -->
@@ -475,7 +478,7 @@ footer{background:var(--primary);color:rgba(255,255,255,.55);text-align:center;p
 <div id="page-noticias" class="page">
   <div class="section-title">📰 Noticias y Videos Destacados</div>
 
-  <!-- Video Destacado 1 -->
+  <!-- ✅ VIDEO DESTACADO 1 CON NUEVO ENLACE -->
   <div class="news-card video-card">
     <div class="news-meta">
       <span class="news-sport-tag">🎥 VIDEO DESTACADO</span>
@@ -483,7 +486,13 @@ footer{background:var(--primary);color:rgba(255,255,255,.55);text-align:center;p
     </div>
     <div class="news-title">¡ESPAÑA GOLEA y CONSIGUE su PRIMERA VICTORIA! | España 4–0 Arabia Saudita</div>
     <div class="video-wrapper">
-      <iframe src="https://www.youtube.com/embed/YiFE-jbe1TA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      <iframe src="https://www.youtube.com/embed/Xwnk6khO1Pc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    </div>
+    <div class="video-fallback" style="display:none;">
+      <div class="icon">🚫</div>
+      <h4>Video no disponible</h4>
+      <p>El propietario del video inhabilitó la reproducción en otros sitios web.</p>
+      <a href="https://youtu.be/Xwnk6khO1Pc" target="_blank" class="btn-youtube">▶ Mirar en YouTube</a>
     </div>
     <p class="news-summary" style="margin-top:12px;">Revive el triunfo de la selección española con un contundente 4-0 sobre Arabia Saudita.</p>
     <div class="news-more">Leer más →</div>
@@ -512,7 +521,7 @@ footer{background:var(--primary);color:rgba(255,255,255,.55);text-align:center;p
   <div style="display:flex;flex-direction:column;gap:16px" id="analisisList"></div>
 </div>
 
-<!-- CONTACTO, ACERCA, PRIVACIDAD (sin cambios) -->
+<!-- CONTACTO, ACERCA, PRIVACIDAD -->
 <div id="page-contacto" class="page">
   <div class="section-title">📬 Contacto</div>
   <div class="static-page">
@@ -596,9 +605,9 @@ footer{background:var(--primary);color:rgba(255,255,255,.55);text-align:center;p
 <!-- JAVASCRIPT COMPLETO                                          -->
 <!-- ============================================================ -->
 <script>
-// --------------------------
-// DATOS COMPLETOS
-// --------------------------
+// ============================================================
+// DATOS COMPLETOS (MUNDIAL 2026 + MLB + NBA)
+// ============================================================
 const datosDeportes = {
   futbol: {
     nombre: 'Mundial 2026',
@@ -657,6 +666,7 @@ const datosDeportes = {
         { local: 'Países Bajos', visitante: 'Suecia', score: '5-1', status: 'Final', flagL: '🇳🇱', flagV: '🇸🇪' },
         { local: 'Japón', visitante: 'Túnez', score: '4-0', status: 'Final', flagL: '🇯🇵', flagV: '🇹🇳' }
       ],
+      // ✅ RESULTADOS DEL 21 DE JUNIO (VERIFICADOS)
       '21': [
         { local: 'España', visitante: 'Arabia Saudita', score: '4-0', status: 'Final', flagL: '🇪🇸', flagV: '🇸🇦' },
         { local: 'Bélgica', visitante: 'Irán', score: '0-0', status: 'Final', flagL: '🇧🇪', flagV: '🇮🇷' },
@@ -1037,7 +1047,7 @@ function spinnerHtml() {
 }
 
 // ============================================================
-// API MLB (statsapi.mlb.com)
+// API MLB
 // ============================================================
 function getFechaMLB() {
   const hoy = new Date();
@@ -1113,13 +1123,13 @@ async function fetchMLBStandings() {
 // RENDERIZADO DE SECCIONES
 // ============================================================
 
-// --- INICIO MEJORADO ---
+// --- INICIO ---
 function renderInicio() {
   const d = datosDeportes[deporte];
   iniciarTicker();
   initCarousel();
 
-  // Estadísticas rápidas
+  // Estadísticas
   const totalPartidos = Object.values(d.partidosPorFecha).reduce((acc, arr) => acc + arr.length, 0);
   const totalGoles = Object.values(d.partidosPorFecha).reduce((acc, arr) => {
     return acc + arr.reduce((sum, p) => {
@@ -1130,7 +1140,7 @@ function renderInicio() {
       return sum;
     }, 0);
   }, 0);
-  const clasificados = 1; // Alemania
+  const clasificados = 1;
   const diasRestantes = 18;
 
   document.getElementById('statPartidos').textContent = totalPartidos;
@@ -1138,7 +1148,7 @@ function renderInicio() {
   document.getElementById('statClasificados').textContent = clasificados;
   document.getElementById('statRestantes').textContent = diasRestantes;
 
-  // Clasificación resumida (top 1 de cada grupo)
+  // Clasificación resumida
   const miniContainer = document.getElementById('standingsMini');
   if (miniContainer && d.clasificacion && d.clasificacion.grupos) {
     miniContainer.innerHTML = d.clasificacion.grupos.slice(0, 4).map(g => {
@@ -1166,7 +1176,7 @@ function renderInicio() {
     ds.style.display = 'none';
   }
 
-  // Panel lateral: goleadores y asistencias
+  // Panel lateral
   const sp = document.getElementById('statsPanel');
   if (deporte === 'futbol') {
     const goles = d.goleadores.map(g => `<div class="stat-item"><span>${g.n}</span><span class="stat-val">${g.v}</span></div>`).join('');
@@ -1207,10 +1217,7 @@ function cargarPartidosInicio() {
   }
 }
 
-function cargarMLBDesdeFecha() {
-  renderInicio();
-}
-
+function cargarMLBDesdeFecha() { renderInicio(); }
 function selFecha(f) {
   fecha = f;
   document.querySelectorAll('.date-btn').forEach(b => b.classList.toggle('active', b.textContent == f));
@@ -1276,7 +1283,6 @@ function renderPartidos() {
     pl.innerHTML = d.partidos.map(p => matchCardHtml(p)).join('');
   }
 }
-
 function cargarMLBPartidos() { renderPartidos(); }
 
 // --- CLASIFICACIÓN ---
@@ -1308,7 +1314,7 @@ function renderEquipos() {
   eq.innerHTML = d.equipos.map(e => `<div class="team-card"><div class="team-icon">${d.icono}</div><div class="team-card-name">${e}</div></div>`).join('');
 }
 
-// --- NOTICIAS (solo texto, los videos ya están en el HTML) ---
+// --- NOTICIAS ---
 function renderNoticias() {
   const d = datosDeportes[deporte];
   const nl = document.getElementById('noticiasList');
