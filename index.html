@@ -706,7 +706,6 @@ const datosDeportes = {
         { local: 'Países Bajos', visitante: 'Suecia', score: '5-1', status: 'Final', flagL: '🇳🇱', flagV: '🇸🇪' },
         { local: 'Japón', visitante: 'Túnez', score: '4-0', status: 'Final', flagL: '🇯🇵', flagV: '🇹🇳' }
       ],
-      // ✅ RESULTADOS DEL 21 DE JUNIO (VERIFICADOS)
       '21': [
         { local: 'España', visitante: 'Arabia Saudita', score: '4-0', status: 'Final', flagL: '🇪🇸', flagV: '🇸🇦' },
         { local: 'Bélgica', visitante: 'Irán', score: '0-0', status: 'Final', flagL: '🇧🇪', flagV: '🇮🇷' },
@@ -1097,7 +1096,7 @@ function spinnerHtml() {
 }
 
 // ============================================================
-// API MLB (CORREGIDA)
+// API MLB (CORREGIDA CON NOMBRES LEGIBLES)
 // ============================================================
 function getFechaMLB() {
   const hoy = new Date();
@@ -1124,21 +1123,40 @@ function parseMLBGame(game, fechaStr) {
   return { local, visitante: visit, score, status: st, fecha: fechaStr };
 }
 
-// ✅ FUNCIÓN CORREGIDA: nunca devuelve "undefined"
+// ✅ FUNCIÓN CORREGIDA: traduce IDs de división a nombres legibles
 function parseMLBStandings(data) {
   const records = data.records || [];
   const grupos = [];
+  
+  // Mapa de IDs de división a nombres legibles (basado en la API de MLB)
+  const divisionNames = {
+    '200': 'Liga Americana – Este',
+    '201': 'Liga Americana – Central',
+    '202': 'Liga Americana – Oeste',
+    '203': 'Liga Nacional – Este',
+    '204': 'Liga Nacional – Central',
+    '205': 'Liga Nacional – Oeste'
+  };
+
   records.forEach(rec => {
-    // Intentar obtener nombre con múltiples fallbacks
     let nombre = 'División';
+    
+    // Intentar obtener el nombre de la división
     if (rec.division && rec.division.name) {
       nombre = rec.division.name;
-    } else if (rec.league && rec.league.name) {
+    } 
+    // Si no, usar el nombre de la liga
+    else if (rec.league && rec.league.name) {
       nombre = rec.league.name;
-    } else if (rec.name) {
+    } 
+    // Si no, usar el nombre del registro
+    else if (rec.name) {
       nombre = rec.name;
-    } else if (rec.division && rec.division.id) {
-      nombre = `División ${rec.division.id}`;
+    } 
+    // Si solo tenemos el ID, traducirlo a un nombre legible
+    else if (rec.division && rec.division.id) {
+      const id = String(rec.division.id);
+      nombre = divisionNames[id] || `División ${id}`;
     }
     
     const equipos = rec.teamRecords.map(tr => ({
@@ -1147,8 +1165,10 @@ function parseMLBStandings(data) {
       P: parseInt(tr.losses),
       PCT: tr.winningPercentage || '.000'
     }));
+    
     grupos.push({ nombre, equipos });
   });
+  
   return grupos;
 }
 
