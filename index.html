@@ -11,7 +11,7 @@
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3765201153278683" crossorigin="anonymous"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-/* ===== ESTILOS (con corrección para emojis) ===== */
+/* ===== ESTILOS (sin cambios, los mismos de antes) ===== */
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
   --primary:#0b1e2e;
@@ -515,7 +515,7 @@ footer{background:var(--primary);color:rgba(255,255,255,.55);text-align:center;p
   <div class="grid-standings" id="clasificacionGrid"></div>
 </div>
 
-<!-- EQUIPOS (CON BANDERAS) -->
+<!-- EQUIPOS (CON BANDERAS Y TODOS LOS 48 EQUIPOS) -->
 <div id="page-equipos" class="page">
   <div class="section-title" id="equiposTitulo">🏟️ Equipos Mundial 2026</div>
   <div class="grid-teams" id="equiposGrid"></div>
@@ -644,7 +644,95 @@ footer{background:var(--primary);color:rgba(255,255,255,.55);text-align:center;p
 
 <script>
 // ============================================================
-// DATOS ESTÁTICOS (RESPALDO) + NOTICIAS ACTUALIZADAS
+// MAPEO DE TRADUCCIÓN INGLÉS → ESPAÑOL (TODOS LOS PAÍSES)
+// ============================================================
+const traducciones = {
+  'Argentina': 'Argentina',
+  'Brazil': 'Brasil',
+  'France': 'Francia',
+  'Spain': 'España',
+  'Germany': 'Alemania',
+  'Portugal': 'Portugal',
+  'England': 'Inglaterra',
+  'Netherlands': 'Países Bajos',
+  'Croatia': 'Croacia',
+  'Belgium': 'Bélgica',
+  'Uruguay': 'Uruguay',
+  'Morocco': 'Marruecos',
+  'Senegal': 'Senegal',
+  'Australia': 'Australia',
+  'United States': 'Estados Unidos',
+  'Mexico': 'México',
+  'Canada': 'Canadá',
+  'Japan': 'Japón',
+  'Korea Republic': 'Corea del Sur',
+  'Sweden': 'Suecia',
+  'Switzerland': 'Suiza',
+  'Turkey': 'Turquía',
+  'Italy': 'Italia',
+  'South Africa': 'Sudáfrica',
+  'Czech Republic': 'República Checa',
+  'Bosnia and Herzegovina': 'Bosnia y Herzegovina',
+  'Paraguay': 'Paraguay',
+  'Qatar': 'Catar',
+  'Curacao': 'Curazao',
+  'Ivory Coast': 'Costa de Marfil',
+  'Ecuador': 'Ecuador',
+  'Tunisia': 'Túnez',
+  'Egypt': 'Egipto',
+  'Iran': 'Irán',
+  'New Zealand': 'Nueva Zelanda',
+  'Saudi Arabia': 'Arabia Saudita',
+  'Cape Verde': 'Cabo Verde',
+  'Iraq': 'Irak',
+  'Norway': 'Noruega',
+  'Algeria': 'Argelia',
+  'Austria': 'Austria',
+  'Jordan': 'Jordania',
+  'DR Congo': 'República Democrática del Congo',
+  'Ghana': 'Ghana',
+  'Panama': 'Panamá',
+  'Colombia': 'Colombia',
+  'Uzbekistan': 'Uzbekistán',
+  'Haiti': 'Haití',
+  'Scotland': 'Escocia',
+  'South Africa': 'Sudáfrica',
+  'Mexico': 'México'
+};
+
+// ============================================================
+// MAPEO DE BANDERAS (CLAVE = NOMBRE EN INGLÉS)
+// ============================================================
+const flagMap = {
+  'Argentina': '🇦🇷', 'Brazil': '🇧🇷', 'France': '🇫🇷', 'Spain': '🇪🇸',
+  'Germany': '🇩🇪', 'Portugal': '🇵🇹', 'England': '🏴󠁧󠁢󠁥󠁮󠁧󠁿', 'Netherlands': '🇳🇱',
+  'Croatia': '🇭🇷', 'Belgium': '🇧🇪', 'Uruguay': '🇺🇾', 'Morocco': '🇲🇦',
+  'Senegal': '🇸🇳', 'Australia': '🇦🇺', 'United States': '🇺🇸', 'Mexico': '🇲🇽',
+  'Canada': '🇨🇦', 'Japan': '🇯🇵', 'Korea Republic': '🇰🇷', 'Sweden': '🇸🇪',
+  'Switzerland': '🇨🇭', 'Turkey': '🇹🇷', 'Italy': '🇮🇹', 'South Africa': '🇿🇦',
+  'Czech Republic': '🇨🇿', 'Bosnia and Herzegovina': '🇧🇦', 'Paraguay': '🇵🇾',
+  'Qatar': '🇶🇦', 'Curacao': '🇨🇼', 'Ivory Coast': '🇨🇮', 'Ecuador': '🇪🇨',
+  'Tunisia': '🇹🇳', 'Egypt': '🇪🇬', 'Iran': '🇮🇷', 'New Zealand': '🇳🇿',
+  'Saudi Arabia': '🇸🇦', 'Cape Verde': '🇨🇻', 'Iraq': '🇮🇶', 'Norway': '🇳🇴',
+  'Algeria': '🇩🇿', 'Austria': '🇦🇹', 'Jordan': '🇯🇴', 'DR Congo': '🇨🇩',
+  'Ghana': '🇬🇭', 'Panama': '🇵🇦', 'Colombia': '🇨🇴', 'Uzbekistan': '🇺🇿',
+  'Haiti': '🇭🇹', 'Scotland': '🏴󠁧󠁢󠁳󠁣󠁴󠁿'
+};
+
+// ============================================================
+// FUNCIONES DE TRADUCCIÓN Y BANDERAS
+// ============================================================
+function traducir(nombreIngles) {
+  if (!nombreIngles) return 'Desconocido';
+  return traducciones[nombreIngles] || nombreIngles; // si no está en el mapa, devuelve el original
+}
+
+function getFlagFromName(nombreIngles) {
+  return flagMap[nombreIngles] || '🏳️';
+}
+
+// ============================================================
+// DATOS ESTÁTICOS (RESPALDO)
 // ============================================================
 const hoy = new Date();
 const fechaStr = hoy.toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
@@ -654,6 +742,7 @@ const datosDeportes = {
     nombre: 'Mundial 2026',
     icono: '⚽',
     banner: { titulo: 'Mundial 2026 • Resultados en vivo', desc: 'Partidos, marcadores y clasificación actualizada.' },
+    // Ya no usamos lista estática de equipos; la obtendremos de la API
     noticias: [
       { 
         titulo: '¡Histórico! Cabo Verde clasifica a octavos en su primer Mundial', 
@@ -689,8 +778,7 @@ const datosDeportes = {
         fecha: fechaStr, 
         texto: 'Selecciones como España, Inglaterra, Argentina y Países Bajos llegan con buen ritmo. Sin embargo, el formato de 48 equipos ha dado sorpresas como la de Cabo Verde y Curazao.' 
       }
-    ],
-    equipos: ['Argentina','Brasil','Francia','España','Alemania','Portugal','Inglaterra','Países Bajos','Croacia','Bélgica','Uruguay','Marruecos','Senegal','Australia','EE.UU.','México','Canadá','Japón','Corea del Sur','Suecia','Suiza','Turquía','Italia']
+    ]
   },
   mlb: {
     nombre: 'MLB',
@@ -891,6 +979,8 @@ async function fetchWorldCupGames(force = false) {
     if (!resp.ok) throw new Error('HTTP ' + resp.status);
     const data = await resp.json();
     let games = Array.isArray(data) ? data : (data.games || []);
+    // FILTRAR partidos que tengan equipos definidos (ambos nombres)
+    games = games.filter(g => g.home_team_name_en && g.away_team_name_en);
     cachedGames = games;
     return games;
   } catch (e) {
@@ -899,38 +989,16 @@ async function fetchWorldCupGames(force = false) {
   }
 }
 
-// ===== MAPEO COMPLETO DE BANDERAS =====
-const flagMap = {
-  'Argentina': '🇦🇷', 'Brasil': '🇧🇷', 'Francia': '🇫🇷', 'España': '🇪🇸',
-  'Alemania': '🇩🇪', 'Portugal': '🇵🇹', 'Inglaterra': '🏴󠁧󠁢󠁥󠁮󠁧󠁿', 'Países Bajos': '🇳🇱',
-  'Croacia': '🇭🇷', 'Bélgica': '🇧🇪', 'Uruguay': '🇺🇾', 'Marruecos': '🇲🇦',
-  'Senegal': '🇸🇳', 'Australia': '🇦🇺', 'EE.UU.': '🇺🇸', 'México': '🇲🇽',
-  'Canadá': '🇨🇦', 'Japón': '🇯🇵', 'Corea del Sur': '🇰🇷', 'Suecia': '🇸🇪',
-  'Suiza': '🇨🇭', 'Turquía': '🇹🇷', 'Italia': '🇮🇹', 'Sudáfrica': '🇿🇦',
-  'Korea Republic': '🇰🇷', 'Czech Republic': '🇨🇿', 'Bosnia and Herzegovina': '🇧🇦',
-  'United States': '🇺🇸', 'Paraguay': '🇵🇾', 'Turkey': '🇹🇷', 'Qatar': '🇶🇦',
-  'Switzerland': '🇨🇭', 'Germany': '🇩🇪', 'Curacao': '🇨🇼', 'Netherlands': '🇳🇱',
-  'Japan': '🇯🇵', 'Ivory Coast': '🇨🇮', 'Ecuador': '🇪🇨', 'Tunisia': '🇹🇳',
-  'Morocco': '🇲🇦', 'Belgium': '🇧🇪', 'Egypt': '🇪🇬', 'Iran': '🇮🇷',
-  'New Zealand': '🇳🇿', 'Saudi Arabia': '🇸🇦', 'Spain': '🇪🇸', 'Cape Verde': '🇨🇻',
-  'France': '🇫🇷', 'Senegal': '🇸🇳', 'Iraq': '🇮🇶', 'Norway': '🇳🇴',
-  'Algeria': '🇩🇿', 'Austria': '🇦🇹', 'Jordan': '🇯🇴', 'Portugal': '🇵🇹',
-  'DR Congo': '🇨🇩', 'England': '🏴󠁧󠁢󠁥󠁮󠁧󠁿', 'Croatia': '🇭🇷', 'Ghana': '🇬🇭',
-  'Panama': '🇵🇦', 'Colombia': '🇨🇴', 'Uzbekistan': '🇺🇿', 'Haiti': '🇭🇹',
-  'Scotland': '🏴󠁧󠁢󠁳󠁣󠁴󠁿', 'Mexico': '🇲🇽', 'South Africa': '🇿🇦', 'Korea Republic': '🇰🇷'
-};
-function getFlagFromName(name) {
-  return flagMap[name] || '🏳️';
-}
-
 function transformAPIMatch(match) {
+  const localIngles = match.home_team_name_en || 'Local';
+  const visitIngles = match.away_team_name_en || 'Visitante';
   return {
-    local: match.home_team_name_en || 'Local',
-    visitante: match.away_team_name_en || 'Visitante',
+    local: traducir(localIngles),
+    visitante: traducir(visitIngles),
     score: match.finished === 'TRUE' ? `${match.home_score}-${match.away_score}` : 'vs',
     status: match.finished === 'TRUE' ? 'Final' : 'Programado',
-    flagL: getFlagFromName(match.home_team_name_en),
-    flagV: getFlagFromName(match.away_team_name_en),
+    flagL: getFlagFromName(localIngles),
+    flagV: getFlagFromName(visitIngles),
     fecha: match.local_date || '',
     group: match.group || '',
     stage: match.stage || 'Group',
@@ -958,8 +1026,8 @@ function calculateStandings(games) {
     const hs = parseInt(g.home_score || 0);
     const as = parseInt(g.away_score || 0);
     
-    if (!groups[group][home]) groups[group][home] = { nombre: home, Pts: 0, PJ: 0, G: 0, E: 0, P: 0, GF: 0, GC: 0 };
-    if (!groups[group][away]) groups[group][away] = { nombre: away, Pts: 0, PJ: 0, G: 0, E: 0, P: 0, GF: 0, GC: 0 };
+    if (!groups[group][home]) groups[group][home] = { nombre: traducir(home), Pts: 0, PJ: 0, G: 0, E: 0, P: 0, GF: 0, GC: 0 };
+    if (!groups[group][away]) groups[group][away] = { nombre: traducir(away), Pts: 0, PJ: 0, G: 0, E: 0, P: 0, GF: 0, GC: 0 };
     
     const h = groups[group][home];
     const a = groups[group][away];
@@ -1027,21 +1095,19 @@ function calcularGolesPorEquipo(games) {
     const visit = g.away_team_name_en;
     const hs = parseInt(g.home_score || 0);
     const as = parseInt(g.away_score || 0);
-    if (!goles[local]) goles[local] = { golesFavor: 0, golesContra: 0, dif: 0 };
-    if (!goles[visit]) goles[visit] = { golesFavor: 0, golesContra: 0, dif: 0 };
+    if (!goles[local]) goles[local] = { golesFavor: 0, golesContra: 0, dif: 0, nombre: traducir(local) };
+    if (!goles[visit]) goles[visit] = { golesFavor: 0, golesContra: 0, dif: 0, nombre: traducir(visit) };
     goles[local].golesFavor += hs;
     goles[local].golesContra += as;
     goles[visit].golesFavor += as;
     goles[visit].golesContra += hs;
   });
-  // Calcular diferencia
   for (const team in goles) {
     goles[team].dif = goles[team].golesFavor - goles[team].golesContra;
   }
-  // Convertir a array y ordenar por golesFavor descendente
-  const arr = Object.entries(goles).map(([nombre, stats]) => ({ nombre, ...stats }));
+  const arr = Object.values(goles);
   arr.sort((a, b) => b.golesFavor - a.golesFavor);
-  return arr.slice(0, 5); // Top 5
+  return arr.slice(0, 5);
 }
 
 // ============================================================
@@ -1197,10 +1263,8 @@ async function renderInicio() {
   iniciarTicker();
   initCarousel();
 
-  // Panel lateral (estadísticas de goles por equipo)
   const sp = document.getElementById('statsPanel');
   if (deporte === 'futbol') {
-    // Se actualizará después de obtener los datos
     sp.innerHTML = spinnerHtml();
   } else {
     sp.innerHTML = '<div class="stat-card"><h4>📊 Estadísticas</h4><p style="color:var(--muted);font-size:.85rem;padding:8px 0">Datos actualizados en tiempo real.</p></div>';
@@ -1225,11 +1289,9 @@ async function renderInicio() {
     ds.style.display = 'none';
   }
 
-  // Estadísticas y partidos desde API
   if (deporte === 'futbol') {
     const games = await fetchWorldCupGames();
     if (games) {
-      // Estadísticas generales
       const stats = calcularEstadisticas(games);
       document.getElementById('statPartidos').textContent = stats.totalPartidos;
       document.getElementById('statGoles').textContent = stats.golesTotales;
@@ -1240,6 +1302,7 @@ async function renderInicio() {
       const topGoles = calcularGolesPorEquipo(games);
       let html = '<div class="stat-card"><h4>⚽ Equipos con más goles</h4>';
       topGoles.forEach((eq, i) => {
+        // eq.nombre ya está traducido
         const flag = getFlagFromName(eq.nombre);
         html += `<div class="stat-item"><span>${flag} ${eq.nombre}</span><span class="stat-val">${eq.golesFavor}</span></div>`;
       });
@@ -1445,15 +1508,36 @@ async function renderClasificacion() {
   }
 }
 
-// --- EQUIPOS (CON BANDERAS CORREGIDAS) ---
-function renderEquipos() {
-  const d = datosDeportes[deporte];
+// --- EQUIPOS (EXTRAÍDOS DE LA API, TRADUCIDOS) ---
+async function renderEquipos() {
   const eq = document.getElementById('equiposGrid');
   if (!eq) return;
-  eq.innerHTML = d.equipos.map(e => {
-    const flag = getFlagFromName(e);
-    return `<div class="team-card"><div class="team-icon">${flag}</div><div class="team-card-name">${e}</div></div>`;
-  }).join('');
+  
+  if (deporte === 'futbol') {
+    eq.innerHTML = spinnerHtml();
+    const games = await fetchWorldCupGames();
+    if (games && games.length > 0) {
+      // Extraer nombres únicos de equipos (en inglés)
+      const equiposSet = new Set();
+      games.forEach(g => {
+        if (g.home_team_name_en) equiposSet.add(g.home_team_name_en);
+        if (g.away_team_name_en) equiposSet.add(g.away_team_name_en);
+      });
+      const equipos = Array.from(equiposSet).sort();
+      // Traducir y mostrar con banderas
+      eq.innerHTML = equipos.map(e => {
+        const nombreEsp = traducir(e);
+        const flag = getFlagFromName(e);
+        return `<div class="team-card"><div class="team-icon">${flag}</div><div class="team-card-name">${nombreEsp}</div></div>`;
+      }).join('');
+    } else {
+      eq.innerHTML = emptyHtml('No se pudieron cargar los equipos.');
+    }
+  } else {
+    // MLB o NBA: usar lista estática
+    const d = datosDeportes[deporte];
+    eq.innerHTML = d.equipos.map(e => `<div class="team-card"><div class="team-icon">🏳️</div><div class="team-card-name">${e}</div></div>`).join('');
+  }
 }
 
 // --- NOTICIAS ---
