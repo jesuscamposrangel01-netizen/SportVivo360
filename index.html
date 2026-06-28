@@ -11,7 +11,6 @@
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3765201153278683" crossorigin="anonymous"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-/* ===== ESTILOS (con banderas más pequeñas) ===== */
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
   --primary:#0b1e2e;
@@ -79,6 +78,35 @@ main{max-width:1280px;margin:0 auto;padding:24px 16px}
 }
 .banner h2{font-size:1.8rem;font-weight:900;line-height:1.2}
 .banner p{opacity:.85;margin-top:6px;font-size:.95rem;max-width:600px}
+
+/* === CONTENEDOR DE PUBLICIDAD ADSTERRA === */
+.ad-container {
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:16px;
+  margin-bottom:24px;
+  box-shadow:var(--card-shadow);
+  text-align:center;
+  min-height:100px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+}
+.ad-container .ad-label {
+  font-size:.6rem;
+  text-transform:uppercase;
+  color:var(--muted);
+  letter-spacing:2px;
+  margin-bottom:8px;
+  font-weight:600;
+}
+.ad-container #container-7beba22162228132422b07d05952ad2c {
+  width:100%;
+  min-height:80px;
+}
 
 .ticker{
   background:var(--card);border:1px solid var(--border);border-radius:14px;
@@ -274,7 +302,6 @@ main{max-width:1280px;margin:0 auto;padding:24px 16px}
 .video-wrapper iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:none}
 .news-card.video-card .news-title{font-size:1.2rem}
 
-/* === EQUIPOS CON BANDERAS MÁS PEQUEÑAS === */
 .team-card{
   background:var(--card);border:1px solid var(--border);
   border-radius:14px;padding:16px 12px;box-shadow:var(--card-shadow);
@@ -283,7 +310,7 @@ main{max-width:1280px;margin:0 auto;padding:24px 16px}
 }
 .team-card:hover{border-color:var(--blue);transform:translateY(-3px)}
 .team-icon{
-  font-size:2.2rem !important; /* Reducido de 3.2rem a 2.2rem */
+  font-size:2.2rem !important;
   font-family: 'Segoe UI Emoji', 'Apple Color Emoji', 'Noto Color Emoji', 'Android Emoji', 'Twemoji Mozilla', sans-serif !important;
   line-height:1.2 !important;
   display:block !important;
@@ -416,6 +443,15 @@ footer{background:var(--primary);color:rgba(255,255,255,.55);text-align:center;p
     <p id="bannerDesc">Partidos, marcadores y clasificación actualizada.</p>
   </div>
 
+  <!-- ============================================================ -->
+  <!-- ANUNCIO ADSTERRA - UBICACIÓN 1 (DESPUÉS DEL BANNER)           -->
+  <!-- ============================================================ -->
+  <div class="ad-container">
+    <div class="ad-label">⚡ Publicidad</div>
+    <script async="async" data-cfasync="false" src="https://pl30112061.effectivecpmnetwork.com/7beba22162228132422b07d05952ad2c/invoke.js"></script>
+    <div id="container-7beba22162228132422b07d05952ad2c"></div>
+  </div>
+
   <div class="ticker">
     <span class="ticker-label">Última hora</span>
     <span class="ticker-text" id="tickerText">Cargando noticias...</span>
@@ -449,7 +485,6 @@ footer{background:var(--primary);color:rgba(255,255,255,.55);text-align:center;p
     <div class="carousel-dots" id="carouselDots"></div>
   </div>
 
-  <!-- ESTADÍSTICAS (se actualizarán dinámicamente) -->
   <div class="stats-grid">
     <div class="stat-card-large">
       <div class="stat-number" id="statPartidos">0</div>
@@ -520,13 +555,13 @@ footer{background:var(--primary);color:rgba(255,255,255,.55);text-align:center;p
   <div class="grid-standings" id="clasificacionGrid"></div>
 </div>
 
-<!-- EQUIPOS (CON BANDERAS MÁS PEQUEÑAS) -->
+<!-- EQUIPOS -->
 <div id="page-equipos" class="page">
   <div class="section-title" id="equiposTitulo">🏟️ Equipos Mundial 2026</div>
   <div class="grid-teams" id="equiposGrid"></div>
 </div>
 
-<!-- NOTICIAS (ACTUALIZADAS) -->
+<!-- NOTICIAS -->
 <div id="page-noticias" class="page">
   <div class="section-title">📰 Noticias y Videos Destacados</div>
 
@@ -649,7 +684,7 @@ footer{background:var(--primary);color:rgba(255,255,255,.55);text-align:center;p
 
 <script>
 // ============================================================
-// MAPEO DE TRADUCCIÓN INGLÉS → ESPAÑOL (TODOS LOS PAÍSES)
+// MAPEO DE TRADUCCIÓN INGLÉS → ESPAÑOL
 // ============================================================
 const traducciones = {
   'Argentina': 'Argentina',
@@ -727,7 +762,7 @@ const traducciones = {
 };
 
 // ============================================================
-// MAPEO DE BANDERAS (CLAVE = NOMBRE EN INGLÉS)
+// MAPEO DE BANDERAS
 // ============================================================
 const flagMap = {
   'Argentina': '🇦🇷', 'Brazil': '🇧🇷', 'France': '🇫🇷', 'Spain': '🇪🇸',
@@ -751,14 +786,10 @@ const flagMap = {
   'Nicaragua': '🇳🇮', 'USA': '🇺🇸', 'South Korea': '🇰🇷'
 };
 
-// ============================================================
-// FUNCIONES DE TRADUCCIÓN Y BANDERAS
-// ============================================================
 function traducir(nombreIngles) {
   if (!nombreIngles) return 'Desconocido';
   return traducciones[nombreIngles] || nombreIngles;
 }
-
 function getFlagFromName(nombreIngles) {
   return flagMap[nombreIngles] || '🏳️';
 }
@@ -943,7 +974,6 @@ function cambiarDeporte(btn) {
   const d = datosDeportes[deporte];
   document.getElementById('headerIcon').textContent = d.icono;
   document.getElementById('headerSportLabel').textContent = d.nombre;
-  
   if (deporte === 'futbol') {
     cachedGames = null;
   }
@@ -1301,7 +1331,6 @@ async function renderInicio() {
     sp.innerHTML = '<div class="stat-card"><h4>📊 Estadísticas</h4><p style="color:var(--muted);font-size:.85rem;padding:8px 0">Datos actualizados en tiempo real.</p></div>';
   }
 
-  // Selector de fechas
   const ds = document.getElementById('dateSelector');
   if (deporte === 'futbol') {
     const fechas = [];
@@ -1329,7 +1358,6 @@ async function renderInicio() {
       document.getElementById('statClasificados').textContent = stats.clasificados;
       document.getElementById('statRestantes').textContent = stats.diasRestantes;
 
-      // Panel lateral: Top 5 goleadores (equipos con más goles) CON BANDERAS
       const topGoles = calcularGolesPorEquipo(games);
       let html = '<div class="stat-card"><h4>⚽ Equipos con más goles</h4>';
       topGoles.forEach((eq, i) => {
@@ -1337,7 +1365,6 @@ async function renderInicio() {
         html += `<div class="stat-item"><span>${flag} ${eq.nombre}</span><span class="stat-val">${eq.golesFavor}</span></div>`;
       });
       html += '</div>';
-      // Segundo: mejor diferencia
       const topDif = [...topGoles].sort((a,b) => b.dif - a.dif).slice(0,5);
       html += '<div class="stat-card" style="margin-top:14px"><h4>📊 Mejor diferencia de goles</h4>';
       topDif.forEach((eq, i) => {
@@ -1347,7 +1374,6 @@ async function renderInicio() {
       html += '</div>';
       sp.innerHTML = html;
 
-      // Clasificación resumida (líderes)
       const standingsData = calculateStandings(games);
       const miniContainer = document.getElementById('standingsMini');
       if (miniContainer) {
@@ -1385,7 +1411,6 @@ async function renderInicio() {
 async function cargarPartidosInicio() {
   const ml = document.getElementById('matchesList');
   if (!ml) return;
-  
   if (deporte === 'futbol') {
     ml.innerHTML = spinnerHtml();
     const games = await fetchWorldCupGames();
@@ -1515,7 +1540,6 @@ async function renderClasificacion() {
   const d = datosDeportes[deporte];
   const cg = document.getElementById('clasificacionGrid');
   if (!cg) return;
-  
   if (deporte === 'futbol') {
     cg.innerHTML = spinnerHtml();
     const games = await fetchWorldCupGames();
@@ -1538,11 +1562,10 @@ async function renderClasificacion() {
   }
 }
 
-// --- EQUIPOS (con banderas más pequeñas) ---
+// --- EQUIPOS ---
 async function renderEquipos() {
   const eq = document.getElementById('equiposGrid');
   if (!eq) return;
-  
   if (deporte === 'futbol') {
     eq.innerHTML = spinnerHtml();
     const games = await fetchWorldCupGames();
@@ -1557,7 +1580,6 @@ async function renderEquipos() {
         es: traducir(n)
       }));
       equipos.sort((a, b) => a.es.localeCompare(b.es, 'es'));
-      
       eq.innerHTML = equipos.map(e => {
         const flag = getFlagFromName(e.en);
         return `<div class="team-card"><div class="team-icon">${flag}</div><div class="team-card-name">${e.es}</div></div>`;
