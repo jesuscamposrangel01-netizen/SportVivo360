@@ -283,11 +283,11 @@ main{max-width:1280px;margin:0 auto;padding:24px 16px}
 }
 .team-card:hover{border-color:var(--blue);transform:translateY(-3px)}
 .team-icon{
-  font-size:3rem !important;
-  font-family: 'Segoe UI Emoji', 'Apple Color Emoji', 'Noto Color Emoji', 'Android Emoji', sans-serif;
-  line-height:1.2;
-  display:block;
-  text-align:center;
+  font-size:3.2rem !important;
+  font-family: 'Segoe UI Emoji', 'Apple Color Emoji', 'Noto Color Emoji', 'Android Emoji', 'Twemoji Mozilla', sans-serif !important;
+  line-height:1.2 !important;
+  display:block !important;
+  text-align:center !important;
 }
 .team-card-name{font-size:.78rem;font-weight:600;text-align:center}
 
@@ -654,18 +654,6 @@ const datosDeportes = {
     nombre: 'Mundial 2026',
     icono: '⚽',
     banner: { titulo: 'Mundial 2026 • Resultados en vivo', desc: 'Partidos, marcadores y clasificación actualizada.' },
-    goleadores: [
-      { n: 'Gakpo / Depay (Países Bajos)', v: '5 goles' },
-      { n: 'Kane / Bellingham (Inglaterra)', v: '4 goles' },
-      { n: 'Messi / Álvarez (Argentina)', v: '3 goles' },
-      { n: 'Vinicius / Endrick (Brasil)', v: '3 goles' }
-    ],
-    asistencias: [
-      { n: 'Ángel Di María (Argentina)', v: '3' },
-      { n: 'Kevin De Bruyne (Bélgica)', v: '2' },
-      { n: 'Antoine Griezmann (Francia)', v: '2' },
-      { n: 'Dani Olmo (España)', v: '2' }
-    ],
     noticias: [
       { 
         titulo: '¡Histórico! Cabo Verde clasifica a octavos en su primer Mundial', 
@@ -911,19 +899,25 @@ async function fetchWorldCupGames(force = false) {
   }
 }
 
+// ===== MAPEO COMPLETO DE BANDERAS =====
 const flagMap = {
-  'Mexico': '🇲🇽', 'South Africa': '🇿🇦', 'Korea Republic': '🇰🇷', 'Czech Republic': '🇨🇿',
-  'Canada': '🇨🇦', 'Bosnia and Herzegovina': '🇧🇦', 'United States': '🇺🇸', 'Paraguay': '🇵🇾',
-  'Australia': '🇦🇺', 'Turkey': '🇹🇷', 'Qatar': '🇶🇦', 'Switzerland': '🇨🇭',
-  'Germany': '🇩🇪', 'Curacao': '🇨🇼', 'Netherlands': '🇳🇱', 'Japan': '🇯🇵',
-  'Ivory Coast': '🇨🇮', 'Ecuador': '🇪🇨', 'Sweden': '🇸🇪', 'Tunisia': '🇹🇳',
-  'Brazil': '🇧🇷', 'Morocco': '🇲🇦', 'Belgium': '🇧🇪', 'Egypt': '🇪🇬',
-  'Iran': '🇮🇷', 'New Zealand': '🇳🇿', 'Saudi Arabia': '🇸🇦', 'Uruguay': '🇺🇾',
-  'Spain': '🇪🇸', 'Cape Verde': '🇨🇻', 'France': '🇫🇷', 'Senegal': '🇸🇳',
-  'Iraq': '🇮🇶', 'Norway': '🇳🇴', 'Argentina': '🇦🇷', 'Algeria': '🇩🇿',
-  'Austria': '🇦🇹', 'Jordan': '🇯🇴', 'Portugal': '🇵🇹', 'DR Congo': '🇨🇩',
-  'England': '🏴󠁧󠁢󠁥󠁮󠁧󠁿', 'Croatia': '🇭🇷', 'Ghana': '🇬🇭', 'Panama': '🇵🇦',
-  'Colombia': '🇨🇴', 'Uzbekistan': '🇺🇿', 'Haiti': '🇭🇹', 'Scotland': '🏴󠁧󠁢󠁳󠁣󠁴󠁿'
+  'Argentina': '🇦🇷', 'Brasil': '🇧🇷', 'Francia': '🇫🇷', 'España': '🇪🇸',
+  'Alemania': '🇩🇪', 'Portugal': '🇵🇹', 'Inglaterra': '🏴󠁧󠁢󠁥󠁮󠁧󠁿', 'Países Bajos': '🇳🇱',
+  'Croacia': '🇭🇷', 'Bélgica': '🇧🇪', 'Uruguay': '🇺🇾', 'Marruecos': '🇲🇦',
+  'Senegal': '🇸🇳', 'Australia': '🇦🇺', 'EE.UU.': '🇺🇸', 'México': '🇲🇽',
+  'Canadá': '🇨🇦', 'Japón': '🇯🇵', 'Corea del Sur': '🇰🇷', 'Suecia': '🇸🇪',
+  'Suiza': '🇨🇭', 'Turquía': '🇹🇷', 'Italia': '🇮🇹', 'Sudáfrica': '🇿🇦',
+  'Korea Republic': '🇰🇷', 'Czech Republic': '🇨🇿', 'Bosnia and Herzegovina': '🇧🇦',
+  'United States': '🇺🇸', 'Paraguay': '🇵🇾', 'Turkey': '🇹🇷', 'Qatar': '🇶🇦',
+  'Switzerland': '🇨🇭', 'Germany': '🇩🇪', 'Curacao': '🇨🇼', 'Netherlands': '🇳🇱',
+  'Japan': '🇯🇵', 'Ivory Coast': '🇨🇮', 'Ecuador': '🇪🇨', 'Tunisia': '🇹🇳',
+  'Morocco': '🇲🇦', 'Belgium': '🇧🇪', 'Egypt': '🇪🇬', 'Iran': '🇮🇷',
+  'New Zealand': '🇳🇿', 'Saudi Arabia': '🇸🇦', 'Spain': '🇪🇸', 'Cape Verde': '🇨🇻',
+  'France': '🇫🇷', 'Senegal': '🇸🇳', 'Iraq': '🇮🇶', 'Norway': '🇳🇴',
+  'Algeria': '🇩🇿', 'Austria': '🇦🇹', 'Jordan': '🇯🇴', 'Portugal': '🇵🇹',
+  'DR Congo': '🇨🇩', 'England': '🏴󠁧󠁢󠁥󠁮󠁧󠁿', 'Croatia': '🇭🇷', 'Ghana': '🇬🇭',
+  'Panama': '🇵🇦', 'Colombia': '🇨🇴', 'Uzbekistan': '🇺🇿', 'Haiti': '🇭🇹',
+  'Scotland': '🏴󠁧󠁢󠁳󠁣󠁴󠁿', 'Mexico': '🇲🇽', 'South Africa': '🇿🇦', 'Korea Republic': '🇰🇷'
 };
 function getFlagFromName(name) {
   return flagMap[name] || '🏳️';
@@ -1008,20 +1002,46 @@ function calcularEstadisticas(games) {
     return acc;
   }, 0);
   
-  // Clasificados: equipos que están en los primeros 2 de cada grupo
   const standings = calculateStandings(games);
   let clasificados = 0;
   standings.forEach(grupo => {
     grupo.equipos.slice(0, 2).forEach(() => clasificados++);
   });
   
-  // Días restantes hasta la final (19 de julio de 2026)
-  const fechaFinal = new Date(2026, 6, 19); // mes 6 = julio
+  const fechaFinal = new Date(2026, 6, 19);
   const hoy = new Date();
   const diffTime = fechaFinal - hoy;
   const diasRestantes = Math.max(0, Math.ceil(diffTime / (1000 * 60 * 60 * 24)));
   
   return { totalPartidos, golesTotales, clasificados, diasRestantes };
+}
+
+// ============================================================
+// CÁLCULO DE GOLES POR EQUIPO (para el panel lateral)
+// ============================================================
+function calcularGolesPorEquipo(games) {
+  const goles = {};
+  const validGames = games.filter(g => g.finished === 'TRUE' && g.home_team_name_en && g.away_team_name_en);
+  validGames.forEach(g => {
+    const local = g.home_team_name_en;
+    const visit = g.away_team_name_en;
+    const hs = parseInt(g.home_score || 0);
+    const as = parseInt(g.away_score || 0);
+    if (!goles[local]) goles[local] = { golesFavor: 0, golesContra: 0, dif: 0 };
+    if (!goles[visit]) goles[visit] = { golesFavor: 0, golesContra: 0, dif: 0 };
+    goles[local].golesFavor += hs;
+    goles[local].golesContra += as;
+    goles[visit].golesFavor += as;
+    goles[visit].golesContra += hs;
+  });
+  // Calcular diferencia
+  for (const team in goles) {
+    goles[team].dif = goles[team].golesFavor - goles[team].golesContra;
+  }
+  // Convertir a array y ordenar por golesFavor descendente
+  const arr = Object.entries(goles).map(([nombre, stats]) => ({ nombre, ...stats }));
+  arr.sort((a, b) => b.golesFavor - a.golesFavor);
+  return arr.slice(0, 5); // Top 5
 }
 
 // ============================================================
@@ -1177,12 +1197,11 @@ async function renderInicio() {
   iniciarTicker();
   initCarousel();
 
-  // Panel lateral
+  // Panel lateral (estadísticas de goles por equipo)
   const sp = document.getElementById('statsPanel');
   if (deporte === 'futbol') {
-    const goles = d.goleadores.map(g => `<div class="stat-item"><span>${g.n}</span><span class="stat-val">${g.v}</span></div>`).join('');
-    const asist = d.asistencias.map(g => `<div class="stat-item"><span>${g.n}</span><span class="stat-val">${g.v}</span></div>`).join('');
-    sp.innerHTML = `<div class="stat-card" style="margin-bottom:14px"><h4>⚽ Máximos Goleadores</h4>${goles}</div><div class="stat-card"><h4>👟 Líderes en Asistencias</h4>${asist}</div>`;
+    // Se actualizará después de obtener los datos
+    sp.innerHTML = spinnerHtml();
   } else {
     sp.innerHTML = '<div class="stat-card"><h4>📊 Estadísticas</h4><p style="color:var(--muted);font-size:.85rem;padding:8px 0">Datos actualizados en tiempo real.</p></div>';
   }
@@ -1210,12 +1229,30 @@ async function renderInicio() {
   if (deporte === 'futbol') {
     const games = await fetchWorldCupGames();
     if (games) {
-      // Calcular estadísticas dinámicas
+      // Estadísticas generales
       const stats = calcularEstadisticas(games);
       document.getElementById('statPartidos').textContent = stats.totalPartidos;
       document.getElementById('statGoles').textContent = stats.golesTotales;
       document.getElementById('statClasificados').textContent = stats.clasificados;
       document.getElementById('statRestantes').textContent = stats.diasRestantes;
+
+      // Panel lateral: Top 5 goleadores (equipos con más goles)
+      const topGoles = calcularGolesPorEquipo(games);
+      let html = '<div class="stat-card"><h4>⚽ Equipos con más goles</h4>';
+      topGoles.forEach((eq, i) => {
+        const flag = getFlagFromName(eq.nombre);
+        html += `<div class="stat-item"><span>${flag} ${eq.nombre}</span><span class="stat-val">${eq.golesFavor}</span></div>`;
+      });
+      html += '</div>';
+      // Segundo: mejor diferencia
+      const topDif = [...topGoles].sort((a,b) => b.dif - a.dif).slice(0,5);
+      html += '<div class="stat-card" style="margin-top:14px"><h4>📊 Mejor diferencia de goles</h4>';
+      topDif.forEach((eq, i) => {
+        const flag = getFlagFromName(eq.nombre);
+        html += `<div class="stat-item"><span>${flag} ${eq.nombre}</span><span class="stat-val">+${eq.dif}</span></div>`;
+      });
+      html += '</div>';
+      sp.innerHTML = html;
 
       // Clasificación resumida (líderes)
       const standingsData = calculateStandings(games);
@@ -1248,6 +1285,7 @@ async function renderInicio() {
   } else {
     document.getElementById('matchesTitle').textContent = `🏀 Partidos Destacados`;
     document.getElementById('matchesList').innerHTML = d.partidos.map(p => matchCardHtml(p)).join('');
+    sp.innerHTML = '<div class="stat-card"><h4>📊 Estadísticas</h4><p style="color:var(--muted);font-size:.85rem;padding:8px 0">Datos actualizados en tiempo real.</p></div>';
   }
 }
 
