@@ -6,15 +6,16 @@
 <title>SportVivo360 | Fútbol, MLB y NBA – Resultados en vivo y estadísticas</title>
 <meta name="description" content="Cobertura del Mundial 2026, MLB y NBA. Resultados, clasificaciones, estadísticas, noticias y análisis actualizados.">
 <link rel="canonical" href="https://sportvivo360.cyou/">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚽</text></svg>">
+<!-- FAVICON ACTUALIZADO CON BALÓN DE FÚTBOL -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='white' stroke='%23333' stroke-width='2'/%3E%3Cpath d='M50 5 L50 95 M5 50 L95 50' stroke='%23333' stroke-width='2'/%3E%3Cpolygon points='50,5 20,20 35,50 20,80 50,95 80,80 65,50 80,20' fill='none' stroke='%23333' stroke-width='2'/%3E%3Ccircle cx='50' cy='50' r='8' fill='%23333'/%3E%3Ccircle cx='50' cy='20' r='4' fill='%23333'/%3E%3Ccircle cx='50' cy='80' r='4' fill='%23333'/%3E%3Ccircle cx='20' cy='50' r='4' fill='%23333'/%3E%3Ccircle cx='80' cy='50' r='4' fill='%23333'/%3E%3Ccircle cx='30' cy='30' r='3' fill='%23333'/%3E%3Ccircle cx='70' cy='30' r='3' fill='%23333'/%3E%3Ccircle cx='30' cy='70' r='3' fill='%23333'/%3E%3Ccircle cx='70' cy='70' r='3' fill='%23333'/%3E%3C/svg%3E">
 <!-- Google AdSense -->
 <meta name="google-adsense-account" content="ca-pub-3765201153278683">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3765201153278683" crossorigin="anonymous"></script>
 <!-- Fecha de última actualización para Google -->
-<meta name="last-modified" content="2026-06-29">
+<meta name="last-modified" content="2026-06-30">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-/* ===== ESTILOS COMPLETOS (sin cambios) ===== */
+/* ===== ESTILOS (con banderas más pequeñas) ===== */
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
   --primary:#0b1e2e;
@@ -379,7 +380,23 @@ footer{background:var(--primary);color:rgba(255,255,255,.55);text-align:center;p
   <div class="header-inner">
     <div class="header-top">
       <div class="logo" onclick="navegar('inicio')">
-        <span id="headerIcon" style="font-size:1.5rem">⚽</span>
+        <!-- HEADER ICON CON BALÓN DE FÚTBOL -->
+        <span id="headerIcon" style="display:inline-flex; align-items:center; font-size:1.5rem;">
+          <svg width="30" height="30" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="45" fill="white" stroke="#b388ff" stroke-width="2"/>
+            <path d="M50 5 L50 95 M5 50 L95 50" stroke="#b388ff" stroke-width="2"/>
+            <polygon points="50,5 20,20 35,50 20,80 50,95 80,80 65,50 80,20" fill="none" stroke="#b388ff" stroke-width="2"/>
+            <circle cx="50" cy="50" r="8" fill="#b388ff"/>
+            <circle cx="50" cy="20" r="4" fill="#b388ff"/>
+            <circle cx="50" cy="80" r="4" fill="#b388ff"/>
+            <circle cx="20" cy="50" r="4" fill="#b388ff"/>
+            <circle cx="80" cy="50" r="4" fill="#b388ff"/>
+            <circle cx="30" cy="30" r="3" fill="#b388ff"/>
+            <circle cx="70" cy="30" r="3" fill="#b388ff"/>
+            <circle cx="30" cy="70" r="3" fill="#b388ff"/>
+            <circle cx="70" cy="70" r="3" fill="#b388ff"/>
+          </svg>
+        </span>
         <h1>SportVivo360</h1>
         <span class="logo-badge" id="headerSportLabel">Mundial 2026</span>
       </div>
@@ -428,20 +445,20 @@ footer{background:var(--primary);color:rgba(255,255,255,.55);text-align:center;p
     <div class="carousel-slides" id="carouselSlides">
       <div class="carousel-slide">
         <div class="carousel-tag">🔴 DESTACADO</div>
-        <h3>FIFA Power Rankings: Bilal El Khannouss lidera el ranking ofensivo</h3>
-        <p>La FIFA implementó el nuevo sistema de analítica en tiempo real. La joya marroquí es la gran revelación ofensiva de la fase de grupos.</p>
+        <h3>El Mundial de las Sorpresas: Caída de Gigantes en Norteamérica 2026</h3>
+        <p>El nuevo formato de 48 selecciones está generando uno de los torneos más impredecibles. Alemania y Países Bajos, eliminados.</p>
         <a href="#" class="carousel-link" onclick="navegar('noticias');return false;">Ver más →</a>
       </div>
       <div class="carousel-slide">
-        <div class="carousel-tag">📉 CRISIS</div>
-        <h3>Renuncia masiva en banquillos tras eliminaciones</h3>
-        <p>Arabia Saudí y Corea del Sur sacuden sus federaciones tras el fracaso en el torneo.</p>
+        <div class="carousel-tag">⚽ ELIMINATORIAS</div>
+        <h3>Paraguay y Marruecos, verdugos de Alemania y Países Bajos</h3>
+        <p>Penales perfectos de Paraguay y Marruecos mandan a casa a dos gigantes europeos. Brasil y Canadá avanzan con lo justo.</p>
         <a href="#" class="carousel-link" onclick="navegar('noticias');return false;">Ver más →</a>
       </div>
       <div class="carousel-slide">
-        <div class="carousel-tag">🏥 ALERTA</div>
-        <h3>Inglaterra en vilo: Jarell Quansah podría perderse el partido contra RD Congo</h3>
-        <p>Los problemas físicos en la defensa inglesa complican el armado táctico de cara a los octavos.</p>
+        <div class="carousel-tag">🏆 HOY</div>
+        <h3>México vs Ecuador, Francia vs Suecia y Costa de Marfil vs Noruega</h3>
+        <p>Tres partidos de pronóstico reservado definen a los clasificados a octavos de final.</p>
         <a href="#" class="carousel-link" onclick="navegar('noticias');return false;">Ver más →</a>
       </div>
     </div>
@@ -471,19 +488,19 @@ footer{background:var(--primary);color:rgba(255,255,255,.55);text-align:center;p
     </div>
   </div>
 
-  <!-- VIDEO DESTACADO 1: Canadá vs Sudáfrica -->
+  <!-- VIDEO DESTACADO 1: Marruecos elimina a Países Bajos -->
   <div class="video-highlight">
-    <div class="video-title">🎥 AGÓNICA CLASIFICACIÓN DE CANADÁ A OCTAVOS DEL MUNDIAL | Sudáfrica 0-1 Canadá | RESUMEN | M73</div>
+    <div class="video-title">🎥 ¡MARRUECOS ELIMINÓ A PAÍSES BAJOS EN PENALES! | Países Bajos 1-1 Marruecos | RESUMEN | M76</div>
     <div class="video-wrapper">
-      <iframe src="https://www.youtube.com/embed/Od2okWddLNY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      <iframe src="https://www.youtube.com/embed/ZdsVHOYKrwk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
     </div>
   </div>
 
-  <!-- VIDEO DESTACADO 2: Todos los goles de la última fecha -->
+  <!-- VIDEO DESTACADO 2: Brasil gana en el último minuto a Japón -->
   <div class="video-highlight">
-    <div class="video-title">🎥 ¡TODOS LOS GOLES DE LA ÚLTIMA FECHA DE LA FASE DE GRUPOS DE LA COPA DEL MUNDO! | ESPN Mundial</div>
+    <div class="video-title">🎥 ¡AGÓNICO TRIUNFO DE BRASIL EN LA ÚLTIMA DEL PARTIDO ANTE JAPÓN! | Brasil 2-1 Japón | RESUMEN | M74</div>
     <div class="video-wrapper">
-      <iframe src="https://www.youtube.com/embed/KKpFi8PaKrs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      <iframe src="https://www.youtube.com/embed/zbsyFPLOi8g" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
     </div>
   </div>
 
@@ -528,35 +545,35 @@ footer{background:var(--primary);color:rgba(255,255,255,.55);text-align:center;p
   <div class="grid-teams" id="equiposGrid"></div>
 </div>
 
-<!-- NOTICIAS (ACTUALIZADAS 29/06/2026) -->
+<!-- NOTICIAS (ACTUALIZADAS 30/06/2026) -->
 <div id="page-noticias" class="page">
   <div class="section-title">📰 Noticias y Videos Destacados</div>
 
-  <!-- Video 1: Canadá vs Sudáfrica -->
+  <!-- Video 1: Marruecos elimina a Países Bajos -->
   <div class="news-card video-card">
     <div class="news-meta">
       <span class="news-sport-tag">🎥 VIDEO DESTACADO</span>
-      <span class="news-date">29 jun 2026</span>
+      <span class="news-date">30 jun 2026</span>
     </div>
-    <div class="news-title">AGÓNICA CLASIFICACIÓN DE CANADÁ A OCTAVOS DEL MUNDIAL | Sudáfrica 0-1 Canadá | RESUMEN | M73</div>
+    <div class="news-title">¡MARRUECOS ELIMINÓ A PAÍSES BAJOS EN PENALES! | Países Bajos 1-1 Marruecos | RESUMEN | M76</div>
     <div class="video-wrapper">
-      <iframe src="https://www.youtube.com/embed/Od2okWddLNY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      <iframe src="https://www.youtube.com/embed/ZdsVHOYKrwk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
     </div>
-    <p class="news-summary" style="margin-top:12px;">Canadá logró una agónica clasificación a octavos de final tras vencer 1-0 a Sudáfrica en un partido vibrante.</p>
+    <p class="news-summary" style="margin-top:12px;">Marruecos reeditó su espíritu guerrero y eliminó a Países Bajos en una dramática tanda de penales (3-2), confirmando que lo hecho en torneos pasados no fue casualidad.</p>
     <div class="news-more">Leer más →</div>
   </div>
 
-  <!-- Video 2: Todos los goles de la última fecha -->
+  <!-- Video 2: Brasil gana a Japón en el último minuto -->
   <div class="news-card video-card">
     <div class="news-meta">
       <span class="news-sport-tag">🎥 VIDEO DESTACADO</span>
-      <span class="news-date">29 jun 2026</span>
+      <span class="news-date">30 jun 2026</span>
     </div>
-    <div class="news-title">¡TODOS LOS GOLES DE LA ÚLTIMA FECHA DE LA FASE DE GRUPOS DE LA COPA DEL MUNDO! | ESPN Mundial</div>
+    <div class="news-title">¡AGÓNICO TRIUNFO DE BRASIL EN LA ÚLTIMA DEL PARTIDO ANTE JAPÓN! | Brasil 2-1 Japón | RESUMEN | M74</div>
     <div class="video-wrapper">
-      <iframe src="https://www.youtube.com/embed/KKpFi8PaKrs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      <iframe src="https://www.youtube.com/embed/zbsyFPLOi8g" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
     </div>
-    <p class="news-summary" style="margin-top:12px;">Revive todos los goles de la emocionante última fecha de la fase de grupos del Mundial 2026.</p>
+    <p class="news-summary" style="margin-top:12px;">Brasil sufrió hasta el último suspiro para vencer 2-1 a Japón. Gabriel Martinelli apareció en el minuto 95 para firmar el gol que salvó a la Canarinha del tiempo extra.</p>
     <div class="news-more">Leer más →</div>
   </div>
 
@@ -564,7 +581,7 @@ footer{background:var(--primary);color:rgba(255,255,255,.55);text-align:center;p
   <div id="noticiasList"></div>
 </div>
 
-<!-- ANÁLISIS (ACTUALIZADO 29/06/2026) -->
+<!-- ANÁLISIS (ACTUALIZADO 30/06/2026) -->
 <div id="page-analisis" class="page">
   <div class="section-title" id="analisisTitulo">🔍 Análisis y Previas</div>
   <div style="display:flex;flex-direction:column;gap:16px" id="analisisList"></div>
@@ -613,7 +630,7 @@ footer{background:var(--primary);color:rgba(255,255,255,.55);text-align:center;p
   <div class="section-title">🔒 Política de Privacidad</div>
   <div class="static-page">
     <div class="static-box">
-      <p><strong>Última actualización:</strong> 29 de junio de 2026</p>
+      <p><strong>Última actualización:</strong> 30 de junio de 2026</p>
       <p>En SportVivo360 (sportvivo360.cyou), nos tomamos muy en serio la privacidad de nuestros usuarios.</p>
       <h3>1. Información que recopilamos</h3>
       <p>Recopilamos información que nos proporcionas voluntariamente, como tu nombre y correo electrónico cuando nos contactas a través del formulario de contacto. Además, podemos recopilar datos de navegación anónimos (dirección IP, tipo de navegador, páginas visitadas) a través de cookies y herramientas de análisis.</p>
@@ -652,75 +669,139 @@ footer{background:var(--primary);color:rgba(255,255,255,.55);text-align:center;p
 
 <script>
 // ============================================================
-// MAPEO DE TRADUCCIÓN INGLÉS → ESPAÑOL
+// DATOS COMPLETOS (MUNDIAL 2026 + MLB + NBA) - ESTÁTICOS
 // ============================================================
-const traducciones = {
-  'Argentina': 'Argentina', 'Brazil': 'Brasil', 'France': 'Francia', 'Spain': 'España',
-  'Germany': 'Alemania', 'Portugal': 'Portugal', 'England': 'Inglaterra', 'Netherlands': 'Países Bajos',
-  'Croatia': 'Croacia', 'Belgium': 'Bélgica', 'Uruguay': 'Uruguay', 'Morocco': 'Marruecos',
-  'Senegal': 'Senegal', 'Australia': 'Australia', 'United States': 'Estados Unidos', 'Mexico': 'México',
-  'Canada': 'Canadá', 'Japan': 'Japón', 'Korea Republic': 'Corea del Sur', 'Sweden': 'Suecia',
-  'Switzerland': 'Suiza', 'Turkey': 'Turquía', 'Italy': 'Italia', 'South Africa': 'Sudáfrica',
-  'Czech Republic': 'República Checa', 'Bosnia and Herzegovina': 'Bosnia y Herzegovina',
-  'Paraguay': 'Paraguay', 'Qatar': 'Catar', 'Curacao': 'Curazao', 'Ivory Coast': 'Costa de Marfil',
-  'Ecuador': 'Ecuador', 'Tunisia': 'Túnez', 'Egypt': 'Egipto', 'Iran': 'Irán',
-  'New Zealand': 'Nueva Zelanda', 'Saudi Arabia': 'Arabia Saudita', 'Cape Verde': 'Cabo Verde',
-  'Iraq': 'Irak', 'Norway': 'Noruega', 'Algeria': 'Argelia', 'Austria': 'Austria',
-  'Jordan': 'Jordania', 'DR Congo': 'República Democrática del Congo', 'Ghana': 'Ghana',
-  'Panama': 'Panamá', 'Colombia': 'Colombia', 'Uzbekistan': 'Uzbekistán', 'Haiti': 'Haití',
-  'Scotland': 'Escocia', 'Denmark': 'Dinamarca', 'Poland': 'Polonia', 'Ukraine': 'Ucrania',
-  'Wales': 'Gales', 'Peru': 'Perú', 'Chile': 'Chile', 'Venezuela': 'Venezuela',
-  'Bolivia': 'Bolivia', 'Costa Rica': 'Costa Rica', 'Honduras': 'Honduras',
-  'El Salvador': 'El Salvador', 'Nigeria': 'Nigeria', 'Cameroon': 'Camerún',
-  'Republic of the Congo': 'República del Congo', 'Congo': 'Congo',
-  'Democratic Republic of the Congo': 'República Democrática del Congo',
-  'Curaçao': 'Curazao', 'Trinidad and Tobago': 'Trinidad y Tobago',
-  'Jamaica': 'Jamaica', 'Guatemala': 'Guatemala', 'Nicaragua': 'Nicaragua',
-  'USA': 'Estados Unidos', 'South Korea': 'Corea del Sur'
-};
+const hoy = new Date();
+const fechaStr = hoy.toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
 
-// ============================================================
-// MAPEO DE BANDERAS
-// ============================================================
-const flagMap = {
-  'Argentina': '🇦🇷', 'Brazil': '🇧🇷', 'France': '🇫🇷', 'Spain': '🇪🇸',
-  'Germany': '🇩🇪', 'Portugal': '🇵🇹', 'England': '🏴󠁧󠁢󠁥󠁮󠁧󠁿', 'Netherlands': '🇳🇱',
-  'Croatia': '🇭🇷', 'Belgium': '🇧🇪', 'Uruguay': '🇺🇾', 'Morocco': '🇲🇦',
-  'Senegal': '🇸🇳', 'Australia': '🇦🇺', 'United States': '🇺🇸', 'Mexico': '🇲🇽',
-  'Canada': '🇨🇦', 'Japan': '🇯🇵', 'Korea Republic': '🇰🇷', 'Sweden': '🇸🇪',
-  'Switzerland': '🇨🇭', 'Turkey': '🇹🇷', 'Italy': '🇮🇹', 'South Africa': '🇿🇦',
-  'Czech Republic': '🇨🇿', 'Bosnia and Herzegovina': '🇧🇦', 'Paraguay': '🇵🇾',
-  'Qatar': '🇶🇦', 'Curacao': '🇨🇼', 'Ivory Coast': '🇨🇮', 'Ecuador': '🇪🇨',
-  'Tunisia': '🇹🇳', 'Egypt': '🇪🇬', 'Iran': '🇮🇷', 'New Zealand': '🇳🇿',
-  'Saudi Arabia': '🇸🇦', 'Cape Verde': '🇨🇻', 'Iraq': '🇮🇶', 'Norway': '🇳🇴',
-  'Algeria': '🇩🇿', 'Austria': '🇦🇹', 'Jordan': '🇯🇴', 'DR Congo': '🇨🇩',
-  'Ghana': '🇬🇭', 'Panama': '🇵🇦', 'Colombia': '🇨🇴', 'Uzbekistan': '🇺🇿',
-  'Haiti': '🇭🇹', 'Scotland': '🏴󠁧󠁢󠁳󠁣󠁴󠁿', 'Denmark': '🇩🇰', 'Poland': '🇵🇱',
-  'Ukraine': '🇺🇦', 'Wales': '🏴󠁧󠁢󠁷󠁬󠁳󠁿', 'Peru': '🇵🇪', 'Chile': '🇨🇱',
-  'Venezuela': '🇻🇪', 'Bolivia': '🇧🇴', 'Costa Rica': '🇨🇷', 'Honduras': '🇭🇳',
-  'El Salvador': '🇸🇻', 'Nigeria': '🇳🇬', 'Cameroon': '🇨🇲', 'Republic of the Congo': '🇨🇬',
-  'Congo': '🇨🇬', 'Democratic Republic of the Congo': '🇨🇩', 'Curaçao': '🇨🇼',
-  'Trinidad and Tobago': '🇹🇹', 'Jamaica': '🇯🇲', 'Guatemala': '🇬🇹',
-  'Nicaragua': '🇳🇮', 'USA': '🇺🇸', 'South Korea': '🇰🇷'
+const datosDeportes = {
+  futbol: {
+    nombre: 'Mundial 2026',
+    icono: '⚽',
+    banner: { titulo: 'Mundial 2026 • Resultados en vivo', desc: 'Partidos, marcadores y clasificación actualizada.' },
+    goleadores: [
+      { n: 'Gakpo / Depay (Países Bajos)', v: '5 goles' },
+      { n: 'Kane / Bellingham (Inglaterra)', v: '4 goles' },
+      { n: 'Messi / Álvarez (Argentina)', v: '3 goles' },
+      { n: 'Vinicius / Endrick (Brasil)', v: '3 goles' }
+    ],
+    asistencias: [
+      { n: 'Ángel Di María (Argentina)', v: '3' },
+      { n: 'Kevin De Bruyne (Bélgica)', v: '2' },
+      { n: 'Antoine Griezmann (Francia)', v: '2' },
+      { n: 'Dani Olmo (España)', v: '2' }
+    ],
+    // NOTICIAS ACTUALIZADAS - 30 DE JUNIO 2026
+    noticias: [
+      { 
+        titulo: 'El Mundial de las Sorpresas: Caída de Gigantes en Norteamérica 2026', 
+        fecha: '30 jun 2026', 
+        resumen: 'El nuevo formato de 48 selecciones está generando uno de los torneos más impredecibles. La ronda de eliminación directa ya cobró víctimas de peso, demostrando que la jerarquía histórica ya no asegura la supervivencia.' 
+      },
+      { 
+        titulo: 'El Apocalipsis Europeo: Alemania y Países Bajos, a Casa', 
+        fecha: '30 jun 2026', 
+        resumen: 'El mayor terremoto futbolístico se vivió con la eliminación de Alemania a manos de Paraguay en penales (4-3). Casi en simultáneo, Marruecos eliminó a Países Bajos (3-2 en penales), confirmando que lo hecho en torneos pasados no fue casualidad.' 
+      },
+      { 
+        titulo: 'El Drama de los Favoritos y el Orgullo Local', 
+        fecha: '30 jun 2026', 
+        resumen: 'Brasil sufrió hasta el último suspiro para vencer 2-1 a Japón con gol de Martinelli en el minuto 95. Canadá hizo historia al avanzar a octavos tras vencer 1-0 a Sudáfrica con gol agónico. Uruguay quedó eliminado en fase de grupos.' 
+      },
+      { 
+        titulo: 'La Batalla de Hoy: Todo o Nada en el Azteca', 
+        fecha: '30 jun 2026', 
+        resumen: 'México vs. Ecuador en el Estadio Azteca, Francia vs. Suecia en Nueva Jersey, y Costa de Marfil vs. Noruega en Dallas. Partidos de pronóstico reservado donde el error se paga con la eliminación.' 
+      }
+    ],
+    analisis: [
+      { 
+        titulo: 'Análisis de la jornada: El fin de las jerarquías en el Mundial 2026', 
+        autor: 'Por SportVivo360', 
+        fecha: '30 jun 2026', 
+        texto: 'La eliminación de Alemania y Países Bajos en la misma jornada marca un antes y un después en el torneo. Paraguay y Marruecos demostraron que el corazón y la táctica pueden más que la historia. Brasil y Canadá avanzan con lo justo, mientras que México, Francia y Costa de Marfil buscan su pase a octavos.' 
+      },
+      { 
+        titulo: 'Lo que viene: Los octavos de final toman forma', 
+        autor: 'Por SportVivo360', 
+        fecha: '30 jun 2026', 
+        texto: 'Con la caída de dos gigantes europeos, el panorama se abre para selecciones como España, Argentina y Portugal. El formato de 48 equipos está demostrando que cualquier cosa puede pasar. La emoción está garantizada.' 
+      }
+    ],
+    equipos: ['Argentina','Brasil','Francia','España','Alemania','Portugal','Inglaterra','Países Bajos','Croacia','Bélgica','Uruguay','Marruecos','Senegal','Australia','EE.UU.','México','Canadá','Japón','Corea del Sur','Suecia','Suiza','Turquía','Italia']
+  },
+  mlb: {
+    nombre: 'MLB',
+    icono: '⚾',
+    banner: { titulo: 'MLB 2026 • Resultados en vivo y clasificaciones', desc: 'Partidos, marcadores y tablas de posiciones de la MLB actualizadas en tiempo real.' },
+    partidos: [
+      { local: 'New York Yankees', visitante: 'Boston Red Sox', score: '6-4', status: 'Final' },
+      { local: 'Los Ángeles Dodgers', visitante: 'San Francisco Giants', score: '3-2', status: 'Vivo' },
+      { local: 'Chicago Cubs', visitante: 'St. Louis Cardinals', score: 'vs', status: 'Programado' },
+      { local: 'Houston Astros', visitante: 'Seattle Mariners', score: '8-1', status: 'Final' },
+      { local: 'Atlanta Braves', visitante: 'Philadelphia Phillies', score: 'vs', status: 'Programado' },
+      { local: 'Toronto Blue Jays', visitante: 'Tampa Bay Rays', score: '5-3', status: 'Final' }
+    ],
+    clasificacion: {
+      titulo: '📊 Clasificación MLB 2026',
+      grupos: [
+        { nombre: 'Liga Americana – Este', equipos: [
+          { nombre: 'New York Yankees', G: 45, P: 28, PCT: '.616' },
+          { nombre: 'Tampa Bay Rays', G: 41, P: 30, PCT: '.577' },
+          { nombre: 'Toronto Blue Jays', G: 34, P: 38, PCT: '.472' }
+        ]},
+        { nombre: 'Liga Nacional – Este', equipos: [
+          { nombre: 'Atlanta Braves', G: 46, P: 25, PCT: '.648' },
+          { nombre: 'Philadelphia Phillies', G: 40, P: 34, PCT: '.541' },
+          { nombre: 'Washington Nationals', G: 38, P: 37, PCT: '.507' }
+        ]}
+      ]
+    },
+    equipos: ['Yankees','Dodgers','Braves','Phillies','Red Sox','Cubs','Astros','Giants','Blue Jays','Mets','Cardinals','Mariners','Rays','Nationals'],
+    noticias: [{ titulo: 'Yankees y Braves lideran la MLB; Judge y Acuña pelean por el MVP', fecha: '30 jun 2026', resumen: 'La temporada 2026 está siendo histórica para ambos jugadores.' }],
+    analisis: [{ titulo: '¿Quién ganará la Serie Mundial 2026?', autor: 'Por Juan Pérez', fecha: '30 jun 2026', texto: 'Dodgers, Yankees y Braves son los principales candidatos.' }]
+  },
+  nba: {
+    nombre: 'NBA',
+    icono: '🏀',
+    banner: { titulo: 'NBA 2025-26 • Temporada regular y playoffs en vivo', desc: 'Sigue a tus equipos favoritos con estadísticas actualizadas.' },
+    partidos: [
+      { local: 'Boston Celtics', visitante: 'Los Ángeles Lakers', score: '112-108', status: 'Final' },
+      { local: 'Denver Nuggets', visitante: 'Golden State Warriors', score: '105-98', status: 'Vivo' },
+      { local: 'Milwaukee Bucks', visitante: 'Phoenix Suns', score: 'vs', status: 'Programado' },
+      { local: 'Philadelphia 76ers', visitante: 'Dallas Mavericks', score: '121-115', status: 'Final' },
+      { local: 'Miami Heat', visitante: 'New York Knicks', score: '98-95', status: 'Final' }
+    ],
+    clasificacion: {
+      titulo: '📊 Clasificación NBA 2025-26',
+      grupos: [
+        { nombre: 'Conferencia Este', equipos: [
+          { nombre: 'Boston Celtics', G: 58, P: 24, PCT: '.707' },
+          { nombre: 'Milwaukee Bucks', G: 55, P: 27, PCT: '.671' },
+          { nombre: 'Philadelphia 76ers', G: 50, P: 32, PCT: '.610' }
+        ]},
+        { nombre: 'Conferencia Oeste', equipos: [
+          { nombre: 'Denver Nuggets', G: 57, P: 25, PCT: '.695' },
+          { nombre: 'OKC Thunder', G: 54, P: 28, PCT: '.659' },
+          { nombre: 'Phoenix Suns', G: 49, P: 33, PCT: '.598' }
+        ]}
+      ]
+    },
+    equipos: ['Celtics','Lakers','Nuggets','Warriors','Bucks','Suns','76ers','Mavericks','Heat','Knicks','Thunder','Clippers'],
+    noticias: [{ titulo: 'Celtics y Nuggets, los reyes de la temporada regular', fecha: '30 jun 2026', resumen: 'Boston y Denver han sido los equipos más consistentes.' }],
+    analisis: [{ titulo: 'Playoffs NBA 2026: predicciones y favoritos', autor: 'Por Laura Gómez', fecha: '30 jun 2026', texto: 'Celtics y Nuggets son los grandes favoritos.' }]
+  }
 };
-
-function traducir(nombreIngles) {
-  if (!nombreIngles) return 'Desconocido';
-  return traducciones[nombreIngles] || nombreIngles;
-}
-function getFlagFromName(nombreIngles) {
-  return flagMap[nombreIngles] || '🏳️';
-}
 
 // ============================================================
 // TICKER
 // ============================================================
 const TICKER = [
   'Bienvenido a SportVivo360. Sigue toda la actualidad del Mundial 2026.',
-  'FIFA Power Rankings: Bilal El Khannouss lidera el ranking ofensivo.',
-  'Crisis en Arabia Saudí y Corea del Sur tras eliminaciones.',
-  'Canadá jugará en Los Ángeles por reglamento del torneo.',
-  'Alerta médica en Inglaterra: Jarell Quansah podría perderse el partido contra RD Congo.'
+  '¡Bombazo! Alemania eliminada por Paraguay en penales. Países Bajos cae ante Marruecos.',
+  'Brasil sufre pero avanza con gol de Martinelli en el minuto 95.',
+  'Canadá hace historia y avanza a octavos de final.',
+  'Hoy: México vs Ecuador, Francia vs Suecia y Costa de Marfil vs Noruega.'
 ];
 
 // ============================================================
@@ -728,12 +809,11 @@ const TICKER = [
 // ============================================================
 let deporte = 'futbol';
 let pagina = 'inicio';
-let fecha = String(new Date().getDate()).padStart(2, '0');
+let fecha = String(hoy.getDate()).padStart(2, '0');
 let tickerIdx = 0;
 let tickerTimer;
 let carouselIndex = 0;
 let carouselTimer;
-let cachedGames = null;
 
 // ============================================================
 // TEMA Y COOKIES
@@ -781,9 +861,6 @@ function cambiarDeporte(btn) {
   const d = datosDeportes[deporte];
   document.getElementById('headerIcon').textContent = d.icono;
   document.getElementById('headerSportLabel').textContent = d.nombre;
-  if (deporte === 'futbol') {
-    cachedGames = null;
-  }
   renderTodo();
   const bannerTitulo = document.getElementById('bannerTitulo');
   const bannerDesc = document.getElementById('bannerDesc');
@@ -837,148 +914,6 @@ function nextSlide() { goToSlide(carouselIndex + 1); }
 function prevSlide() { goToSlide(carouselIndex - 1); }
 
 // ============================================================
-// API MUNDIAL 2026 (FÚTBOL)
-// ============================================================
-async function fetchWorldCupGames(force = false) {
-  if (cachedGames && !force) return cachedGames;
-  const url = 'https://worldcup26.ir/get/games';
-  try {
-    const resp = await fetch(url);
-    if (!resp.ok) throw new Error('HTTP ' + resp.status);
-    const data = await resp.json();
-    let games = Array.isArray(data) ? data : (data.games || []);
-    games = games.filter(g => g.home_team_name_en && g.away_team_name_en);
-    cachedGames = games;
-    return games;
-  } catch (e) {
-    console.warn('API Mundial 2026 falló:', e);
-    return null;
-  }
-}
-
-function transformAPIMatch(match) {
-  const localIngles = match.home_team_name_en || 'Local';
-  const visitIngles = match.away_team_name_en || 'Visitante';
-  return {
-    local: traducir(localIngles),
-    visitante: traducir(visitIngles),
-    score: match.finished === 'TRUE' ? `${match.home_score}-${match.away_score}` : 'vs',
-    status: match.finished === 'TRUE' ? 'Final' : 'Programado',
-    flagL: getFlagFromName(localIngles),
-    flagV: getFlagFromName(visitIngles),
-    fecha: match.local_date || '',
-    group: match.group || '',
-    stage: match.stage || 'Group',
-    home_score: parseInt(match.home_score || 0),
-    away_score: parseInt(match.away_score || 0),
-    finished: match.finished === 'TRUE'
-  };
-}
-
-// ============================================================
-// CÁLCULO DE CLASIFICACIÓN (SOLO GRUPOS A-L)
-// ============================================================
-function calculateStandings(games) {
-  const groups = {};
-  const validGames = games.filter(g => {
-    const group = g.group || '';
-    return /^[A-L]$/.test(group) && g.home_team_name_en && g.away_team_name_en && g.finished === 'TRUE';
-  });
-
-  validGames.forEach(g => {
-    const group = g.group;
-    if (!groups[group]) groups[group] = {};
-    const home = g.home_team_name_en;
-    const away = g.away_team_name_en;
-    const hs = parseInt(g.home_score || 0);
-    const as = parseInt(g.away_score || 0);
-    
-    if (!groups[group][home]) groups[group][home] = { nombre: traducir(home), Pts: 0, PJ: 0, G: 0, E: 0, P: 0, GF: 0, GC: 0 };
-    if (!groups[group][away]) groups[group][away] = { nombre: traducir(away), Pts: 0, PJ: 0, G: 0, E: 0, P: 0, GF: 0, GC: 0 };
-    
-    const h = groups[group][home];
-    const a = groups[group][away];
-    h.PJ++; a.PJ++;
-    h.GF += hs; h.GC += as;
-    a.GF += as; a.GC += hs;
-    
-    if (hs > as) { h.Pts += 3; h.G++; a.P++; }
-    else if (hs < as) { a.Pts += 3; a.G++; h.P++; }
-    else { h.Pts += 1; a.Pts += 1; h.E++; a.E++; }
-  });
-
-  const result = [];
-  const groupOrder = ['A','B','C','D','E','F','G','H','I','J','K','L'];
-  for (const letter of groupOrder) {
-    if (groups[letter]) {
-      const equipos = Object.values(groups[letter]);
-      equipos.sort((a, b) => {
-        if (a.Pts !== b.Pts) return b.Pts - a.Pts;
-        const difA = a.GF - a.GC;
-        const difB = b.GF - b.GC;
-        if (difA !== difB) return difB - difA;
-        return b.GF - a.GF;
-      });
-      result.push({ nombre: `Grupo ${letter}`, equipos });
-    }
-  }
-  return result;
-}
-
-// ============================================================
-// FUNCIONES PARA CALCULAR ESTADÍSTICAS DINÁMICAS
-// ============================================================
-function calcularEstadisticas(games) {
-  const totalPartidos = games.length;
-  const golesTotales = games.reduce((acc, p) => {
-    if (p.finished === 'TRUE') {
-      return acc + parseInt(p.home_score || 0) + parseInt(p.away_score || 0);
-    }
-    return acc;
-  }, 0);
-  
-  const standings = calculateStandings(games);
-  let clasificados = 0;
-  standings.forEach(grupo => {
-    grupo.equipos.slice(0, 2).forEach(() => clasificados++);
-  });
-  
-  const fechaFinal = new Date(2026, 6, 19);
-  const hoy = new Date();
-  const diffTime = fechaFinal - hoy;
-  const diasRestantes = Math.max(0, Math.ceil(diffTime / (1000 * 60 * 60 * 24)));
-  
-  return { totalPartidos, golesTotales, clasificados, diasRestantes };
-}
-
-// ============================================================
-// CÁLCULO DE GOLES POR EQUIPO (para el panel lateral)
-// ============================================================
-function calcularGolesPorEquipo(games) {
-  const goles = {};
-  const validGames = games.filter(g => g.finished === 'TRUE' && g.home_team_name_en && g.away_team_name_en);
-  validGames.forEach(g => {
-    const local = g.home_team_name_en;
-    const visit = g.away_team_name_en;
-    const hs = parseInt(g.home_score || 0);
-    const as = parseInt(g.away_score || 0);
-    if (!goles[local]) goles[local] = { nombreIngles: local, golesFavor: 0, golesContra: 0, dif: 0 };
-    if (!goles[visit]) goles[visit] = { nombreIngles: visit, golesFavor: 0, golesContra: 0, dif: 0 };
-    goles[local].golesFavor += hs;
-    goles[local].golesContra += as;
-    goles[visit].golesFavor += as;
-    goles[visit].golesContra += hs;
-  });
-  for (const team in goles) {
-    goles[team].dif = goles[team].golesFavor - goles[team].golesContra;
-    goles[team].nombre = traducir(goles[team].nombreIngles);
-  }
-  const arr = Object.values(goles);
-  arr.sort((a, b) => b.golesFavor - a.golesFavor);
-  return arr.slice(0, 5);
-}
-
-// ============================================================
 // RENDERIZADO PRINCIPAL
 // ============================================================
 function renderTodo() {
@@ -1025,7 +960,7 @@ function matchCardHtml(m) {
   const score = m.score && m.score !== 'vs' ? m.score.split('-') : null;
   const s1 = score ? score[0] : '-';
   const s2 = score ? score[1] : '-';
-  return `<div class="match-card"><div class="match-header">${badgeHtml(m.status)}${m.fecha ? '<span class="match-date">' + m.fecha + '</span>' : ''}</div><div class="team-row"><div class="team-info">${flagL ? '<span class="team-flag">' + flagL + '</span>' : ''}<span class="team-name">${m.local || ''}</span></div><span class="team-score">${s1}</span></div><div class="team-row"><div class="team-info">${flagV ? '<span class="team-flag">' + flagV + '</span>' : ''}<span class="team-name">${m.visitante}</span></div><span class="team-score">${s2}</span></div></div>`;
+  return `<div class="match-card"><div class="match-header">${badgeHtml(m.status)}${m.fecha ? '<span class="match-date">Jun ' + m.fecha + '</span>' : ''}</div><div class="team-row"><div class="team-info">${flagL ? '<span class="team-flag">' + flagL + '</span>' : ''}<span class="team-name">${m.local || ''}</span></div><span class="team-score">${s1}</span></div><div class="team-row"><div class="team-info">${flagV ? '<span class="team-flag">' + flagV + '</span>' : ''}<span class="team-name">${m.visitante}</span></div><span class="team-score">${s2}</span></div></div>`;
 }
 
 function standingsHtml(grupo, tipo) {
@@ -1042,229 +977,51 @@ function emptyHtml(msg) {
   return `<div class="empty"><div class="empty-icon">🏟️</div><p>${msg}</p></div>`;
 }
 
-function spinnerHtml() {
-  return `<div class="spinner"></div>`;
-}
-
 // ============================================================
-// API MLB (RESPALDO)
-// ============================================================
-function getFechaMLB() {
-  const hoy = new Date();
-  const y = hoy.getFullYear();
-  const m = String(hoy.getMonth() + 1).padStart(2, '0');
-  const d = String(hoy.getDate()).padStart(2, '0');
-  return `${y}-${m}-${d}`;
-}
-function parseMLBGame(game, fechaStr) {
-  const teams = game.teams;
-  const local = teams.home.team.name;
-  const visit = teams.away.team.name;
-  let score = 'vs';
-  let st = 'Programado';
-  const status = game.status.detailedState;
-  if (status === 'Final' || status === 'Game Over') { st = 'Final'; score = `${teams.home.score}-${teams.away.score}`; }
-  else if (status === 'In Progress' || status === 'Live') { st = 'Vivo'; score = `${teams.home.score}-${teams.away.score}`; }
-  return { local, visitante: visit, score, status: st, fecha: fechaStr };
-}
-function parseMLBStandings(data) {
-  const records = data.records || [];
-  const grupos = [];
-  const divisionNames = {
-    '200': 'Liga Americana – Este', '201': 'Liga Americana – Central', '202': 'Liga Americana – Oeste',
-    '203': 'Liga Nacional – Este', '204': 'Liga Nacional – Central', '205': 'Liga Nacional – Oeste'
-  };
-  records.forEach(rec => {
-    let nombre = 'División';
-    if (rec.division && rec.division.name) nombre = rec.division.name;
-    else if (rec.league && rec.league.name) nombre = rec.league.name;
-    else if (rec.name) nombre = rec.name;
-    else if (rec.division && rec.division.id) {
-      const id = String(rec.division.id);
-      nombre = divisionNames[id] || `División ${id}`;
-    }
-    const equipos = rec.teamRecords.map(tr => ({
-      nombre: tr.team.name,
-      G: parseInt(tr.wins),
-      P: parseInt(tr.losses),
-      PCT: tr.winningPercentage || '.000'
-    }));
-    grupos.push({ nombre, equipos });
-  });
-  return grupos;
-}
-async function fetchMLBSchedule(fecha) {
-  const url = `https://statsapi.mlb.com/api/v1/schedule?sportId=1&date=${fecha}`;
-  try {
-    const resp = await fetch(url);
-    if (!resp.ok) throw new Error('Error en la API');
-    const data = await resp.json();
-    const dates = data.dates || [];
-    if (dates.length === 0) return [];
-    const games = dates[0].games || [];
-    return games.map(g => parseMLBGame(g, fecha));
-  } catch (e) {
-    console.warn('Error al obtener partidos MLB, usando respaldo:', e);
-    return null;
-  }
-}
-async function fetchMLBStandings() {
-  const url = 'https://statsapi.mlb.com/api/v1/standings?leagueId=103,104&season=2026&standingsTypes=regularSeason';
-  try {
-    const resp = await fetch(url);
-    if (!resp.ok) throw new Error('Error en la API');
-    const data = await resp.json();
-    return parseMLBStandings(data);
-  } catch (e) {
-    console.warn('Error al obtener clasificación MLB, usando respaldo:', e);
-    return null;
-  }
-}
-
-// ============================================================
-// DATOS ESTÁTICOS (RESPALDO PARA MLB, NBA Y FÚTBOL SI FALLA API)
-// ============================================================
-const datosDeportes = {
-  futbol: {
-    nombre: 'Mundial 2026',
-    icono: '⚽',
-    banner: { titulo: 'Mundial 2026 • Resultados en vivo', desc: 'Partidos, marcadores y clasificación actualizada.' },
-    goleadores: [
-      { n: 'Gakpo / Depay (Países Bajos)', v: '5 goles' },
-      { n: 'Kane / Bellingham (Inglaterra)', v: '4 goles' },
-      { n: 'Messi / Álvarez (Argentina)', v: '3 goles' },
-      { n: 'Vinicius / Endrick (Brasil)', v: '3 goles' }
-    ],
-    asistencias: [
-      { n: 'Ángel Di María (Argentina)', v: '3' },
-      { n: 'Kevin De Bruyne (Bélgica)', v: '2' },
-      { n: 'Antoine Griezmann (Francia)', v: '2' },
-      { n: 'Dani Olmo (España)', v: '2' }
-    ],
-    noticias: [
-      { 
-        titulo: 'Innovación tecnológica: Llega el "FIFA Power Rankings"', 
-        fecha: '29 jun 2026', 
-        resumen: 'La FIFA implementó formalmente en esta fase final el FIFA Power Rankings (desarrollado junto a Aramco). Se trata de un sistema avanzado de analítica de datos en tiempo real que mide el rendimiento individual de cada jugador minuto a minuto. Tras el cierre de la fase de grupos, joyas jóvenes como Bilal El Khannouss (Marruecos) lideran las subidas más altas en el ranking de rendimiento ofensivo.' 
-      },
-      { 
-        titulo: '📉 Crisis en los banquillos tras las eliminaciones', 
-        fecha: '29 jun 2026', 
-        resumen: 'La fase de grupos dejó heridas profundas en varias federaciones que ya planificaban llegar más lejos. El presidente de la Federación de Fútbol de Arabia Saudí, Yasser Al-Misehal, renunció a su cargo tras el fracaso de su selección. En Corea del Sur, el director técnico de la selección asiática dimitió luego de que el presidente del país criticara públicamente a los "incompetentes" encargados del equipo nacional.' 
-      },
-      { 
-        titulo: '✈️ El "desarraigo" de Canadá: el dato curioso', 
-        fecha: '29 jun 2026', 
-        resumen: 'A pesar de ser coanfitrión del torneo junto a Estados Unidos y México, Canadá jugó su partido de dieciseisavos en Los Ángeles. Esto se debe a que el reglamento del torneo obligó a los canadienses a perder su localía geográfica en esta instancia tras haber clasificado en el segundo lugar de su grupo (escoltando a Suiza).' 
-      },
-      { 
-        titulo: '🩹 Alerta médica en Inglaterra', 
-        fecha: '29 jun 2026', 
-        resumen: 'La interna de los "Three Lions" se mantiene en vilo debido a los problemas físicos en la zona defensiva. Los reportes médicos de las últimas horas indican que el lateral Jarell Quansah tiene altas probabilidades de perderse el crucial partido de eliminación contra la República Democrática del Congo, complicando el armado táctico de su entrenador.' 
-      }
-    ],
-    analisis: [
-      { 
-        titulo: 'Análisis de la fase de grupos: Los favoritos y las sorpresas', 
-        autor: 'Por SportVivo360', 
-        fecha: '29 jun 2026', 
-        texto: 'La fase de grupos del Mundial 2026 nos dejó momentos históricos: la clasificación de Cabo Verde, el dominio de Alemania y Países Bajos, y el "desarraigo" de Canadá. Los octavos de final prometen emociones fuertes con cruces como Inglaterra-RD Congo.' 
-      },
-      { 
-        titulo: 'El impacto del FIFA Power Rankings en la evaluación de jugadores', 
-        autor: 'Por SportVivo360', 
-        fecha: '29 jun 2026', 
-        texto: 'El nuevo sistema de analítica de la FIFA está revolucionando la forma en que se mide el rendimiento individual. Joyas como Bilal El Khannouss (Marruecos) están siendo reconocidas por su impacto ofensivo, mientras que los equipos ajustan sus estrategias en base a estos datos.' 
-      }
-    ],
-    equipos: ['Argentina','Brasil','Francia','España','Alemania','Portugal','Inglaterra','Países Bajos','Croacia','Bélgica','Uruguay','Marruecos','Senegal','Australia','EE.UU.','México','Canadá','Japón','Corea del Sur','Suecia','Suiza','Turquía','Italia']
-  },
-  mlb: {
-    nombre: 'MLB',
-    icono: '⚾',
-    banner: { titulo: 'MLB 2026 • Resultados en vivo y clasificaciones', desc: 'Partidos, marcadores y tablas de posiciones de la MLB actualizadas en tiempo real.' },
-    partidos: [
-      { local: 'New York Yankees', visitante: 'Boston Red Sox', score: '6-4', status: 'Final' },
-      { local: 'Los Ángeles Dodgers', visitante: 'San Francisco Giants', score: '3-2', status: 'Vivo' },
-      { local: 'Chicago Cubs', visitante: 'St. Louis Cardinals', score: 'vs', status: 'Programado' },
-      { local: 'Houston Astros', visitante: 'Seattle Mariners', score: '8-1', status: 'Final' },
-      { local: 'Atlanta Braves', visitante: 'Philadelphia Phillies', score: 'vs', status: 'Programado' },
-      { local: 'Toronto Blue Jays', visitante: 'Tampa Bay Rays', score: '5-3', status: 'Final' }
-    ],
-    clasificacion: {
-      titulo: '📊 Clasificación MLB 2026',
-      grupos: [
-        { nombre: 'Liga Americana – Este', equipos: [
-          { nombre: 'New York Yankees', G: 45, P: 28, PCT: '.616' },
-          { nombre: 'Tampa Bay Rays', G: 41, P: 30, PCT: '.577' },
-          { nombre: 'Toronto Blue Jays', G: 34, P: 38, PCT: '.472' }
-        ]},
-        { nombre: 'Liga Nacional – Este', equipos: [
-          { nombre: 'Atlanta Braves', G: 46, P: 25, PCT: '.648' },
-          { nombre: 'Philadelphia Phillies', G: 40, P: 34, PCT: '.541' },
-          { nombre: 'Washington Nationals', G: 38, P: 37, PCT: '.507' }
-        ]}
-      ]
-    },
-    equipos: ['Yankees','Dodgers','Braves','Phillies','Red Sox','Cubs','Astros','Giants','Blue Jays','Mets','Cardinals','Mariners','Rays','Nationals'],
-    noticias: [{ titulo: 'Yankees y Braves lideran la MLB; Judge y Acuña pelean por el MVP', fecha: '29 jun 2026', resumen: 'La temporada 2026 está siendo histórica para ambos jugadores.' }],
-    analisis: [{ titulo: '¿Quién ganará la Serie Mundial 2026?', autor: 'Por Juan Pérez', fecha: '29 jun 2026', texto: 'Dodgers, Yankees y Braves son los principales candidatos.' }]
-  },
-  nba: {
-    nombre: 'NBA',
-    icono: '🏀',
-    banner: { titulo: 'NBA 2025-26 • Temporada regular y playoffs en vivo', desc: 'Sigue a tus equipos favoritos con estadísticas actualizadas.' },
-    partidos: [
-      { local: 'Boston Celtics', visitante: 'Los Ángeles Lakers', score: '112-108', status: 'Final' },
-      { local: 'Denver Nuggets', visitante: 'Golden State Warriors', score: '105-98', status: 'Vivo' },
-      { local: 'Milwaukee Bucks', visitante: 'Phoenix Suns', score: 'vs', status: 'Programado' },
-      { local: 'Philadelphia 76ers', visitante: 'Dallas Mavericks', score: '121-115', status: 'Final' },
-      { local: 'Miami Heat', visitante: 'New York Knicks', score: '98-95', status: 'Final' }
-    ],
-    clasificacion: {
-      titulo: '📊 Clasificación NBA 2025-26',
-      grupos: [
-        { nombre: 'Conferencia Este', equipos: [
-          { nombre: 'Boston Celtics', G: 58, P: 24, PCT: '.707' },
-          { nombre: 'Milwaukee Bucks', G: 55, P: 27, PCT: '.671' },
-          { nombre: 'Philadelphia 76ers', G: 50, P: 32, PCT: '.610' }
-        ]},
-        { nombre: 'Conferencia Oeste', equipos: [
-          { nombre: 'Denver Nuggets', G: 57, P: 25, PCT: '.695' },
-          { nombre: 'OKC Thunder', G: 54, P: 28, PCT: '.659' },
-          { nombre: 'Phoenix Suns', G: 49, P: 33, PCT: '.598' }
-        ]}
-      ]
-    },
-    equipos: ['Celtics','Lakers','Nuggets','Warriors','Bucks','Suns','76ers','Mavericks','Heat','Knicks','Thunder','Clippers'],
-    noticias: [{ titulo: 'Celtics y Nuggets, los reyes de la temporada regular', fecha: '29 jun 2026', resumen: 'Boston y Denver han sido los equipos más consistentes.' }],
-    analisis: [{ titulo: 'Playoffs NBA 2026: predicciones y favoritos', autor: 'Por Laura Gómez', fecha: '29 jun 2026', texto: 'Celtics y Nuggets son los grandes favoritos.' }]
-  }
-};
-
-// ============================================================
-// RENDERIZADO DE SECCIONES (FÚTBOL CON API)
+// RENDERIZADO DE SECCIONES
 // ============================================================
 
 // --- INICIO ---
-async function renderInicio() {
+function renderInicio() {
   const d = datosDeportes[deporte];
   iniciarTicker();
   initCarousel();
 
-  const sp = document.getElementById('statsPanel');
-  if (deporte === 'futbol') {
-    sp.innerHTML = spinnerHtml();
-  } else {
-    sp.innerHTML = '<div class="stat-card"><h4>📊 Estadísticas</h4><p style="color:var(--muted);font-size:.85rem;padding:8px 0">Datos actualizados en tiempo real.</p></div>';
+  // Estadísticas
+  const totalPartidos = Object.values(d.partidosPorFecha).reduce((acc, arr) => acc + arr.length, 0);
+  const totalGoles = Object.values(d.partidosPorFecha).reduce((acc, arr) => {
+    return acc + arr.reduce((sum, p) => {
+      if (p.score && p.score !== 'vs') {
+        const g = p.score.split('-').map(Number);
+        return sum + g[0] + g[1];
+      }
+      return sum;
+    }, 0);
+  }, 0);
+  const clasificados = 2;
+  const diasRestantes = 13;
+
+  document.getElementById('statPartidos').textContent = totalPartidos;
+  document.getElementById('statGoles').textContent = totalGoles;
+  document.getElementById('statClasificados').textContent = clasificados;
+  document.getElementById('statRestantes').textContent = diasRestantes;
+
+  // Clasificación resumida
+  const miniContainer = document.getElementById('standingsMini');
+  if (miniContainer && d.clasificacion && d.clasificacion.grupos) {
+    miniContainer.innerHTML = d.clasificacion.grupos.slice(0, 4).map(g => {
+      const top = g.equipos[0];
+      return `<div class="standings-mini-card">
+        <h4>${g.nombre}</h4>
+        <div class="standings-mini-item"><span class="pos">1.</span><span class="team">${top.nombre}</span><span class="pts">${top.Pts} pts</span></div>
+      </div>`;
+    }).join('');
   }
 
+  // Selector de fechas
   const ds = document.getElementById('dateSelector');
   if (deporte === 'futbol') {
-    const fechas = [];
-    for (let d = 11; d <= 30; d++) {
-      fechas.push(String(d).padStart(2, '0'));
-    }
+    const fechas = ['11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30'];
     ds.style.display = 'flex';
     ds.innerHTML = '<span class="date-label">Junio:</span>' + fechas.map(f => `<button class="date-btn ${f===fecha?'active':''}" onclick="selFecha('${f}')">${f}</button>`).join('');
   } else if (deporte === 'mlb') {
@@ -1277,89 +1034,34 @@ async function renderInicio() {
     ds.style.display = 'none';
   }
 
+  // Panel lateral
+  const sp = document.getElementById('statsPanel');
   if (deporte === 'futbol') {
-    const games = await fetchWorldCupGames();
-    if (games) {
-      const stats = calcularEstadisticas(games);
-      document.getElementById('statPartidos').textContent = stats.totalPartidos;
-      document.getElementById('statGoles').textContent = stats.golesTotales;
-      document.getElementById('statClasificados').textContent = stats.clasificados;
-      document.getElementById('statRestantes').textContent = stats.diasRestantes;
-
-      const topGoles = calcularGolesPorEquipo(games);
-      let html = '<div class="stat-card"><h4>⚽ Equipos con más goles</h4>';
-      topGoles.forEach((eq, i) => {
-        const flag = getFlagFromName(eq.nombreIngles);
-        html += `<div class="stat-item"><span>${flag} ${eq.nombre}</span><span class="stat-val">${eq.golesFavor}</span></div>`;
-      });
-      html += '</div>';
-      const topDif = [...topGoles].sort((a,b) => b.dif - a.dif).slice(0,5);
-      html += '<div class="stat-card" style="margin-top:14px"><h4>📊 Mejor diferencia de goles</h4>';
-      topDif.forEach((eq, i) => {
-        const flag = getFlagFromName(eq.nombreIngles);
-        html += `<div class="stat-item"><span>${flag} ${eq.nombre}</span><span class="stat-val">+${eq.dif}</span></div>`;
-      });
-      html += '</div>';
-      sp.innerHTML = html;
-
-      const standingsData = calculateStandings(games);
-      const miniContainer = document.getElementById('standingsMini');
-      if (miniContainer) {
-        miniContainer.innerHTML = standingsData.slice(0, 4).map(g => {
-          const top = g.equipos[0];
-          return `<div class="standings-mini-card">
-            <h4>${g.nombre}</h4>
-            <div class="standings-mini-item"><span class="pos">1.</span><span class="team">${top.nombre}</span><span class="pts">${top.Pts} pts</span></div>
-          </div>`;
-        }).join('');
-      }
-    }
-
-    await cargarPartidosInicio();
-  } else if (deporte === 'mlb') {
-    document.getElementById('matchesTitle').textContent = `⚾ Partidos MLB`;
-    const ml = document.getElementById('matchesList');
-    ml.innerHTML = spinnerHtml();
-    const fechaMLB = document.getElementById('mlbDatePicker') ? document.getElementById('mlbDatePicker').value : getFechaMLB();
-    const partidos = await fetchMLBSchedule(fechaMLB);
-    if (partidos && partidos.length > 0) {
-      ml.innerHTML = partidos.map(p => matchCardHtml(p)).join('');
-    } else if (partidos === null) {
-      ml.innerHTML = d.partidos.map(p => matchCardHtml(p)).join('');
-    } else {
-      ml.innerHTML = emptyHtml('No hay partidos en esta fecha.');
-    }
+    const goles = d.goleadores.map(g => `<div class="stat-item"><span>${g.n}</span><span class="stat-val">${g.v}</span></div>`).join('');
+    const asist = d.asistencias.map(g => `<div class="stat-item"><span>${g.n}</span><span class="stat-val">${g.v}</span></div>`).join('');
+    sp.innerHTML = `<div class="stat-card" style="margin-bottom:14px"><h4>⚽ Máximos Goleadores</h4>${goles}</div><div class="stat-card"><h4>👟 Líderes en Asistencias</h4>${asist}</div>`;
   } else {
-    document.getElementById('matchesTitle').textContent = `🏀 Partidos Destacados`;
-    document.getElementById('matchesList').innerHTML = d.partidos.map(p => matchCardHtml(p)).join('');
     sp.innerHTML = '<div class="stat-card"><h4>📊 Estadísticas</h4><p style="color:var(--muted);font-size:.85rem;padding:8px 0">Datos actualizados en tiempo real.</p></div>';
   }
+
+  cargarPartidosInicio();
 }
 
-async function cargarPartidosInicio() {
+function cargarPartidosInicio() {
   const ml = document.getElementById('matchesList');
+  const d = datosDeportes[deporte];
   if (!ml) return;
+
   if (deporte === 'futbol') {
-    ml.innerHTML = spinnerHtml();
-    const games = await fetchWorldCupGames();
-    if (games && games.length > 0) {
-      const fechaSeleccionada = fecha;
-      const partidosFiltrados = games
-        .filter(g => {
-          if (!g.local_date) return false;
-          const parts = g.local_date.split(' ')[0].split('/');
-          if (parts.length === 3) {
-            const dia = parts[1];
-            return dia === fechaSeleccionada;
-          }
-          return false;
-        })
-        .map(g => transformAPIMatch(g));
-      document.getElementById('matchesTitle').textContent = `Partidos del ${fecha} de Junio`;
-      ml.innerHTML = partidosFiltrados.length ? partidosFiltrados.map(p => matchCardHtml(p)).join('') : emptyHtml('📅 No hay partidos programados para el ' + fecha + ' de junio. Prueba con otra fecha.');
-    } else {
-      ml.innerHTML = emptyHtml('No se pudo cargar la API. Verifica tu conexión.');
-    }
+    const partidos = d.partidosPorFecha[fecha] || [];
+    document.getElementById('matchesTitle').textContent = `Partidos del ${fecha} de Junio`;
+    ml.innerHTML = partidos.length ? partidos.map(p => matchCardHtml(p)).join('') : emptyHtml('No hay partidos para esta fecha.');
+  } else if (deporte === 'mlb') {
+    document.getElementById('matchesTitle').textContent = `⚾ Partidos MLB`;
+    ml.innerHTML = d.partidos.map(p => matchCardHtml(p)).join('');
+  } else {
+    document.getElementById('matchesTitle').textContent = `🏀 Partidos Destacados`;
+    ml.innerHTML = d.partidos.map(p => matchCardHtml(p)).join('');
   }
 }
 
@@ -1371,38 +1073,14 @@ function selFecha(f) {
 }
 
 // --- EN VIVO ---
-async function renderEnVivo() {
+function renderEnVivo() {
   const d = datosDeportes[deporte];
   const lv = document.getElementById('liveList');
   if (!lv) return;
   if (deporte === 'futbol') {
-    lv.innerHTML = spinnerHtml();
-    const games = await fetchWorldCupGames();
-    if (games && games.length > 0) {
-      const hoy = new Date().getDate();
-      const hoyStr = String(hoy).padStart(2, '0');
-      const filtrados = games
-        .filter(g => {
-          if (!g.local_date) return false;
-          const parts = g.local_date.split(' ')[0].split('/');
-          return parts.length === 3 && parts[1] === hoyStr && g.finished !== 'TRUE';
-        })
-        .map(g => transformAPIMatch(g));
-      lv.innerHTML = filtrados.length ? filtrados.map(p => matchCardHtml(p)).join('') : emptyHtml('No hay partidos en vivo o próximos para hoy.');
-    } else {
-      lv.innerHTML = emptyHtml('No se pudo cargar la API.');
-    }
-  } else if (deporte === 'mlb') {
-    lv.innerHTML = spinnerHtml();
-    const fechaMLB = getFechaMLB();
-    const games = await fetchMLBSchedule(fechaMLB);
-    if (games) {
-      const vivos = games.filter(g => g.status === 'Vivo');
-      lv.innerHTML = vivos.length ? vivos.map(p => matchCardHtml(p)).join('') : emptyHtml('No hay partidos en vivo en este momento.');
-    } else {
-      const vivos = d.partidos.filter(p => p.status === 'Vivo');
-      lv.innerHTML = vivos.length ? vivos.map(p => matchCardHtml(p)).join('') : emptyHtml('No hay partidos en vivo.');
-    }
+    let vivos = [];
+    Object.values(d.partidosPorFecha).forEach(lista => lista.forEach(p => { if (p.status === 'Vivo') vivos.push(p); }));
+    lv.innerHTML = vivos.length ? vivos.map(p => matchCardHtml(p)).join('') : emptyHtml('No hay partidos en vivo.');
   } else {
     const vivos = d.partidos.filter(p => p.status === 'Vivo');
     lv.innerHTML = vivos.length ? vivos.map(p => matchCardHtml(p)).join('') : emptyHtml('No hay partidos en vivo.');
@@ -1410,115 +1088,40 @@ async function renderEnVivo() {
 }
 
 // --- PARTIDOS ---
-async function renderPartidos() {
+function renderPartidos() {
   const d = datosDeportes[deporte];
   const pl = document.getElementById('partidosList');
   const ds = document.getElementById('dateSelectorPartidos');
   if (!pl) return;
 
   if (deporte === 'futbol') {
-    const fechas = [];
-    for (let d = 11; d <= 30; d++) {
-      fechas.push(String(d).padStart(2, '0'));
-    }
-    ds.innerHTML = '<span class="date-label">Junio:</span>' + fechas.map(f => `<button class="date-btn ${f===fecha?'active':''}" onclick="selFechaPartidos('${f}')">${f}</button>`).join('');
-    pl.innerHTML = spinnerHtml();
-    const games = await fetchWorldCupGames();
-    if (games && games.length > 0) {
-      const fechaSeleccionada = fecha;
-      const partidosFiltrados = games
-        .filter(g => {
-          if (!g.local_date) return false;
-          const parts = g.local_date.split(' ')[0].split('/');
-          if (parts.length === 3) {
-            const dia = parts[1];
-            return dia === fechaSeleccionada;
-          }
-          return false;
-        })
-        .map(g => transformAPIMatch(g));
-      pl.innerHTML = partidosFiltrados.length ? partidosFiltrados.map(p => matchCardHtml(p)).join('') : emptyHtml('📅 No hay partidos programados para el ' + fecha + ' de junio.');
-    } else {
-      pl.innerHTML = emptyHtml('No se pudo cargar la API.');
-    }
+    const fechas = ['11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30'];
+    ds.innerHTML = '<span class="date-label">Junio:</span>' + fechas.map(f => `<button class="date-btn ${f===fecha?'active':''}" onclick="selFecha('${f}')">${f}</button>`).join('');
+    const partidos = d.partidosPorFecha[fecha] || [];
+    pl.innerHTML = partidos.length ? partidos.map(p => matchCardHtml(p)).join('') : emptyHtml('No hay partidos para esta fecha.');
   } else if (deporte === 'mlb') {
-    ds.innerHTML = `<span class="date-label">📅 Fecha:</span>
-      <input type="date" id="mlbDatePickerPartidos" value="${getFechaMLB()}" style="background:var(--card);border:1px solid var(--border);border-radius:8px;padding:6px 12px;color:var(--text);font-family:inherit;font-size:.85rem;">
-      <button class="date-btn" onclick="cargarMLBPartidos()">Buscar</button>`;
-    pl.innerHTML = spinnerHtml();
-    const fechaMLB = document.getElementById('mlbDatePickerPartidos') ? document.getElementById('mlbDatePickerPartidos').value : getFechaMLB();
-    const games = await fetchMLBSchedule(fechaMLB);
-    if (games && games.length > 0) {
-      pl.innerHTML = games.map(p => matchCardHtml(p)).join('');
-    } else if (games === null) {
-      pl.innerHTML = d.partidos.map(p => matchCardHtml(p)).join('');
-    } else {
-      pl.innerHTML = emptyHtml('No hay partidos en esta fecha.');
-    }
+    ds.innerHTML = '';
+    pl.innerHTML = d.partidos.map(p => matchCardHtml(p)).join('');
   } else {
     ds.innerHTML = '';
     pl.innerHTML = d.partidos.map(p => matchCardHtml(p)).join('');
   }
 }
-function selFechaPartidos(f) { fecha = f; renderPartidos(); }
-function cargarMLBPartidos() { renderPartidos(); }
 
 // --- CLASIFICACIÓN ---
-async function renderClasificacion() {
+function renderClasificacion() {
   const d = datosDeportes[deporte];
   const cg = document.getElementById('clasificacionGrid');
   if (!cg) return;
-  if (deporte === 'futbol') {
-    cg.innerHTML = spinnerHtml();
-    const games = await fetchWorldCupGames();
-    if (games && games.length > 0) {
-      const standingsData = calculateStandings(games);
-      cg.innerHTML = standingsData.map(g => standingsHtml(g, deporte)).join('');
-    } else {
-      cg.innerHTML = emptyHtml('No se pudo calcular la clasificación. Verifica la API.');
-    }
-  } else if (deporte === 'mlb') {
-    cg.innerHTML = spinnerHtml();
-    const data = await fetchMLBStandings();
-    if (data && data.length > 0) {
-      cg.innerHTML = data.map(g => standingsHtml(g, deporte)).join('');
-    } else {
-      cg.innerHTML = d.clasificacion.grupos.map(g => standingsHtml(g, deporte)).join('');
-    }
-  } else {
-    cg.innerHTML = d.clasificacion.grupos.map(g => standingsHtml(g, deporte)).join('');
-  }
+  cg.innerHTML = d.clasificacion.grupos.map(g => standingsHtml(g, deporte)).join('');
 }
 
 // --- EQUIPOS ---
-async function renderEquipos() {
+function renderEquipos() {
+  const d = datosDeportes[deporte];
   const eq = document.getElementById('equiposGrid');
   if (!eq) return;
-  if (deporte === 'futbol') {
-    eq.innerHTML = spinnerHtml();
-    const games = await fetchWorldCupGames();
-    if (games && games.length > 0) {
-      const equiposSet = new Set();
-      games.forEach(g => {
-        if (g.home_team_name_en) equiposSet.add(g.home_team_name_en);
-        if (g.away_team_name_en) equiposSet.add(g.away_team_name_en);
-      });
-      const equipos = Array.from(equiposSet).map(n => ({
-        en: n,
-        es: traducir(n)
-      }));
-      equipos.sort((a, b) => a.es.localeCompare(b.es, 'es'));
-      eq.innerHTML = equipos.map(e => {
-        const flag = getFlagFromName(e.en);
-        return `<div class="team-card"><div class="team-icon">${flag}</div><div class="team-card-name">${e.es}</div></div>`;
-      }).join('');
-    } else {
-      eq.innerHTML = emptyHtml('No se pudieron cargar los equipos.');
-    }
-  } else {
-    const d = datosDeportes[deporte];
-    eq.innerHTML = d.equipos.map(e => `<div class="team-card"><div class="team-icon">🏳️</div><div class="team-card-name">${e}</div></div>`).join('');
-  }
+  eq.innerHTML = d.equipos.map(e => `<div class="team-card"><div class="team-icon">${d.icono}</div><div class="team-card-name">${e}</div></div>`).join('');
 }
 
 // --- NOTICIAS ---
